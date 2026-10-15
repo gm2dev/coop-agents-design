@@ -138,7 +138,7 @@ debajo del pliegue en 360×640.
 - **h1** “Agenda”. Barra: control segmentado “Día / Semana” (links con `aria-current`) y filtro **Peluquero** (`select` Todos/Ana/Bruno/Carla + botón “Filtrar”; no cambia solo al elegir).
 - Navegación: h2 con el período (“Viernes 16 de octubre” / “Semana del 12 al 18 de octubre”), “← Día anterior · Hoy · Día siguiente →” (o semana). Nota: “Horarios en hora del local. Los turnos nuevos de la web aparecen al abrir o actualizar la agenda.”
 - **Día:** una sección por peluquero (h3 con nombre y “N turnos”/“Sin turnos”), lista de tarjetas en orden horario; peluquero sin turnos: “Sin turnos este día.” Celular: secciones apiladas; ≥ 64rem: columnas.
-- **Semana:** 7 secciones (h3 “Vie 16 oct”, “Hoy” como badge + borde 2px*), tarjetas compactas (hora · peluquero, servicio · duración · cliente, estado). Días cerrados: “Cerrado”. Celular: apiladas; ≥ 64rem: 7 columnas.
+- **Semana:** 7 secciones (h3 “Vie 16 oct”, “Hoy” como badge + borde 2px*), tarjetas compactas (hora · peluquero, servicio · duración · cliente, estado). Días cerrados: “Cerrado”. Celular: apiladas; ≥ 64rem: 7 columnas. La semana del H1 (`admin-agenda-semana.html`) **no muestra bloqueos** (CU-11 es del H2): por eso el lunes 12 (feriado) figura solo como “Cerrado”; el indicador de bloqueo está en `admin-agenda-semana-h2` (DD-36).
 - **Filtrado** (`-dia-filtrada`): `role="status"` “Mostrando solo los turnos de Bruno. Ver todos”, solo la columna de ese peluquero.
 - **Estados:** cargando · **vacío** (`-vacia`: “No hay turnos este día. Cuando alguien reserve por la web, el turno va a aparecer acá.”) · error (+ Reintentar).
 - **H2:** ver H-A1 (`admin-agenda-hoy`). No hay creación de turnos en el panel (D-23).
@@ -201,7 +201,10 @@ selector de días y horarios de P3, `fieldset` + `legend`, resumen de errores de
 - **Tarjeta vigente** (pasada o futura): “Mover” y “Cancelar” (nombre accesible “Mover turno de Paula V., 11:00”). Los futuros no tienen asistencia.
 - **Cancelada:** borde punteado, fondo `surface.subtle`, hora y servicio tachados, badge “✕ Cancelado por el cliente/local” + “Horario libre”; sin acciones ni asistencia. Encabezado “Ana · 2 turnos, 1 cancelado”.
 - `-viernes`: refleja cambios del cliente (turno de Marta cancelado por el cliente) y el turno movido. `-semana-h2`: tarjetas compactas con los mismos badges.
-- **Bloqueos en la agenda (DD-36, RN-22):** recuadro punteado “⊘ Bloqueado · <alcance> · <horario>” + “Motivo: …” solo si existe + link “Ver bloqueos”. Ejemplo en `-semana-h2`: lunes 12 “⊘ Bloqueado · Todo el local · Todo el día · Motivo: Feriado”. En la vista de día va al inicio de la columna del peluquero afectado (o de todas si es del local). No es un turno: sin acciones.
+- **Bloqueos en la agenda (DD-36, RN-22) — regla única:** recuadro punteado (`.empty.block-note`, no es un turno: sin acciones) con “⊘ Bloqueado” (ícono `aria-hidden`) + alcance/horario, “Motivo: …” solo si existe (vacío: se omite, nunca “Sin motivo”) y link “Ver bloqueos”.
+  - **Todo el día** (local o peluquero): en la vista de día, al inicio de la columna del peluquero afectado (o de todas, si es del local), “⊘ Bloqueado · Todo el día”; en la semana, en el día correspondiente: `-semana-h2` lunes 12 “⊘ Bloqueado · Todo el local · Todo el día · Motivo: Feriado”.
+  - **Rango horario:** dentro de la columna del peluquero, en orden cronológico entre los turnos, en la posición de su hora de inicio, con el rango visible: “⊘ Bloqueado · 09:00–13:00”. Los turnos confirmados dentro del rango se siguen mostrando (no se ocultan).
+  - Ejemplo de ambos casos en la vista de día: `admin-agenda-dia-bloqueo` (sábado 24 de octubre): Carla con bloqueo 09:00–13:00 “Motivo: Trámite personal” antes de su turno de las 15:00; Ana con bloqueo de todo el día sin motivo (columna “Sin turnos”). Coincide con `admin-bloqueos`.
 
 ### H-A2 · Mover (`admin-mover.html`) — CU-13
 
@@ -223,7 +226,7 @@ selector de días y horarios de P3, `fieldset` + `legend`, resumen de errores de
 - Lista: h1 “Bloqueos” + “Feriados del local y ausencias de un peluquero. En esos días u horarios la web no ofrece turnos. Los turnos ya confirmados no se cancelan solos.” · “Nuevo bloqueo” · h2 “Próximos y recientes”: por bloqueo, días (h3), “Todo el local · Todo el día” / “Peluquero: Carla · 09:00 a 13:00”, “◷ Ya pasó” si corresponde, si tiene motivo, línea “Motivo: Feriado” (sin motivo no se muestra nada, nunca “Sin motivo”), “Eliminar” (nombre accesible completo). **Vacía** (`-vacio`): explica para qué sirve + “Nuevo bloqueo”.
 - Formulario: `fieldset` “¿A quién afecta?” (radios Todo el local / Un peluquero → revela `select` Peluquero) · “¿Qué días?” (Un día / Varios días seguidos → revela “Fecha hasta (inclusive)”) · “¿Qué horario?” (Todo el día / Un rango horario → revela Desde/Hasta `step=900`; hint “En hora del local, cada 15 minutos. Si elegís varios días, el rango se aplica a cada uno.”) · **Motivo (opcional)** (`type=text`, `maxlength=80`, hint “Solo lo ves vos en el panel. Ej.: Feriado, Vacaciones de Ana. Hasta 80 caracteres.” vinculado con `aria-describedby`; vacío no genera error — D-30, RN-22) · “Guardar bloqueo” / “Cancelar”.
 - **Errores** (`-error`): resumen “Revisá 2 datos para guardar” + junto al campo (“La fecha “hasta” tiene que ser igual o posterior a la fecha “desde”.”, “La hora de fin tiene que ser posterior a la de inicio.”).
-- **Guardado** (`-guardado`) · **con turnos dentro** (`-afectados`: “✓ Guardamos el bloqueo de Bruno, del lunes 2 al viernes 6 de noviembre · Motivo: Vacaciones de Bruno · Hay 2 turnos confirmados dentro. No se cancelaron: decidí si los movés o los cancelás.” + lista con Mover / Cancelar) · **eliminar** (`-eliminar`: “¿Eliminar este bloqueo?” + “Esos horarios vuelven a ofrecerse en la web.” + “Sí, eliminar bloqueo” / “No, volver”) · eliminado (`admin-bloqueos-eliminado`).
+- **Guardado** (`-guardado`) · **con turnos dentro** (`-afectados`: “✓ Guardamos el bloqueo de Bruno, del lunes 2 al viernes 6 de noviembre · Motivo: Vacaciones de Bruno · Hay 2 turnos confirmados dentro. No se cancelaron: decidí si los movés o los cancelás.” + lista con Mover / Cancelar) · **eliminar** (`-eliminar`: “¿Eliminar este bloqueo?” + “Esos horarios vuelven a ofrecerse en la web.” + “Sí, eliminar bloqueo” / “No, volver”) · eliminado (`admin-bloqueos-eliminado`: “✓ Eliminamos el bloqueo de Ana del martes 20 de octubre. Esos horarios vuelven a estar libres en la web.” + línea “Motivo: Vacaciones de Ana”, mismo formato que la lista).
 - **Cliente** (`horario-bloqueado`): el martes 20 (bloqueo de Ana de todo el día) se ve “Cerrado” y no es link (DD-08, DD-33). El motivo del bloqueo nunca aparece en la web (D-30).
 
 ### H-A5 · Turnos afectados — CU-10 (H2)
@@ -298,7 +301,7 @@ Sin anchos fijos: todo en `rem` / grid `auto-fill`, `overflow-wrap: anywhere` pa
 | | Turno web aparece al actualizar | ✔ turno de “Lucía” 15:30 + nota |
 | | (H2) cambios/cancelaciones del cliente reflejados | ✔ `admin-agenda-viernes` (Marta cancelada por el cliente) + nota “aparecen al abrir o actualizar” |
 | | (H2) cancelado distinguible y su horario libre | ✔ H-A1: badge + tachado + borde punteado + “Horario libre” |
-| | (H2) bloqueo del período con su motivo, si lo tiene (D-30) | ✔ `admin-agenda-semana-h2` lunes 12 (“⊘ Bloqueado … Motivo: Feriado”), DD-36 |
+| | (H2) bloqueo del período con su motivo, si lo tiene (D-30) | ✔ `admin-agenda-semana-h2` lunes 12 (“⊘ Bloqueado … Motivo: Feriado”) y `admin-agenda-dia-bloqueo` (rango horario y todo el día), DD-36 |
 | CU-06 | Turno futuro: resumen + “Cambiar” y “Cancelar” | ✔ `turno` (H-P1) |
 | | ≥ 2 h: elige día/horario libre (mismo servicio y peluquero o “cualquiera”) y confirma → horario nuevo, original libre, confirmación; “cualquiera” asignado por RN-20 | ✔ `cambiar` → `-revisar` → `-confirmado` (peluquero asignado visible) / — asignación de sistema |
 | | 16:00 con turno 18:00: puede (exactamente 2 h) | — regla del servidor; UI: estado `turno` con acciones |
@@ -319,7 +322,7 @@ Sin anchos fijos: todo en `rem` / grid `auto-fill`, `overflow-wrap: anywhere` pa
 | | Bloqueo de un peluquero: sin horarios de ese peluquero | ✔ `admin-bloqueo-nuevo` (“Un peluquero”) + `horario-bloqueado` (con Ana) |
 | | Turnos confirmados dentro: los ve, no se cancelan, decide mover/cancelar | ✔ `admin-bloqueo-afectados` |
 | | Eliminar: horarios vuelven a estar libres | ✔ `admin-bloqueo-eliminar` → `admin-bloqueos-eliminado` |
-| | (D-30, RN-22) Motivo opcional, solo en el panel (lista y agenda) | ✔ “Motivo (opcional)” en `admin-bloqueo-nuevo` + “Motivo: …” en la lista y en `admin-agenda-semana-h2`; no aparece en `horario-bloqueado` |
+| | (D-30, RN-22) Motivo opcional, solo en el panel (lista y agenda) | ✔ “Motivo (opcional)” en `admin-bloqueo-nuevo` + “Motivo: …” en la lista y en `admin-agenda-semana-h2` / `admin-agenda-dia-bloqueo`; no aparece en `horario-bloqueado` |
 | CU-13 | No existe crear turno en el panel | ✔ ninguna acción para crear turnos en la agenda (D-23) |
 | | Superposición: error, no se mueve, no se puede forzar | ✔ `admin-mover-superpuesto` |
 | | Fuera de horario o bloqueo: advierte motivo y pide confirmación | ✔ `admin-mover-advertencia`, `admin-mover-bloqueo` (“Mover igual” / “Elegir otro horario”) |

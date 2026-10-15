@@ -151,7 +151,7 @@ implementación · **PENDIENTE** = requiere navegador o tecnología asistiva · 
 | Mover sin arrastre | Formulario con controles nativos (`select`, `date`, `time step=900`). | 2.5.7, 2.1.1 | OK (estático) |
 | Campos que aparecen (bloqueos) | Radios que revelan campos debajo (`hidden`), sin mover el foco ni cambiar de página. | 3.2.2 | OK (estático) |
 | Motivo del bloqueo (opcional) | `label` visible “Motivo (opcional)”, hint con el límite vinculado por `aria-describedby`, `maxlength=80`; vacío no genera error. | 3.3.2, 1.3.1 | OK (Playwright) |
-| Bloqueo en la agenda (DD-36) | “⊘ Bloqueado” en texto (ícono `aria-hidden`) + alcance, horario y motivo; recuadro punteado, no depende del color. | 1.4.1, 1.3.1 | OK (Playwright + axe) |
+| Bloqueo en la agenda (DD-36) | “⊘ Bloqueado” en texto (ícono `aria-hidden`) + alcance, horario y motivo (si existe); recuadro punteado, no depende del color. En la vista de día va en el orden del DOM: al inicio de la columna (todo el día) o entre los turnos según su hora de inicio (rango), así el orden de lectura coincide con el cronológico (1.3.2). | 1.4.1, 1.3.1, 1.3.2 | OK (Playwright + axe) |
 | Reflow de tarjetas con muchas acciones | Botones y badges pueden partir línea dentro de la tarjeta. | 1.4.10, 1.4.12 | OK (Playwright) |
 
 Para la implementación: tras mover/cancelar, el foco va a la alerta de éxito de la agenda; al guardar la

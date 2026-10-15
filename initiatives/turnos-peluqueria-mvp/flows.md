@@ -281,7 +281,7 @@ flowchart TD
   saved -.->|En la web| web[horario-bloqueado<br/>día 'Cerrado', sin motivo]
 ```
 
-El motivo (D-30, RN-22) es opcional: vacío no da error y no se muestra nada. Se ve en la lista de bloqueos y en la agenda (DD-36); el cliente nunca lo ve.
+El motivo (D-30, RN-22) es opcional: vacío no da error y no se muestra nada. Se ve en la lista de bloqueos y en la agenda (DD-36); el cliente nunca lo ve. En la agenda, un bloqueo de todo el día va al inicio de la columna del peluquero (o de todas, si es del local) o en el día de la semana; uno de rango horario va entre los turnos según su hora de inicio, con el rango visible, sin ocultar los turnos confirmados que caigan dentro (`admin-agenda-dia-bloqueo`).
 
 ### CU-12 (H2) y CU-14 — Agenda operable y asistencia
 
@@ -301,6 +301,7 @@ flowchart TD
   fut & past -->|Cancelar| cu13c([CU-13 Cancelar])
   ag -.->|Día siguiente| vie[admin-agenda-viernes<br/>cambios y cancelaciones del cliente]
   ag -.->|Semana| sem[admin-agenda-semana-h2<br/>bloqueos: '⊘ Bloqueado' + motivo si hay]
+  ag -.->|Día con bloqueos| blq[admin-agenda-dia-bloqueo<br/>todo el día: inicio de la columna<br/>rango: entre los turnos por hora de inicio]
 ```
 
 CU-14, error al guardar: la marca no se da por guardada hasta que responde el servidor. Si falla, el estado
