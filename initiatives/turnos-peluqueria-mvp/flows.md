@@ -266,8 +266,8 @@ flowchart TD
 flowchart TD
   nav([Panel → Bloqueos]) --> any{¿Hay bloqueos?}
   any -->|No| empty[admin-bloqueos-vacio]
-  any -->|Sí| list[admin-bloqueos<br/>alcance · días · horario]
-  empty & list -->|Nuevo bloqueo| form[admin-bloqueo-nuevo<br/>¿A quién? · ¿Qué días? · ¿Qué horario? step 15]
+  any -->|Sí| list[admin-bloqueos<br/>alcance · días · horario · motivo si hay]
+  empty & list -->|Nuevo bloqueo| form[admin-bloqueo-nuevo<br/>¿A quién? · ¿Qué días? · ¿Qué horario? step 15<br/>Motivo opcional, solo panel]
   form -->|Guardar| val{¿Válido?}
   val -->|No| ferr[admin-bloqueo-error<br/>resumen + error en campo]
   ferr --> form
@@ -278,8 +278,10 @@ flowchart TD
   list -->|Eliminar| del[admin-bloqueo-eliminar<br/>confirmación]
   del -->|No, volver| list
   del -->|Sí, eliminar| gone[admin-bloqueos-eliminado<br/>horarios vuelven a la web]
-  saved -.->|En la web| web[horario-bloqueado<br/>día 'Cerrado']
+  saved -.->|En la web| web[horario-bloqueado<br/>día 'Cerrado', sin motivo]
 ```
+
+El motivo (D-30, RN-22) es opcional: vacío no da error y no se muestra nada. Se ve en la lista de bloqueos y en la agenda (DD-36); el cliente nunca lo ve.
 
 ### CU-12 (H2) y CU-14 — Agenda operable y asistencia
 
@@ -298,12 +300,12 @@ flowchart TD
   fut & past -->|Mover| cu13m([CU-13 Mover])
   fut & past -->|Cancelar| cu13c([CU-13 Cancelar])
   ag -.->|Día siguiente| vie[admin-agenda-viernes<br/>cambios y cancelaciones del cliente]
-  ag -.->|Semana| sem[admin-agenda-semana-h2]
+  ag -.->|Semana| sem[admin-agenda-semana-h2<br/>bloqueos: '⊘ Bloqueado' + motivo si hay]
 ```
 
 CU-14, error al guardar: la marca no se da por guardada hasta que responde el servidor. Si falla, el estado
 vuelve al anterior (botones, `aria-pressed`, badge), se avisa con `role=alert` dentro de la misma tarjeta y el
-foco no se mueve del botón tocado; el resumen “N sin marcar” no cambia. El contrato de la API lo define el Architect.
+foco no se mueve del botón tocado; el resumen “N sin marcar” no cambia. El Architect confirmó que es implementable tal cual (P-D13).
 
 ### CU-13 — Mover y cancelar desde el panel
 
@@ -318,7 +320,9 @@ flowchart TD
   chk -->|Fuera del horario semanal| w1[admin-mover-advertencia<br/>motivo + 'Mover igual' / 'Elegir otro horario']
   chk -->|Dentro de un bloqueo| w2[admin-mover-bloqueo]
   w1 & w2 -->|Elegir otro horario| form
-  w1 & w2 -->|Mover igual| ok
+  w1 & w2 -->|Mover igual| rev{Revalida}
+  rev -->|Se ocupó mientras tanto| sup
+  rev -->|OK| ok
   chk -->|Error de red| err[admin-mover-error<br/>turno sin cambios]
   err --> form
   chk -->|OK| ok[admin-agenda-movido<br/>'Avisale al cliente: tel:'<br/>link del cliente muestra 'El local cambió tu turno']
@@ -329,6 +333,8 @@ flowchart TD
   r -->|OK con teléfono| c1[admin-agenda-cancelado<br/>'Avisale al cliente: tel:']
   r -->|OK sin contacto| c2[admin-agenda-cancelado-sin-contacto<br/>'El cliente no dejó contacto']
 ```
+
+El servidor valida todo de una vez (P-D12, Architect): la superposición gana y no trae advertencias; fuera de horario y bloqueo llegan juntos en una sola advertencia; “Mover igual” revalida antes de guardar.
 
 El panel no crea turnos (D-23) ni acceso al link privado (D-29); nada se envía al cliente (D-1).
 

@@ -150,6 +150,8 @@ implementación · **PENDIENTE** = requiere navegador o tecnología asistiva · 
 | Acciones repetidas en tarjetas | “Mover” / “Cancelar” / “Eliminar” con texto oculto que completa el nombre (“Mover turno de Paula V., 11:00”); el nombre empieza con el texto visible. | 2.4.4, 2.5.3 | OK (estático) |
 | Mover sin arrastre | Formulario con controles nativos (`select`, `date`, `time step=900`). | 2.5.7, 2.1.1 | OK (estático) |
 | Campos que aparecen (bloqueos) | Radios que revelan campos debajo (`hidden`), sin mover el foco ni cambiar de página. | 3.2.2 | OK (estático) |
+| Motivo del bloqueo (opcional) | `label` visible “Motivo (opcional)”, hint con el límite vinculado por `aria-describedby`, `maxlength=80`; vacío no genera error. | 3.3.2, 1.3.1 | OK (Playwright) |
+| Bloqueo en la agenda (DD-36) | “⊘ Bloqueado” en texto (ícono `aria-hidden`) + alcance, horario y motivo; recuadro punteado, no depende del color. | 1.4.1, 1.3.1 | OK (Playwright + axe) |
 | Reflow de tarjetas con muchas acciones | Botones y badges pueden partir línea dentro de la tarjeta. | 1.4.10, 1.4.12 | OK (Playwright) |
 
 Para la implementación: tras mover/cancelar, el foco va a la alerta de éxito de la agenda; al guardar la
