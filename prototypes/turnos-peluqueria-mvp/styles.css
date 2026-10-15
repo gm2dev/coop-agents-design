@@ -205,8 +205,12 @@ input[readonly] { background: var(--color-surface-subtle); }
              padding: var(--space-400); margin-bottom: var(--space-400); }
 .keep-link h2 { font-size: var(--font-size-400); }
 .keep-link label { color: var(--color-text-default); }
-.keep-link input { margin-bottom: var(--space-300); }
-.copy-status { min-height: calc(var(--font-size-200) * var(--font-line-height-base)); font-weight: var(--font-weight-semibold); margin: var(--space-200) 0 0; }
+.keep-link p { margin-bottom: var(--space-200); }
+.keep-link .actions { margin-top: var(--space-300); }
+/* Campo + botón Copiar: apilados en celular (botón a ancho completo), en fila desde 40rem. */
+.copy-field { display: flex; flex-direction: column; gap: var(--space-200); }
+.copy-field .btn { width: 100%; }
+.copy-status { min-height: calc(var(--font-size-200) * var(--font-line-height-base)); font-weight: var(--font-weight-semibold); margin: var(--space-100) 0 var(--space-200); }
 
 /* Resumen */
 .summary { display: grid; grid-template-columns: max-content 1fr; gap: var(--space-200) var(--space-400); margin: 0 0 var(--space-300); }
@@ -264,15 +268,18 @@ input[readonly] { background: var(--color-surface-subtle); }
 .row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-200);
        background: var(--color-surface-default); border: var(--border-width-default) solid var(--color-border-default); border-radius: var(--radius-md); padding: var(--space-300); }
 .row p { margin: 0; }
+.row > div { min-width: 0; }
+.row .badge { white-space: normal; }
 .row-title { font-weight: var(--font-weight-semibold); }
 
 .ranges { list-style: none; padding: 0; margin: 0 0 var(--space-200); display: grid; gap: var(--space-200); }
-.range { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-200); align-items: end; }
-.range .field { margin: 0; }
+.range { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-200); align-items: end; }
+.range .field { margin: 0; min-width: 0; }
+.range input { min-width: 0; }
 .range .remove { grid-column: 1 / -1; justify-self: start; }
-.day-fieldset { border-top: var(--border-width-default) solid var(--color-border-default); padding-top: var(--space-300); }
-.day-fieldset legend { float: left; width: 100%; }
-.day-fieldset legend + * { clear: both; }
+/* Sin float: el separador va en el propio legend para que no cruce el texto y ningún hermano
+   (p.ej. .no-ranges[hidden]) quede al lado de un flotante y empuje los rangos fuera de pantalla. */
+.day-fieldset legend { display: block; width: 100%; border-top: var(--border-width-default) solid var(--color-border-default); padding-top: var(--space-300); }
 
 /* ---------- Barra del prototipo (no es parte del producto) ---------- */
 .proto { background: var(--color-surface-disabled); border-top: var(--border-width-strong) dashed var(--color-border-strong); padding: var(--space-400) 0; }
@@ -291,7 +298,10 @@ input[readonly] { background: var(--color-surface-subtle); }
   .actions { flex-direction: row-reverse; justify-content: flex-start; }
   .actions .btn { width: auto; }
   .inline-fields { grid-template-columns: 1fr 1fr; }
-  .range { grid-template-columns: 1fr 1fr auto; }
+  .copy-field { flex-direction: row; align-items: stretch; }
+  .copy-field input { flex: 1 1 auto; min-width: 0; }
+  .copy-field .btn { width: auto; flex: 0 0 auto; }
+  .range { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; }
   .range .remove { grid-column: auto; }
   .date-nav h2 { flex: 1 1 auto; order: 0; }
 }
