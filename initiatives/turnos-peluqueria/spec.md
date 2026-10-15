@@ -1,4 +1,4 @@
-# Spec de UI — Turnos para peluquería (ronda 1)
+# Spec de UI — Turnos para peluquería (v0.2)
 
 Fuente de verdad del comportamiento y el copy; el prototipo lo ilustra
 (`prototypes/turnos-peluqueria/`). Si difieren, **gana esta spec** y se reporta la diferencia.
@@ -143,7 +143,8 @@ Reintentar no duplica (idempotencia, a implementar).
 | Estado | Archivo | Qué se ve | Anuncio / foco |
 |---|---|---|---|
 | Confirmando | `revisar-enviando.html` | botón «Confirmando…» `aria-disabled`; Alert info; **sin** «← Tus datos», sin «Cambiar» ni «Volver» | `role="status"`; evita doble envío |
-| Horario tomado | `revisar-tomado.html` | Alert danger «Alguien reservó las 15:30 mientras completabas tus datos» + alternativas (Jue 22 · 16:15 / 17:00) + «Ver todos los horarios». En el resumen, Día y hora: «15:30» con Badge «⊘ No disponible» y «Elegí otro horario.»; CTA «Elegir otro horario» (no «Confirmar») | `role="alert"` + foco al Alert |
+| Horario tomado | `revisar-tomado.html` | Alert danger «Alguien reservó las 15:30 mientras completabas tus datos» + alternativas (Jue 22 · 16:15 / 17:00, llevan a `revisar-alternativa.html` / `revisar-alternativa-1700.html`) + «Ver todos los horarios». En el resumen, Día y hora: «15:30» con Badge «⊘ No disponible» y «Elegí otro horario.»; CTA «Elegir otro horario» (no «Confirmar») | `role="alert"` + foco al Alert |
+| Con alternativa | `revisar-alternativa.html` · `revisar-alternativa-1700.html` | resumen con el horario nuevo (16:15 a 17:00 / 17:00 a 17:45); Alert info «Cambiaste el horario… Tus datos se conservaron»; **Confirmar turno** | `role="status"` |
 | Error de red | `revisar-error-red.html` | Alert danger «…todavía no está reservado. Probá de nuevo; no se va a duplicar.» + «Reintentar confirmación» | `role="alert"` + foco |
 
 No hay retención del horario ni aviso de tiempo restante (Architect, Q10).
@@ -202,8 +203,9 @@ No hay retención del horario ni aviso de tiempo restante (Architect, Q10).
 | Cargando | `reprogramar-cargando.html` | «Buscando horarios…» + skeleton | `role="status"` |
 | Vacío | `reprogramar-vacio.html` | «No quedan horarios con Martín el viernes 23» + próximo día + volver sin cambiar | — |
 | Error al cargar | `reprogramar-error-red.html` | Alert danger «No pudimos cargar los horarios… Tu turno sigue igual.» + «Reintentar» | `role="alert"` |
-| Horario tomado | `reprogramar-tomado.html` | Alert danger «Alguien reservó el jueves 22 a las 16:15 antes que vos… tu turno sigue igual» + alternativas; las 16:15 ya no figuran | `role="alert"` + foco |
-| Error al confirmar | `reprogramar-error-guardar.html` | Alert danger «No pudimos reprogramar tu turno… Tu turno sigue igual (jue 22, 15:30)» + selección conservada + «Reintentar» | `role="alert"` + foco |
+| Horario tomado | `reprogramar-tomado.html` | Alert danger «Alguien reservó el jueves 22 a las 16:15 antes que vos… tu turno sigue igual» + alternativas (17:00 / 18:30); las 16:15 ya no figuran | `role="alert"` + foco |
+| Alternativa elegida | `reprogramar-alternativa.html` · `reprogramar-alternativa-1830.html` | horario de la alternativa preseleccionado, Alert info «Elegiste… Hasta que confirmes, tu turno sigue igual»; reprograma recién con **Confirmar nuevo horario** | `role="status"` |
+| Error al confirmar | `reprogramar-error-guardar.html` | Alert danger «No pudimos reprogramar tu turno… Tu turno sigue igual (jue 22, 15:30)» + selección conservada (11:30, una sola) + «Reintentar» | `role="alert"` + foco |
 
 ### P12 · Reprogramado — `reprogramado.html`
 - Alert success **h1** «Reprogramaste tu turno», «Tu turno anterior (jueves 22, 15:30) quedó liberado.
@@ -253,11 +255,12 @@ Sin `nav` de staff (todavía no entró). Sin contraseña.
 - **Validación** (`staff-bloquear-error.html`).
 - **Conflicto** (`staff-bloquear-conflicto.html`): Alert warning «Hay 2 turnos reservados en ese horario»
   con lista; «Bloquear sin cancelar los turnos» (secondary) · «Bloquear y cancelar los 2 turnos…»
-  (danger-outline, lleva a confirmación).
+  (danger-outline, lleva a confirmación). En este estado **no** hay botón primario «Bloquear horario»: solo
+  las decisiones del Alert y «Cancelar».
 - **Confirmar cancelación** (`staff-bloquear-confirmar.html`): **h1** «¿Bloquear y cancelar 2 turnos?»;
   qué período; lista de turnos con nombre y email de cada clienta; Motivo para las clientas (se incluye en
   el email); Alert warning «A cada clienta le avisamos por email que su turno se canceló. Esta acción no se
-  puede deshacer.» Acciones: **Sí, bloquear y cancelar 2 turnos** (danger) · No, volver.
+  puede deshacer.» Acciones: **Sí, bloquear y cancelar 2 turnos** (danger) · No, volver. Link superior «← Volver al formulario».
 - **Error al guardar** (`staff-bloquear-error-guardar.html`): «No pudimos guardar el bloqueo… El horario no
   quedó bloqueado y no se canceló ningún turno.» + «Reintentar».
 

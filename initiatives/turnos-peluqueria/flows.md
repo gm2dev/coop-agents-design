@@ -1,7 +1,8 @@
-# Flujos — Turnos para peluquería (ronda 1)
+# Flujos — Turnos para peluquería (v0.2)
 
 Casos de uso **tentativos** (ver [README](README.md)). IDs de pantalla: `P*` cliente, `S*` staff;
-se usan igual en [spec.md](spec.md) y en el prototipo. Donde dice `AC?` hay que mapear cuando el PO
+se usan igual en [spec.md](spec.md) y en el prototipo. Los nodos con clase `demo` (borde grueso) son
+los del [recorrido de demo del MVP](README.md#alcance-de-la-demo-mvp); ver la tabla de abajo. Donde dice `AC?` hay que mapear cuando el PO
 publique los criterios de aceptación.
 
 ## CU1 — Cliente reserva un turno
@@ -29,11 +30,14 @@ flowchart TD
   P5 -->|Confirmar| P5c[P5 Confirmando… · sin links de volver ni cambiar]
   P5c -->|OK| P6[P6 Confirmado: profesional asignado, referencia, email con link y recordatorio · AC?]
   P5c -->|Horario tomado, se valida al confirmar| P5t[P5 Error: horario marcado No disponible + alternativas]
-  P5t -->|Elige alternativa| P6
+  P5t -->|Elige alternativa| P5a[P5 con el horario alternativo · Confirmar turno]
+  P5a -->|Confirmar| P5c
   P5t -->|Ver todos| P3L
   P5c -->|Error de red| P5x[P5 Error: no está reservado, Reintentar]
   P5x -->|Reintentar, idempotente| P5c
   P6 -->|Abre el link del email| P8[P8 Mi turno · CU2]
+  classDef demo stroke-width:4px
+  class A,P1,P2,P3,P3v,P4,P4e,P5,P5t,P5a,P6,P8 demo
 ```
 
 | Nodo | Notas |
@@ -44,6 +48,7 @@ flowchart TD
 | P4 | Email y celular obligatorios (CPO). Bajo celular: «La peluquería lo usa solo para llamarte si tiene que cancelar o mover tu turno.» |
 | P5 | Con «cualquiera» no se muestra un asignado (se asigna al confirmar, S8); P6 muestra quién quedó. |
 | P5t | No se retiene el horario (Architect, Q10): se valida al confirmar. Conserva datos; el horario elegido se marca «No disponible» y se ofrecen los más cercanos. Sin aviso de tiempo restante. |
+| P5a | `revisar-alternativa.html` (16:15) / `revisar-alternativa-1700.html`: mismo resumen con el horario nuevo y un aviso; no confirma sola. |
 | P5x | Aclara que el turno **no** quedó reservado; reintentar no duplica. |
 
 ## CU2 — Cliente consulta, cancela o reprograma
@@ -74,16 +79,21 @@ flowchart TD
   C -->|Sí| P12[P12 Reprogramado: horario anterior liberado]
   C -->|Tomado| P11t[P11 Horario tomado: tu turno sigue igual + alternativas]
   C -->|Error de red| P11x[P11 Error al confirmar: tu turno sigue igual · Reintentar]
-  P11t --> P11
+  P11t -->|Elige alternativa| P11a[P11 con la alternativa preseleccionada · Confirmar nuevo horario]
+  P11a -->|Confirmar nuevo horario| C
+  P11t -->|Elige otro| P11
   P11x --> C
   P11 -->|No cambiar mi turno| P8
   P10 -->|Reservar otro turno| P1[P1 · CU1]
   P7 -->|Reservar un turno nuevo| P1
+  classDef demo stroke-width:4px
+  class L,P8,P7,P9,P10 demo
 ```
 
 | Nodo | Notas |
 |---|---|
 | P7 | Antes era el formulario código + celular; ahora es la salida del link inválido (CPO + Architect, S2/Q11). Pregunta abierta Q14: «Reenviarme el link por email». |
+| P11a | `reprogramar-alternativa.html` (17:00) / `reprogramar-alternativa-1830.html`: la alternativa del Alert preselecciona el horario; reprograma recién con «Confirmar nuevo horario». |
 | P11 | Pantallas propias de CU2 (`reprogramar*.html`), con «← Tu turno» y «No cambiar mi turno»: nunca saca al usuario a CU1. Solo cambia día/horario (Q7, decisión CDO v0). |
 | Todas | Pie «¿Necesitás ayuda?» con el teléfono de la peluquería (3.2.6). |
 
@@ -192,6 +202,17 @@ flowchart TD
   S9 -->|Ver agenda| S1
   S8 -->|Cancelar| S1
 ```
+
+## Nodos del recorrido de demo (MVP)
+
+| Flujo | En la demo | Después del MVP |
+|---|---|---|
+| CU1 | A, P1, P2, P3, P3v, P4, P4e, P5, P5t, P5a, P6 | — (P3L/P3x, P5c, P5x quedan como estados de soporte) |
+| CU2 | L, P8, P7, P9, P10 | P11*, P12 (reprogramar) |
+| CU5 | S0, enviado | — |
+| CU3 | S1 (día), S3 | S2 (semana), S3 de turno cargado a mano |
+| CU4 | S4 (incl. feriado), S5 | conflicto con turnos y confirmar cancelación, S5 con cancelados, S6, S7 |
+| CU6 | — | todo (S8, S9) |
 
 ## Cobertura de estados
 
