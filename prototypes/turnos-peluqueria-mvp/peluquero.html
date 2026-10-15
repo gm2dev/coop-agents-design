@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Paso 2 de 5: Elegí peluquero — La Esquina Peluquería</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="bar"><a class="brand" href="servicios.html">La Esquina Peluquería</a><span class="small muted">Reserva de turnos</span></div>
+  </header>
+  <main id="main">
+    <p><a class="back" href="servicios.html">← Volver: servicio</a></p>
+    <p class="step">Paso 2 de 5 · Peluquero</p>
+    <ol class="progress" aria-hidden="true"><li class="done"></li><li aria-current="step"></li><li></li><li></li><li></li></ol>
+    <h1>¿Con quién?</h1>
+    <div class="selection"><p><strong>Corte y barba</strong> · 45 min · $ 11.000</p><a href="servicios.html">Cambiar servicio</a></div>
+    <form action="horario.html" method="get" data-persist="peluquero">
+      <fieldset aria-describedby="pelu-hint">
+        <legend>Peluquero</legend>
+        <p class="hint" id="pelu-hint">Solo ves a quienes hacen este servicio.</p>
+        <ul class="options">
+          <li><label class="option"><input type="radio" name="peluquero" value="cualquiera" checked><span class="option-body"><span class="option-title">Cualquiera disponible</span><span class="option-meta">Ves más horarios. Al confirmar te mostramos con quién quedó tu turno.</span></span></label></li>
+          <li><label class="option"><input type="radio" name="peluquero" value="ana"><span class="option-body"><span class="option-title">Ana</span></span></label></li>
+          <li><label class="option"><input type="radio" name="peluquero" value="bruno"><span class="option-body"><span class="option-title">Bruno</span></span></label></li>
+          <li><label class="option"><input type="radio" name="peluquero" value="carla"><span class="option-body"><span class="option-title">Carla</span></span></label></li>
+        </ul>
+      </fieldset>
+      <div class="actions"><button class="btn btn-primary" type="submit">Continuar</button></div>
+    </form>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <h2 class="h3">La Esquina Peluquería</h2>
+      <p>Calle Ejemplo 1234, Villa Prueba</p>
+      <p>Teléfono: <a href="tel:+541140000000">011 4000-0000</a></p>
+      <p class="small muted">Todos los horarios están en hora del local (Buenos Aires).</p>
+    </div>
+  </footer>
+  <aside class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      <h2>Estados de esta pantalla</h2><ul><li><a href="peluquero.html">Con peluqueros (por defecto “Cualquiera disponible”)</a></li></ul>
+      <p><a href="index.html">Índice del prototipo y recorridos de demo</a> · Prototipo de diseño · Hito 1 · datos ficticios · v0.1</p>
+    </div>
+  </aside>
+  <script src="app.js"></script>
+</body>
+</html>

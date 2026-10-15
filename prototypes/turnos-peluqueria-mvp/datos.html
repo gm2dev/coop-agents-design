@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Paso 4 de 5: Tus datos — La Esquina Peluquería</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="bar"><a class="brand" href="servicios.html">La Esquina Peluquería</a><span class="small muted">Reserva de turnos</span></div>
+  </header>
+  <main id="main">
+    <p><a class="back" href="horario.html">← Volver: día y horario</a></p>
+    <p class="step">Paso 4 de 5 · Tus datos</p>
+    <ol class="progress" aria-hidden="true"><li class="done"></li><li class="done"></li><li class="done"></li><li aria-current="step"></li><li></li></ol>
+    <h1>Tus datos</h1>
+    <div class="selection"><p><strong>Corte y barba</strong> · Vie 16 oct, 15:30 · con <strong>Cualquiera disponible</strong></p><a href="horario.html">Cambiar</a></div>
+    <div class="alert alert-danger" id="error-summary" role="alert" tabindex="-1" hidden>
+      <p class="alert-title"></p>
+      <ul></ul>
+    </div>
+    <form action="revisar.html" method="get" data-validate data-persist="datos">
+      <div class="field">
+        <label for="nombre">Nombre</label>
+        <input id="nombre" name="nombre" type="text" autocomplete="name" data-required data-label="tu nombre">
+        <p class="field-error" id="nombre-error" hidden><span aria-hidden="true">⚠</span><span class="msg">Ingresá tu nombre.</span></p>
+      </div>
+      <div class="field">
+        <label for="telefono">Teléfono <span class="optional">(opcional)</span></label>
+        <p class="hint" id="telefono-hint">Para que el local pueda contactarte si hay un cambio.</p>
+        <input id="telefono" name="telefono" type="tel" autocomplete="tel" aria-describedby="telefono-hint" value="">
+        <p class="field-error" id="telefono-error" hidden><span aria-hidden="true">⚠</span><span class="msg"></span></p>
+      </div>
+      <div class="field">
+        <label for="email">Email <span class="optional">(opcional)</span></label>
+        <p class="hint" id="email-hint">Solo lo ve el local.</p>
+        <input id="email" name="email" type="email" autocomplete="email" aria-describedby="email-hint" value="">
+        <p class="field-error" id="email-error" hidden><span aria-hidden="true">⚠</span><span class="msg">Revisá el email: tiene que tener la forma nombre@ejemplo.com.</span></p>
+      </div>
+      <p class="small muted">No te vamos a mandar mensajes: tu turno lo ves en la pantalla de confirmación y en tu link privado.</p>
+      <div class="actions"><button class="btn btn-primary" type="submit">Continuar</button></div>
+    </form>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <h2 class="h3">La Esquina Peluquería</h2>
+      <p>Calle Ejemplo 1234, Villa Prueba</p>
+      <p>Teléfono: <a href="tel:+541140000000">011 4000-0000</a></p>
+      <p class="small muted">Todos los horarios están en hora del local (Buenos Aires).</p>
+    </div>
+  </footer>
+  <aside class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      <h2>Estados de esta pantalla</h2><ul><li><a href="datos.html">Formulario vacío (probá continuar sin nombre o con un email inválido)</a></li><li><a href="datos-error.html">Con errores: nombre vacío y email inválido</a></li></ul>
+      <p><a href="index.html">Índice del prototipo y recorridos de demo</a> · Prototipo de diseño · Hito 1 · datos ficticios · v0.1</p>
+    </div>
+  </aside>
+  <script src="app.js"></script>
+</body>
+</html>

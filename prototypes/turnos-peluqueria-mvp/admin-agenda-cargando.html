@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cargando agenda — Panel de La Esquina Peluquería</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin">
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="bar">
+      <a class="brand" href="admin-agenda-dia.html">Panel · La Esquina Peluquería</a>
+      <span class="small"><span class="muted">Usuario: encargada</span> · <a href="admin-ingresar.html">Salir</a></span>
+    </div>
+    <nav class="admin-nav wrap" aria-label="Secciones del panel"><ul><li><a href="admin-agenda-dia.html" aria-current="page">Agenda</a></li><li><a href="admin-servicios.html">Servicios</a></li><li><a href="admin-peluqueros.html">Peluqueros</a></li><li><a href="admin-local.html">Datos del local</a></li></ul></nav>
+  </header>
+  <main id="main">
+    <h1>Agenda</h1>
+    <div class="toolbar">
+      <nav class="segmented" aria-label="Vista de la agenda"><a href="admin-agenda-dia.html" aria-current="page">Día</a><a href="admin-agenda-semana.html">Semana</a></nav>
+      <form class="field" action="admin-agenda-dia-filtrada.html" method="get">
+        <label for="filtro">Peluquero</label>
+        <div class="inline-fields"><select id="filtro" name="peluquero"><option value="todos" selected>Todos</option><option value="ana">Ana</option><option value="bruno">Bruno</option><option value="carla">Carla</option></select><button class="btn btn-secondary" type="submit">Filtrar</button></div>
+      </form>
+    </div>
+    <div class="date-nav">
+      <h2 id="periodo" aria-live="polite">Viernes 16 de octubre</h2>
+      <a href="admin-agenda-dia.html">← Día anterior</a><a href="admin-agenda-dia.html">Hoy</a><a href="admin-agenda-dia.html">Día siguiente →</a>
+    </div>
+    <p class="small muted">Horarios en hora del local. Los turnos nuevos de la web aparecen al abrir o actualizar la agenda.</p>
+    <div class="loading" role="status"><span class="spinner" aria-hidden="true"></span><span>Cargando turnos…</span></div>
+  </main>
+  <aside class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      <h2>Estados de esta pantalla</h2><ul><li><a href="admin-agenda-dia.html">Día: todos los peluqueros</a></li><li><a href="admin-agenda-dia-filtrada.html">Día filtrado por peluquero (Bruno)</a></li><li><a href="admin-agenda-semana.html">Semana</a></li><li><a href="admin-agenda-vacia.html">Vacío: día sin turnos</a></li><li><a href="admin-agenda-cargando.html">Cargando</a></li><li><a href="admin-agenda-error.html">Error al cargar</a></li></ul>
+      <p><a href="index.html">Índice del prototipo y recorridos de demo</a> · Prototipo de diseño · Hito 1 · datos ficticios · v0.1</p>
+    </div>
+  </aside>
+  <script src="app.js"></script>
+</body>
+</html>

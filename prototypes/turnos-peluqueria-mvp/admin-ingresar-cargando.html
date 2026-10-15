@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ingresando — Panel de La Esquina Peluquería</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="bar"><span class="brand">Panel · La Esquina Peluquería</span></div>
+  </header>
+  <main id="main">
+    <h1>Ingresar al panel</h1>
+    <p class="visually-hidden" role="status">Ingresando…</p>
+    <div class="alert alert-danger" id="error-summary" role="alert" tabindex="-1" hidden><p class="alert-title"></p><ul></ul></div>
+    <form class="panel" action="admin-agenda-dia.html" method="get" data-validate>
+      <div class="field">
+        <label for="usuario">Usuario</label>
+        <input id="usuario" name="usuario" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" data-required data-label="tu usuario" value="encargada">
+        <p class="field-error" id="usuario-error" hidden><span aria-hidden="true">⚠</span><span class="msg"></span></p>
+      </div>
+      <div class="field">
+        <label for="contrasena">Contraseña</label>
+        <input id="contrasena" name="contrasena" type="password" autocomplete="current-password" data-required data-label="tu contraseña">
+        <p class="field-error" id="contrasena-error" hidden><span aria-hidden="true">⚠</span><span class="msg"></span></p>
+        <label class="check-line small"><input type="checkbox" data-toggle-password="contrasena"> Mostrar contraseña</label>
+      </div>
+      <div class="actions"><button class="btn btn-primary" type="button" aria-disabled="true"><span class="spinner" aria-hidden="true"></span>Ingresando…</button></div>
+    </form>
+    <p class="small muted">Si olvidaste tu contraseña, pedí que te la reseteen.</p>
+  </main>
+  <aside class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      <h2>Estados de esta pantalla</h2><ul><li><a href="admin-ingresar.html">Formulario (probá ingresar con campos vacíos)</a></li><li><a href="admin-ingresar-error.html">Error: usuario o contraseña incorrectos</a></li><li><a href="admin-ingresar-bloqueado.html">Demasiados intentos</a></li><li><a href="admin-ingresar-cargando.html">Ingresando (cargando)</a></li><li><a href="admin-sesion.html">Sin sesión: intenta abrir una pantalla del panel</a></li></ul>
+      <p><a href="index.html">Índice del prototipo y recorridos de demo</a> · Prototipo de diseño · Hito 1 · datos ficticios · v0.1</p>
+    </div>
+  </aside>
+  <script src="app.js"></script>
+</body>
+</html>

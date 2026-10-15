@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Servicios — Panel de La Esquina Peluquería</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin">
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="bar">
+      <a class="brand" href="admin-agenda-dia.html">Panel · La Esquina Peluquería</a>
+      <span class="small"><span class="muted">Usuario: encargada</span> · <a href="admin-ingresar.html">Salir</a></span>
+    </div>
+    <nav class="admin-nav wrap" aria-label="Secciones del panel"><ul><li><a href="admin-agenda-dia.html">Agenda</a></li><li><a href="admin-servicios.html" aria-current="page">Servicios</a></li><li><a href="admin-peluqueros.html">Peluqueros</a></li><li><a href="admin-local.html">Datos del local</a></li></ul></nav>
+  </header>
+  <main id="main">
+    <h1>Servicios</h1>
+    <p><a class="btn btn-primary" href="admin-servicio-editar.html">Agregar servicio</a></p>
+    <p class="small muted">La web solo muestra los servicios activos que tienen al menos un peluquero asignado.</p>
+    <ul class="list">
+      <li class="row">
+        <div>
+          <p class="row-title">Corte de pelo <span class="badge badge-success"><span aria-hidden="true">✓</span> Activo</span></p>
+          <p class="small">30 min · $ 8.000 (precio de referencia)</p>
+          <p class="small muted">Peluqueros: Ana, Bruno, Carla</p>
+        </div>
+        <a class="btn btn-secondary" href="admin-servicio-editar.html">Editar<span class="visually-hidden"> Corte de pelo</span></a>
+      </li>
+      <li class="row">
+        <div>
+          <p class="row-title">Corte y barba <span class="badge badge-success"><span aria-hidden="true">✓</span> Activo</span></p>
+          <p class="small">45 min · $ 11.000 (precio de referencia)</p>
+          <p class="small muted">Peluqueros: Ana, Bruno</p>
+        </div>
+        <a class="btn btn-secondary" href="admin-servicio-editar.html">Editar<span class="visually-hidden"> Corte y barba</span></a>
+      </li>
+      <li class="row">
+        <div>
+          <p class="row-title">Color <span class="badge badge-success"><span aria-hidden="true">✓</span> Activo</span></p>
+          <p class="small">90 min · $ 25.000 (precio de referencia)</p>
+          <p class="small muted">Peluqueros: Ana</p>
+        </div>
+        <a class="btn btn-secondary" href="admin-servicio-editar.html">Editar<span class="visually-hidden"> Color</span></a>
+      </li>
+      <li class="row">
+        <div>
+          <p class="row-title">Peinado <span class="badge badge-success"><span aria-hidden="true">✓</span> Activo</span></p>
+          <p class="small">45 min · $ 9.500 (precio de referencia)</p>
+          <p class="small muted">Peluqueros: Carla</p>
+        </div>
+        <a class="btn btn-secondary" href="admin-servicio-editar.html">Editar<span class="visually-hidden"> Peinado</span></a>
+      </li>
+      <li class="row">
+        <div>
+          <p class="row-title">Alisado <span class="badge badge-success"><span aria-hidden="true">✓</span> Activo</span></p>
+          <p class="small">120 min · $ 40.000 (precio de referencia)</p>
+          <p class="small"><span class="badge badge-warning"><span aria-hidden="true">⚠</span> Sin peluqueros asignados</span> No se ofrece en la web hasta que le asignes al menos uno.</p>
+        </div>
+        <a class="btn btn-secondary" href="admin-servicio-editar.html">Editar<span class="visually-hidden"> Alisado</span></a>
+      </li>
+      <li class="row">
+        <div>
+          <p class="row-title">Tratamiento capilar <span class="badge badge-neutral">Inactivo</span></p>
+          <p class="small">60 min · $ 15.000 (precio de referencia)</p>
+          <p class="small muted">Peluqueros: Carla</p>
+        </div>
+        <a class="btn btn-secondary" href="admin-servicio-editar.html">Editar<span class="visually-hidden"> Tratamiento capilar</span></a>
+      </li>
+    </ul>
+  </main>
+  <aside class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      <h2>Estados de esta pantalla</h2><ul><li><a href="admin-servicios.html">Lista con avisos</a></li><li><a href="admin-servicios-vacio.html">Vacío: sin servicios</a></li><li><a href="admin-servicio-editar.html">Editar servicio</a></li><li><a href="admin-servicio-error.html">Editar: errores de validación</a></li><li><a href="admin-servicios-guardado.html">Éxito: servicio guardado</a></li></ul>
+      <p><a href="index.html">Índice del prototipo y recorridos de demo</a> · Prototipo de diseño · Hito 1 · datos ficticios · v0.1</p>
+    </div>
+  </aside>
+  <script src="app.js"></script>
+</body>
+</html>

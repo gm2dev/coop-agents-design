@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Peluqueros — Panel de La Esquina Peluquería</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin">
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="bar">
+      <a class="brand" href="admin-agenda-dia.html">Panel · La Esquina Peluquería</a>
+      <span class="small"><span class="muted">Usuario: encargada</span> · <a href="admin-ingresar.html">Salir</a></span>
+    </div>
+    <nav class="admin-nav wrap" aria-label="Secciones del panel"><ul><li><a href="admin-agenda-dia.html">Agenda</a></li><li><a href="admin-servicios.html">Servicios</a></li><li><a href="admin-peluqueros.html" aria-current="page">Peluqueros</a></li><li><a href="admin-local.html">Datos del local</a></li></ul></nav>
+  </header>
+  <main id="main">
+    <h1>Peluqueros</h1>
+    <p><a class="btn btn-primary" href="admin-peluquero-editar.html">Agregar peluquero</a></p>
+    <ul class="list">
+      <li class="row">
+        <div>
+          <p class="row-title">Ana <span class="badge badge-success"><span aria-hidden="true">✓</span> Activo</span></p>
+          <p class="small muted">Servicios: Corte de pelo, Corte y barba, Color</p>
+          <p class="small muted">Horario: mar a sáb, 9 a 13 y 15 a 19</p>
+        </div>
+        <a class="btn btn-secondary" href="admin-peluquero-editar.html">Editar<span class="visually-hidden"> Ana</span></a>
+      </li>
+      <li class="row">
+        <div>
+          <p class="row-title">Bruno <span class="badge badge-success"><span aria-hidden="true">✓</span> Activo</span></p>
+          <p class="small muted">Servicios: Corte de pelo, Corte y barba</p>
+          <p class="small muted">Horario: mar a vie, 10 a 19; sáb 9 a 14</p>
+        </div>
+        <a class="btn btn-secondary" href="admin-peluquero-editar.html">Editar<span class="visually-hidden"> Bruno</span></a>
+      </li>
+      <li class="row">
+        <div>
+          <p class="row-title">Carla <span class="badge badge-success"><span aria-hidden="true">✓</span> Activo</span></p>
+          <p class="small muted">Servicios: Corte de pelo, Peinado</p>
+          <p class="small muted">Horario: mié a sáb, 9 a 17</p>
+        </div>
+        <a class="btn btn-secondary" href="admin-peluquero-editar.html">Editar<span class="visually-hidden"> Carla</span></a>
+      </li>
+      <li class="row">
+        <div>
+          <p class="row-title">Dani <span class="badge badge-success"><span aria-hidden="true">✓</span> Activo</span></p>
+          <p class="small"><span class="badge badge-warning"><span aria-hidden="true">⚠</span> Sin servicios</span> No aparece en la reserva hasta que tenga al menos un servicio.</p>
+          <p class="small muted">Horario: sin horario cargado</p>
+        </div>
+        <a class="btn btn-secondary" href="admin-peluquero-editar.html">Editar<span class="visually-hidden"> Dani</span></a>
+      </li>
+    </ul>
+  </main>
+  <aside class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      <h2>Estados de esta pantalla</h2><ul><li><a href="admin-peluqueros.html">Lista con avisos</a></li><li><a href="admin-peluqueros-vacio.html">Vacío: sin peluqueros</a></li><li><a href="admin-peluquero-editar.html">Editar peluquero y horario semanal</a></li><li><a href="admin-peluquero-error.html">Editar: errores en rangos</a></li><li><a href="admin-peluqueros-guardado.html">Éxito: peluquero guardado</a></li></ul>
+      <p><a href="index.html">Índice del prototipo y recorridos de demo</a> · Prototipo de diseño · Hito 1 · datos ficticios · v0.1</p>
+    </div>
+  </aside>
+  <script src="app.js"></script>
+</body>
+</html>

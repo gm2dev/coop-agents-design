@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Paso 3 de 5: Elegí día y horario (fin de la ventana de reserva) — La Esquina Peluquería</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="bar"><a class="brand" href="servicios.html">La Esquina Peluquería</a><span class="small muted">Reserva de turnos</span></div>
+  </header>
+  <main id="main">
+    <p><a class="back" href="peluquero.html">← Volver: peluquero</a></p>
+    <p class="step">Paso 3 de 5 · Día y horario</p>
+    <ol class="progress" aria-hidden="true"><li class="done"></li><li class="done"></li><li aria-current="step"></li><li></li><li></li></ol>
+    <h1>¿Qué día y a qué hora?</h1>
+    <div class="selection"><p><strong>Corte y barba</strong> · 45 min · con <strong>Cualquiera disponible</strong></p><a href="peluquero.html">Cambiar</a></div>
+    <form action="datos.html" method="get" class="panel" data-persist="horario">
+      <h2 class="h3" id="dias-titulo">Día <span class="muted small">(9 al 15 de noviembre)</span></h2>
+      <nav aria-labelledby="dias-titulo">
+        <div class="days-nav"><a href="horario.html">← Semana anterior</a><span class="muted">Último día: sáb 14 nov</span></div>
+        <ul class="days"><li><span class="day-off"><span>Lun 9</span><small>Cerrado</small><span class="visually-hidden">, lunes 9 de noviembre</span></span></li><li><a href="horario-limite.html"><span>Mar 10</span><small>Con horarios</small><span class="visually-hidden">, martes 10 de noviembre</span></a></li><li><a href="horario-limite.html"><span>Mié 11</span><small>Con horarios</small><span class="visually-hidden">, miércoles 11 de noviembre</span></a></li><li><a href="horario-limite.html" aria-current="date"><span>Jue 12</span><small>Con horarios</small><span class="visually-hidden">, jueves 12 de noviembre</span></a></li><li><a href="horario-limite.html"><span>Vie 13</span><small>Con horarios</small><span class="visually-hidden">, viernes 13 de noviembre</span></a></li><li><a href="horario-limite.html"><span>Sáb 14</span><small>Último día</small><span class="visually-hidden">, sábado 14 de noviembre</span></a></li><li><span class="day-off"><span>Dom 15</span><small>No disponible</small><span class="visually-hidden">, domingo 15 de noviembre</span></span></li></ul>
+      </nav>
+      <p class="hint">Podés reservar desde hoy hasta 30 días hacia adelante (hasta el sábado 14 de noviembre).</p>
+      <div class="alert alert-info"><p>Se puede reservar hasta 30 días hacia adelante. Para una fecha posterior al sábado 14 de noviembre, volvé a entrar más adelante o llamá al local: <a href="tel:+541140000000">011 4000-0000</a>.</p></div>
+      <fieldset>
+        <legend>Horarios del jueves 12 de noviembre</legend>
+        <p class="hint">Hora de inicio, en hora del local. El turno dura 45 min.</p>
+        <ul class="slots">
+          <li><label class="slot"><input type="radio" name="horario" value="09:00" required><span class="check" aria-hidden="true">✓</span>09:00</label></li>
+          <li><label class="slot"><input type="radio" name="horario" value="09:45" required><span class="check" aria-hidden="true">✓</span>09:45</label></li>
+          <li><label class="slot"><input type="radio" name="horario" value="10:30" required><span class="check" aria-hidden="true">✓</span>10:30</label></li>
+          <li><label class="slot"><input type="radio" name="horario" value="16:00" required><span class="check" aria-hidden="true">✓</span>16:00</label></li>
+          <li><label class="slot"><input type="radio" name="horario" value="16:45" required><span class="check" aria-hidden="true">✓</span>16:45</label></li>
+        </ul>
+      </fieldset>
+      <div class="actions"><button class="btn btn-primary" type="submit">Continuar</button></div>
+    </form>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <h2 class="h3">La Esquina Peluquería</h2>
+      <p>Calle Ejemplo 1234, Villa Prueba</p>
+      <p>Teléfono: <a href="tel:+541140000000">011 4000-0000</a></p>
+      <p class="small muted">Todos los horarios están en hora del local (Buenos Aires).</p>
+    </div>
+  </footer>
+  <aside class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      <h2>Estados de esta pantalla</h2><ul><li><a href="horario.html">Con horarios</a></li><li><a href="horario-cargando.html">Cargando horarios</a></li><li><a href="horario-vacio.html">Vacío: día sin horarios</a></li><li><a href="horario-limite.html">Fin de la ventana de 30 días</a></li><li><a href="horario-error.html">Error al cargar</a></li><li><a href="horario-ocupado.html">CU-04: el horario se acaba de ocupar</a></li></ul>
+      <p><a href="index.html">Índice del prototipo y recorridos de demo</a> · Prototipo de diseño · Hito 1 · datos ficticios · v0.1</p>
+    </div>
+  </aside>
+  <script src="app.js"></script>
+</body>
+</html>

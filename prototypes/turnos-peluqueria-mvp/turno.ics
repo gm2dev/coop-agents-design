@@ -1,0 +1,27 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//coop-agents-design//prototipo turnos-peluqueria-mvp//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:America/Argentina/Buenos_Aires
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:-0300
+TZOFFSETTO:-0300
+TZNAME:-03
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:prototipo-k7Q2-9xRm-4LpZ-a81c@reservas.example
+DTSTAMP:20261015T120000Z
+DTSTART;TZID=America/Argentina/Buenos_Aires:20261016T153000
+DTEND;TZID=America/Argentina/Buenos_Aires:20261016T161500
+SUMMARY:Corte y barba en La Esquina Peluquería (con Bruno)
+LOCATION:Calle Ejemplo 1234\, Villa Prueba
+DESCRIPTION:Turno de prueba (prototipo). Corte y barba\, 45 min\, con Bruno.
+  Precio orientativo $ 11.000\, se paga en el local. Teléfono del local: 011
+  4000-0000. Tu link privado: https://reservas.example/t/k7Q2-9xRm-4LpZ-a81c
+URL:https://reservas.example/t/k7Q2-9xRm-4LpZ-a81c
+END:VEVENT
+END:VCALENDAR
