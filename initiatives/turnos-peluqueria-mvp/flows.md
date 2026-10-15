@@ -1,11 +1,11 @@
-# Flujos — Turnos para peluquería, MVP Hito 1
+# Flujos — Turnos para peluquería, MVP Hitos 1 y 2
 
-Un diagrama por caso de uso del Hito 1, con camino principal, errores, vacíos y salidas. Los nodos entre
+Un diagrama por caso de uso del Hito 1 y del Hito 2 (desde [§ Hito 2](#hito-2)), con camino principal, errores, vacíos y salidas. Los nodos entre
 corchetes llevan el nombre del archivo del prototipo (`prototypes/turnos-peluqueria-mvp/<archivo>.html`).
 Criterios y reglas: [casos-de-uso.md](https://github.com/gm2dev/coop-agents-product/blob/po/turnos-peluqueria-mvp/initiatives/turnos-peluqueria-mvp/casos-de-uso.md).
 
 Convención: rectángulo = pantalla o estado; rombo = decisión del sistema o del usuario; `-.->` = salida
-alternativa. Los nodos `H2` marcan dónde se engancha algo que se diseña después.
+alternativa.
 
 ## Vista general del cliente
 
@@ -194,4 +194,146 @@ flowchart TD
   fe --> v
   v -->|Sí| ok[admin-local-guardado<br/>'Ya se muestran en la web y en las confirmaciones']
   ok -.-> use([Se usan en: footer del cliente, confirmación,<br/>link privado, mensajes 'llamá al local', .ics])
+```
+
+<a id="hito-2"></a>
+## Hito 2
+
+### CU-05 (H2) — Estados del link privado
+
+```mermaid
+flowchart TD
+  open([Cliente abre su link]) --> load[turno-cargando]
+  load --> found{¿Existe el turno?}
+  found -->|No| nf[turno-no-encontrado<br/>sin datos + teléfono]
+  found -->|Sí| st{Estado}
+  st -->|Cancelado por el local| cl[turno-cancelado-local<br/>✕ + teléfono, sin acciones]
+  st -->|Cancelado por el cliente| cv[turno-cancelado<br/>✕ Cancelado por vos, sin acciones]
+  st -->|Ya empezó / pasó| pa[turno-pasado<br/>◷ sin acciones]
+  st -->|Vigente| mv{¿Lo movió el local?}
+  mv -->|Sí| mov[turno-movido<br/>↻ 'El local cambió tu turno: ahora es…'<br/>+ borrar evento anterior]
+  mv -->|No| conf[turno ✓ Confirmado]
+  mov --> two{¿Faltan 2 h o más?<br/>RN-08, exactamente 2 h = sí}
+  conf --> two
+  two -->|Sí| acc[Bloque 'Cambiar día u horario' / 'Cancelar turno']
+  two -->|No| m2[turno-menos-2h<br/>'Faltan menos de 2 horas…' + tel:]
+  cl & cv & pa -.-> new([Reservar un turno nuevo])
+  acc -->|Cambiar| cu6([CU-06])
+  acc -->|Cancelar| cu7([CU-07])
+```
+
+### CU-06 — Cambiar el turno desde el link
+
+```mermaid
+flowchart TD
+  t[turno] -->|Cambiar día u horario| load[cambiar-cargando]
+  load -->|Error| err[cambiar-error<br/>Reintentar + teléfono]
+  err -->|Reintentar| load
+  load --> pick[cambiar · Paso 1 de 2<br/>mismo servicio y peluquero o 'cualquiera'<br/>30 días, inicios cada 15 min]
+  pick -.->|'¿Otro servicio?' Cancelá y reservá| cu7([CU-07])
+  pick -->|Continuar| rev[cambiar-revisar · Paso 2<br/>Antes → Después]
+  rev -.->|No cambiar| t
+  rev -->|Confirmar cambio| send[cambiar-enviando]
+  send --> res{Respuesta}
+  res -->|Horario ocupado| occ[cambiar-ocupado<br/>role=alert + foco<br/>turno original intacto]
+  occ --> pick
+  res -->|Faltan menos de 2 h| late[turno-plazo-vencido<br/>alert + tel:, turno intacto]
+  res -->|Error de red| neterr[cambiar-error-envio<br/>turno intacto, Reintentar]
+  neterr --> send
+  res -->|OK| ok[cambiar-confirmado<br/>mismo link · Agregar al calendario .ics nuevo<br/>· borrar el evento anterior]
+  ok --> t
+```
+
+### CU-07 — Cancelar el turno desde el link
+
+```mermaid
+flowchart TD
+  t[turno] -->|Cancelar turno| ask[cancelar<br/>'¿Cancelar tu turno?' + resumen]
+  ask -->|No, mantener turno| t
+  ask -->|Sí, cancelar turno| send[cancelar-enviando]
+  send --> res{Respuesta}
+  res -->|Error de red| err[cancelar-error<br/>turno sigue vigente, Reintentar]
+  err --> send
+  res -->|Faltan menos de 2 h| late[turno-plazo-vencido]
+  res -->|OK| done[cancelar-listo<br/>cancelado + borrar del calendario]
+  done -.-> new([Reservar un turno nuevo])
+  done -.->|Abre el link después| cv[turno-cancelado]
+```
+
+### CU-11 — Bloqueos
+
+```mermaid
+flowchart TD
+  nav([Panel → Bloqueos]) --> any{¿Hay bloqueos?}
+  any -->|No| empty[admin-bloqueos-vacio]
+  any -->|Sí| list[admin-bloqueos<br/>alcance · días · horario]
+  empty & list -->|Nuevo bloqueo| form[admin-bloqueo-nuevo<br/>¿A quién? · ¿Qué días? · ¿Qué horario? step 15]
+  form -->|Guardar| val{¿Válido?}
+  val -->|No| ferr[admin-bloqueo-error<br/>resumen + error en campo]
+  ferr --> form
+  val -->|Sí| turns{¿Turnos confirmados dentro?}
+  turns -->|No| saved[admin-bloqueo-guardado]
+  turns -->|Sí| aff[admin-bloqueo-afectados<br/>lista: no se cancelaron]
+  aff -->|Mover / Cancelar| cu13([CU-13])
+  list -->|Eliminar| del[admin-bloqueo-eliminar<br/>confirmación]
+  del -->|No, volver| list
+  del -->|Sí, eliminar| gone[admin-bloqueos-eliminado<br/>horarios vuelven a la web]
+  saved -.->|En la web| web[horario-bloqueado<br/>día 'Cerrado']
+```
+
+### CU-12 (H2) y CU-14 — Agenda operable y asistencia
+
+```mermaid
+flowchart TD
+  ag[admin-agenda-hoy] --> sum{¿Hay pasados sin marcar?}
+  sum -->|Sí| s1[Resumen 'N turnos pasados sin marcar'<br/>links a cada tarjeta]
+  ag --> card{Tipo de turno}
+  card -->|Vigente, inicio pasado| past[? Sin marcar + Asistió / No asistió<br/>+ Mover / Cancelar]
+  past -->|Marca| marked[✓ Asistió / ✕ No asistió<br/>corregible: queda la última]
+  card -->|Vigente futuro| fut[Mover / Cancelar<br/>sin control de asistencia]
+  card -->|Cancelado| canc[✕ Cancelado por el cliente / local<br/>tachado + 'Horario libre', sin acciones]
+  fut & past -->|Mover| cu13m([CU-13 Mover])
+  fut & past -->|Cancelar| cu13c([CU-13 Cancelar])
+  ag -.->|Día siguiente| vie[admin-agenda-viernes<br/>cambios y cancelaciones del cliente]
+  ag -.->|Semana| sem[admin-agenda-semana-h2]
+```
+
+### CU-13 — Mover y cancelar desde el panel
+
+```mermaid
+flowchart TD
+  card[Tarjeta vigente] -->|Mover| form[admin-mover<br/>peluquero · fecha · hora step 15 · duración<br/>sin límite de 30 días ni de 2 h]
+  form -.->|Volver sin mover| ag[agenda]
+  form -->|Guardar cambio| send[admin-mover-guardando]
+  send --> chk{Validación}
+  chk -->|Superpone con otro turno| sup[admin-mover-superpuesto<br/>error en campo + resumen<br/>no se puede forzar]
+  sup --> form
+  chk -->|Fuera del horario semanal| w1[admin-mover-advertencia<br/>motivo + 'Mover igual' / 'Elegir otro horario']
+  chk -->|Dentro de un bloqueo| w2[admin-mover-bloqueo]
+  w1 & w2 -->|Elegir otro horario| form
+  w1 & w2 -->|Mover igual| ok
+  chk -->|Error de red| err[admin-mover-error<br/>turno sin cambios]
+  err --> form
+  chk -->|OK| ok[admin-agenda-movido<br/>'Avisale al cliente: tel:'<br/>link del cliente muestra 'El local cambió tu turno']
+  card -->|Cancelar| ask[admin-cancelar<br/>segundo paso]
+  ask -->|No, volver| ag
+  ask -->|Sí, cancelar turno| r{Respuesta}
+  r -->|Error| cerr[admin-cancelar-error]
+  r -->|OK con teléfono| c1[admin-agenda-cancelado<br/>'Avisale al cliente: tel:']
+  r -->|OK sin contacto| c2[admin-agenda-cancelado-sin-contacto<br/>'El cliente no dejó contacto']
+```
+
+El panel no crea turnos (D-23) ni acceso al link privado (D-29); nada se envía al cliente (D-1).
+
+### CU-10 (H2) — Turnos afectados por horario o desactivación
+
+```mermaid
+flowchart TD
+  edit[admin-peluquero-editar] -->|Guardar horario| a{¿Turnos futuros fuera del horario nuevo?}
+  a -->|No| g[admin-peluqueros-guardado]
+  a -->|Sí| af[admin-peluqueros-afectados<br/>no se borraron: lista + Mover / Cancelar]
+  edit -->|Desactivar y guardar| d{¿Tiene turnos futuros?}
+  d -->|No| g
+  d -->|Sí| de[admin-peluqueros-desactivado<br/>lista + Mover / Cancelar]
+  af & de --> cu13([CU-13])
 ```

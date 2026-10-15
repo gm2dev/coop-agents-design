@@ -22,7 +22,12 @@ recorrer de punta a punta:
 La pregunta que tiene que contestar la demo: *¿el flujo se entiende sin ayuda y el cliente se da cuenta de que
 tiene que guardar su link?*
 
-## Alcance (H1)
+## Alcance (H1 + H2)
+
+Los nombres son archivos de `prototypes/turnos-peluqueria-mvp/` (sin `.html`); `-x` abrevia el prefijo de la fila.
+Detalle criterio por criterio en [spec.md § Cobertura](spec.md#5-cobertura-de-criterios).
+
+### Hito 1 — demo interna
 
 | CU | Título | Pantallas del prototipo |
 |---|---|---|
@@ -30,29 +35,33 @@ tiene que guardar su link?*
 | CU-02 | Ver horarios libres | `peluquero`, `horario`, `-cargando`, `-vacio`, `-limite`, `-error` |
 | CU-03 | Reservar un turno | `datos`, `datos-error`, `revisar`, `-enviando`, `-error` |
 | CU-04 | Reserva simultánea | `horario-ocupado` |
-| CU-05 | Confirmación y calendario | `confirmacion`, `turno.ics`, `turno`, `turno-cargando`, `turno-no-encontrado` |
+| CU-05 | Confirmación y calendario | `confirmacion`, `turno.ics`, `turno-solo-lectura` (link H1), `turno-cargando`, `turno-no-encontrado` |
 | CU-08 | Ingresar al panel | `admin-ingresar`, `-cargando`, `-error`, `-bloqueado`, `admin-sesion` |
 | CU-09 | Gestionar servicios | `admin-servicios`, `-vacio`, `-guardado`, `admin-servicio-editar`, `admin-servicio-error` |
 | CU-10 | Peluqueros y horario semanal | `admin-peluqueros`, `-vacio`, `-guardado`, `admin-peluquero-editar`, `admin-peluquero-error` |
 | CU-12 | Agenda del día y de la semana | `admin-agenda-dia`, `-dia-filtrada`, `-semana`, `-vacia`, `-cargando`, `-error` |
 | CU-16 | Datos del local | `admin-local`, `-error`, `-guardado` |
 
-Detalle por criterio en [spec.md § Cobertura](spec.md#cobertura-de-criterios).
+### Hito 2 — MVP operable (v0.4)
 
-### Hito 2: puntos de enganche (se diseña en v0.4)
+| CU | Título | Pantallas del prototipo |
+|---|---|---|
+| CU-05 (H2) | Link privado con estados | `turno` (confirmado, con Cambiar y Cancelar), `turno-menos-2h`, `turno-movido` (+ `turno-movido.ics`), `turno-cancelado-local`, `turno-cancelado` (por vos), `turno-pasado`, `turno-plazo-vencido` (borde), `turno-cargando`, `turno-no-encontrado` |
+| CU-06 | Cambiar el turno | `cambiar`, `-cargando`, `-error`, `-ocupado`, `-revisar`, `-enviando`, `-error-envio`, `-confirmado` (+ `turno-cambiado.ics`) |
+| CU-07 | Cancelar el turno | `cancelar`, `-enviando`, `-error`, `-listo` |
+| CU-11 | Bloqueos | `admin-bloqueos`, `-vacio`, `-eliminado`, `admin-bloqueo-nuevo`, `-error`, `-guardado`, `-afectados`, `-eliminar`; en la web `horario-bloqueado` |
+| CU-12 (H2) | Agenda con cambios y cancelados | `admin-agenda-hoy`, `admin-agenda-viernes` (cambios y cancelaciones del cliente), `admin-agenda-semana-h2` |
+| CU-13 | Mover y cancelar desde el panel | `admin-mover`, `-superpuesto`, `-advertencia` (fuera de horario), `-bloqueo`, `-guardando`, `-error`, `admin-agenda-movido`; `admin-cancelar`, `-error`, `admin-agenda-cancelado`, `-cancelado-sin-contacto` |
+| CU-14 | Marcar asistencia | `admin-agenda-hoy` (resumen “3 turnos pasados sin marcar”, Asistió/No asistió con `aria-pressed`, corregible), `admin-agenda-semana-h2` |
+| CU-10 (H2) | Turnos afectados | `admin-peluqueros-afectados` (cambio de horario), `admin-peluqueros-desactivado` |
 
-El H2 ya no queda fuera: se diseña en esta versión (v0.4). La tabla queda como mapa de dónde se engancha
-cada pieza en las pantallas del H1:
+**No existen** (a propósito): crear turnos en el panel (D-23), ver o recuperar links privados (D-24, D-29),
+usuarios/roles/cambio de contraseña (D-25), configuración de la anticipación (2 h fijas, D-13; CU-15 eliminado).
 
-| Qué (H2) | Dónde se engancha |
-|---|---|
-| CU-06 Cambiar y CU-07 Cancelar desde el link | `turno.html`: debajo del resumen, antes de “Dónde” (hay un comentario HTML en ese lugar). En H1 ese bloque dice “Si necesitás cambiar o cancelar el turno, llamá al local” con el teléfono (RN-17). La confirmación (`confirmacion.html`) no cambia. |
-| CU-06/07: mensaje de anticipación mínima | Mismo lugar en `turno.html`, reemplaza las acciones cuando faltan menos de 2 horas (anticipación fija, D-13, RN-08). |
-| CU-11 Bloqueos | Nueva sección “Bloqueos” en la navegación del panel (después de Peluqueros). En el cliente no cambia la UI: los días bloqueados se ven como “Sin horarios” o “Cerrado” en el selector de días. |
-| CU-13 Mover y cancelar turnos | Agenda: acciones por turno (Mover, Cancelar) en cada tarjeta vigente. No hay creación de turnos en el panel: el local reserva desde la web pública (D-23). |
-| CU-14 Asistencia | Agenda: en turnos pasados, badge “Sin marcar” y acciones Asistió / No asistió en la tarjeta. El badge de estado ya reserva el lugar. |
-| CU-10 (H2) turnos afectados por cambio de horario o desactivación | Mensaje de éxito de `admin-peluqueros-guardado` (hoy dice “Los turnos ya confirmados no se modifican”): en H2 suma la lista de turnos afectados con link a la agenda. |
-| CU-12 (H2) turnos cancelados en la agenda | Badge de estado en la tarjeta (“Cancelado”, tachado + texto, nunca solo color). |
+**Datos de ejemplo (hoy jueves 15/10/2026, 14:00):** turno de Bruno a las 15:45 (menos de 2 h); Paula 11:00,
+Diego 12:00 y Rocío 13:00 pasados sin marcar; Julián 09:00 “Asistió”; Vera 16:00 cancelable desde el panel y
+cancelada por el local en su link; Lucía (viernes 16, 15:30 con Bruno) movida por el local al sábado 17, 10:00
+con Ana; Marta (viernes 16, 09:30) cancelada por el cliente.
 
 ## Decisiones de diseño
 
@@ -76,6 +85,23 @@ Las decisiones del CDO para esta entrega se respetan tal cual; acá van cómo se
 | DD-14 | **Avisos de configuración incompleta en listas del panel:** badge “⚠ Sin peluqueros asignados” en servicios y “⚠ Sin servicios” en peluqueros, con la consecuencia en texto (“No se ofrece en la web…”). | CU-09, CU-10, RN-15. |
 | DD-15 | **El precio de referencia es opcional en el panel.** CU-09 solo valida nombre y duración. | D-19 (antes P-D2). |
 | DD-16 | **El footer del cliente muestra siempre nombre, dirección y teléfono del local** y aclara que los horarios están en hora del local. | RN-05, RN-17: el teléfono está a mano en todos los estados de error. |
+| DD-17 | **Link privado H2: el estado va primero (badge con ícono + texto) y las acciones van en un bloque “¿Necesitás cambiarlo?” debajo del resumen**: “Cambiar día u horario” (secundario) y “Cancelar turno” (peligro outline), con el texto “Podés cambiar el día y el horario, o cancelar, hasta 2 horas antes del turno.” y “¿Querés otro servicio? Cancelá este turno y reservá uno nuevo.” | El cliente primero confirma qué turno es; la regla de 2 h (D-13, RN-08) se dice antes de que choque con ella. Cancelar no es el primario para evitar toques por error. |
+| DD-18 | **Menos de 2 horas: no se muestran botones deshabilitados**, se reemplaza el bloque por un aviso “Faltan menos de 2 horas para tu turno” + “Para cambiarlo o cancelarlo llamá al local: <tel:>”. Si el plazo vence con la página abierta, el envío vuelve al link con `role=alert` “Ya faltan menos de 2 horas…” y el turno intacto (`turno-plazo-vencido`). | Un botón deshabilitado no explica qué hacer; el teléfono sí (RN-17). El caso borde 16:00/16:01 lo decide el servidor. |
+| DD-19 | **Estados del link con forma además de color:** ✓ Confirmado, ↻ “El local cambió tu turno” (aviso info con día/hora/peluquero nuevos + borrar el evento anterior), ✕ Cancelado por el local (con teléfono), ✕ Cancelado por vos, ◷ Turno pasado. En los cancelados el resumen se titula “Turno cancelado” y el texto va tachado; sin acciones, con “Reservar un turno nuevo”. Nunca nombre ni teléfono del cliente (S-8). | D-18, 1.4.1. Diferenciar “por el local” de “por vos” evita que el cliente crea que canceló sin querer. |
+| DD-20 | **CU-06 Cambiar reutiliza el paso “Día y horario” de la reserva** (mismos días, ventana de 30 días, inicios cada 15 min, días “Cerrado”) en 2 pasos: elegir → **revisar Antes/Después** → confirmar. Arriba se recuerda el turno actual y que el servicio no cambia. El horario actual no aparece entre los libres. | Un solo patrón que el cliente ya conoce (principio de reutilizar); la revisión antes/después es la prevención de errores (3.3.4). |
+| DD-21 | **Horario ocupado al confirmar el cambio** (`cambiar-ocupado`): vuelve al paso 1 con `role=alert` + foco: “Ese horario se acaba de ocupar, elegí otro. … Tu turno sigue igual: <original>”, horarios actualizados. | Misma solución que CU-04 (DD-09); lo crítico es decir que el turno original no se perdió. |
+| DD-22 | **Turno cambiado** (`cambiar-confirmado`): mismo link (“no hace falta guardarlo de nuevo”), aviso de advertencia “Actualizá tu calendario: borrá el evento del <anterior>” y “Agregar al calendario” con el `.ics` del turno nuevo. No se repite el bloque “Guardá tu link”. | CU-06; el calendario del cliente es el único recordatorio (D-1) y queda desactualizado si no lo borra. |
+| DD-23 | **CU-07 Cancelar en pantalla propia** “¿Cancelar tu turno?” con resumen, consecuencia (“El horario queda libre…”), “Sí, cancelar turno” (peligro) y “No, mantener turno” (secundario). Resultado con aviso “Borralo de tu calendario” y “Reservar un turno nuevo”. | Segundo paso explícito (CU-07) sin diálogo modal: sin trampas de foco y funciona igual en celular. |
+| DD-24 | **CU-13 en la agenda: “Mover” y “Cancelar” solo en turnos vigentes**, con nombre accesible completo (“Mover turno de Lucía, 15:30”). Los cancelados y pasados marcados no tienen acciones. | No ofrecer acciones imposibles; 2.4.4 / 2.5.3. |
+| DD-25 | **Mover: formulario en página propia** con el turno actual arriba y “Peluquero” (`select` con los activos que hacen el servicio), “Fecha” (`date`, sin `max`) y “Hora de inicio” (`time`, `step=900`), duración visible (“termina a las 10:45”). Texto: “Desde el panel podés mover a cualquier fecha (sin el límite de 30 días) y aunque falten menos de 2 horas.” | D-7, D-14/RN-14, D-21/RN-19. Sin arrastrar (2.5.7). El admin tipea un horario porque puede elegir horarios no ofrecidos en la web. |
+| DD-26 | **Superposición = error (no se puede forzar):** error junto a “Hora de inicio” con el turno que choca + resumen arriba con foco; no hay botón para seguir. **Fuera de horario o sobre bloqueo = advertencia** “¿Mover igual?” con el motivo concreto, consecuencia (“no se ofrece en la web”) y “Mover igual” / “Elegir otro horario”. | RN-01 vs. D-11/RN-16: el error bloquea, la advertencia pide confirmar; visualmente distintos (danger vs. warning) y con verbos distintos. |
+| DD-27 | **Éxito de mover/cancelar en la agenda:** alerta de éxito con foco “Moviste el turno de <cliente> al … El horario anterior quedó libre.” + “Avisale al cliente: <tel:>. El sistema no le envía nada.”; sin teléfono: “El cliente no dejó contacto.” (con email, link mailto). | D-1, D-3: el panel no notifica; le da al local lo necesario para avisar. Nunca muestra el link privado (D-29). |
+| DD-28 | **Cancelar desde el panel en página propia** “¿Cancelar el turno de <cliente>?” con “El link privado del cliente va a mostrar que el local canceló el turno. No se le envía ningún mensaje.” | Segundo paso; deja claro el efecto en el cliente (D-18). |
+| DD-29 | **CU-14 asistencia:** en vigentes con inicio pasado, badge “? Sin marcar” y un grupo `fieldset` “Asistencia” con dos botones “Asistió” / “No asistió” (`aria-pressed`, el elegido con relleno + ✓); se puede cambiar (queda la última). Futuros y cancelados sin control. Arriba de la agenda del día, resumen “N turnos pasados sin marcar asistencia” con links a cada tarjeta. | CU-14; botones de alternancia en vez de radios para marcar con un toque sin “Guardar”. El resumen da el “para completarlos”. |
+| DD-30 | **CU-12 cancelados:** tarjeta con borde punteado, fondo atenuado, hora y servicio tachados, badge “✕ Cancelado por el cliente / por el local” y “Horario libre”; el encabezado del peluquero cuenta “2 turnos, 1 cancelado”. | CU-12 (H2): distinguibles sin depender del color (1.4.1). |
+| DD-31 | **CU-11 Bloqueos como sección del panel** (después de Peluqueros): lista de próximos y recientes (alcance, días, horario; los pasados con “◷ Ya pasó”); formulario con tres preguntas en `fieldset`: ¿A quién afecta? (todo el local / un peluquero + select), ¿Qué días? (un día / varios días seguidos), ¿Qué horario? (todo el día / rango con `step=900`). Sin motivo/nota (ver P-D9). | Preguntas en lenguaje del local; mostrar solo los campos que aplican. No se inventan campos obligatorios. |
+| DD-32 | **Turnos dentro de un bloqueo o afectados por CU-10:** tras guardar, alerta de éxito que dice cuántos turnos quedaron dentro y que **no se cancelaron**, + lista con fecha, servicio, cliente, contacto y “Mover”/“Cancelar” por turno. Eliminar un bloqueo pide confirmación y dice que esos horarios vuelven a ofrecerse. | CU-11, CU-10 (H2): el admin decide; el sistema no toca turnos. |
+| DD-33 | **En la web, un día con bloqueo de todo el día se ve como “Cerrado”** (no es link, DD-08); un bloqueo parcial solo quita horarios. No se dice el motivo. | El cliente no necesita saber por qué; reutiliza el patrón de día cerrado. |
 
 ## Supuestos
 
@@ -101,12 +127,18 @@ Las decisiones del CDO para esta entrega se respetan tal cual; acá van cómo se
 | P-D8 | Intervalo de inicio de los turnos (15 o 30 min). | CPO | ✅ **Resuelta (D-21, RN-19):** cada 15 minutos, también al mover desde el panel. |
 | P-5 / P-7 | Ventana de reserva y criterio de “Cualquiera disponible” (preguntas de producto). | CPO | ✅ **Cerradas:** 30 días inclusive (D-14, RN-14) y peluquero con menos turnos ese día con desempate por orden de carga (D-15, RN-20; interno, no cambia la UI). |
 | P-D7 | ¿El panel necesita un estado “sin sesión / sesión vencida” distinto del de ingreso? | Architect | ✅ **Respondida (Architect):** mismo formulario con aviso (`admin-sesion`, sin cambios). La sesión dura 12 horas. |
+| P-D9 | ¿El bloqueo necesita un **motivo o nota** (opcional, solo visible en el panel, p. ej. “Feriado”, “Vacaciones de Ana”)? | CPO | Propuesta: campo opcional “Nota (solo la ves vos)”. No se incluyó en el prototipo para no inventar campos (CU-11 no lo pide). |
+| P-D10 | Al mover a otro peluquero que **no hace ese servicio**, ¿se permite con advertencia o se impide? | CPO | El prototipo solo lista peluqueros activos que hacen el servicio (lo más seguro). |
+| P-D11 | ¿El link privado debe mostrar si el turno fue **marcado “No asistió”**? | CPO | Propuesta: no; el pasado se ve como “Turno pasado” sin marca (la asistencia es interna). |
+| P-D12 | Mover desde el panel: ¿el servidor devuelve en una sola respuesta la superposición y las advertencias (fuera de horario + bloqueo a la vez)? | Architect | El diseño muestra todos los motivos juntos en la misma advertencia; la superposición siempre gana (error). |
+| P-D13 | En la agenda, el control de asistencia guarda al tocar (sin “Guardar”): ¿qué pasa si falla? | Architect | Propuesta: el botón vuelve al estado anterior y aparece un `role=alert` en la tarjeta “No pudimos guardar la asistencia. Probá de nuevo.” (no prototipado). |
+| P-D14 | ¿La grilla horaria para la semana (D-22) se revisa con la demo de H1 antes de cerrar H2? | CDO | El H2 mantiene la lista por día. |
 
 ## Tokens propuestos (provisionales de la iniciativa)
 
 **Decisión del CDO (v0.4):** se aceptan como **provisionales de la iniciativa**; se incorporan a
 `design-system/tokens.json` en un PR propio del design system más adelante. Hasta entonces se siguen declarando
-en el bloque PROPUESTOS. No se modificó `design-system/tokens.json`. El prototipo los declara en un bloque “PROPUESTOS” al inicio de
+en el bloque PROPUESTOS. No se modificó `design-system/tokens.json`. **El H2 no agrega tokens nuevos**: reutiliza los mismos (badges, alertas, bordes punteados con `border.width.default`). El prototipo los declara en un bloque “PROPUESTOS” al inicio de
 `prototypes/turnos-peluqueria-mvp/styles.css`, separado del espejo de tokens (`prototypes/shared/tokens.css`).
 
 | Token propuesto | Valor | Propósito | Contraste / nota |
@@ -152,3 +184,10 @@ nuevos). Si el CDO prefiere generarlo con un script, conviene un PR aparte del d
     vino cada turno ni ofrece crear turnos (D-23); texto de contraseña olvidada para un único admin (D-25); línea “¿Reservaste
     por otra persona?…” en la confirmación (D-24); P-D1, P-D2, P-D3, P-D6, P-D8, P-5 y P-7 resueltas; tokens
     propuestos aceptados como provisionales de la iniciativa.
+  - Parte B (Hito 2): link privado con 6 estados (D-18), CU-06 Cambiar (reusa el paso de horario, revisar
+    antes/después, ocupado al confirmar), CU-07 Cancelar en pantalla propia, CU-13 mover/cancelar desde la agenda
+    (error de superposición vs. advertencia fuera de horario/bloqueo, “Avisale al cliente”), CU-14 asistencia,
+    CU-12 cancelados, CU-11 bloqueos (lista, nuevo, turnos dentro, eliminar, “Cerrado” en la web) y CU-10 turnos
+    afectados. DD-17 a DD-33, preguntas P-D9 a P-D14. La tabla de “enganches” se reemplazó por el diseño real.
+  - Verificación: Playwright + axe sobre 90 páginas (0 violaciones), sin scroll horizontal a 320/360 px, espaciado
+    1.4.12 sin desbordes (se corrigió la tarjeta de la agenda H2), 0 links rotos.

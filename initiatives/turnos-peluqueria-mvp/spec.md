@@ -1,4 +1,4 @@
-# Spec de UI — Turnos para peluquería, MVP Hito 1
+# Spec de UI — Turnos para peluquería, MVP Hitos 1 y 2
 
 Pantallas, componentes, contenido, estados y responsive del Hito 1. Criterios:
 [casos-de-uso.md](https://github.com/gm2dev/coop-agents-product/blob/po/turnos-peluqueria-mvp/initiatives/turnos-peluqueria-mvp/casos-de-uso.md).
@@ -116,11 +116,11 @@ debajo del pliegue en 360×640.
 
 **Archivo `.ics`:** `SUMMARY` “<servicio> en <local> (con <peluquero>)”, `DTSTART/DTEND` con la zona del local, `LOCATION` = dirección vigente (CU-16), `DESCRIPTION` con servicio, duración, peluquero, precio orientativo, teléfono del local y el link privado; `URL` = link privado. Líneas ≤ 75 octetos, plegadas con CRLF + espacio (RFC 5545), sin partir caracteres UTF-8. Sin alarmas (`VALARM`): el recordatorio lo decide el calendario del cliente (no prometemos aviso).
 
-### P8 · Link privado (`turno.html`) — CU-05
+### P8 · Link privado H1 (`turno-solo-lectura.html`) — CU-05
 
 - **h1** “Tu turno” + badge “✓ Confirmado” + “Estado actualizado al abrir este link.”
 - Resumen (sin nombre ni teléfono del cliente, S-8, confirmado por el Architect) + “Agregar al calendario”.
-- Dónde + “Si necesitás cambiar o cancelar el turno, llamá al local: <teléfono>.” (H1). **Enganche H2:** acciones Cambiar / Cancelar en este lugar.
+- Dónde + “Si necesitás cambiar o cancelar el turno, llamá al local: <teléfono>.” (H1). En H2 `turno.html` suma estados y acciones (ver H-P1).
 - “Este link es privado: no lo compartas.”
 - **Estados:** cargando (`turno-cargando`: spinner + “Cargando tu turno…”; si a los 3 s sigue cargando se suma “Puede tardar unos segundos.” dentro de la misma región `role="status"`. Con la base inactiva la primera carga tarda ~1 s, así que es una protección: P-D5, Architect) · **Turno no encontrado** (`turno-no-encontrado`: h1 “Turno no encontrado”, “Este link no corresponde a ningún turno. Revisá que lo hayas copiado completo.” + teléfono del local + “Reservar un turno”; nunca datos de un turno; misma respuesta para token inválido o inexistente).
 
@@ -141,7 +141,7 @@ debajo del pliegue en 360×640.
 - **Semana:** 7 secciones (h3 “Vie 16 oct”, “Hoy” como badge + borde 2px*), tarjetas compactas (hora · peluquero, servicio · duración · cliente, estado). Días cerrados: “Cerrado”. Celular: apiladas; ≥ 64rem: 7 columnas.
 - **Filtrado** (`-dia-filtrada`): `role="status"` “Mostrando solo los turnos de Bruno. Ver todos”, solo la columna de ese peluquero.
 - **Estados:** cargando · **vacío** (`-vacia`: “No hay turnos este día. Cuando alguien reserve por la web, el turno va a aparecer acá.”) · error (+ Reintentar).
-- **H2:** Mover/Cancelar y Asistió/No asistió en la tarjeta; estados Cancelado y Sin marcar como badges con texto (ver § H2). No hay creación de turnos en el panel (D-23).
+- **H2:** ver H-A1 (`admin-agenda-hoy`). No hay creación de turnos en el panel (D-23).
 
 ### A3 · Servicios (`admin-servicios.html`, `admin-servicio-editar.html`) — CU-09
 
@@ -154,7 +154,7 @@ debajo del pliegue en 360×640.
 - Lista: nombre + Activo/Inactivo, servicios, resumen del horario; sin servicios → **badge “⚠ Sin servicios” + “No aparece en la reserva hasta que tenga al menos un servicio.”**
 - Formulario: **Nombre** · **Servicios que hace** (checkboxes) · **Horario semanal**: h2 + hint (“Uno o más rangos por día, en hora del local… Si cambiás el horario, los turnos ya confirmados no se borran ni se modifican.”); un `fieldset` por día (legend = día): “No trabaja.” si no hay rangos; cada rango “Desde / Hasta” (`type="time"`, `step="900"`: rangos en pasos de 15 min, S-3, Architect; nombres accesibles “Desde (rango 2)”) + “Quitar” (“Quitar rango 2 del martes”); “+ Agregar rango al <día>”. Agregar/quitar mueve el foco (al nuevo “Desde” / al botón “Agregar”) y se anuncia en `role="status"`. · **Activo** (hint “Sus turnos futuros se mantienen”).
 - **Validaciones** (`admin-peluquero-error`): “La hora de fin tiene que ser posterior a la de inicio.” · “Este rango se superpone con el rango 1 (10:00 a 13:00).” — en el rango (inputs `aria-invalid`) y en el resumen (“Martes, rango 2: …”).
-- **Estados:** vacío · errores · guardado (“Los turnos ya confirmados no se modifican.”; enganche H2: turnos afectados).
+- **Estados:** vacío · errores · guardado (“Los turnos ya confirmados no se modifican.”) · H2: turnos afectados (ver H-A5).
 
 ### A5 · Datos del local (`admin-local.html`) — CU-16
 
@@ -162,19 +162,85 @@ debajo del pliegue en 360×640.
 - **Nombre del local** (“Como lo ven los clientes.”) · **Dirección** (“Calle, número y barrio o localidad.”) · **Teléfono de contacto** (“Aparece en todos los mensajes que piden ‘llamá al local’.”). Como todos son obligatorios, no se marca ninguno (la frase de arriba lo dice).
 - **Estados:** errores junto al campo + resumen (`-error`) · guardado (`-guardado`).
 
+## 3b. Hito 2
+
+Componentes reutilizados: `alert` (success/info/warning/danger, con `role=alert` + foco cuando es error), `badge`
+con ícono + texto, `summary` (`dl`), botones primario/secundario/peligro (`btn-danger`, `btn-danger-outline`),
+selector de días y horarios de P3, `fieldset` + `legend`, resumen de errores de DD-10. Sin tokens nuevos.
+
+### H-P1 · Link privado H2 (`turno.html` y estados) — CU-05 (H2), CU-06, CU-07
+
+- **h1** “Tu turno” + línea de estado: badge (✓ Confirmado · ✕ Cancelado por el local · ✕ Cancelado por vos · ◷ Turno pasado) + “Estado actualizado al abrir este link.”
+- **Movido por el local** (`turno-movido`): alerta info “↻ El local cambió tu turno” · “Ahora es el **sábado 17 de octubre a las 10:00 con Ana**.” · “Si lo tenías en tu calendario, borrá el evento anterior (viernes 16 a las 15:30) y agregá el nuevo.” El resumen ya muestra los datos nuevos; “Agregar al calendario” baja `turno-movido.ics`. Si faltan ≥ 2 h conserva las acciones.
+- **Resumen** (sin nombre ni teléfono del cliente, S-8) + “Agregar al calendario”.
+- **Acciones (≥ 2 h):** sección h2 “¿Necesitás cambiarlo?”, texto “Podés cambiar el día y el horario, o cancelar, hasta 2 horas antes del turno.”, “Cambiar día u horario” (secundario → `cambiar`), “Cancelar turno” (peligro outline → `cancelar`), “¿Querés otro servicio? Cancelá este turno y reservá uno nuevo.”
+- **< 2 h** (`turno-menos-2h`): sin la sección de acciones; alerta warning “◷ Faltan menos de 2 horas para tu turno” · “Para cambiarlo o cancelarlo llamá al local: <a href=tel:>”.
+- **Cancelado por el local** (`turno-cancelado-local`): alerta danger “El local canceló tu turno” · “Si tenés dudas, llamá al local: tel: · Si lo tenías en tu calendario, borrá el evento.” · resumen titulado “Turno cancelado” con valores tachados · “Reservar un turno nuevo”. Sin calendario ni acciones.
+- **Cancelado por vos** (`turno-cancelado`) y **pasado** (`turno-pasado`: “Este turno ya pasó, así que no se puede cambiar ni cancelar.”): igual estructura, sin acciones.
+- **Borde** (`turno-plazo-vencido`): el plazo venció con la página abierta → al enviar, vuelve acá con alerta `role=alert` + foco “Ya faltan menos de 2 horas para tu turno · … Tu turno sigue igual. Para cambiarlo o cancelarlo llamá al local: tel:”.
+- Cargando y no encontrado: como P8.
+
+### H-P2 · Cambiar (`cambiar.html` → `cambiar-revisar.html`) — CU-06
+
+- Paso 1 de 2 “¿A qué día y hora lo pasamos?”: recordatorio “Tu turno actual: viernes 16 de octubre, 15:30 · Corte y barba con Bruno” + “Cambiás solo el día y el horario, con el mismo servicio (… 45 min) y como reservaste: con <peluquero | Cualquiera disponible>. ¿Querés otro servicio? Cancelá este turno y reservá uno nuevo.” Selector de días y horarios de P3 (30 días, inicios cada 15 min, “Cerrado”, “Sin horarios”); el horario actual no figura (“Tu horario actual (15:30) no aparece en la lista.”). “Continuar”.
+- Paso 2 “Revisá el cambio”: dos bloques **Antes** / **→ Después** (fecha, hora, peluquero; “Cualquiera disponible (te lo asignamos al confirmar)”), línea “Sin cambios: servicio · duración · precio”. “Confirmar cambio” (primario) / “No cambiar, volver a mi turno”.
+- **Estados:** cargando · error al cargar (Reintentar + tel) · enviando (`aria-disabled`, “Cambiando tu turno…”) · error de conexión (`-error-envio`, alerta con foco “Tu turno sigue igual (…). Probá de nuevo.”) · **ocupado** (`-ocupado`: vuelve al paso 1, alerta `role=alert` + foco “Ese horario se acaba de ocupar, elegí otro” + “Tu turno sigue igual: …”, horarios “(actualizados)”) · < 2 h (`turno-plazo-vencido`).
+- **Cambiado** (`-confirmado`): h1 “Tu turno cambió” (foco) · éxito “✓ Ahora es el martes 20 de octubre a las 11:30 · Corte y barba con Bruno” (peluquero asignado) · warning “Actualizá tu calendario: borrá el evento del viernes 16 a las 15:30 y agregá el nuevo.” · “Agregar al calendario” (`turno-cambiado.ics`) · “Tu link privado sigue siendo el mismo: no hace falta guardarlo de nuevo.” · resumen · “Ver mi turno”.
+
+### H-P3 · Cancelar (`cancelar.html`) — CU-07
+
+- h1 “¿Cancelar tu turno?” · resumen “Turno que vas a cancelar” · “El horario queda libre para otra persona. Si después querés un turno, tenés que reservar de nuevo.” · “Sí, cancelar turno” (`btn-danger`) / “No, mantener turno” (secundario, vuelve a `turno`).
+- **Estados:** cancelando · error de conexión (turno vigente, Reintentar) · < 2 h (`turno-plazo-vencido`) · **listo** (`cancelar-listo`: h1 “Cancelaste tu turno”, éxito “… quedó cancelado y el horario está libre.”, warning “Borralo de tu calendario”, “Reservar un turno nuevo”).
+
+### H-A1 · Agenda H2 (`admin-agenda-hoy.html`, `-viernes`, `-semana-h2`) — CU-12 (H2), CU-14
+
+- Igual que A2 + línea “Son las 14:00 (hora del prototipo). La asistencia se marca solo en turnos que ya empezaron.”
+- **Resumen de pendientes** (si hay): alerta warning “? 3 turnos pasados sin marcar asistencia” con links a cada tarjeta (`#t-paula`, que tiene `tabindex=-1`).
+- **Tarjeta vigente con inicio pasado:** badge “? Sin marcar” (o “✓ Asistió” / “✕ No asistió”) + `fieldset.attendance` (legend “Asistencia” + oculto “de Paula V., 11:00”) con botones “Asistió” / “No asistió” (`aria-pressed`; el elegido con fondo seleccionado y ✓). Al tocar: cambia el badge y se anuncia en `role=status` “Marcaste “Asistió” para Paula V.”; se puede cambiar.
+- **Tarjeta vigente** (pasada o futura): “Mover” y “Cancelar” (nombre accesible “Mover turno de Paula V., 11:00”). Los futuros no tienen asistencia.
+- **Cancelada:** borde punteado, fondo `surface.subtle`, hora y servicio tachados, badge “✕ Cancelado por el cliente/local” + “Horario libre”; sin acciones ni asistencia. Encabezado “Ana · 2 turnos, 1 cancelado”.
+- `-viernes`: refleja cambios del cliente (turno de Marta cancelado por el cliente) y el turno movido. `-semana-h2`: tarjetas compactas con los mismos badges.
+
+### H-A2 · Mover (`admin-mover.html`) — CU-13
+
+- “← Volver a la agenda” · h1 “Mover turno” · “Turno actual” (cliente + contacto, servicio · duración, cuándo con peluquero).
+- “Nuevo horario”: **Peluquero** (`select`, hint “Solo los peluqueros activos que hacen <servicio>.”) · **Fecha** (`type=date`, sin `max`) · **Hora de inicio** (`type=time`, `step=900`, hint “Cada 15 minutos (:00, :15, :30, :45). El turno dura 45 min: termina a las 10:45.”) · nota “Desde el panel podés mover a cualquier fecha (sin el límite de 30 días) y aunque falten menos de 2 horas.” · “Guardar cambio” / “Volver a la agenda sin mover”.
+- **Superpuesto** (`-superpuesto`): resumen `role=alert` + foco “No se puede mover a ese horario · Bruno ya tiene un turno de 16:00 a 16:30… · El turno sigue como estaba.” + error junto a “Hora de inicio” (`aria-invalid`, `aria-describedby`). No hay botón para forzar.
+- **Advertencia** (`-advertencia` fuera del horario semanal; `-bloqueo` dentro de un bloqueo): alerta warning con foco “⚠ ¿Mover igual?” + motivo concreto (“Ana no trabaja los domingos” / “el martes 20 de octubre Ana tiene un bloqueo de todo el día”) + “Si lo movés igual, el turno queda en ese horario aunque no se ofrezca en la web.” · “Mover igual” (primario) / “Elegir otro horario” (secundario) · resumen “Turno actual” y “Horario elegido”.
+- **Estados:** guardando · error de conexión (turno sin cambios) · **movido** (`admin-agenda-movido`: alerta success con foco “✓ Moviste el turno de Lucía al sábado 17 de octubre a las 10:00 con Ana. El horario anterior (…) quedó libre.” + “Avisale al cliente: <tel:>. El sistema no le envía nada.”).
+
+### H-A3 · Cancelar desde el panel (`admin-cancelar.html`) — CU-13
+
+- h1 “¿Cancelar el turno de Vera T.?” · resumen · “El horario queda libre. El link privado del cliente va a mostrar que el local canceló el turno. No se le envía ningún mensaje.” · “Sí, cancelar turno” (peligro) / “No, volver a la agenda”.
+- **Estados:** error de conexión · **cancelado** (`admin-agenda-cancelado`: “✓ Cancelaste el turno de Vera T. (…). El horario quedó libre.” + “Avisale al cliente: tel:”) · **sin contacto** (`-cancelado-sin-contacto`: “El cliente no dejó contacto.”).
+
+### H-A4 · Bloqueos (`admin-bloqueos.html`, `admin-bloqueo-nuevo.html`) — CU-11
+
+- Nav del panel: Agenda · Servicios · Peluqueros · **Bloqueos** · Datos del local.
+- Lista: h1 “Bloqueos” + “Feriados del local y ausencias de un peluquero. En esos días u horarios la web no ofrece turnos. Los turnos ya confirmados no se cancelan solos.” · “Nuevo bloqueo” · h2 “Próximos y recientes”: por bloqueo, días (h3), “Todo el local · Todo el día” / “Peluquero: Carla · 09:00 a 13:00”, “◷ Ya pasó” si corresponde, “Eliminar” (nombre accesible completo). **Vacía** (`-vacio`): explica para qué sirve + “Nuevo bloqueo”.
+- Formulario: `fieldset` “¿A quién afecta?” (radios Todo el local / Un peluquero → revela `select` Peluquero) · “¿Qué días?” (Un día / Varios días seguidos → revela “Fecha hasta (inclusive)”) · “¿Qué horario?” (Todo el día / Un rango horario → revela Desde/Hasta `step=900`; hint “En hora del local, cada 15 minutos. Si elegís varios días, el rango se aplica a cada uno.”) · “Guardar bloqueo” / “Cancelar”. Sin motivo (P-D9).
+- **Errores** (`-error`): resumen “Revisá 2 datos para guardar” + junto al campo (“La fecha “hasta” tiene que ser igual o posterior a la fecha “desde”.”, “La hora de fin tiene que ser posterior a la de inicio.”).
+- **Guardado** (`-guardado`) · **con turnos dentro** (`-afectados`: “✓ Guardamos el bloqueo de Bruno, del lunes 2 al viernes 6 de noviembre · Hay 2 turnos confirmados dentro. No se cancelaron: decidí si los movés o los cancelás.” + lista con Mover / Cancelar) · **eliminar** (`-eliminar`: “¿Eliminar este bloqueo?” + “Esos horarios vuelven a ofrecerse en la web.” + “Sí, eliminar bloqueo” / “No, volver”) · eliminado (`admin-bloqueos-eliminado`).
+- **Cliente** (`horario-bloqueado`): el martes 20 (bloqueo de Ana de todo el día) se ve “Cerrado” y no es link (DD-08, DD-33).
+
+### H-A5 · Turnos afectados — CU-10 (H2)
+
+- `admin-peluqueros-afectados`: “✓ Guardamos el nuevo horario de Bruno · 2 turnos futuros quedaron fuera del horario nuevo (…). No se borraron ni se modificaron: decidí si los movés o los cancelás.” + h2 “Turnos fuera del nuevo horario de Bruno” con tarjetas (fecha y hora, servicio · cliente · contacto, Mover / Cancelar).
+- `admin-peluqueros-desactivado`: “✓ Desactivamos a Carla · Ya no aparece en la reserva. Tiene 3 turnos futuros que se mantienen…” + lista igual.
+
 ## 4. Responsive
 
 | Ancho | Cliente | Panel |
 |---|---|---|
 | 320–639 px | 1 columna; botones a ancho completo, primario arriba; horarios en 2+ columnas (min 5.5rem*); días en 3–4 columnas; resumen `dl` en 2 columnas | Nav de secciones en fila con wrap; barra de herramientas apilada; agenda día y semana apiladas |
-| ≥ 640 px (`breakpoint.md`) | Botones en fila (primario a la derecha); campos de a 2 | Rangos “Desde/Hasta/Quitar” en una fila; campos de servicio de a 2 |
+| ≥ 640 px (`breakpoint.md`) | Botones en fila (primario a la derecha); campos de a 2; “Antes / Después” lado a lado | Rangos “Desde/Hasta/Quitar” en una fila; campos de servicio, mover y bloqueo de a 2 |
 | ≥ 1024 px (`breakpoint.lg`) | Igual (columna de 40rem) | Agenda día en columnas por peluquero; semana en 7 columnas |
 
 Sin anchos fijos: todo en `rem` / grid `auto-fill`, `overflow-wrap: anywhere` para textos largos (link privado, emails).
 
 ## 5. Cobertura de criterios
 
-✔ = cubierto en pantalla · — = no aplica a UI (sistema) · H2 = fuera de esta entrega.
+✔ = cubierto en pantalla · — = no aplica a UI (sistema).
 
 | CU | Criterio (resumen) | Pantalla / estado |
 |---|---|---|
@@ -200,7 +266,9 @@ Sin anchos fijos: todo en `rem` / grid `auto-fill`, `overflow-wrap: anywhere` pa
 | | “Cualquiera”: reasigna o mensaje | ✔ P6 (nota) / — sistema |
 | CU-05 | Resumen completo + datos del local | ✔ P7 |
 | | Link + indicación visible de guardarlo + copiar | ✔ P7 bloque destacado |
-| | Link abre resumen solo lectura con estado vigente | ✔ P8 (ver P-D1) |
+| | Link H1: resumen solo lectura “Confirmado”, sin cambiar/cancelar | ✔ P8 `turno-solo-lectura` |
+| | (H2) Movido por el admin: datos nuevos + “El local cambió tu turno: ahora es…” | ✔ `turno-movido` |
+| | (H2) Cancelado por el admin: cancelado por el local + teléfono, sin botones | ✔ `turno-cancelado-local` |
 | | Link inválido: “Turno no encontrado” sin datos | ✔ `turno-no-encontrado` |
 | | Agregar al calendario con link en la descripción | ✔ `turno.ics` |
 | | No se envía nada | ✔ textos sin promesas de aviso; sin ramas de envío |
@@ -218,14 +286,50 @@ Sin anchos fijos: todo en `rem` / grid `auto-fill`, `overflow-wrap: anywhere` pa
 | | Sin servicios: aviso | ✔ badge en lista + hint |
 | | Rango inválido o superpuesto: error | ✔ `admin-peluquero-error` |
 | | Cambio de horario no toca turnos | ✔ hint + mensaje de guardado |
-| | (H2) turnos afectados | H2 — enganche en mensaje de guardado |
+| | (H2) turnos afectados por el cambio de horario, para mover/cancelar | ✔ `admin-peluqueros-afectados` (H-A5) |
 | | Desactivar | ✔ checkbox Activo + hint |
-| | (H2) turnos futuros del desactivado | H2 |
+| | (H2) turnos futuros del desactivado, para mover/cancelar | ✔ `admin-peluqueros-desactivado` (H-A5) |
 | CU-12 | Día por peluquero con hora, duración, servicio, cliente, contacto, estado | ✔ A2 día |
 | | Semana con navegación | ✔ A2 semana |
 | | Filtro por peluquero | ✔ `admin-agenda-dia-filtrada` |
 | | Turno web aparece al actualizar | ✔ turno de “Lucía” 15:30 + nota |
-| | (H2) cambios/cancelaciones del cliente; cancelados distinguibles | H2 |
+| | (H2) cambios/cancelaciones del cliente reflejados | ✔ `admin-agenda-viernes` (Marta cancelada por el cliente) + nota “aparecen al abrir o actualizar” |
+| | (H2) cancelado distinguible y su horario libre | ✔ H-A1: badge + tachado + borde punteado + “Horario libre” |
+| CU-06 | Turno futuro: resumen + “Cambiar” y “Cancelar” | ✔ `turno` (H-P1) |
+| | ≥ 2 h: elige día/horario libre (mismo servicio y peluquero o “cualquiera”) y confirma → horario nuevo, original libre, confirmación; “cualquiera” asignado por RN-20 | ✔ `cambiar` → `-revisar` → `-confirmado` (peluquero asignado visible) / — asignación de sistema |
+| | 16:00 con turno 18:00: puede (exactamente 2 h) | — regla del servidor; UI: estado `turno` con acciones |
+| | 16:01: no puede, mensaje de contactar al local | ✔ `turno-menos-2h`; si vence con la página abierta, `turno-plazo-vencido` |
+| | Ventana de 30 días e inicios cada 15 min | ✔ `cambiar` (mismo selector y hint de P3) |
+| | Mismo link, “Agregar al calendario” nuevo, aviso de borrar el anterior | ✔ `cambiar-confirmado` + `turno-cambiado.ics` |
+| | Otro servicio: no desde “Cambiar”, ve que debe cancelar y reservar | ✔ textos en `turno` y `cambiar` |
+| | Horario ocupado al confirmar: mensaje, conserva el original, elige otro | ✔ `cambiar-ocupado` (`role=alert` + foco) |
+| | < 2 h al abrir: no puede, mensaje con teléfono | ✔ `turno-menos-2h` |
+| | Pasado o cancelado: ve el estado, no puede cambiar | ✔ `turno-pasado`, `turno-cancelado`, `turno-cancelado-local` |
+| CU-07 | ≥ 2 h: “Cancelar” + segundo paso → cancelado, horario libre, aviso de borrar del calendario | ✔ `cancelar` → `cancelar-listo` |
+| | 16:00 / 18:00: puede | — servidor; UI `turno` con acciones |
+| | 16:01: no puede, mensaje | ✔ `turno-menos-2h` / `turno-plazo-vencido` |
+| | No confirma el segundo paso: sigue vigente | ✔ “No, mantener turno” → `turno` |
+| | < 2 h al abrir: no puede, teléfono | ✔ `turno-menos-2h` |
+| | Perdió el link / reservó por teléfono: el admin mueve o cancela | ✔ CU-13 (`admin-mover`, `admin-cancelar`); teléfono del local en todo el cliente |
+| CU-11 | Bloqueo de todo el local en fecha o rango: sin horarios para nadie | ✔ `admin-bloqueo-nuevo` (“Todo el local”, un día / varios) + `horario-bloqueado` (“Cerrado”) |
+| | Bloqueo de un peluquero: sin horarios de ese peluquero | ✔ `admin-bloqueo-nuevo` (“Un peluquero”) + `horario-bloqueado` (con Ana) |
+| | Turnos confirmados dentro: los ve, no se cancelan, decide mover/cancelar | ✔ `admin-bloqueo-afectados` |
+| | Eliminar: horarios vuelven a estar libres | ✔ `admin-bloqueo-eliminar` → `admin-bloqueos-eliminado` |
+| CU-13 | No existe crear turno en el panel | ✔ ninguna acción para crear turnos en la agenda (D-23) |
+| | Superposición: error, no se mueve, no se puede forzar | ✔ `admin-mover-superpuesto` |
+| | Fuera de horario o bloqueo: advierte motivo y pide confirmación | ✔ `admin-mover-advertencia`, `admin-mover-bloqueo` (“Mover igual” / “Elegir otro horario”) |
+| | Solo inicios cada 15 min | ✔ `type=time step=900` + hint |
+| | Mueve (puede ser otro peluquero): horario nuevo, anterior libre, link muestra “El local cambió tu turno” | ✔ `admin-mover` (select peluquero) → `admin-agenda-movido` → `turno-movido` |
+| | Cancela: cancelado, horario libre, link muestra cancelado por el local | ✔ `admin-cancelar` → `admin-agenda-cancelado` → `turno-cancelado-local` |
+| | < 2 h: el admin puede | ✔ nota en `admin-mover`; Vera (16:00 de hoy) cancelable |
+| | Más de 30 días: el admin puede | ✔ fecha sin `max` + nota |
+| | El panel no muestra ni recupera el link privado | ✔ ninguna pantalla del panel lo muestra |
+| | Sin notificación; muestra el teléfono del cliente | ✔ “Avisale al cliente: tel:” / “El cliente no dejó contacto” |
+| CU-14 | Vigente con inicio pasado: marca asistió/no asistió y se ve | ✔ `admin-agenda-hoy` (botones `aria-pressed` + badge) |
+| | Futuro: no puede marcar | ✔ sin control en futuros (Martín 15:45) |
+| | Corrige: queda la última | ✔ botones alternables (JS del prototipo) |
+| | Pasados sin marcar identificados | ✔ badge “? Sin marcar” + resumen “3 turnos pasados sin marcar” |
+| | Cancelado: no se marca | ✔ cancelados sin control |
 | CU-16 | Cargar y guardar nombre, dirección, teléfono | ✔ A5 |
 | | Vacío: error junto al campo | ✔ `admin-local-error` |
 | | Teléfono nuevo en “contactá al local” | ✔ todos los mensajes usan el mismo dato (footer, vacíos, errores, P8) |
