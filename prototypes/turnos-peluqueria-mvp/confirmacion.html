@@ -20,15 +20,18 @@
 
     <section class="keep-link" aria-labelledby="link-titulo">
       <h2 id="link-titulo"><span aria-hidden="true">⚠ </span>Guardá tu link privado</h2>
-      <p><strong>Es la única forma de volver a ver tu turno. No se envía por email, SMS ni WhatsApp: guardalo ahora.</strong></p>
+      <p><strong>Es la única forma de volver a ver tu turno. No se envía por email, SMS ni WhatsApp.</strong></p>
+      <!-- El botón Copiar va pegado al campo para quedar arriba del pliegue en 360×640 (DD-01). -->
       <label class="label" for="link-privado">Tu link privado</label>
-      <input id="link-privado" type="url" readonly value="https://reservas.example/t/k7Q2-9xRm-4LpZ-a81c" aria-describedby="link-ayuda">
-      <p class="small" id="link-ayuda">Copialo y guardalo en tus notas, o agregá el turno a tu calendario: el evento incluye el link.</p>
-      <div class="actions">
+      <div class="copy-field">
+        <input id="link-privado" type="url" readonly value="https://reservas.example/t/k7Q2-9xRm-4LpZ-a81c" aria-describedby="link-ayuda">
         <button class="btn btn-primary" type="button" data-copy-target="link-privado" data-copy-status="copy-status">Copiar link</button>
-        <a class="btn btn-secondary" href="turno.ics" download="turno-la-esquina.ics">Agregar al calendario</a>
       </div>
       <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+      <p class="small" id="link-ayuda">Guardalo en tus notas, o agregá el turno a tu calendario: el evento incluye el link.</p>
+      <div class="actions">
+        <a class="btn btn-secondary" href="turno.ics" download="turno-la-esquina.ics">Agregar al calendario</a>
+      </div>
     </section>
 
     <section class="panel" aria-labelledby="resumen-titulo">
