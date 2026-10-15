@@ -282,6 +282,9 @@ input[readonly] { background: var(--color-surface-subtle); }
 .row > div { min-width: 0; }
 .row .badge { white-space: normal; }
 .row-title { font-weight: var(--font-weight-semibold); }
+.row-note { overflow-wrap: anywhere; }
+.block-note p { margin: 0; }
+.block-note p + p { margin-top: var(--space-100); }
 
 .ranges { list-style: none; padding: 0; margin: 0 0 var(--space-200); display: grid; gap: var(--space-200); }
 .range { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-200); align-items: end; }
