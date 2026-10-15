@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Turnos para peluquería — MVP Hito 1 (prototipo)</title>
+  <title>Índice del prototipo — Turnos para peluquería, MVP (Hitos 1 y 2)</title>
   <link rel="stylesheet" href="../shared/tokens.css">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -13,15 +13,16 @@
     <div class="bar"><a class="brand" href="../index.html">← Prototipos</a></div>
   </header>
   <main id="main">
-    <h1>Turnos para peluquería — MVP, Hito 1</h1>
-    <p class="lead">Prototipo navegable de la demo interna: reserva del cliente y panel del local.</p>
+    <h1>Turnos para peluquería — MVP</h1>
+    <p class="lead">Prototipo navegable de los Hitos 1 (demo interna) y 2 (MVP operable): reserva y autogestión del cliente, y panel del local.</p>
     <div class="alert alert-info">
-      <p>Prototipo de diseño con datos ficticios (local, peluqueros y clientes inventados). No es código de producto, no guarda nada y no envía mensajes. Fecha simulada: <strong>jueves 15 de octubre de 2026</strong>.</p>
+      <p>Prototipo de diseño con datos ficticios (local, peluqueros y clientes inventados). No es código de producto, no guarda nada y no envía mensajes. Fecha simulada: <strong>jueves 15 de octubre de 2026, 14:00</strong> (hora del local). Cada pantalla tiene abajo un recuadro “Estados de esta pantalla”.</p>
     </div>
     <p>Documentación: <a href="https://github.com/gm2dev/coop-agents-design/tree/design/turnos-peluqueria-mvp/initiatives/turnos-peluqueria-mvp">initiatives/turnos-peluqueria-mvp</a> (README, flujos, spec y accesibilidad).</p>
 
+    <h2>Hito 1 — demo interna</h2>
     <section class="panel" aria-labelledby="demo-cliente">
-      <h2 id="demo-cliente">Recorrido de demo: cliente (celular)</h2>
+      <h3 id="demo-cliente">Recorrido H1: cliente (celular)</h3>
       <p class="small muted">Ideal en un celular o con la ventana angosta. Unos 3 minutos.</p>
       <ol class="demo-route">
         <li><a href="servicios.html">Elegí un servicio</a> (CU-01): precio orientativo, se paga en el local.</li>
@@ -30,13 +31,12 @@
         <li><a href="datos.html">Cargá tus datos</a> (CU-03): solo el nombre es obligatorio. Probá continuar vacío para ver los errores.</li>
         <li><a href="revisar.html">Revisá y confirmá</a>.</li>
         <li>Mostrá el caso de dos personas reservando a la vez: <a href="horario-ocupado.html">ese horario se acaba de ocupar</a> (CU-04).</li>
-        <li><a href="confirmacion.html">Confirmación</a> (CU-05): link privado con aviso de guardarlo, “Copiar link” y “Agregar al calendario”.</li>
-        <li>Abrí <a href="turno.html">el link privado</a> (solo lectura) y un <a href="turno-no-encontrado.html">link inválido</a>.</li>
+        <li><a href="confirmacion.html">Confirmación</a> (CU-05): link privado con aviso de guardarlo, “Copiar link” y “Agregar al calendario”; si reservaste por otra persona, copiá el link y mandáselo.</li>
+        <li>Abrí <a href="turno-solo-lectura.html">el link privado del H1</a> (solo lectura) y un <a href="turno-no-encontrado.html">link inválido</a>.</li>
       </ol>
     </section>
-
     <section class="panel" aria-labelledby="demo-admin">
-      <h2 id="demo-admin">Recorrido de demo: panel del local (tablet, PC o celular)</h2>
+      <h3 id="demo-admin">Recorrido H1: panel del local (tablet, PC o celular)</h3>
       <p class="small muted">Unos 4 minutos. Cualquier usuario y contraseña sirven.</p>
       <ol class="demo-route">
         <li><a href="admin-ingresar.html">Ingresá</a> con usuario y contraseña (CU-08). Mostrá el <a href="admin-ingresar-error.html">error genérico</a> y <a href="admin-ingresar-bloqueado.html">demasiados intentos</a>.</li>
@@ -47,10 +47,9 @@
         <li><a href="admin-local.html">Datos del local</a> (CU-16): todos obligatorios; se ven en la confirmación del cliente.</li>
       </ol>
     </section>
-
-    <section class="panel" aria-labelledby="todas">
-      <h2 id="todas">Todas las pantallas y estados</h2>
-      <h3>Cliente</h3>
+    <section class="panel" aria-labelledby="todas-h1">
+      <h3 id="todas-h1">H1: todas las pantallas y estados</h3>
+      <h4>Cliente</h4>
       <ul>
         <li>CU-01 Servicios: <a href="servicios.html">con servicios</a> · <a href="servicios-cargando.html">cargando</a> · <a href="servicios-vacio.html">vacío (sin servicios activos)</a> · <a href="servicios-error.html">error</a></li>
         <li>Peluquero: <a href="peluquero.html">elegir peluquero</a></li>
@@ -58,9 +57,9 @@
         <li>CU-03 Datos: <a href="datos.html">formulario</a> · <a href="datos-error.html">con errores</a></li>
         <li>Revisar: <a href="revisar.html">listo</a> · <a href="revisar-enviando.html">confirmando</a> · <a href="revisar-error.html">error de conexión</a></li>
         <li>CU-04: <a href="horario-ocupado.html">el horario se acaba de ocupar</a></li>
-        <li>CU-05: <a href="confirmacion.html">confirmación</a> · <a href="turno.ics">archivo de calendario (.ics)</a> · <a href="turno.html">link privado</a> · <a href="turno-cargando.html">link cargando</a> · <a href="turno-no-encontrado.html">turno no encontrado</a></li>
+        <li>CU-05: <a href="confirmacion.html">confirmación</a> · <a href="turno.ics">archivo de calendario (.ics)</a> · <a href="turno-solo-lectura.html">link privado (solo lectura)</a> · <a href="turno-cargando.html">link cargando</a> · <a href="turno-no-encontrado.html">turno no encontrado</a></li>
       </ul>
-      <h3>Panel del local</h3>
+      <h4>Panel del local</h4>
       <ul>
         <li>CU-08 Ingreso: <a href="admin-ingresar.html">formulario</a> · <a href="admin-ingresar-cargando.html">ingresando</a> · <a href="admin-ingresar-error.html">credenciales incorrectas</a> · <a href="admin-ingresar-bloqueado.html">demasiados intentos</a> · <a href="admin-sesion.html">sin sesión</a></li>
         <li>CU-12 Agenda: <a href="admin-agenda-dia.html">día</a> · <a href="admin-agenda-dia-filtrada.html">día filtrado</a> · <a href="admin-agenda-semana.html">semana</a> · <a href="admin-agenda-vacia.html">vacía</a> · <a href="admin-agenda-cargando.html">cargando</a> · <a href="admin-agenda-error.html">error</a></li>
@@ -68,10 +67,54 @@
         <li>CU-10 Peluqueros: <a href="admin-peluqueros.html">lista</a> · <a href="admin-peluqueros-vacio.html">vacía</a> · <a href="admin-peluquero-editar.html">editar y horario semanal</a> · <a href="admin-peluquero-error.html">errores en rangos</a> · <a href="admin-peluqueros-guardado.html">guardado</a></li>
         <li>CU-16 Datos del local: <a href="admin-local.html">formulario</a> · <a href="admin-local-error.html">errores</a> · <a href="admin-local-guardado.html">guardado</a></li>
       </ul>
-      <h3>Fuera de este prototipo (Hito 2)</h3>
-      <p class="small muted">Cambiar y cancelar desde el link privado (CU-06, CU-07), bloqueos (CU-11), mover y cancelar turnos desde el panel (CU-13) y asistencia (CU-14).</p>
+    </section>
+
+    <h2>Hito 2 — MVP operable</h2>
+    <section class="panel" aria-labelledby="demo-cliente-h2">
+      <h3 id="demo-cliente-h2">Recorrido H2: cliente gestiona su turno (celular)</h3>
+      <p class="small muted">Unos 3 minutos.</p>
+      <ol class="demo-route">
+        <li>Abrí <a href="turno.html">tu link privado</a>: turno del viernes 16 con “Cambiar día u horario” y “Cancelar turno” (faltan 2 horas o más).</li>
+        <li><a href="cambiar.html">Cambiar</a> (CU-06): mismo servicio, mismo peluquero o “cualquiera”, ventana de 30 días. Elegí el martes 20 a las 11:30 y <a href="cambiar-revisar.html">revisá el cambio</a> (antes y después).</li>
+        <li>Mostrá que el horario <a href="cambiar-ocupado.html">se ocupó al confirmar</a>: tu turno original sigue igual.</li>
+        <li><a href="cambiar-confirmado.html">Turno cambiado</a>: mismo link, “Agregar al calendario” y aviso para borrar el evento anterior.</li>
+        <li><a href="cancelar.html">Cancelar</a> (CU-07): segundo paso en pantalla propia y <a href="cancelar-listo.html">cancelado</a>.</li>
+        <li>Turno de hoy a las 15:45: <a href="turno-menos-2h.html">faltan menos de 2 horas</a>, sin acciones y con el teléfono del local.</li>
+        <li>Lo que hizo el local: <a href="turno-movido.html">el local cambió tu turno</a> y <a href="turno-cancelado-local.html">el local canceló tu turno</a>.</li>
+      </ol>
+    </section>
+    <section class="panel" aria-labelledby="demo-admin-h2">
+      <h3 id="demo-admin-h2">Recorrido H2: el local opera el día (tablet o PC)</h3>
+      <p class="small muted">Unos 5 minutos.</p>
+      <ol class="demo-route">
+        <li><a href="admin-agenda-hoy.html">Agenda de hoy</a>: resumen “3 turnos pasados sin marcar”. Marcá “Asistió” o “No asistió” (CU-14); el turno de las 15:45 todavía no se puede marcar.</li>
+        <li>Turnos cancelados con badge y tachado, y su horario libre; en <a href="admin-agenda-viernes.html">el viernes</a> se ven los cambios y cancelaciones de clientes (CU-12).</li>
+        <li><a href="admin-mover.html">Mover</a> el turno de Lucía (CU-13): <a href="admin-mover-superpuesto.html">superposición</a> (no se puede forzar), <a href="admin-mover-advertencia.html">fuera del horario</a> y <a href="admin-mover-bloqueo.html">sobre un bloqueo</a> (“Mover igual”). Resultado: <a href="admin-agenda-movido.html">“Avisale al cliente”</a> con su teléfono.</li>
+        <li><a href="admin-cancelar.html">Cancelar</a> un turno con segundo paso y <a href="admin-agenda-cancelado-sin-contacto.html">“El cliente no dejó contacto”</a>.</li>
+        <li><a href="admin-bloqueos.html">Bloqueos</a> (CU-11): <a href="admin-bloqueo-nuevo.html">nuevo bloqueo</a> de Bruno del 2 al 6 de noviembre y <a href="admin-bloqueo-afectados.html">turnos confirmados dentro</a>. En la web: <a href="horario-bloqueado.html">días bloqueados como “Cerrado”</a>.</li>
+        <li>Peluqueros (CU-10): <a href="admin-peluqueros-afectados.html">turnos fuera del nuevo horario</a> y <a href="admin-peluqueros-desactivado.html">peluquero desactivado con turnos futuros</a>.</li>
+      </ol>
+    </section>
+    <section class="panel" aria-labelledby="todas-h2">
+      <h3 id="todas-h2">H2: todas las pantallas y estados</h3>
+      <h4>Cliente</h4>
+      <ul>
+        <li>CU-05/06/07 Link privado: <a href="turno.html">confirmado con acciones</a> · <a href="turno-menos-2h.html">faltan menos de 2 horas</a> · <a href="turno-movido.html">movido por el local</a> · <a href="turno-cancelado-local.html">cancelado por el local</a> · <a href="turno-cancelado.html">cancelado por vos</a> · <a href="turno-pasado.html">turno pasado</a> · <a href="turno-plazo-vencido.html">el plazo venció con la página abierta</a> · <a href="turno-cargando.html">cargando</a> · <a href="turno-no-encontrado.html">no encontrado</a></li>
+        <li>CU-06 Cambiar: <a href="cambiar.html">día y horario</a> · <a href="cambiar-cargando.html">cargando</a> · <a href="cambiar-error.html">error al cargar</a> · <a href="cambiar-ocupado.html">horario ocupado al confirmar</a> · <a href="cambiar-revisar.html">revisar el cambio</a> · <a href="cambiar-enviando.html">confirmando</a> · <a href="cambiar-error-envio.html">error de conexión</a> · <a href="cambiar-confirmado.html">cambiado</a> · <a href="turno-cambiado.ics">.ics del turno nuevo</a></li>
+        <li>CU-07 Cancelar: <a href="cancelar.html">¿cancelar tu turno?</a> · <a href="cancelar-enviando.html">cancelando</a> · <a href="cancelar-error.html">error de conexión</a> · <a href="cancelar-listo.html">cancelado</a></li>
+        <li>CU-11 en la web: <a href="horario-bloqueado.html">días bloqueados como “Cerrado”</a></li>
+      </ul>
+      <h4>Panel del local</h4>
+      <ul>
+        <li>CU-12/14 Agenda: <a href="admin-agenda-hoy.html">hoy con asistencia y sin marcar</a> · <a href="admin-agenda-viernes.html">cambios de clientes</a> · <a href="admin-agenda-semana-h2.html">semana</a></li>
+        <li>CU-13 Mover: <a href="admin-mover.html">formulario</a> · <a href="admin-mover-superpuesto.html">superposición</a> · <a href="admin-mover-advertencia.html">fuera del horario semanal</a> · <a href="admin-mover-bloqueo.html">sobre un bloqueo</a> · <a href="admin-mover-guardando.html">guardando</a> · <a href="admin-mover-error.html">error de conexión</a> · <a href="admin-agenda-movido.html">movido</a></li>
+        <li>CU-13 Cancelar: <a href="admin-cancelar.html">confirmación</a> · <a href="admin-cancelar-error.html">error de conexión</a> · <a href="admin-agenda-cancelado.html">cancelado con teléfono</a> · <a href="admin-agenda-cancelado-sin-contacto.html">cancelado sin contacto</a></li>
+        <li>CU-11 Bloqueos: <a href="admin-bloqueos.html">lista</a> · <a href="admin-bloqueos-vacio.html">vacía</a> · <a href="admin-bloqueo-nuevo.html">nuevo</a> · <a href="admin-bloqueo-error.html">errores</a> · <a href="admin-bloqueo-guardado.html">guardado</a> · <a href="admin-bloqueo-afectados.html">con turnos dentro</a> · <a href="admin-bloqueo-eliminar.html">eliminar</a> · <a href="admin-bloqueos-eliminado.html">eliminado</a></li>
+        <li>CU-10 (H2): <a href="admin-peluqueros-afectados.html">turnos fuera del nuevo horario</a> · <a href="admin-peluqueros-desactivado.html">peluquero desactivado con turnos</a></li>
+      </ul>
+      <p class="small muted">No existen en el panel: crear turnos (el local reserva desde la web, D-23), ver o recuperar links privados (D-29), usuarios ni configuración de la anticipación (2 horas fijas).</p>
     </section>
   </main>
-  <footer class="site-footer"><div class="wrap small muted">Prototipo de diseño · Hito 1 · datos ficticios · v0.4</div></footer>
+  <footer class="site-footer"><div class="wrap small muted">Prototipo de diseño · Hitos 1 y 2 · datos ficticios · v0.4</div></footer>
 </body>
 </html>

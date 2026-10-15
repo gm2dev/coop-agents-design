@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agenda de la semana del 12 al 18 de octubre — Panel de La Esquina Peluquería</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin">
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="bar">
+      <a class="brand" href="admin-agenda-hoy.html">Panel · La Esquina Peluquería</a>
+      <span class="small"><span class="muted">Usuario: admin</span> · <a href="admin-ingresar.html">Salir</a></span>
+    </div>
+    <nav class="admin-nav wrap" aria-label="Secciones del panel"><ul><li><a href="admin-agenda-hoy.html" aria-current="page">Agenda</a></li><li><a href="admin-servicios.html">Servicios</a></li><li><a href="admin-peluqueros.html">Peluqueros</a></li><li><a href="admin-bloqueos.html">Bloqueos</a></li><li><a href="admin-local.html">Datos del local</a></li></ul></nav>
+  </header>
+  <main id="main">
+    <h1>Agenda</h1>
+    <div class="toolbar">
+      <nav class="segmented" aria-label="Vista de la agenda"><a href="admin-agenda-hoy.html">Día</a><a href="admin-agenda-semana-h2.html" aria-current="page">Semana</a></nav>
+      <form class="field" action="admin-agenda-dia-filtrada.html" method="get">
+        <label for="filtro">Peluquero</label>
+        <div class="inline-fields"><select id="filtro" name="peluquero"><option value="todos" selected>Todos</option><option value="ana">Ana</option><option value="bruno">Bruno</option><option value="carla">Carla</option></select><button class="btn btn-secondary" type="submit">Filtrar</button></div>
+      </form>
+    </div>
+    <div class="date-nav">
+      <h2 id="periodo" aria-live="polite">Semana del 12 al 18 de octubre</h2>
+      <a href="admin-agenda-semana-h2.html">← Semana anterior</a><a href="admin-agenda-semana-h2.html">Esta semana</a><a href="admin-agenda-semana-h2.html">Semana siguiente →</a>
+    </div>
+    <p class="small muted">Horarios en hora del local. Los turnos nuevos, cambios y cancelaciones de la web aparecen al abrir o actualizar la agenda.</p>
+    <p><a href="admin-agenda-hoy.html">3 turnos pasados sin marcar asistencia (hoy)</a></p>
+    <div class="week">
+      <section class="week-day" aria-labelledby="d-12"><h3 id="d-12">Lun 12 oct</h3><p class="empty small">Cerrado</p></section>
+      <section class="week-day" aria-labelledby="d-13"><h3 id="d-13">Mar 13 oct</h3><ul class="appts"><li class="appt"><p><span class="appt-time">10:00</span> · Ana</p><p class="small appt-what">Corte de pelo · 30 min · Julián M.</p><p class="meta"><span class="badge badge-success"><span aria-hidden="true">✓</span> Asistió</span></p></li></ul></section>
+      <section class="week-day" aria-labelledby="d-14"><h3 id="d-14">Mié 14 oct</h3><ul class="appts"><li class="appt"><p><span class="appt-time">09:00</span> · Carla</p><p class="small appt-what">Peinado · 45 min · Paula V.</p><p class="meta"><span class="badge badge-success"><span aria-hidden="true">✓</span> Asistió</span></p></li><li class="appt"><p><span class="appt-time">18:00</span> · Bruno</p><p class="small appt-what">Corte · 30 min · Nico S.</p><p class="meta"><span class="badge badge-neutral"><span aria-hidden="true">✕</span> No asistió</span></p></li></ul></section>
+      <section class="week-day" data-today aria-labelledby="d-15"><h3 id="d-15">Jue 15 oct <span class="badge badge-info">Hoy</span></h3><ul class="appts"><li class="appt"><p><span class="appt-time">09:00</span> · Ana</p><p class="small appt-what">Corte · 30 min · Julián M.</p><p class="meta"><span class="badge badge-success"><span aria-hidden="true">✓</span> Asistió</span></p></li><li class="appt"><p><span class="appt-time">10:00</span> · Bruno</p><p class="small appt-what">Corte · 30 min · Nico S.</p><p class="meta"><span class="badge badge-neutral"><span aria-hidden="true">✕</span> No asistió</span></p></li><li class="appt is-unmarked"><p><span class="appt-time">11:00</span> · Ana</p><p class="small appt-what">Color · 90 min · Paula V.</p><p class="meta"><span class="badge badge-warning"><span aria-hidden="true">?</span> Sin marcar</span></p></li><li class="appt is-unmarked"><p><span class="appt-time">12:00</span> · Bruno</p><p class="small appt-what">Corte y barba · 45 min · Diego P.</p><p class="meta"><span class="badge badge-warning"><span aria-hidden="true">?</span> Sin marcar</span></p></li><li class="appt is-unmarked"><p><span class="appt-time">13:00</span> · Carla</p><p class="small appt-what">Peinado · 45 min · Rocío F.</p><p class="meta"><span class="badge badge-warning"><span aria-hidden="true">?</span> Sin marcar</span></p></li><li class="appt"><p><span class="appt-time">15:45</span> · Bruno</p><p class="small appt-what">Corte · 30 min · Martín A.</p><p class="meta"><span class="badge badge-success"><span aria-hidden="true">✓</span> Confirmado</span></p></li><li class="appt is-cancelled"><p><span class="appt-time">15:00</span> · Carla</p><p class="small appt-what">Peinado · 45 min · Gisela H.</p><p class="meta"><span class="badge badge-danger"><span aria-hidden="true">✕</span> Cancelado por el cliente</span> <span class="appt-free small">Horario libre</span></p></li><li class="appt"><p><span class="appt-time">16:00</span> · Ana</p><p class="small appt-what">Color · 90 min · Vera T.</p><p class="meta"><span class="badge badge-success"><span aria-hidden="true">✓</span> Confirmado</span></p></li><li class="appt"><p><span class="appt-time">17:00</span> · Bruno</p><p class="small appt-what">Corte · 30 min · Tomás L.</p><p class="meta"><span class="badge badge-success"><span aria-hidden="true">✓</span> Confirmado</span></p></li></ul></section>
+      <section class="week-day" aria-labelledby="d-16"><h3 id="d-16">Vie 16 oct</h3><ul class="appts"><li class="appt is-cancelled"><p><span class="appt-time">09:30</span> · Ana</p><p class="small appt-what">Corte · 30 min · Marta G.</p><p class="meta"><span class="badge badge-danger"><span aria-hidden="true">✕</span> Cancelado por el cliente</span> <span class="appt-free small">Horario libre</span></p></li><li class="appt"><p><span class="appt-time">10:00</span> · Bruno</p><p class="small appt-what">Corte y barba · 45 min · Diego P.</p><p class="meta"><span class="badge badge-success"><span aria-hidden="true">✓</span> Confirmado</span></p></li><li class="appt"><p><span class="appt-time">11:00</span> · Ana</p><p class="small appt-what">Color · 90 min · Sofía R.</p><p class="meta"><span class="badge badge-success"><span aria-hidden="true">✓</span> Confirmado</span></p></li><li class="appt"><p><span class="appt-time">14:15</span> · Ana</p><p class="small appt-what">Corte · 30 min · Julia B.</p><p class="meta"><span class="badge badge-success"><span aria-hidden="true">✓</span> Confirmado</span></p></li><li class="appt"><p><span class="appt-time">15:30</span> · Bruno</p><p class="small appt-what">Corte y barba · 45 min · Lucía</p><p class="meta"><span class="badge badge-success"><span aria-hidden="true">✓</span> Confirmado</span></p></li><li class="appt"><p><span class="appt-time">17:00</span> · Bruno</p><p class="small appt-what">Corte · 30 min · Tomás L.</p><p class="meta"><span class="badge badge-success"><span aria-hidden="true">✓</span> Confirmado</span></p></li></ul></section>
+      <section class="week-day" aria-labelledby="d-17"><h3 id="d-17">Sáb 17 oct</h3><p class="empty small">Sin turnos</p></section>
+      <section class="week-day" aria-labelledby="d-18"><h3 id="d-18">Dom 18 oct</h3><p class="empty small">Cerrado</p></section>
+    </div>
+    <p class="small muted">En el celular los días se apilan; en escritorio se ven en 7 columnas. Para mover, cancelar o marcar asistencia, abrí el día.</p>
+  </main>
+  <aside class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      <h2>Estados de esta pantalla</h2><ul><li><a href="admin-agenda-hoy.html">Hoy (jueves 15): pasados sin marcar, un cancelado y un turno a menos de 2 h</a></li><li><a href="admin-agenda-viernes.html">Viernes 16: cambios y cancelaciones del cliente</a></li><li><a href="admin-agenda-semana-h2.html">Semana con cancelados y asistencia</a></li><li><a href="admin-agenda-movido.html">Después de mover (con teléfono del cliente)</a></li><li><a href="admin-agenda-cancelado.html">Después de cancelar (con teléfono del cliente)</a></li><li><a href="admin-agenda-cancelado-sin-contacto.html">Después de cancelar (el cliente no dejó contacto)</a></li><li><a href="admin-agenda-dia.html">Hito 1: agenda del día (referencia)</a></li></ul>
+      <p><a href="index.html">Índice del prototipo y recorridos de demo</a> · Prototipo de diseño · Hito 2 · datos ficticios · v0.4</p>
+    </div>
+  </aside>
+  <script src="app.js"></script>
+</body>
+</html>

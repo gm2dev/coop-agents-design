@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Advertencia: Mover turno de Lucía — Panel de La Esquina Peluquería</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin">
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="bar">
+      <a class="brand" href="admin-agenda-hoy.html">Panel · La Esquina Peluquería</a>
+      <span class="small"><span class="muted">Usuario: admin</span> · <a href="admin-ingresar.html">Salir</a></span>
+    </div>
+    <nav class="admin-nav wrap" aria-label="Secciones del panel"><ul><li><a href="admin-agenda-hoy.html" aria-current="page">Agenda</a></li><li><a href="admin-servicios.html">Servicios</a></li><li><a href="admin-peluqueros.html">Peluqueros</a></li><li><a href="admin-bloqueos.html">Bloqueos</a></li><li><a href="admin-local.html">Datos del local</a></li></ul></nav>
+  </header>
+  <main id="main">
+    <p><a class="back" href="admin-agenda-viernes.html">← Volver a la agenda</a></p>
+    <h1>Mover turno</h1>
+    <section class="alert alert-warning" role="alert" tabindex="-1" data-autofocus aria-labelledby="adv-titulo">
+      <h2 class="alert-title" id="adv-titulo"><span aria-hidden="true">⚠ </span>¿Mover igual?</h2>
+      <p><strong>Dentro de un bloqueo:</strong> el martes 20 de octubre Ana tiene un bloqueo de todo el día.</p>
+      <p>Si lo movés igual, el turno queda en ese horario aunque no se ofrezca en la web.</p>
+      <form action="admin-agenda-movido.html" method="get">
+        <div class="actions"><button class="btn btn-primary" type="submit">Mover igual</button><a class="btn btn-secondary" href="admin-mover.html">Elegir otro horario</a></div>
+      </form>
+    </section>
+    <section class="panel" aria-labelledby="turno-titulo">
+      <h2 class="h3" id="turno-titulo">Turno actual</h2>
+      <dl class="summary">
+        <dt>Cliente</dt><dd>Lucía · <a href="tel:+541155550199">11 5555-0199</a></dd>
+        <dt>Servicio</dt><dd>Corte y barba · <span id="m-duracion">45 min</span></dd>
+        <dt>Cuándo</dt><dd>Viernes 16 de octubre, 15:30 a 16:15, con Bruno</dd>
+      </dl>
+    </section>
+    <section class="panel" aria-labelledby="nuevo-titulo">
+      <h2 class="h3" id="nuevo-titulo">Horario elegido</h2>
+      <dl class="summary"><dt>Cuándo</dt><dd>Martes 20 de octubre, 10:00 a 10:45, con Ana</dd></dl>
+    </section>
+  </main>
+  <aside class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      <h2>Estados de esta pantalla</h2><ul><li><a href="admin-mover.html">Formulario</a></li><li><a href="admin-mover-superpuesto.html">Error: se superpone con otro turno (no se puede forzar)</a></li><li><a href="admin-mover-advertencia.html">Advertencia: fuera del horario semanal</a></li><li><a href="admin-mover-bloqueo.html">Advertencia: dentro de un bloqueo</a></li><li><a href="admin-mover-guardando.html">Guardando</a></li><li><a href="admin-mover-error.html">Error de conexión</a></li><li><a href="admin-agenda-movido.html">Éxito: vuelve a la agenda con el teléfono del cliente</a></li></ul>
+      <p><a href="index.html">Índice del prototipo y recorridos de demo</a> · Prototipo de diseño · Hito 2 · datos ficticios · v0.4</p>
+    </div>
+  </aside>
+  <script src="app.js"></script>
+</body>
+</html>

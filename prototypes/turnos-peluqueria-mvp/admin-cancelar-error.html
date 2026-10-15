@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Error: Cancelar turno de Vera T. — Panel de La Esquina Peluquería</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin">
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="bar">
+      <a class="brand" href="admin-agenda-hoy.html">Panel · La Esquina Peluquería</a>
+      <span class="small"><span class="muted">Usuario: admin</span> · <a href="admin-ingresar.html">Salir</a></span>
+    </div>
+    <nav class="admin-nav wrap" aria-label="Secciones del panel"><ul><li><a href="admin-agenda-hoy.html" aria-current="page">Agenda</a></li><li><a href="admin-servicios.html">Servicios</a></li><li><a href="admin-peluqueros.html">Peluqueros</a></li><li><a href="admin-bloqueos.html">Bloqueos</a></li><li><a href="admin-local.html">Datos del local</a></li></ul></nav>
+  </header>
+  <main id="main">
+    <p><a class="back" href="admin-agenda-hoy.html">← Volver a la agenda</a></p>
+    <h1>¿Cancelar el turno de Vera T.?</h1>
+    <div class="alert alert-danger" role="alert" tabindex="-1" data-autofocus>
+      <p class="alert-title">No pudimos cancelar el turno</p>
+      <p>Hubo un problema de conexión. El turno sigue confirmado. Probá de nuevo.</p>
+    </div>
+    <section class="panel" aria-labelledby="turno-titulo">
+      <h2 class="h3" id="turno-titulo">Turno</h2>
+      <dl class="summary">
+        <dt>Cliente</dt><dd>Vera T. · <a href="tel:+541150000107">11 5000-0107</a></dd>
+        <dt>Servicio</dt><dd>Color · 90 min</dd>
+        <dt>Cuándo</dt><dd>Hoy, jueves 15 de octubre, 16:00 a 17:30, con Ana</dd>
+      </dl>
+    </section>
+    <p>El horario queda libre. El link privado del cliente va a mostrar que el local canceló el turno. No se le envía ningún mensaje.</p>
+    <form action="admin-agenda-cancelado.html" method="get">
+      <div class="actions"><button class="btn btn-danger" type="submit">Sí, cancelar turno</button><a class="btn btn-secondary" href="admin-agenda-hoy.html">No, volver a la agenda</a></div>
+    </form>
+  </main>
+  <aside class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      <h2>Estados de esta pantalla</h2><ul><li><a href="admin-cancelar.html">Segundo paso: confirmar</a></li><li><a href="admin-cancelar-error.html">Error de conexión</a></li><li><a href="admin-agenda-cancelado.html">Éxito: con teléfono del cliente</a></li><li><a href="admin-agenda-cancelado-sin-contacto.html">Éxito: el cliente no dejó contacto</a></li></ul>
+      <p><a href="index.html">Índice del prototipo y recorridos de demo</a> · Prototipo de diseño · Hito 2 · datos ficticios · v0.4</p>
+    </div>
+  </aside>
+  <script src="app.js"></script>
+</body>
+</html>

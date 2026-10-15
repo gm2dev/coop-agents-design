@@ -7,6 +7,8 @@
  * 4. "Volver conserva lo elegido": guarda las opciones en sessionStorage.
  * 5. Mostrar contraseña.
  * 6. Agregar/quitar rangos del horario semanal.
+ * 7. (H2) Marcar asistencia con botones aria-pressed y resumen de pasados sin marcar.
+ * 8. (H2) Mostrar/ocultar campos según la opción elegida (bloqueos).
  * Sin JS, todas las pantallas se pueden recorrer con links y formularios normales.
  */
 (function () {
@@ -185,5 +187,53 @@
       var st2 = document.getElementById('ranges-status');
       if (st2) st2.textContent = 'Rango quitado del ' + l.getAttribute('data-day-label') + '.';
     }
+  });
+
+  /* 7. Asistencia (CU-14): queda la última marca; se anuncia en role=status */
+  var BADGES = {
+    asistio: '<span class="badge badge-success" data-att-badge><span aria-hidden="true">✓</span> Asistió</span>',
+    noasistio: '<span class="badge badge-neutral" data-att-badge><span aria-hidden="true">✕</span> No asistió</span>'
+  };
+  document.querySelectorAll('[data-attendance]').forEach(function (fs) {
+    fs.addEventListener('click', function (ev) {
+      var btn = ev.target.closest('[data-mark]');
+      if (!btn) return;
+      var li = fs.closest('.appt');
+      fs.querySelectorAll('[data-mark]').forEach(function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
+      var badge = li.querySelector('[data-att-badge]');
+      if (badge) badge.outerHTML = BADGES[btn.getAttribute('data-mark')];
+      li.classList.remove('is-unmarked'); li.classList.add('is-past');
+      var st = document.getElementById('agenda-status');
+      if (st) st.textContent = 'Marcaste ' + (btn.getAttribute('data-mark') === 'asistio' ? '“Asistió”' : '“No asistió”') + ' para ' + fs.getAttribute('data-attendance') + '.';
+      var link = document.querySelector('[data-unmarked-summary] a[href="#' + li.id + '"]');
+      if (link) {
+        var item = link.parentElement, list = item.parentElement; item.remove();
+        var left = list.querySelectorAll('li').length;
+        var box = document.querySelector('[data-unmarked-summary]');
+        if (!left) { box.hidden = true; if (st) st.textContent += ' No quedan turnos pasados sin marcar.'; }
+        else { box.querySelector('[data-unmarked-count]').textContent = left; box.querySelector('.alert-title').lastChild.textContent = left === 1 ? ' turno pasado sin marcar asistencia' : ' turnos pasados sin marcar asistencia'; }
+      }
+    });
+  });
+  /* Links del resumen "sin marcar": llevan el foco a la tarjeta */
+  document.querySelectorAll('[data-unmarked-summary] a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (x) {
+      var t = document.getElementById(a.getAttribute('href').slice(1));
+      if (t) { x.preventDefault(); t.scrollIntoView({ block: 'center' }); t.focus(); }
+    });
+  });
+
+  /* 8. Mostrar/ocultar campos (bloqueos) */
+  document.querySelectorAll('[data-reveal-form]').forEach(function (form) {
+    form.addEventListener('change', function (ev) {
+      var r = ev.target;
+      if (!r.hasAttribute('data-reveal-group')) return;
+      var g = r.getAttribute('data-reveal-group');
+      form.querySelectorAll('[data-reveal-group="' + g + '"]').forEach(function (o) {
+        var id = o.getAttribute('data-reveal');
+        if (id !== 'none') document.getElementById(id).hidden = !o.checked;
+      });
+      if (g === 'dias') { var t = form.querySelector('.reveal-text'); if (t) t.hidden = r.value !== 'rango'; }
+    });
   });
 })();

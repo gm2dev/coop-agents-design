@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tu turno cambió — La Esquina Peluquería</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="bar"><a class="brand" href="servicios.html">La Esquina Peluquería</a><span class="small muted">Reserva de turnos</span></div>
+  </header>
+  <main id="main">
+    <h1 tabindex="-1" data-autofocus>Tu turno cambió</h1>
+    <div class="alert alert-success">
+      <p class="lead"><span aria-hidden="true">✓ </span>Ahora es el <strong>martes 20 de octubre a las 11:30</strong> · Corte y barba con <strong>Bruno</strong></p>
+    </div>
+    <section class="keep-link" aria-labelledby="cal-titulo">
+      <h2 id="cal-titulo" class="h3"><span aria-hidden="true">⚠ </span>Actualizá tu calendario</h2>
+      <p>Si tenías el turno en tu calendario, <strong>borrá el evento del viernes 16 a las 15:30</strong> y agregá el nuevo.</p>
+      <div class="actions"><a class="btn btn-primary" href="turno-cambiado.ics" download="turno-la-esquina.ics">Agregar al calendario</a></div>
+      <p class="small keep-link-note">Tu link privado sigue siendo el mismo: no hace falta guardarlo de nuevo.</p>
+    </section>
+    <section class="panel" aria-labelledby="resumen-titulo">
+      <h2 class="h3" id="resumen-titulo">Resumen del turno</h2>
+      <dl class="summary">
+        <dt>Servicio</dt><dd>Corte y barba</dd>
+        <dt>Peluquero</dt><dd>Bruno</dd>
+        <dt>Fecha</dt><dd>Martes 20 de octubre</dd>
+        <dt>Hora</dt><dd>11:30 a 12:15 <span class="muted">(hora del local)</span></dd>
+        <dt>Duración</dt><dd>45 min</dd>
+        <dt>Precio</dt><dd>$ 11.000 <span class="muted">(orientativo, se paga en el local)</span></dd>
+      </dl>
+    </section>
+    <p><a href="turno.html">Ver mi turno</a></p>
+    <section class="panel" aria-labelledby="local-titulo">
+      <h2 class="h3" id="local-titulo">Dónde</h2>
+      <p><strong>La Esquina Peluquería</strong><br>Calle Ejemplo 1234, Villa Prueba<br>Teléfono: <a href="tel:+541140000000">011 4000-0000</a></p>
+    </section>
+    <p class="small muted">Este link es privado: no lo compartas.</p>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <h2 class="h3">La Esquina Peluquería</h2>
+      <p>Calle Ejemplo 1234, Villa Prueba</p>
+      <p>Teléfono: <a href="tel:+541140000000">011 4000-0000</a></p>
+      <p class="small muted">Todos los horarios están en hora del local (Buenos Aires).</p>
+    </div>
+  </footer>
+  <aside class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      <h2>Estados de esta pantalla</h2><ul><li><a href="cambiar.html">Paso 1: elegir día y horario</a></li><li><a href="cambiar-cargando.html">Paso 1: cargando horarios</a></li><li><a href="cambiar-error.html">Paso 1: error al cargar</a></li><li><a href="cambiar-ocupado.html">Paso 1: el horario se ocupó al confirmar</a></li><li><a href="cambiar-revisar.html">Paso 2: revisar el cambio</a></li><li><a href="cambiar-enviando.html">Paso 2: confirmando</a></li><li><a href="cambiar-error-envio.html">Paso 2: error de conexión</a></li><li><a href="cambiar-confirmado.html">Éxito: turno cambiado</a></li><li><a href="turno-plazo-vencido.html">Borde: faltan menos de 2 horas al confirmar</a></li></ul>
+      <p><a href="index.html">Índice del prototipo y recorridos de demo</a> · Prototipo de diseño · Hito 2 · datos ficticios · v0.4</p>
+    </div>
+  </aside>
+  <script src="app.js"></script>
+</body>
+</html>

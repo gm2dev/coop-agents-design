@@ -14,7 +14,7 @@
   </header>
   <main id="main">
     <h1>Tu turno</h1>
-    <p><span class="badge badge-success"><span aria-hidden="true">✓</span> Confirmado</span> <span class="small muted">Estado actualizado al abrir este link.</span></p>
+    <p class="turn-status"><span class="badge badge-success"><span aria-hidden="true">✓</span> Confirmado</span> <span class="small muted">Estado actualizado al abrir este link.</span></p>
     <section class="panel" aria-labelledby="resumen-titulo">
       <h2 class="h3" id="resumen-titulo">Resumen</h2>
       <dl class="summary">
@@ -24,15 +24,21 @@
         <dt>Hora</dt><dd>15:30 a 16:15 <span class="muted">(hora del local)</span></dd>
         <dt>Duración</dt><dd>45 min</dd>
         <dt>Precio</dt><dd>$ 11.000 <span class="muted">(orientativo, se paga en el local)</span></dd>
-        
       </dl>
       <p><a class="btn btn-secondary" href="turno.ics" download="turno-la-esquina.ics">Agregar al calendario</a></p>
     </section>
-    <!-- H2 (CU-06, CU-07): acá van las acciones "Cambiar día u horario" y "Cancelar turno". -->
+    <section class="panel" aria-labelledby="acciones-titulo">
+      <h2 class="h3" id="acciones-titulo">¿Necesitás cambiarlo?</h2>
+      <p class="small">Podés cambiar el día y el horario, o cancelar, hasta 2 horas antes del turno.</p>
+      <div class="actions actions-start">
+        <a class="btn btn-primary" href="cambiar.html">Cambiar día u horario</a>
+        <a class="btn btn-danger-outline" href="cancelar.html">Cancelar turno</a>
+      </div>
+      <p class="small">¿Querés otro servicio? Cancelá este turno y reservá uno nuevo.</p>
+    </section>
     <section class="panel" aria-labelledby="local-titulo">
       <h2 class="h3" id="local-titulo">Dónde</h2>
       <p><strong>La Esquina Peluquería</strong><br>Calle Ejemplo 1234, Villa Prueba<br>Teléfono: <a href="tel:+541140000000">011 4000-0000</a></p>
-      <p>Si necesitás cambiar o cancelar el turno, llamá al local: <a href="tel:+541140000000">011 4000-0000</a>.</p>
     </section>
     <p class="small muted">Este link es privado: no lo compartas.</p>
   </main>
@@ -46,8 +52,8 @@
   </footer>
   <aside class="proto" aria-label="Navegación del prototipo">
     <div class="wrap small">
-      <h2>Estados de esta pantalla</h2><ul><li><a href="turno.html">Turno vigente (solo lectura)</a></li><li><a href="turno-cargando.html">Cargando</a></li><li><a href="turno-no-encontrado.html">Turno no encontrado (link inválido)</a></li></ul>
-      <p><a href="index.html">Índice del prototipo y recorridos de demo</a> · Prototipo de diseño · Hito 1 · datos ficticios · v0.4</p>
+      <h2>Estados de esta pantalla</h2><ul><li><a href="turno.html">Confirmado, con Cambiar y Cancelar (faltan 2 h o más)</a></li><li><a href="turno-menos-2h.html">Faltan menos de 2 horas (sin acciones)</a></li><li><a href="turno-movido.html">Movido por el local (aviso D-18)</a></li><li><a href="turno-cancelado-local.html">Cancelado por el local</a></li><li><a href="turno-cancelado.html">Cancelado por vos</a></li><li><a href="turno-pasado.html">Turno pasado</a></li><li><a href="turno-plazo-vencido.html">Borde: el plazo de 2 h venció mientras tenía la página abierta</a></li><li><a href="turno-cargando.html">Cargando</a></li><li><a href="turno-no-encontrado.html">Turno no encontrado (link inválido)</a></li><li><a href="turno-solo-lectura.html">Hito 1: solo lectura (referencia)</a></li></ul>
+      <p><a href="index.html">Índice del prototipo y recorridos de demo</a> · Prototipo de diseño · Hito 2 · datos ficticios · v0.4</p>
     </div>
   </aside>
   <script src="app.js"></script>

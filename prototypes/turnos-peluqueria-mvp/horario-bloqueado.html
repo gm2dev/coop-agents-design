@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Paso 3 de 5: Elegí día y horario (con días bloqueados) — La Esquina Peluquería</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="bar"><a class="brand" href="servicios.html">La Esquina Peluquería</a><span class="small muted">Reserva de turnos</span></div>
+  </header>
+  <main id="main">
+    <p><a class="back" href="peluquero.html">← Volver: peluquero</a></p>
+    <p class="step">Paso 3 de 5 · Día y horario</p>
+    <ol class="progress" aria-hidden="true"><li class="done"></li><li class="done"></li><li aria-current="step"></li><li></li><li></li></ol>
+    <h1>¿Qué día y a qué hora?</h1>
+    <div class="selection"><p><strong>Corte y barba</strong> · 45 min · con <strong>Ana</strong></p><a href="peluquero.html">Cambiar</a></div>
+    <form action="datos.html" method="get" class="panel" data-persist="horario">
+      <h2 class="h3" id="dias-titulo">Día <span class="muted small">(15 al 21 de octubre)</span></h2>
+      <nav aria-labelledby="dias-titulo">
+        <div class="days-nav"><span class="muted">Desde hoy</span><a href="horario-limite.html">Semana siguiente →</a></div>
+        <ul class="days"><li><a href="horario.html"><span>Jue 15</span><small>Hoy</small><span class="visually-hidden">, jueves 15 de octubre</span></a></li><li><a href="horario.html" aria-current="date"><span>Vie 16</span><small>Con horarios</small><span class="visually-hidden">, viernes 16 de octubre</span></a></li><li><a href="horario-vacio.html"><span>Sáb 17</span><small>Sin horarios</small><span class="visually-hidden">, sábado 17 de octubre</span></a></li><li><span class="day-off"><span>Dom 18</span><small>Cerrado</small><span class="visually-hidden">, domingo 18 de octubre</span></span></li><li><span class="day-off"><span>Lun 19</span><small>Cerrado</small><span class="visually-hidden">, lunes 19 de octubre</span></span></li><li><span class="day-off"><span>Mar 20</span><small>Cerrado</small><span class="visually-hidden">, martes 20 de octubre</span></span></li><li><span class="day-off"><span>Mié 21</span><small>Cerrado</small><span class="visually-hidden">, miércoles 21 de octubre</span></span></li></ul>
+      </nav>
+      <p class="hint">Podés reservar desde hoy hasta 30 días hacia adelante (hasta el sábado 14 de noviembre).</p>
+      <fieldset>
+        <legend>Horarios del viernes 16 de octubre</legend>
+        <p class="hint">Hora de inicio, en hora del local. El turno dura 45 min.</p>
+        <ul class="slots">
+          <li><label class="slot"><input type="radio" name="horario" value="10:00" required><span class="check" aria-hidden="true">✓</span>10:00</label></li>
+          <li><label class="slot"><input type="radio" name="horario" value="10:45" required><span class="check" aria-hidden="true">✓</span>10:45</label></li>
+          <li><label class="slot"><input type="radio" name="horario" value="11:30" required><span class="check" aria-hidden="true">✓</span>11:30</label></li>
+          <li><label class="slot"><input type="radio" name="horario" value="14:00" required><span class="check" aria-hidden="true">✓</span>14:00</label></li>
+          <li><label class="slot"><input type="radio" name="horario" value="14:45" required><span class="check" aria-hidden="true">✓</span>14:45</label></li>
+          <li><label class="slot"><input type="radio" name="horario" value="15:30" required><span class="check" aria-hidden="true">✓</span>15:30</label></li>
+          <li><label class="slot"><input type="radio" name="horario" value="16:15" required><span class="check" aria-hidden="true">✓</span>16:15</label></li>
+          <li><label class="slot"><input type="radio" name="horario" value="17:00" required><span class="check" aria-hidden="true">✓</span>17:00</label></li>
+          <li><label class="slot"><input type="radio" name="horario" value="18:00" required><span class="check" aria-hidden="true">✓</span>18:00</label></li>
+        </ul>
+      </fieldset>
+      <div class="actions"><button class="btn btn-primary" type="submit">Continuar</button></div>
+    </form>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <h2 class="h3">La Esquina Peluquería</h2>
+      <p>Calle Ejemplo 1234, Villa Prueba</p>
+      <p>Teléfono: <a href="tel:+541140000000">011 4000-0000</a></p>
+      <p class="small muted">Todos los horarios están en hora del local (Buenos Aires).</p>
+    </div>
+  </footer>
+  <aside class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      <h2>Estados de esta pantalla</h2><ul><li><a href="admin-bloqueos.html">Lista con bloqueos</a></li><li><a href="admin-bloqueos-vacio.html">Vacía</a></li><li><a href="admin-bloqueo-nuevo.html">Nuevo bloqueo</a></li><li><a href="admin-bloqueo-error.html">Nuevo bloqueo con errores</a></li><li><a href="admin-bloqueo-guardado.html">Guardado sin turnos afectados</a></li><li><a href="admin-bloqueo-afectados.html">Guardado con turnos confirmados dentro</a></li><li><a href="admin-bloqueo-eliminar.html">Eliminar: confirmación</a></li><li><a href="admin-bloqueos-eliminado.html">Eliminado</a></li><li><a href="horario-bloqueado.html">Vista del cliente: días bloqueados</a></li></ul>
+      <p><a href="index.html">Índice del prototipo y recorridos de demo</a> · Prototipo de diseño · Hito 2 · datos ficticios · v0.4</p>
+    </div>
+  </aside>
+  <script src="app.js"></script>
+</body>
+</html>

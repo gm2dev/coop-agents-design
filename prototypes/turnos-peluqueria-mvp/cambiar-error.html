@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Error: Cambiar turno, paso 1 de 2 — La Esquina Peluquería</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="bar"><a class="brand" href="servicios.html">La Esquina Peluquería</a><span class="small muted">Reserva de turnos</span></div>
+  </header>
+  <main id="main">
+    <p><a class="back" href="turno.html">← Volver a tu turno</a></p>
+    <p class="step">Cambiar turno · Paso 1 de 2 · Día y horario</p>
+    <ol class="progress" aria-hidden="true"><li aria-current="step"></li><li></li></ol>
+    <h1>¿A qué día y hora lo pasamos?</h1>
+    <div class="alert alert-danger" role="alert" tabindex="-1" data-autofocus>
+      <p class="alert-title">No pudimos cargar los horarios</p>
+      <p>Revisá tu conexión y probá de nuevo. <strong>Tu turno sigue igual.</strong> Si el problema sigue, llamá al local: <a href="tel:+541140000000">011 4000-0000</a>.</p>
+      <p><a class="btn btn-secondary" href="cambiar.html">Probar de nuevo</a></p>
+    </div>
+    <div class="selection">
+      <p>Tu turno actual: <strong>viernes 16 de octubre, 15:30</strong> · Corte y barba con Bruno</p>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <h2 class="h3">La Esquina Peluquería</h2>
+      <p>Calle Ejemplo 1234, Villa Prueba</p>
+      <p>Teléfono: <a href="tel:+541140000000">011 4000-0000</a></p>
+      <p class="small muted">Todos los horarios están en hora del local (Buenos Aires).</p>
+    </div>
+  </footer>
+  <aside class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      <h2>Estados de esta pantalla</h2><ul><li><a href="cambiar.html">Paso 1: elegir día y horario</a></li><li><a href="cambiar-cargando.html">Paso 1: cargando horarios</a></li><li><a href="cambiar-error.html">Paso 1: error al cargar</a></li><li><a href="cambiar-ocupado.html">Paso 1: el horario se ocupó al confirmar</a></li><li><a href="cambiar-revisar.html">Paso 2: revisar el cambio</a></li><li><a href="cambiar-enviando.html">Paso 2: confirmando</a></li><li><a href="cambiar-error-envio.html">Paso 2: error de conexión</a></li><li><a href="cambiar-confirmado.html">Éxito: turno cambiado</a></li><li><a href="turno-plazo-vencido.html">Borde: faltan menos de 2 horas al confirmar</a></li></ul>
+      <p><a href="index.html">Índice del prototipo y recorridos de demo</a> · Prototipo de diseño · Hito 2 · datos ficticios · v0.4</p>
+    </div>
+  </aside>
+  <script src="app.js"></script>
+</body>
+</html>

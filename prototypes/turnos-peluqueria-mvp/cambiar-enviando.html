@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cambiar turno, paso 2 de 2: confirmando — La Esquina Peluquería</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="bar"><a class="brand" href="servicios.html">La Esquina Peluquería</a><span class="small muted">Reserva de turnos</span></div>
+  </header>
+  <main id="main">
+    <p><a class="back" href="cambiar.html">← Volver: elegir otro horario</a></p>
+    <p class="step">Cambiar turno · Paso 2 de 2 · Revisar el cambio</p>
+    <ol class="progress" aria-hidden="true"><li class="done"></li><li aria-current="step"></li></ol>
+    <h1>Revisá el cambio</h1>
+    <p class="visually-hidden" role="status">Confirmando el cambio…</p>
+    <div class="compare">
+      <section class="panel compare-before" aria-labelledby="antes-titulo">
+        <h2 class="h3" id="antes-titulo">Antes</h2>
+        <dl class="summary">
+          <dt>Fecha</dt><dd>Viernes 16 de octubre</dd>
+          <dt>Hora</dt><dd>15:30 a 16:15</dd>
+          <dt>Peluquero</dt><dd>Bruno</dd>
+        </dl>
+      </section>
+      <section class="panel compare-after" aria-labelledby="despues-titulo">
+        <h2 class="h3" id="despues-titulo"><span aria-hidden="true">→ </span>Después</h2>
+        <dl class="summary">
+          <dt>Fecha</dt><dd>Martes 20 de octubre</dd>
+          <dt>Hora</dt><dd>11:30 a 12:15</dd>
+          <dt>Peluquero</dt><dd>Cualquiera disponible <span class="muted">(te lo asignamos al confirmar)</span></dd>
+        </dl>
+      </section>
+    </div>
+    <p class="small">Sin cambios: Corte y barba · 45 min · $ 11.000 (orientativo, se paga en el local) · todos los horarios en hora del local.</p>
+    <div class="actions"><button class="btn btn-primary" type="button" aria-disabled="true"><span class="spinner spinner-sm" aria-hidden="true"></span> Confirmando…</button></div>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <h2 class="h3">La Esquina Peluquería</h2>
+      <p>Calle Ejemplo 1234, Villa Prueba</p>
+      <p>Teléfono: <a href="tel:+541140000000">011 4000-0000</a></p>
+      <p class="small muted">Todos los horarios están en hora del local (Buenos Aires).</p>
+    </div>
+  </footer>
+  <aside class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      <h2>Estados de esta pantalla</h2><ul><li><a href="cambiar.html">Paso 1: elegir día y horario</a></li><li><a href="cambiar-cargando.html">Paso 1: cargando horarios</a></li><li><a href="cambiar-error.html">Paso 1: error al cargar</a></li><li><a href="cambiar-ocupado.html">Paso 1: el horario se ocupó al confirmar</a></li><li><a href="cambiar-revisar.html">Paso 2: revisar el cambio</a></li><li><a href="cambiar-enviando.html">Paso 2: confirmando</a></li><li><a href="cambiar-error-envio.html">Paso 2: error de conexión</a></li><li><a href="cambiar-confirmado.html">Éxito: turno cambiado</a></li><li><a href="turno-plazo-vencido.html">Borde: faltan menos de 2 horas al confirmar</a></li></ul>
+      <p><a href="index.html">Índice del prototipo y recorridos de demo</a> · Prototipo de diseño · Hito 2 · datos ficticios · v0.4</p>
+    </div>
+  </aside>
+  <script src="app.js"></script>
+</body>
+</html>
