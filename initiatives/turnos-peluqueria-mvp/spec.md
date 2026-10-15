@@ -5,7 +5,7 @@ Pantallas, componentes, contenido, estados y responsive del Hito 1. Criterios:
 Flujos: [flows.md](flows.md). Prototipo: [`prototypes/turnos-peluqueria-mvp/`](../../prototypes/turnos-peluqueria-mvp/index.html).
 
 Solo se usan tokens semánticos de [`design-system/tokens.json`](../../design-system/tokens.json) (y los
-**propuestos** del [README](README.md#tokens-propuestos-decide-el-cdo), marcados con *). En el texto, `token`
+**propuestos** del [README](README.md#tokens-propuestos-provisionales-de-la-iniciativa), marcados con *). En el texto, `token`
 = nombre del token, no valor.
 
 ## 1. Base común
@@ -35,9 +35,9 @@ con el formato `<Paso o pantalla> — <local>` (prefijo `Error: ` cuando la pág
 | **Selector de días** | Paso 3 | `nav` con `ul` de links (7 por vista), el día elegido con `aria-current="date"` (+ fondo, borde 2px* y semibold). Cada día dice su estado en texto (“Hoy”, “Con horarios”, “Sin horarios”, “Cerrado”, “Último día”, “No disponible”). Cerrado / fuera de ventana: no es link, `surface.disabled`, borde punteado, `text.muted`. Nombre accesible completo con texto oculto (“, viernes 16 de octubre”). Navegación “← Semana anterior / Semana siguiente →”. |
 | **Horarios** | Paso 3 | `fieldset` + `legend` “Horarios del <día>” + hint (hora de inicio, hora del local, duración). Los turnos pueden empezar cada 15 minutos (S-3, Architect; el intervalo se configura en un solo lugar si producto prefiere 30): la grilla muestra solo los inicios libres con la duración completa, por eso los ejemplos saltan (10:00, 10:45…). Radio group nativo en grilla `auto-fill` (min `size.grid.slot-min`*), cada horario alto `size.target.comfortable`. Elegido: `surface.selected`, borde 2px*, ✓ visible. Flechas para moverse dentro del grupo, Tab para salir. |
 | **Campo de texto** | Formularios | `label` visible arriba; “(opcional)” en `text.muted` dentro del label; hint debajo del label asociado con `aria-describedby`; input alto `size.target.comfortable`, fuente `font.size.200` (evita zoom en iOS), borde `border.strong`. |
-| **Error de campo** | Formularios | Debajo del input: ⚠ + texto en `feedback.danger.text` semibold; input con `aria-invalid="true"` y borde 2px* `feedback.danger.border`; el id del error se agrega a `aria-describedby`. |
-| **Resumen de errores** | Formularios | Alerta `danger` arriba del formulario, `role="alert"`, `tabindex="-1"`, recibe el foco al enviar; título “Revisá N datos para …” + lista de links que llevan el foco a cada campo. |
-| **Alerta** | Mensajes | Variantes `danger`, `success`, `warning`, `info` (`feedback.*.text/bg/border`, borde 2px*). Título en negrita + texto. Errores: `role="alert"` y foco. Estados informativos: `role="status"`. |
+| **Error de campo** | Formularios | Debajo del input: ✕ (`aria-hidden`) + “Error:” oculto para lector de pantalla + texto en `feedback.danger.text` semibold; input con `aria-invalid="true"` y borde 2px* `feedback.danger.border`; el id del error se agrega a `aria-describedby`. |
+| **Resumen de errores** | Formularios | Alerta `danger` arriba del formulario, `role="alert"`, `tabindex="-1"`, recibe el foco al enviar; título con ✕ (`aria-hidden`) + “Error:” oculto + “Revisá N datos para …” + lista de links que llevan el foco a cada campo. |
+| **Alerta** | Mensajes | Variantes `danger`, `success`, `warning`, `info` (`feedback.*.text/bg/border`, borde 2px*). Título en negrita + texto. **Ícono por tipo (DD-34):** error = ✕ + “Error:” (oculto si el título ya lo dice), advertencia = ⚠ + “Advertencia:” oculto, éxito = ✓; los íconos van con `aria-hidden`. Errores: `role="alert"` y foco. Estados informativos: `role="status"`. |
 | **Bloque “Guardá tu link privado”** | Confirmación | Fondo `feedback.warning.bg`, borde 2px* `feedback.warning.border`, `radius.lg`. h2 con ⚠, frase en negrita, campo de solo lectura con el link (label visible) y botón primario “Copiar link” pegado al campo (arriba del pliegue en 360×640), secundario “Agregar al calendario”, región `role="status"` para el resultado de copiar. |
 | **Botones** | Acciones | Primario `action.primary` / `text.on-action` (hover `action.primary-hover`); secundario `surface.default` + borde y texto `action.primary`. Alto `size.target.comfortable`. En celular ocupan el ancho; desde `breakpoint.md`, ancho automático y el primario a la derecha (orden del DOM: primario primero). Enviando: `aria-disabled="true"`, spinner + “Confirmando…”, `surface.disabled`. |
 | **Badge** | Estado, avisos | Píldora con borde y texto; siempre con palabra (“✓ Confirmado”, “⚠ Sin servicios”). Confirmado = `success`, avisos = `warning`. No hay badge que distinga de dónde vino el turno: todos se crean desde la web (D-23). |
@@ -195,8 +195,9 @@ selector de días y horarios de P3, `fieldset` + `legend`, resumen de errores de
 ### H-A1 · Agenda H2 (`admin-agenda-hoy.html`, `-viernes`, `-semana-h2`) — CU-12 (H2), CU-14
 
 - Igual que A2 + línea “Son las 14:00 (hora del prototipo). La asistencia se marca solo en turnos que ya empezaron.”
-- **Resumen de pendientes** (si hay): alerta warning “? 3 turnos pasados sin marcar asistencia” con links a cada tarjeta (`#t-paula`, que tiene `tabindex=-1`).
-- **Tarjeta vigente con inicio pasado:** badge “? Sin marcar” (o “✓ Asistió” / “✕ No asistió”) + `fieldset.attendance` (legend “Asistencia” + oculto “de Paula V., 11:00”) con botones “Asistió” / “No asistió” (`aria-pressed`; el elegido con fondo seleccionado y ✓). Al tocar: cambia el badge y se anuncia en `role=status` “Marcaste “Asistió” para Paula V.”; se puede cambiar.
+- **Resumen de pendientes** (si hay): alerta warning “⚠ 3 turnos pasados sin marcar asistencia” (con “Advertencia:” oculto, DD-34) con links a cada tarjeta (`#t-paula`, que tiene `tabindex=-1`).
+- **Tarjeta vigente con inicio pasado:** badge “? Sin marcar” (o “✓ Asistió” / “✕ No asistió”) + `fieldset.attendance` (legend “Asistencia” + oculto “de Paula V., 11:00”) con botones “Asistió” / “No asistió” (`aria-pressed`; el elegido con fondo seleccionado y ✓). Al tocar: cambia el badge y se anuncia en `role=status` “Marcaste “Asistió” para Paula V.” (sin doble punto si el nombre termina en “.”); se puede cambiar. El foco no se mueve.
+- **Error al guardar la asistencia** (`admin-agenda-asistencia-error.html`, DD-35): la marca se ve mientras guarda; si falla, botones, `aria-pressed`, badge y filete vuelven al valor previo; debajo de los botones, dentro del `fieldset` de la tarjeta, aparece una alerta `danger` compacta con `role="alert"`: “✕ No pudimos guardar la asistencia” + ““Asistió” no se guardó: Paula V. sigue como estaba (Sin marcar). Revisá tu conexión.” + botón secundario “Probá de nuevo” (nombre accesible “Probá de nuevo a marcar “Asistió” para Paula V.”). El foco queda en el botón tocado, que suma `aria-describedby` al id de la alerta. “Probá de nuevo” o volver a tocar un botón quita la alerta y guarda (anuncio en `role=status`, foco en el botón de la marca guardada). El resumen “N sin marcar” solo baja cuando se guarda. La API la define el Architect.
 - **Tarjeta vigente** (pasada o futura): “Mover” y “Cancelar” (nombre accesible “Mover turno de Paula V., 11:00”). Los futuros no tienen asistencia.
 - **Cancelada:** borde punteado, fondo `surface.subtle`, hora y servicio tachados, badge “✕ Cancelado por el cliente/local” + “Horario libre”; sin acciones ni asistencia. Encabezado “Ana · 2 turnos, 1 cancelado”.
 - `-viernes`: refleja cambios del cliente (turno de Marta cancelado por el cliente) y el turno movido. `-semana-h2`: tarjetas compactas con los mismos badges.
@@ -253,7 +254,7 @@ Sin anchos fijos: todo en `rem` / grid `auto-fill`, `overflow-wrap: anywhere` pa
 | | Pasados no aparecen | ✔ P3 (hoy) |
 | | Día sin horarios: mensaje + otro día | ✔ `horario-vacio` |
 | | Zona del local | ✔ hints, resumen, footer, `.ics` |
-| | Ventana de 30 días (tentativo) | ✔ hint + `horario-limite` |
+| | Ventana de 30 días (D-14) | ✔ hint + `horario-limite` |
 | CU-03 | Confirmar con nombre → confirmación | ✔ P4 → P5 → P7 |
 | | “Cualquiera”: muestra el asignado | ✔ P7, P8 |
 | | Nombre vacío: error junto al campo | ✔ `datos-error` |
@@ -326,6 +327,7 @@ Sin anchos fijos: todo en `rem` / grid `auto-fill`, `overflow-wrap: anywhere` pa
 | | El panel no muestra ni recupera el link privado | ✔ ninguna pantalla del panel lo muestra |
 | | Sin notificación; muestra el teléfono del cliente | ✔ “Avisale al cliente: tel:” / “El cliente no dejó contacto” |
 | CU-14 | Vigente con inicio pasado: marca asistió/no asistió y se ve | ✔ `admin-agenda-hoy` (botones `aria-pressed` + badge) |
+| | Error al guardar: vuelve al valor previo y avisa (diseño, DD-35) | ✔ `admin-agenda-asistencia-error` (`role=alert` en la tarjeta + “Probá de nuevo”) |
 | | Futuro: no puede marcar | ✔ sin control en futuros (Martín 15:45) |
 | | Corrige: queda la última | ✔ botones alternables (JS del prototipo) |
 | | Pasados sin marcar identificados | ✔ badge “? Sin marcar” + resumen “3 turnos pasados sin marcar” |

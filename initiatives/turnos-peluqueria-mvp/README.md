@@ -52,7 +52,7 @@ Detalle criterio por criterio en [spec.md § Cobertura](spec.md#5-cobertura-de-c
 | CU-11 | Bloqueos | `admin-bloqueos`, `-vacio`, `-eliminado`, `admin-bloqueo-nuevo`, `-error`, `-guardado`, `-afectados`, `-eliminar`; en la web `horario-bloqueado` |
 | CU-12 (H2) | Agenda con cambios y cancelados | `admin-agenda-hoy`, `admin-agenda-viernes` (cambios y cancelaciones del cliente), `admin-agenda-semana-h2` |
 | CU-13 | Mover y cancelar desde el panel | `admin-mover`, `-superpuesto`, `-advertencia` (fuera de horario), `-bloqueo`, `-guardando`, `-error`, `admin-agenda-movido`; `admin-cancelar`, `-error`, `admin-agenda-cancelado`, `-cancelado-sin-contacto` |
-| CU-14 | Marcar asistencia | `admin-agenda-hoy` (resumen “3 turnos pasados sin marcar”, Asistió/No asistió con `aria-pressed`, corregible), `admin-agenda-semana-h2` |
+| CU-14 | Marcar asistencia | `admin-agenda-hoy` (resumen “3 turnos pasados sin marcar”, Asistió/No asistió con `aria-pressed`, corregible), `admin-agenda-asistencia-error` (error al guardar), `admin-agenda-semana-h2` |
 | CU-10 (H2) | Turnos afectados | `admin-peluqueros-afectados` (cambio de horario), `admin-peluqueros-desactivado` |
 
 **No existen** (a propósito): crear turnos en el panel (D-23), ver o recuperar links privados (D-24, D-29),
@@ -102,6 +102,8 @@ Las decisiones del CDO para esta entrega se respetan tal cual; acá van cómo se
 | DD-31 | **CU-11 Bloqueos como sección del panel** (después de Peluqueros): lista de próximos y recientes (alcance, días, horario; los pasados con “◷ Ya pasó”); formulario con tres preguntas en `fieldset`: ¿A quién afecta? (todo el local / un peluquero + select), ¿Qué días? (un día / varios días seguidos), ¿Qué horario? (todo el día / rango con `step=900`). Sin motivo/nota (ver P-D9). | Preguntas en lenguaje del local; mostrar solo los campos que aplican. No se inventan campos obligatorios. |
 | DD-32 | **Turnos dentro de un bloqueo o afectados por CU-10:** tras guardar, alerta de éxito que dice cuántos turnos quedaron dentro y que **no se cancelaron**, + lista con fecha, servicio, cliente, contacto y “Mover”/“Cancelar” por turno. Eliminar un bloqueo pide confirmación y dice que esos horarios vuelven a ofrecerse. | CU-11, CU-10 (H2): el admin decide; el sistema no toca turnos. |
 | DD-33 | **En la web, un día con bloqueo de todo el día se ve como “Cerrado”** (no es link, DD-08); un bloqueo parcial solo quita horarios. No se dice el motivo. | El cliente no necesita saber por qué; reutiliza el patrón de día cerrado. |
+| DD-34 | **Decisión del CDO (C1): error y advertencia se distinguen también por ícono, en toda la iniciativa.** Error = **✕** + “Error:” y advertencia = **⚠** + “Advertencia:”; el ícono va con `aria-hidden="true"` y la palabra como texto oculto para lector de pantalla cuando el texto visible no la dice (el `<title>` ya empieza con “Error:” / “Advertencia:”). Se aplica a todos los `field-error`, a los resúmenes de errores, a las alertas de error con `role=alert` y a las advertencias (“¿Mover igual?”, “N turnos pasados sin marcar”). Éxito sigue con ✓. Sin cambios de colores ni tokens. **Propuesta de patrón para el design system:** se incorpora en el PR aparte del design system junto con los tokens provisionales. | 1.4.1 (no depender del color: danger y warning tienen tonos cercanos para personas con daltonismo) y 1.1.1/1.3.1 (el tipo de mensaje llega también al lector de pantalla). Antes `field-error` usaba ⚠ igual que las advertencias. |
+| DD-35 | **CU-14, error al guardar la asistencia** (`admin-agenda-asistencia-error`): la marca no se da por guardada hasta que responde el servidor; si falla, botones, `aria-pressed` y badge vuelven al valor previo, aparece dentro de la tarjeta un `role=alert` “✕ No pudimos guardar la asistencia · “Asistió” no se guardó: Paula V. sigue como estaba (Sin marcar). Revisá tu conexión.” con el botón “Probá de nuevo”, y el foco queda en el botón tocado (que suma `aria-describedby` a la alerta). El resumen “N sin marcar” solo baja cuando se guarda. | Decisión del CDO (antes P-D13): el diseño cubre el estado; la API la define el Architect. Revertir evita que el admin crea que quedó guardado; el error local a la tarjeta no le hace perder el lugar en la agenda (3.3.1, 4.1.3, 2.4.3). |
 
 ## Supuestos
 
@@ -131,7 +133,6 @@ Las decisiones del CDO para esta entrega se respetan tal cual; acá van cómo se
 | P-D10 | Al mover a otro peluquero que **no hace ese servicio**, ¿se permite con advertencia o se impide? | CPO | El prototipo solo lista peluqueros activos que hacen el servicio (lo más seguro). |
 | P-D11 | ¿El link privado debe mostrar si el turno fue **marcado “No asistió”**? | CPO | Propuesta: no; el pasado se ve como “Turno pasado” sin marca (la asistencia es interna). |
 | P-D12 | Mover desde el panel: ¿el servidor devuelve en una sola respuesta la superposición y las advertencias (fuera de horario + bloqueo a la vez)? | Architect | El diseño muestra todos los motivos juntos en la misma advertencia; la superposición siempre gana (error). |
-| P-D13 | En la agenda, el control de asistencia guarda al tocar (sin “Guardar”): ¿qué pasa si falla? | Architect | Propuesta: el botón vuelve al estado anterior y aparece un `role=alert` en la tarjeta “No pudimos guardar la asistencia. Probá de nuevo.” (no prototipado). |
 | P-D14 | ¿La grilla horaria para la semana (D-22) se revisa con la demo de H1 antes de cerrar H2? | CDO | El H2 mantiene la lista por día. |
 
 ## Tokens propuestos (provisionales de la iniciativa)
@@ -149,6 +150,9 @@ en el bloque PROPUESTOS. No se modificó `design-system/tokens.json`. **El H2 no
 | `size.grid.slot-min` | `5.5rem` | Ancho mínimo de un botón de horario en la grilla | Con 320 px entran 2 columnas; a 200 % de zoom, 1. |
 | `size.grid.day-min` | `4.5rem` | Ancho mínimo de un día en el selector | — |
 | `size.grid.column-min` | `14rem` | Columna mínima de la agenda (escritorio) y del filtro | — |
+
+**Propuesta de patrón (v0.5, DD-34):** íconos por tipo de mensaje — error ✕ + “Error:”, advertencia ⚠ +
+“Advertencia:”, éxito ✓ — con el ícono `aria-hidden`. Va en el mismo PR del design system que estos tokens.
 
 Además se agregó `prototypes/shared/tokens.css`, espejo 1:1 de `tokens.json` como variables CSS (sin valores
 nuevos). Si el CDO prefiere generarlo con un script, conviene un PR aparte del design system.
@@ -191,3 +195,18 @@ nuevos). Si el CDO prefiere generarlo con un script, conviene un PR aparte del d
     afectados. DD-17 a DD-33, preguntas P-D9 a P-D14. La tabla de “enganches” se reemplazó por el diseño real.
   - Verificación: Playwright + axe sobre 90 páginas (0 violaciones), sin scroll horizontal a 320/360 px, espaciado
     1.4.12 sin desbordes (se corrigió la tarjeta de la agenda H2), 0 links rotos.
+- v0.5 — ronda v0.4 del Designer Reviewer:
+  - CU-14 (mayor): nuevo estado `admin-agenda-asistencia-error` (vuelve al valor previo, `aria-pressed` restaurado,
+    `role=alert` en la tarjeta con “Probá de nuevo”, foco en el botón tocado), DD-35; P-D13 sale de preguntas
+    abiertas (decisión del CDO: el diseño cubre el estado, la API la define el Architect). Enlazado en el índice
+    y en los estados de las agendas H2; spec, flows y accesibilidad actualizados.
+  - DD-34 (decisión C1 del CDO): error = ✕ + “Error:”, advertencia = ⚠ + “Advertencia:” en todos los
+    `field-error`, resúmenes y alertas de error del prototipo; propuesta de patrón para el design system.
+  - RN-17: “llamá al local” en `confirmacion` con el teléfono como link `tel:` en la misma frase (las demás frases
+    ya lo tenían).
+  - `admin-agenda-hoy`: el anuncio ya no dice “Paula V..”. spec: ancla a los tokens provisionales corregida y
+    ventana de 30 días sin “(tentativo)” (D-14).
+  - Verificación (Chromium headless): Playwright + axe sobre 90 páginas (0 violaciones), sin scroll horizontal a
+    320/360/1280 px, espaciado 1.4.12 sin desbordes, 0 links/anclas rotos, “Copiar link” termina en y=594 en
+    360×640; error de asistencia probado con teclado (foco en el botón tocado, `aria-pressed` restaurado,
+    `role=alert` en la tarjeta, “Probá de nuevo” guarda). Siguen PENDIENTES lector de pantalla, zoom 200 % y preview.

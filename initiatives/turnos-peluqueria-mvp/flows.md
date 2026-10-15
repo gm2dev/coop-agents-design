@@ -289,7 +289,10 @@ flowchart TD
   sum -->|Sí| s1[Resumen 'N turnos pasados sin marcar'<br/>links a cada tarjeta]
   ag --> card{Tipo de turno}
   card -->|Vigente, inicio pasado| past[? Sin marcar + Asistió / No asistió<br/>+ Mover / Cancelar]
-  past -->|Marca| marked[✓ Asistió / ✕ No asistió<br/>corregible: queda la última]
+  past -->|Marca| save{¿Se guardó?}
+  save -->|Sí| marked[✓ Asistió / ✕ No asistió<br/>role=status 'Marcaste…'<br/>corregible: queda la última]
+  save -->|Error| aerr[admin-agenda-asistencia-error<br/>vuelve al valor previo · aria-pressed restaurado<br/>role=alert en la tarjeta · foco en el botón tocado]
+  aerr -->|Probá de nuevo / tocar otra vez| save
   card -->|Vigente futuro| fut[Mover / Cancelar<br/>sin control de asistencia]
   card -->|Cancelado| canc[✕ Cancelado por el cliente / local<br/>tachado + 'Horario libre', sin acciones]
   fut & past -->|Mover| cu13m([CU-13 Mover])
@@ -297,6 +300,10 @@ flowchart TD
   ag -.->|Día siguiente| vie[admin-agenda-viernes<br/>cambios y cancelaciones del cliente]
   ag -.->|Semana| sem[admin-agenda-semana-h2]
 ```
+
+CU-14, error al guardar: la marca no se da por guardada hasta que responde el servidor. Si falla, el estado
+vuelve al anterior (botones, `aria-pressed`, badge), se avisa con `role=alert` dentro de la misma tarjeta y el
+foco no se mueve del botón tocado; el resumen “N sin marcar” no cambia. El contrato de la API lo define el Architect.
 
 ### CU-13 — Mover y cancelar desde el panel
 

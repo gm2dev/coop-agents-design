@@ -74,12 +74,12 @@ implementación · **PENDIENTE** = requiere navegador o tecnología asistiva · 
 
 | Criterio | Cómo se cumple | Estado |
 |---|---|---|
-| 1.1.1 Contenido no textual | Íconos (✓ ⚠) decorativos con `aria-hidden`; siempre acompañados de texto. Spinner `aria-hidden` + texto. Sin imágenes. | OK (estático) |
+| 1.1.1 Contenido no textual | Íconos (✓ ✕ ⚠) decorativos con `aria-hidden`; siempre acompañados de texto. Spinner `aria-hidden` + texto. Sin imágenes. | OK (estático) |
 | 1.3.1 Info y relaciones | Landmarks (`header`, `nav`, `main`, `footer`, `aside`), `fieldset/legend` en radios, checkboxes y días de la semana, `dl` en resúmenes, listas, `section` con `aria-labelledby`. | OK (estático) |
 | 1.3.2 Secuencia significativa | Orden del DOM = orden visual. En botones, el primario va primero en el DOM; desde 640 px se muestra a la derecha con `row-reverse` (el orden de foco sigue siendo primario → secundario). | OK (estático) · PENDIENTE confirmar que no confunde en el preview |
 | 1.3.4 Orientación | Sin bloqueo de orientación. | OK (estático) |
 | 1.3.5 Propósito de los campos | `autocomplete` name, tel, email, username, current-password, organization, street-address. | OK (estático) |
-| 1.4.1 Uso del color | Elegido: fondo + borde 2px + ✓/semibold; errores: ícono + texto + borde; estados con palabra; día cerrado con borde punteado + texto; día actual con `aria-current`; links subrayados. | OK (estático) |
+| 1.4.1 Uso del color | Elegido: fondo + borde 2px + ✓/semibold; errores: ✕ + “Error:” + texto + borde, advertencias: ⚠ + “Advertencia:” (DD-34); estados con palabra; día cerrado con borde punteado + texto; día actual con `aria-current`; links subrayados. | OK (estático) |
 | 1.4.3 Contraste mínimo | Ver § 2. | OK (calculado) |
 | 1.4.4 Cambio de tamaño | Tipografía en `rem`; sin alturas fijas en contenedores de texto. | OK (estático) · PENDIENTE (zoom 200 % real en el preview) |
 | 1.4.10 Reflow | Mobile-first, grids `auto-fill`, `overflow-wrap: anywhere` (link privado, emails), sin anchos fijos. Objetivo 320 px (producto pide 360 px). Rangos horarios y filas de listas con `minmax(0,1fr)`/`min-width:0`. | OK (Playwright v0.4: 90 páginas, `scrollWidth ≤ 320` y `≤ 360`) |
@@ -153,7 +153,7 @@ implementación · **PENDIENTE** = requiere navegador o tecnología asistiva · 
 | Reflow de tarjetas con muchas acciones | Botones y badges pueden partir línea dentro de la tarjeta. | 1.4.10, 1.4.12 | OK (Playwright) |
 
 Para la implementación: tras mover/cancelar, el foco va a la alerta de éxito de la agenda; al guardar la
-asistencia, no mover el foco (solo anunciar); si falla, revertir el botón y anunciar con `role=alert` (P-D13).
+asistencia, no mover el foco (solo anunciar); si falla, revertir el botón y anunciar con `role=alert` dentro de la tarjeta, sin mover el foco del botón tocado (DD-35, `admin-agenda-asistencia-error`).
 
 ## 5. PENDIENTE — para la persona de diseño sobre el preview de Vercel
 
