@@ -1,0 +1,39 @@
+:root {
+  /* Espejo de design-system/tokens.json — no agregar valores que no estén ahí. */
+  --color-text-default: #1a1d23;      /* color.text.default */
+  --color-text-muted: #4b5563;        /* color.text.muted */
+  --color-text-on-action: #ffffff;    /* color.text.on-action */
+  --color-text-link: #0e6b63;         /* color.text.link */
+  --color-text-selected: #0a524c;     /* color.text.selected */
+  --color-surface-default: #ffffff;   /* color.surface.default */
+  --color-surface-subtle: #f5f6f8;    /* color.surface.subtle */
+  --color-surface-selected: #e6f4f2;  /* color.surface.selected */
+  --color-surface-disabled: #eceef2;  /* color.surface.disabled */
+  --color-border-default: #eceef2;    /* color.border.default (solo divisores) */
+  --color-border-strong: #6b7280;     /* color.border.strong */
+  --color-border-selected: #0e6b63;   /* color.border.selected */
+  --color-action-primary: #0e6b63;    /* color.action.primary */
+  --color-action-primary-hover: #0a524c; /* color.action.primary-hover */
+  --color-action-danger: #b42318;     /* color.action.danger */
+  --color-danger-text: #912018;  --color-danger-bg: #fef3f2;  --color-danger-border: #b42318;
+  --color-success-text: #05603a; --color-success-bg: #ecfdf3; --color-success-border: #05603a;
+  --color-warning-text: #7a2e0e; --color-warning-bg: #fffaeb; --color-warning-border: #7a2e0e;
+  --color-info-text: #1e40af;    --color-info-bg: #eff6ff;    --color-info-border: #1e40af;
+  --color-focus-ring: #1d4ed8;        /* color.focus.ring */
+
+  --font-family-base: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-size-100: 0.875rem; --font-size-200: 1rem; --font-size-300: 1.125rem;
+  --font-size-400: 1.375rem; --font-size-500: 1.75rem;
+  --font-weight-regular: 400; --font-weight-semibold: 600; --font-weight-bold: 700;
+  --line-height-tight: 1.25; --line-height-base: 1.5;
+
+  --space-050: 2px; --space-100: 4px; --space-200: 8px; --space-300: 12px; --space-400: 16px;
+  --space-500: 24px; --space-600: 32px; --space-700: 48px;
+
+  --radius-sm: 4px; --radius-md: 8px; --radius-lg: 12px; --radius-pill: 999px;
+
+  --size-target-min: 24px; --size-target-comfortable: 44px; --size-content-max: 40rem;
+
+  --focus-width: 3px; --focus-offset: 2px;
+  /* breakpoint.md = 40rem, breakpoint.lg = 64rem (usados en media queries, que no aceptan variables) */
+}

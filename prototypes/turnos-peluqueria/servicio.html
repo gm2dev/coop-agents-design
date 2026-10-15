@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Elegí el servicio — Tijera Fina (prototipo)</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="bar">
+      <a class="brand" href="index.html">Tijera Fina</a>
+      
+    </div>
+  </header>
+  <main id="main">
+    <p><a class="back" href="index.html">← Inicio</a></p>
+    <p class="step">Paso 1 de 5 · Servicio</p>
+    <ol class="progress" aria-hidden="true"><li aria-current="step"></li><li></li><li></li><li></li><li></li></ol>
+    <h1>¿Qué te querés hacer?</h1>
+    <form action="profesional.html" method="get" class="panel">
+      <fieldset>
+        <legend>Servicio</legend>
+        
+        <ul class="options" id="servicios">
+        <li><label class="option"><input type="radio" name="servicio" value="corte"><span><span class="title">Corte de pelo</span><span class="meta">45 min</span></span><span class="price">$12.000</span></label></li>
+        <li><label class="option"><input type="radio" name="servicio" value="corte-barba"><span><span class="title">Corte y barba</span><span class="meta">60 min</span></span><span class="price">$16.000</span></label></li>
+        <li><label class="option"><input type="radio" name="servicio" value="barba"><span><span class="title">Arreglo de barba</span><span class="meta">30 min</span></span><span class="price">$7.000</span></label></li>
+        <li><label class="option"><input type="radio" name="servicio" value="color"><span><span class="title">Color</span><span class="meta">2 h</span></span><span class="price">$35.000</span></label></li>
+        <li><label class="option"><input type="radio" name="servicio" value="brushing"><span><span class="title">Brushing</span><span class="meta">40 min</span></span><span class="price">$9.000</span></label></li>
+        </ul>
+      </fieldset>
+      <p class="small muted">Precios de referencia. El pago se hace en el local.</p>
+      <div class="actions"><button class="btn btn-primary" type="submit">Continuar</button></div>
+    </form>
+    <p class="small"><a href="servicio-error.html">Simular: continuar sin elegir</a></p>
+  </main>
+  <footer class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      <h2>Estados de esta pantalla</h2><ul><li><a href="servicio.html">Por defecto</a></li><li><a href="servicio-error.html">Validación: sin servicio elegido</a></li></ul>
+      <p><a href="index.html">Índice del prototipo turnos-peluqueria</a> · Prototipo de diseño con datos de ejemplo, borrador v0.</p>
+    </div>
+  </footer>
+</body>
+</html>

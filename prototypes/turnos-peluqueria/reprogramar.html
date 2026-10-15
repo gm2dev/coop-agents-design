@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Elegí el nuevo día y horario — Tijera Fina (prototipo)</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="bar">
+      <a class="brand" href="index.html">Tijera Fina</a>
+      
+    </div>
+  </header>
+  <main id="main">
+    <p><a class="back" href="turno.html">← Tu turno</a></p>
+
+    <h1>Elegí el nuevo día y horario</h1>
+    <div class="selection"><p>Turno actual: <strong>Corte de pelo</strong> · jueves 22 de octubre, 15:30 · con Martín</p></div>
+    <form action="reprogramado.html" method="get" class="panel">
+      <h2 class="h3" id="dias-titulo">Día</h2>
+      <nav aria-labelledby="dias-titulo">
+        <ul class="days">
+          <li><a href="horario.html" aria-current="date"><span>Jue 22 oct</span><span class="d-status">Con turnos</span></a></li>
+          <li><a href="horario-vacio.html"><span>Vie 23 oct</span><span class="d-status">Sin turnos</span></a></li>
+          <li><a href="horario.html"><span>Sáb 24 oct</span><span class="d-status">Con turnos</span></a></li>
+          <li><span class="day"><span>Dom 25 oct</span><span class="d-status">Cerrado</span></span></li>
+          <li><span class="day"><span>Lun 26 oct</span><span class="d-status">Cerrado</span></span></li>
+          <li><a href="horario.html"><span>Mar 27 oct</span><span class="d-status">Con turnos</span></a></li>
+          <li><a href="horario.html"><span>Mié 28 oct</span><span class="d-status">Con turnos</span></a></li>
+        </ul>
+      </nav>
+      <p class="small"><a href="horario.html">Ver más días</a> <span class="muted">(en el prototipo vuelve a esta semana)</span></p>
+      <fieldset>
+        <legend>Horarios del jueves 22 de octubre</legend>
+        <p class="hint">Hora de inicio. Duración del servicio: 45 min.</p>
+        <ul class="slots"><li><label class="option"><input type="radio" name="horario" value="10:00"><span>10:00</span></label></li><li><label class="option"><input type="radio" name="horario" value="10:45"><span>10:45</span></label></li><li><label class="option"><input type="radio" name="horario" value="11:30"><span>11:30</span></label></li><li><label class="option"><input type="radio" name="horario" value="14:00"><span>14:00</span></label></li><li><label class="option"><input type="radio" name="horario" value="15:30" checked><span>15:30</span></label></li><li><label class="option"><input type="radio" name="horario" value="16:15"><span>16:15</span></label></li><li><label class="option"><input type="radio" name="horario" value="17:00"><span>17:00</span></label></li><li><label class="option"><input type="radio" name="horario" value="18:30"><span>18:30</span></label></li></ul>
+      </fieldset>
+      <div class="actions"><button class="btn btn-primary" type="submit">Confirmar nuevo horario</button></div>
+    </form>
+  </main>
+  <footer class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      <h2>Estados de esta pantalla</h2><ul><li><a href="reprogramar.html">Con horarios</a></li><li><a href="horario-vacio.html">Vacío (mismo patrón que P3)</a></li><li><a href="horario-error-red.html">Error de red (mismo patrón que P3)</a></li><li><a href="revisar-tomado.html">Horario tomado (mismo patrón que P5)</a></li></ul>
+      <p><a href="index.html">Índice del prototipo turnos-peluqueria</a> · Prototipo de diseño con datos de ejemplo, borrador v0.</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reservá tu turno — Tijera Fina (prototipo)</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="bar">
+      <a class="brand" href="index.html">Tijera Fina</a>
+      
+    </div>
+  </header>
+  <main id="main">
+    
+    <h1>Reservá tu turno en Tijera Fina</h1>
+    <p>Elegí servicio, día y horario en pocos pasos. Sin crear cuenta.</p>
+    <div class="actions"><a class="btn btn-primary" href="servicio.html">Reservar turno</a><a class="btn btn-secondary" href="gestion.html">Ya tengo un turno</a></div>
+
+    <section class="panel stack" aria-labelledby="mapa" style="margin-top:var(--space-600)">
+      <h2 id="mapa">Mapa del prototipo (borrador v0)</h2>
+      <p class="small muted">Prototipo de diseño con datos de ejemplo. Los nombres, teléfonos y la dirección son ficticios.</p>
+      <h3>CU1 · Cliente reserva un turno</h3>
+      <ol>
+        <li><a href="servicio.html">P1 Servicio</a> (<a href="servicio-error.html">validación</a>)</li>
+        <li><a href="profesional.html">P2 Profesional</a></li>
+        <li><a href="horario.html">P3 Día y horario</a> (<a href="horario-cargando.html">cargando</a>, <a href="horario-vacio.html">vacío</a>, <a href="horario-error-red.html">error de red</a>)</li>
+        <li><a href="datos.html">P4 Tus datos</a> (<a href="datos-error.html">validación</a>)</li>
+        <li><a href="revisar.html">P5 Revisar y confirmar</a> (<a href="revisar-enviando.html">confirmando</a>, <a href="revisar-tomado.html">horario tomado</a>, <a href="revisar-error-red.html">error de red</a>)</li>
+        <li><a href="confirmado.html">P6 Confirmación</a></li>
+      </ol>
+      <h3>CU2 · Consultar, cancelar o reprogramar</h3>
+      <ul>
+        <li><a href="gestion.html">P7 Buscar turno por código</a> (<a href="gestion-error.html">no encontrado</a>)</li>
+        <li><a href="turno.html">P8 Mi turno</a> (<a href="turno-fuera-de-plazo.html">fuera de plazo</a>)</li>
+        <li><a href="cancelar.html">P9 Cancelar</a> → <a href="turno-cancelado.html">P10 Cancelado</a></li>
+        <li><a href="reprogramar.html">P11 Reprogramar</a> → <a href="reprogramado.html">P12 Reprogramado</a></li>
+      </ul>
+      <h3>CU3 · Staff ve la agenda</h3>
+      <ul>
+        <li><a href="staff-agenda.html">S1 Agenda del día</a> (<a href="staff-agenda-cargando.html">cargando</a>, <a href="staff-agenda-vacia.html">sin turnos</a>, <a href="staff-agenda-error.html">error</a>)</li>
+        <li><a href="staff-agenda-semana.html">S2 Agenda de la semana</a></li>
+        <li><a href="staff-turno.html">S3 Detalle del turno</a></li>
+      </ul>
+      <h3>CU4 · Staff bloquea horarios y cancela turnos</h3>
+      <ul>
+        <li><a href="staff-bloquear.html">S4 Bloquear horario</a> (<a href="staff-bloquear-error.html">validación</a>, <a href="staff-bloquear-conflicto.html">conflicto con turnos</a>) → <a href="staff-bloqueado.html">S5 Bloqueado</a></li>
+        <li><a href="staff-cancelar.html">S6 Cancelar turno</a> → <a href="staff-turno-cancelado.html">S1 con confirmación</a></li>
+      </ul>
+      <p class="small"><a href="../index.html">← Todos los prototipos</a></p>
+    </section>
+  </main>
+  <footer class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      
+      <p><a href="index.html">Índice del prototipo turnos-peluqueria</a> · Prototipo de diseño con datos de ejemplo, borrador v0.</p>
+    </div>
+  </footer>
+</body>
+</html>

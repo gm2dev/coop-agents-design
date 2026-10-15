@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tus datos (errores) — Tijera Fina (prototipo)</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="bar">
+      <a class="brand" href="index.html">Tijera Fina</a>
+      
+    </div>
+  </header>
+  <main id="main">
+    <p><a class="back" href="horario.html">← Día y horario</a></p>
+    <p class="step">Paso 4 de 5 · Tus datos</p>
+    <ol class="progress" aria-hidden="true"><li class="done"></li><li class="done"></li><li class="done"></li><li aria-current="step"></li><li></li></ol>
+    <h1>Tus datos</h1>
+    <div class="selection"><p><strong>Corte de pelo</strong> · jueves 22 de octubre, 15:30 · con <strong>cualquiera disponible</strong></p><a href="horario.html">Cambiar</a></div>
+    <div class="alert alert-danger" role="alert" tabindex="-1" autofocus>
+      <h2><span aria-hidden="true">⚠</span> Revisá 2 datos para continuar</h2>
+      <ul>
+        <li><a href="#nombre">Nombre: escribí tu nombre</a></li>
+        <li><a href="#telefono">Teléfono: tiene que tener 10 números</a></li>
+      </ul>
+    </div>
+    <form action="revisar.html" method="get" class="panel" novalidate>
+      <p class="small muted">Todos los campos son obligatorios salvo los que dicen «opcional».</p>
+      <div class="field">
+        <label for="nombre">Nombre y apellido</label>
+        
+        <input type="text" id="nombre" name="nombre" autocomplete="name" value="" aria-describedby="err-nombre" aria-invalid="true">
+        <p class="error-msg" id="err-nombre"><span aria-hidden="true">⚠</span> Escribí tu nombre.</p>
+      </div>
+      <div class="field">
+        <label for="telefono">Celular</label>
+        <span class="hint" id="hint-telefono">Con código de área, sin 0 ni 15. Ej.: 11 5555 0000. Te mandamos el recordatorio por WhatsApp o SMS.</span>
+        <input type="tel" id="telefono" name="telefono" autocomplete="tel" value="11 5555" aria-describedby="hint-telefono err-telefono" aria-invalid="true" inputmode="tel">
+        <p class="error-msg" id="err-telefono"><span aria-hidden="true">⚠</span> Tiene que tener 10 números. Ej.: 11 5555 0000.</p>
+      </div>
+      <div class="field">
+        <label for="email">Email <span class="opt">(opcional)</span></label>
+        <span class="hint" id="hint-email">Para mandarte la confirmación y el link para gestionar el turno.</span>
+        <input type="email" id="email" name="email" autocomplete="email" value="ana@ejemplo.com" aria-describedby="hint-email">
+        
+      </div>
+      <div class="field">
+        <label for="nota">Comentario para la peluquería <span class="opt">(opcional)</span></label>
+        <textarea id="nota" name="nota" maxlength="200" aria-describedby="hint-nota"></textarea>
+        <span class="hint" id="hint-nota">Hasta 200 caracteres.</span>
+      </div>
+      <div class="actions"><button class="btn btn-primary" type="submit">Revisar turno</button></div>
+    </form>
+    <p class="small"><a href="datos-error.html">Simular: enviar con errores</a></p>
+  </main>
+  <footer class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      <h2>Estados de esta pantalla</h2><ul><li><a href="datos.html">Por defecto</a></li><li><a href="datos-error.html">Validación con errores</a></li></ul>
+      <p><a href="index.html">Índice del prototipo turnos-peluqueria</a> · Prototipo de diseño con datos de ejemplo, borrador v0.</p>
+    </div>
+  </footer>
+</body>
+</html>

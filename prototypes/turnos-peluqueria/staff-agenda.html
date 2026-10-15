@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agenda del día — Tijera Fina (prototipo)</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="staff">
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="bar">
+      <a class="brand" href="staff-agenda.html">Tijera Fina · Staff</a>
+      <nav class="staff-nav" aria-label="Secciones del staff"><ul><li><a href="staff-agenda.html" aria-current="page">Agenda del día</a></li><li><a href="staff-agenda-semana.html">Semana</a></li><li><a href="staff-bloquear.html">Bloquear horario</a></li></ul></nav>
+    </div>
+  </header>
+  <main id="main">
+    
+    <h1>Agenda · jueves 22 de octubre</h1>
+    <form class="toolbar" action="staff-agenda.html" method="get" aria-label="Filtros de agenda">
+      <div class="field"><label for="f-fecha">Día</label><input type="date" id="f-fecha" name="fecha" value="2026-10-22"></div>
+      <div class="field"><label for="f-pro">Profesional</label><select id="f-pro" name="pro"><option>Todos</option><option>Lucía</option><option>Martín</option><option>Sofía</option></select></div>
+      <button class="btn btn-secondary" type="submit">Ver</button>
+    </form>
+    <div class="datenav"><a class="btn btn-secondary" href="staff-agenda.html">← Día anterior</a><a class="btn btn-secondary" href="staff-agenda.html">Hoy</a><a class="btn btn-secondary" href="staff-agenda.html">Día siguiente →</a></div>
+    <div style="margin-top:var(--space-500)">
+    <div class="agenda">
+      <section aria-labelledby="pro-Luc">
+        <h2 id="pro-Luc">Lucía <span class="small muted">· 3 turnos</span></h2>
+        <ol><li><a class="appt" href="staff-turno.html"><span class="time">09:30 – 10:15</span><span class="what">Corte de pelo · Carla M.</span></a></li><li><a class="appt" href="staff-turno.html"><span class="time">10:30 – 12:30</span><span class="what">Color · Julia R.</span></a></li><li><a class="appt blocked" href="staff-bloquear.html"><span class="time">13:00 – 14:00</span><span class="what">Bloqueado: almuerzo</span> <span class="badge badge-off">No disponible</span></a></li><li><a class="appt" href="staff-turno.html"><span class="time">15:00 – 15:40</span><span class="what">Brushing · Paula S.</span></a></li></ol>
+      </section>
+      <section aria-labelledby="pro-Mar">
+        <h2 id="pro-Mar">Martín <span class="small muted">· 3 turnos</span></h2>
+        <ol><li><a class="appt" href="staff-turno.html"><span class="time">10:00 – 11:00</span><span class="what">Corte y barba · Diego F.</span></a></li><li><div class="appt cancelled"><span class="time">11:30 – 12:15</span><span class="what">Corte de pelo · Tomás L.</span> <span class="badge badge-danger">Cancelado</span></div></li><li><a class="appt" href="staff-turno.html"><span class="time">15:30 – 16:15</span><span class="what">Corte de pelo · Ana P.</span></a></li><li><a class="appt" href="staff-turno.html"><span class="time">17:00 – 17:30</span><span class="what">Arreglo de barba · Lucas G.</span></a></li></ol>
+      </section>
+      <section aria-labelledby="pro-Sof">
+        <h2 id="pro-Sof">Sofía <span class="small muted">· 0 turnos</span></h2>
+        <ol><li><a class="appt blocked" href="staff-bloquear.html"><span class="time">09:00 – 18:00</span><span class="what">Bloqueado: capacitación</span> <span class="badge badge-off">No disponible</span></a></li></ol>
+      </section>
+    </div>
+    </div>
+    <p class="small"><a href="staff-agenda-cargando.html">Simular: cargando</a> · <a href="staff-agenda-vacia.html">Simular: sin turnos</a> · <a href="staff-agenda-error.html">Simular: error</a></p>
+  </main>
+  <footer class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      <h2>Estados de esta pantalla</h2><ul><li><a href="staff-agenda.html">Con turnos</a></li><li><a href="staff-agenda-cargando.html">Cargando</a></li><li><a href="staff-agenda-vacia.html">Sin turnos</a></li><li><a href="staff-agenda-error.html">Error de red</a></li><li><a href="staff-turno-cancelado.html">Después de cancelar un turno</a></li></ul>
+      <p><a href="index.html">Índice del prototipo turnos-peluqueria</a> · Prototipo de diseño con datos de ejemplo, borrador v0.</p>
+    </div>
+  </footer>
+</body>
+</html>
