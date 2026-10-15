@@ -131,7 +131,7 @@ flowchart TD
   err --> val
   chk -->|5 intentos fallidos| blk[admin-ingresar-bloqueado<br/>'Demasiados intentos'<br/>'Probá de nuevo en 15 minutos']
   blk -.->|Después de 15 min| login
-  login -.->|Olvidó la contraseña| manual([Texto: 'pedile a quien administra<br/>el panel que te la resetee'<br/>reseteo manual, sin email])
+  login -.->|Olvidó la contraseña| manual([Texto: 'pedile al equipo que te dio<br/>el acceso que la resetee'<br/>reseteo manual, sin email, D-25])
 ```
 
 ## CU-09 — Gestionar servicios
@@ -176,13 +176,13 @@ flowchart TD
   err --> load
   r -->|OK| d{¿Hay turnos en el período?}
   d -->|No| empty[admin-agenda-vacia<br/>'No hay turnos este día']
-  d -->|Sí| day[admin-agenda-dia<br/>columna por peluquero, tarjetas con hora, duración,<br/>servicio, cliente, contacto, origen, estado]
+  d -->|Sí| day[admin-agenda-dia<br/>columna por peluquero, tarjetas con hora, duración,<br/>servicio, cliente, contacto, estado]
   day -->|Filtrar por peluquero| f[admin-agenda-dia-filtrada]
   f -->|Ver todos| day
   day <-->|Día / Semana| wk[admin-agenda-semana<br/>7 días, navegación de semanas]
   day -->|Día anterior / siguiente| load
   wk -->|Semana anterior / siguiente| load
-  day -.-> h2[[H2: Cargar turno, mover, cancelar, asistencia]]
+  day -.-> h2[[H2: mover, cancelar, asistencia<br/>sin creación de turnos, D-23]]
 ```
 
 ## CU-16 — Configurar datos del local

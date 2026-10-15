@@ -40,10 +40,10 @@ con el formato `<Paso o pantalla> — <local>` (prefijo `Error: ` cuando la pág
 | **Alerta** | Mensajes | Variantes `danger`, `success`, `warning`, `info` (`feedback.*.text/bg/border`, borde 2px*). Título en negrita + texto. Errores: `role="alert"` y foco. Estados informativos: `role="status"`. |
 | **Bloque “Guardá tu link privado”** | Confirmación | Fondo `feedback.warning.bg`, borde 2px* `feedback.warning.border`, `radius.lg`. h2 con ⚠, frase en negrita, campo de solo lectura con el link (label visible) y botón primario “Copiar link” pegado al campo (arriba del pliegue en 360×640), secundario “Agregar al calendario”, región `role="status"` para el resultado de copiar. |
 | **Botones** | Acciones | Primario `action.primary` / `text.on-action` (hover `action.primary-hover`); secundario `surface.default` + borde y texto `action.primary`. Alto `size.target.comfortable`. En celular ocupan el ancho; desde `breakpoint.md`, ancho automático y el primario a la derecha (orden del DOM: primario primero). Enviando: `aria-disabled="true"`, spinner + “Confirmando…”, `surface.disabled`. |
-| **Badge** | Estado, origen, avisos | Píldora con borde y texto; siempre con palabra (“Origen: Web”, “✓ Confirmado”, “⚠ Sin servicios”). Web = `info` (en H1 todos los turnos son Web; “Origen: Panel” neutro llega con CU-13 en H2), Confirmado = `success`, avisos = `warning`. |
+| **Badge** | Estado, avisos | Píldora con borde y texto; siempre con palabra (“✓ Confirmado”, “⚠ Sin servicios”). Confirmado = `success`, avisos = `warning`. No hay badge que distinga de dónde vino el turno: todos se crean desde la web (D-23). |
 | **Resumen (dl)** | Revisar, confirmación, link | `dl` en 2 columnas (`dt` en `text.muted`, `dd` semibold): servicio, peluquero, fecha, hora inicio–fin (hora del local), duración, precio (orientativo, se paga en el local) y, en revisar/confirmación, nombre y teléfono. |
 | **Cargando** | Listas y envíos | Spinner decorativo + texto en `role="status"`; esqueleto `aria-hidden`. Con `prefers-reduced-motion` el spinner no gira. |
-| **Tarjeta de turno** | Agenda | Borde `border.strong` con filete izquierdo `action.primary`; hora inicio–fin (bold) · duración; servicio · cliente; contacto como link `tel:`/`mailto:` o “Sin contacto”; badges de origen y estado. |
+| **Tarjeta de turno** | Agenda | Borde `border.strong` con filete izquierdo `action.primary`; hora inicio–fin (bold) · duración; servicio · cliente; contacto como link `tel:`/`mailto:` o “Sin contacto”; badge de estado. |
 
 ## 2. Cliente
 
@@ -64,7 +64,7 @@ con el formato `<Paso o pantalla> — <local>` (prefijo `Error: ` cuando la pág
 ### P3 · Día y horario (`horario.html`) — CU-02
 
 - **h1:** “¿Qué día y a qué hora?”. Selección actual con “Cambiar”.
-- Selector de días (semana actual) + hint de ventana: “Podés reservar desde hoy hasta **30** días hacia adelante (hasta el **sábado 14 de noviembre**).” (cifra y fecha parametrizables, P-5).
+- Selector de días (semana actual) + hint de ventana: “Podés reservar desde hoy hasta **30** días hacia adelante (hasta el **sábado 14 de noviembre**).” (D-14, RN-14).
 - Horarios del día elegido (radio group) + “Continuar”.
 - **Estados:**
   - cargando (`horario-cargando`): “Buscando horarios libres…” (RNF-06: < 3 s esperado).
@@ -109,6 +109,11 @@ Orden (y jerarquía) fijo, pensado para que en 360 px el bloque del link quede e
 4. **Dónde:** nombre, dirección y teléfono del local + “Si perdés el link o necesitás cambiar algo, llamá al local.”
 5. Link “Reservar otro turno”.
 
+**v0.4 (D-24):** dentro del bloque “Guardá tu link privado”, debajo de los botones, línea secundaria
+(`font.size.100`) “¿Reservaste por otra persona? Copiá el link y mandáselo.” Sirve al local cuando reserva por
+un cliente que llamó (D-23). El sistema no envía nada. Va al final del bloque para no empujar “Copiar link”
+debajo del pliegue en 360×640.
+
 **Archivo `.ics`:** `SUMMARY` “<servicio> en <local> (con <peluquero>)”, `DTSTART/DTEND` con la zona del local, `LOCATION` = dirección vigente (CU-16), `DESCRIPTION` con servicio, duración, peluquero, precio orientativo, teléfono del local y el link privado; `URL` = link privado. Líneas ≤ 75 octetos, plegadas con CRLF + espacio (RFC 5545), sin partir caracteres UTF-8. Sin alarmas (`VALARM`): el recordatorio lo decide el calendario del cliente (no prometemos aviso).
 
 ### P8 · Link privado (`turno.html`) — CU-05
@@ -125,7 +130,7 @@ Orden (y jerarquía) fijo, pensado para que en 360 px el bloque del link quede e
 
 - Sin navegación de secciones. **h1** “Ingresar al panel”.
 - Campos **Usuario** (`autocomplete="username"`, sin autocapitalizar) y **Contraseña** (`autocomplete="current-password"`) + checkbox “Mostrar contraseña”. Pegar está permitido.
-- “Ingresar” (primario). Debajo: “Si olvidaste tu contraseña, pedile a quien administra el panel que te la resetee.” (sin link, sin email).
+- “Ingresar” (primario). Debajo: “Si olvidaste la contraseña, pedile al equipo que te dio el acceso que la resetee.” (sin link, sin email; un único usuario admin y sin pantalla de cambio de contraseña, D-25, D-28).
 - **Estados:** campos vacíos (error junto al campo + resumen) · ingresando (`-cargando`) · **error genérico** (`-error`: “Usuario o contraseña incorrectos. Revisalos y probá de nuevo.”; conserva el usuario, vacía la contraseña; no dice cuál falló) · **demasiados intentos** (`-bloqueado`: “Demasiados intentos. Por seguridad, pausamos el ingreso. Probá de nuevo en 15 minutos.” + texto de reseteo; se activa con 5 intentos fallidos y el bloqueo es fijo de 15 minutos (P-D4, Architect); no revela si el usuario existe ni cuántos intentos quedan) · **sin sesión o sesión vencida** (`admin-sesion`: el mismo formulario con aviso “Para ver el panel, primero iniciá sesión.”; ningún dato del panel). La sesión dura 12 horas y no hay “Recordarme” (P-D7, S-7, Architect).
 
 ### A2 · Agenda (`admin-agenda-dia.html`, `-semana`) — CU-12
@@ -133,10 +138,10 @@ Orden (y jerarquía) fijo, pensado para que en 360 px el bloque del link quede e
 - **h1** “Agenda”. Barra: control segmentado “Día / Semana” (links con `aria-current`) y filtro **Peluquero** (`select` Todos/Ana/Bruno/Carla + botón “Filtrar”; no cambia solo al elegir).
 - Navegación: h2 con el período (“Viernes 16 de octubre” / “Semana del 12 al 18 de octubre”), “← Día anterior · Hoy · Día siguiente →” (o semana). Nota: “Horarios en hora del local. Los turnos nuevos de la web aparecen al abrir o actualizar la agenda.”
 - **Día:** una sección por peluquero (h3 con nombre y “N turnos”/“Sin turnos”), lista de tarjetas en orden horario; peluquero sin turnos: “Sin turnos este día.” Celular: secciones apiladas; ≥ 64rem: columnas.
-- **Semana:** 7 secciones (h3 “Vie 16 oct”, “Hoy” como badge + borde 2px*), tarjetas compactas (hora · peluquero, servicio · duración · cliente, origen, estado). Días cerrados: “Cerrado”. Celular: apiladas; ≥ 64rem: 7 columnas.
+- **Semana:** 7 secciones (h3 “Vie 16 oct”, “Hoy” como badge + borde 2px*), tarjetas compactas (hora · peluquero, servicio · duración · cliente, estado). Días cerrados: “Cerrado”. Celular: apiladas; ≥ 64rem: 7 columnas.
 - **Filtrado** (`-dia-filtrada`): `role="status"` “Mostrando solo los turnos de Bruno. Ver todos”, solo la columna de ese peluquero.
 - **Estados:** cargando · **vacío** (`-vacia`: “No hay turnos este día. Cuando alguien reserve por la web, el turno va a aparecer acá.”) · error (+ Reintentar).
-- **Enganche H2:** “Cargar turno” en la barra; Mover/Cancelar y Asistió/No asistió en la tarjeta; estados Cancelado y Sin marcar como badges con texto.
+- **H2:** Mover/Cancelar y Asistió/No asistió en la tarjeta; estados Cancelado y Sin marcar como badges con texto (ver § H2). No hay creación de turnos en el panel (D-23).
 
 ### A3 · Servicios (`admin-servicios.html`, `admin-servicio-editar.html`) — CU-09
 
@@ -216,10 +221,10 @@ Sin anchos fijos: todo en `rem` / grid `auto-fill`, `overflow-wrap: anywhere` pa
 | | (H2) turnos afectados | H2 — enganche en mensaje de guardado |
 | | Desactivar | ✔ checkbox Activo + hint |
 | | (H2) turnos futuros del desactivado | H2 |
-| CU-12 | Día por peluquero con hora, duración, servicio, cliente, contacto, origen, estado | ✔ A2 día |
+| CU-12 | Día por peluquero con hora, duración, servicio, cliente, contacto, estado | ✔ A2 día |
 | | Semana con navegación | ✔ A2 semana |
 | | Filtro por peluquero | ✔ `admin-agenda-dia-filtrada` |
-| | Turno web aparece al actualizar | ✔ turno de “Lucía” 15:30 (origen Web) + nota |
+| | Turno web aparece al actualizar | ✔ turno de “Lucía” 15:30 + nota |
 | | (H2) cambios/cancelaciones del cliente; cancelados distinguibles | H2 |
 | CU-16 | Cargar y guardar nombre, dirección, teléfono | ✔ A5 |
 | | Vacío: error junto al campo | ✔ `admin-local-error` |

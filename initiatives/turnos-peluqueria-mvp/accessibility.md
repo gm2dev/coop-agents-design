@@ -39,7 +39,7 @@ más los pares nuevos que usa este prototipo (calculados con la fórmula de lumi
 | Par | Uso | Ratio | Mínimo | |
 |---|---|---|---|---|
 | text.link / surface.subtle | links sobre el fondo de página | 5.88 | 4.5 | OK |
-| text.muted / surface.subtle | texto secundario sobre el fondo; badge “Origen: Panel” (solo H2, CU-13) | 6.99 | 4.5 | OK |
+| text.muted / surface.subtle | texto secundario sobre el fondo | 6.99 | 4.5 | OK |
 | text.muted / surface.disabled | día “Cerrado” / “No disponible” | 6.51 | 4.5 | OK |
 | border.strong / surface.disabled | borde de día cerrado | 4.16 | 3 | OK |
 | text.default / feedback.warning.bg | label del link en el bloque “Guardá tu link” | 16.18 | 4.5 | OK |
@@ -52,7 +52,7 @@ más los pares nuevos que usa este prototipo (calculados con la fórmula de lumi
 | text.selected / surface.selected | opción y horario elegidos | 8.00 | 4.5 | OK |
 | border.selected / surface.default | borde de elegido | 6.36 | 3 | OK |
 | action.primary / surface.disabled | barra de progreso: hecho vs pendiente | 5.48 | 3 | OK (además es decorativa: el paso está en texto) |
-| feedback.info.text / feedback.info.bg | badge “Origen: Web”, alertas info | 8.01 | 4.5 | OK |
+| feedback.info.text / feedback.info.bg | badge “Hoy”, alertas info | 8.01 | 4.5 | OK |
 | feedback.success.text / feedback.success.bg | badge “Confirmado”, alertas de éxito | 7.26 | 4.5 | OK |
 | feedback.danger.text / surface.default | error junto al campo, botón “Quitar” | 8.66 | 4.5 | OK |
 | feedback.danger.border / surface.default | borde de campo con error | 6.57 | 3 | OK |
@@ -72,7 +72,7 @@ implementación · **PENDIENTE** = requiere navegador o tecnología asistiva · 
 | 1.3.2 Secuencia significativa | Orden del DOM = orden visual. En botones, el primario va primero en el DOM; desde 640 px se muestra a la derecha con `row-reverse` (el orden de foco sigue siendo primario → secundario). | OK (estático) · PENDIENTE confirmar que no confunde en el preview |
 | 1.3.4 Orientación | Sin bloqueo de orientación. | OK (estático) |
 | 1.3.5 Propósito de los campos | `autocomplete` name, tel, email, username, current-password, organization, street-address. | OK (estático) |
-| 1.4.1 Uso del color | Elegido: fondo + borde 2px + ✓/semibold; errores: ícono + texto + borde; estados y origen con palabra; día cerrado con borde punteado + texto; día actual con `aria-current`; links subrayados. | OK (estático) |
+| 1.4.1 Uso del color | Elegido: fondo + borde 2px + ✓/semibold; errores: ícono + texto + borde; estados con palabra; día cerrado con borde punteado + texto; día actual con `aria-current`; links subrayados. | OK (estático) |
 | 1.4.3 Contraste mínimo | Ver § 2. | OK (calculado) |
 | 1.4.4 Cambio de tamaño | Tipografía en `rem`; sin alturas fijas en contenedores de texto. | OK (estático) · PENDIENTE (zoom 200 % real en el preview) |
 | 1.4.10 Reflow | Mobile-first, grids `auto-fill`, `overflow-wrap: anywhere` (link privado, emails), sin anchos fijos. Objetivo 320 px (producto pide 360 px). Rangos horarios y filas de listas con `minmax(0,1fr)`/`min-width:0`. | OK (Playwright: 46 páginas, `scrollWidth ≤ 320`) |

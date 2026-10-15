@@ -207,6 +207,7 @@ input[readonly] { background: var(--color-surface-subtle); }
 .keep-link label { color: var(--color-text-default); }
 .keep-link p { margin-bottom: var(--space-200); }
 .keep-link .actions { margin-top: var(--space-300); }
+.keep-link .keep-link-note { margin: var(--space-300) 0 0; } /* D-24: línea secundaria debajo de los botones */
 /* Campo + botón Copiar: apilados en celular (botón a ancho completo), en fila desde 40rem. */
 .copy-field { display: flex; flex-direction: column; gap: var(--space-200); }
 .copy-field .btn { width: 100%; }
