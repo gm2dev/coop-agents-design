@@ -16,14 +16,14 @@
     </div>
   </header>
   <main id="main">
-    
     <h1>Reservá tu turno en Tijera Fina</h1>
     <p>Elegí servicio, día y horario en pocos pasos. Sin crear cuenta.</p>
-    <div class="actions"><a class="btn btn-primary" href="servicio.html">Reservar turno</a><a class="btn btn-secondary" href="gestion.html">Ya tengo un turno</a></div>
+    <p class="small muted">¿Ya tenés turno? Para cancelarlo o cambiarlo, usá el link del email de confirmación.</p>
+    <div class="actions"><a class="btn btn-primary" href="servicio.html">Reservar turno</a></div>
 
     <section class="panel stack" aria-labelledby="mapa" style="margin-top:var(--space-600)">
-      <h2 id="mapa">Mapa del prototipo (borrador v0)</h2>
-      <p class="small muted">Prototipo de diseño con datos de ejemplo. Los nombres, teléfonos y la dirección son ficticios.</p>
+      <h2 id="mapa">Mapa del prototipo (ronda 1)</h2>
+      <p class="small muted">Prototipo de diseño con datos de ejemplo. Los nombres, emails, teléfonos y la dirección son ficticios. 61 pantallas y estados.</p>
       <h3>CU1 · Cliente reserva un turno</h3>
       <ol>
         <li><a href="servicio.html">P1 Servicio</a> (<a href="servicio-error.html">validación</a>)</li>
@@ -33,32 +33,46 @@
         <li><a href="revisar.html">P5 Revisar y confirmar</a> (<a href="revisar-enviando.html">confirmando</a>, <a href="revisar-tomado.html">horario tomado</a>, <a href="revisar-error-red.html">error de red</a>)</li>
         <li><a href="confirmado.html">P6 Confirmación</a></li>
       </ol>
-      <h3>CU2 · Consultar, cancelar o reprogramar</h3>
+      <h3>CU2 · Consultar, cancelar o reprogramar (solo con el link del email)</h3>
       <ul>
-        <li><a href="gestion.html">P7 Buscar turno por código</a> (<a href="gestion-error.html">no encontrado</a>)</li>
-        <li><a href="turno.html">P8 Mi turno</a> (<a href="turno-fuera-de-plazo.html">fuera de plazo</a>)</li>
-        <li><a href="cancelar.html">P9 Cancelar</a> → <a href="turno-cancelado.html">P10 Cancelado</a></li>
-        <li><a href="reprogramar.html">P11 Reprogramar</a> → <a href="reprogramado.html">P12 Reprogramado</a></li>
+        <li><a href="turno.html">P8 Mi turno</a> (<a href="turno-fuera-de-plazo.html">fuera de plazo</a>, <a href="link-invalido.html">P7 link inválido o vencido</a>)</li>
+        <li><a href="cancelar.html">P9 Cancelar</a> (<a href="cancelar-error.html">error de red</a>) → <a href="turno-cancelado.html">P10 Cancelado</a></li>
+        <li><a href="reprogramar.html">P11 Reprogramar</a> (<a href="reprogramar-cargando.html">cargando</a>, <a href="reprogramar-vacio.html">vacío</a>, <a href="reprogramar-error-red.html">error al cargar</a>, <a href="reprogramar-tomado.html">horario tomado</a>, <a href="reprogramar-error-guardar.html">error al confirmar</a>) → <a href="reprogramado.html">P12 Reprogramado</a></li>
+      </ul>
+      <h3>CU5 · Staff ingresa (link mágico)</h3>
+      <ul>
+        <li><a href="staff-ingreso.html">S0 Ingreso con email</a> (<a href="staff-ingreso-error.html">validación</a>) → <a href="staff-ingreso-enviado.html">Revisá tu email</a> · <a href="staff-ingreso-vencido.html">link vencido</a></li>
       </ul>
       <h3>CU3 · Staff ve la agenda</h3>
       <ul>
         <li><a href="staff-agenda.html">S1 Agenda del día</a> (<a href="staff-agenda-cargando.html">cargando</a>, <a href="staff-agenda-vacia.html">sin turnos</a>, <a href="staff-agenda-error.html">error</a>)</li>
         <li><a href="staff-agenda-semana.html">S2 Agenda de la semana</a></li>
-        <li><a href="staff-turno.html">S3 Detalle del turno</a></li>
+        <li><a href="staff-turno.html">S3 Detalle del turno</a> (<a href="staff-turno-manual.html">cargado por el staff</a>)</li>
       </ul>
       <h3>CU4 · Staff bloquea horarios y cancela turnos</h3>
       <ul>
-        <li><a href="staff-bloquear.html">S4 Bloquear horario</a> (<a href="staff-bloquear-error.html">validación</a>, <a href="staff-bloquear-conflicto.html">conflicto con turnos</a>) → <a href="staff-bloqueado.html">S5 Bloqueado</a></li>
-        <li><a href="staff-cancelar.html">S6 Cancelar turno</a> → <a href="staff-turno-cancelado.html">S1 con confirmación</a></li>
+        <li><a href="staff-bloquear.html">S4 Bloquear horario</a> (<a href="staff-bloquear-feriado.html">feriado</a>, <a href="staff-bloquear-error.html">validación</a>, <a href="staff-bloquear-conflicto.html">conflicto con turnos</a>, <a href="staff-bloquear-confirmar.html">confirmar cancelación</a>, <a href="staff-bloquear-error-guardar.html">error al guardar</a>) → <a href="staff-bloqueado.html">S5 Bloqueado</a> / <a href="staff-bloqueado-cancelados.html">S5 con turnos cancelados</a></li>
+        <li><a href="staff-bloqueo.html">S7 Detalle del bloqueo</a> → <a href="staff-bloqueo-editar.html">editar</a> (<a href="staff-bloqueo-editar-error.html">error</a>) · <a href="staff-bloqueo-quitar.html">quitar</a> (<a href="staff-bloqueo-quitar-error.html">error</a>) → <a href="staff-bloqueo-quitado.html">quitado</a></li>
+        <li><a href="staff-cancelar.html">S6 Cancelar turno</a> (<a href="staff-cancelar-error.html">error de red</a>) → <a href="staff-turno-cancelado.html">S1 con confirmación</a></li>
+      </ul>
+      <h3>CU6 · Staff carga un turno a mano</h3>
+      <ul>
+        <li><a href="staff-cargar.html">S8 Cargar turno</a> (<a href="staff-cargar-vacio.html">sin horarios</a>, <a href="staff-cargar-error.html">validación</a>, <a href="staff-cargar-tomado.html">horario tomado</a>, <a href="staff-cargar-error-red.html">error al guardar</a>) → <a href="staff-cargar-ok.html">S9 Turno cargado</a></li>
       </ul>
       <p class="small"><a href="../index.html">← Todos los prototipos</a></p>
     </section>
   </main>
-  <footer class="proto" aria-label="Navegación del prototipo">
-    <div class="wrap small">
-      
-      <p><a href="index.html">Índice del prototipo turnos-peluqueria</a> · Prototipo de diseño con datos de ejemplo, borrador v0.</p>
+  <footer class="site-footer">
+    <div class="wrap">
+      <h2 class="h3">¿Necesitás ayuda?</h2>
+      <p><strong>Tijera Fina</strong> · Teléfono: <a href="tel:+541155550100">11 5555 0100</a></p>
+      <p class="small muted">Av. Siempreviva 742, CABA · Martes a sábado, de 9 a 19 h</p>
     </div>
   </footer>
+  <aside class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      <p><a href="index.html">Índice del prototipo turnos-peluqueria</a> · Prototipo de diseño con datos de ejemplo, ronda 1.</p>
+    </div>
+  </aside>
 </body>
 </html>

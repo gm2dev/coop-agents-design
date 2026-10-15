@@ -17,36 +17,44 @@
   </header>
   <main id="main">
     <p><a class="back" href="turno.html">← Tu turno</a></p>
-
     <h1>Elegí el nuevo día y horario</h1>
-    <div class="selection"><p>Turno actual: <strong>Corte de pelo</strong> · jueves 22 de octubre, 15:30 · con Martín</p></div>
+    <div class="selection"><p>Tu turno actual: <strong>jue 22, 15:30</strong> · Corte de pelo · con Martín</p></div>
+    <p class="small muted">Podés cambiar el día y el horario con el mismo profesional. Si querés otro profesional, cancelá y reservá un turno nuevo.</p>
     <form action="reprogramado.html" method="get" class="panel">
       <h2 class="h3" id="dias-titulo">Día</h2>
       <nav aria-labelledby="dias-titulo">
         <ul class="days">
-          <li><a href="horario.html" aria-current="date"><span>Jue 22 oct</span><span class="d-status">Con turnos</span></a></li>
-          <li><a href="horario-vacio.html"><span>Vie 23 oct</span><span class="d-status">Sin turnos</span></a></li>
-          <li><a href="horario.html"><span>Sáb 24 oct</span><span class="d-status">Con turnos</span></a></li>
+          <li><a href="reprogramar.html" aria-current="date"><span>Jue 22 oct</span><span class="d-status">Con turnos</span></a></li>
+          <li><a href="reprogramar-vacio.html"><span>Vie 23 oct</span><span class="d-status">Sin turnos</span></a></li>
+          <li><a href="reprogramar.html"><span>Sáb 24 oct</span><span class="d-status">Con turnos</span></a></li>
           <li><span class="day"><span>Dom 25 oct</span><span class="d-status">Cerrado</span></span></li>
           <li><span class="day"><span>Lun 26 oct</span><span class="d-status">Cerrado</span></span></li>
-          <li><a href="horario.html"><span>Mar 27 oct</span><span class="d-status">Con turnos</span></a></li>
-          <li><a href="horario.html"><span>Mié 28 oct</span><span class="d-status">Con turnos</span></a></li>
+          <li><a href="reprogramar.html"><span>Mar 27 oct</span><span class="d-status">Con turnos</span></a></li>
+          <li><a href="reprogramar.html"><span>Mié 28 oct</span><span class="d-status">Con turnos</span></a></li>
         </ul>
       </nav>
-      <p class="small"><a href="horario.html">Ver más días</a> <span class="muted">(en el prototipo vuelve a esta semana)</span></p>
+      <p class="small"><a href="reprogramar.html">Ver más días</a> <span class="muted">(en el prototipo vuelve a esta semana)</span></p>
       <fieldset>
-        <legend>Horarios del jueves 22 de octubre</legend>
-        <p class="hint">Hora de inicio. Duración del servicio: 45 min.</p>
-        <ul class="slots"><li><label class="option"><input type="radio" name="horario" value="10:00"><span>10:00</span></label></li><li><label class="option"><input type="radio" name="horario" value="10:45"><span>10:45</span></label></li><li><label class="option"><input type="radio" name="horario" value="11:30"><span>11:30</span></label></li><li><label class="option"><input type="radio" name="horario" value="14:00"><span>14:00</span></label></li><li><label class="option"><input type="radio" name="horario" value="15:30" checked><span>15:30</span></label></li><li><label class="option"><input type="radio" name="horario" value="16:15"><span>16:15</span></label></li><li><label class="option"><input type="radio" name="horario" value="17:00"><span>17:00</span></label></li><li><label class="option"><input type="radio" name="horario" value="18:30"><span>18:30</span></label></li></ul>
+        <legend>Horarios del jueves 22 de octubre con Martín</legend>
+        <p class="hint">Hora de inicio, en horario de la peluquería. Duración del servicio: 45 min. Tu horario actual (15:30) no figura.</p>
+        <ul class="slots"><li><label class="option"><input type="radio" name="horario" value="10:00"><span>10:00</span></label></li><li><label class="option"><input type="radio" name="horario" value="10:45"><span>10:45</span></label></li><li><label class="option"><input type="radio" name="horario" value="11:30"><span>11:30</span></label></li><li><label class="option"><input type="radio" name="horario" value="14:00"><span>14:00</span></label></li><li><label class="option"><input type="radio" name="horario" value="16:15"><span>16:15</span></label></li><li><label class="option"><input type="radio" name="horario" value="17:00"><span>17:00</span></label></li><li><label class="option"><input type="radio" name="horario" value="18:30"><span>18:30</span></label></li></ul>
       </fieldset>
-      <div class="actions"><button class="btn btn-primary" type="submit">Confirmar nuevo horario</button></div>
+      <div class="actions"><button class="btn btn-primary" type="submit">Confirmar nuevo horario</button><a class="btn btn-secondary" href="turno.html">No cambiar mi turno</a></div>
     </form>
+    <p class="small"><a href="reprogramar-tomado.html">Simular: horario tomado</a> · <a href="reprogramar-error-guardar.html">Simular: error al confirmar</a></p>
   </main>
-  <footer class="proto" aria-label="Navegación del prototipo">
-    <div class="wrap small">
-      <h2>Estados de esta pantalla</h2><ul><li><a href="reprogramar.html">Con horarios</a></li><li><a href="horario-vacio.html">Vacío (mismo patrón que P3)</a></li><li><a href="horario-error-red.html">Error de red (mismo patrón que P3)</a></li><li><a href="revisar-tomado.html">Horario tomado (mismo patrón que P5)</a></li></ul>
-      <p><a href="index.html">Índice del prototipo turnos-peluqueria</a> · Prototipo de diseño con datos de ejemplo, borrador v0.</p>
+  <footer class="site-footer">
+    <div class="wrap">
+      <h2 class="h3">¿Necesitás ayuda?</h2>
+      <p><strong>Tijera Fina</strong> · Teléfono: <a href="tel:+541155550100">11 5555 0100</a></p>
+      <p class="small muted">Av. Siempreviva 742, CABA · Martes a sábado, de 9 a 19 h</p>
     </div>
   </footer>
+  <aside class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      <h2>Estados de esta pantalla</h2><ul><li><a href="reprogramar.html">Con horarios</a></li><li><a href="reprogramar-cargando.html">Cargando</a></li><li><a href="reprogramar-vacio.html">Vacío: sin horarios ese día</a></li><li><a href="reprogramar-error-red.html">Error de red al cargar horarios</a></li><li><a href="reprogramar-tomado.html">Horario tomado al confirmar</a></li><li><a href="reprogramar-error-guardar.html">Error de red al confirmar</a></li><li><a href="reprogramado.html">Éxito: reprogramado</a></li></ul>
+      <p><a href="index.html">Índice del prototipo turnos-peluqueria</a> · Prototipo de diseño con datos de ejemplo, ronda 1.</p>
+    </div>
+  </aside>
 </body>
 </html>

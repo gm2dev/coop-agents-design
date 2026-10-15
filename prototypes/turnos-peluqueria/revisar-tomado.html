@@ -22,32 +22,38 @@
     <h1>Revisá tu turno</h1>
     <div class="alert alert-danger" role="alert" tabindex="-1" autofocus>
       <h2><span aria-hidden="true">⚠</span> Alguien reservó las 15:30 mientras completabas tus datos</h2>
-      <p>Tus datos quedan guardados. Elegí otro horario:</p>
-      <ul class="slots" style="margin-top:var(--space-200)">
+      <p>Ese horario ya no está disponible. Tus datos quedan guardados. Elegí otro horario:</p>
+      <ul class="slots alt-slots">
         <li><a class="btn btn-secondary" href="revisar.html">Jue 22 · 16:15</a></li>
         <li><a class="btn btn-secondary" href="revisar.html">Jue 22 · 17:00</a></li>
       </ul>
       <p><a href="horario.html">Ver todos los horarios</a></p>
     </div>
-    <form action="confirmado.html" method="get" class="panel">
+    <div class="panel">
       <dl class="summary">
         <div><dt>Servicio</dt><dd>Corte de pelo · 45 min</dd><a class="change" href="servicio.html">Cambiar<span class="visually-hidden"> servicio</span></a></div>
-        <div><dt>Profesional</dt><dd>Martín <span class="muted small">(asignado: elegiste «cualquiera»)</span></dd><a class="change" href="profesional.html">Cambiar<span class="visually-hidden"> profesional</span></a></div>
-        <div><dt>Día y hora</dt><dd>Jueves 22 de octubre, 15:30 a 16:15</dd><a class="change" href="horario.html">Cambiar<span class="visually-hidden"> día y hora</span></a></div>
+        <div><dt>Profesional</dt><dd>Cualquier profesional disponible <span class="muted small">(te lo asignamos al confirmar)</span></dd><a class="change" href="profesional.html">Cambiar<span class="visually-hidden"> profesional</span></a></div>
+        <div><dt>Día y hora</dt><dd><s>Jueves 22 de octubre, 15:30</s> <span class="badge badge-off"><span aria-hidden="true">⊘</span> No disponible</span> <span class="small">Elegí otro horario.</span></dd><a class="change" href="horario.html">Cambiar<span class="visually-hidden"> día y hora</span></a></div>
         <div><dt>Precio</dt><dd>$12.000 · se paga en el local</dd></div>
-        <div><dt>A nombre de</dt><dd>Ana Pérez · 11 5555 0000</dd><a class="change" href="datos.html">Cambiar<span class="visually-hidden"> datos</span></a></div>
+        <div><dt>A nombre de</dt><dd>Ana Pérez · ana@ejemplo.com · 11 5555 0000</dd><a class="change" href="datos.html">Cambiar<span class="visually-hidden"> tus datos</span></a></div>
         <div><dt>Dónde</dt><dd>Tijera Fina · Av. Siempreviva 742, CABA</dd></div>
       </dl>
-      <p class="small muted">Podés cancelar o reprogramar sin costo hasta 12 h antes <span class="muted">(supuesto)</span>.</p>
-      <div class="actions"><a class="btn btn-secondary" href="datos.html">Volver</a></div>
-    </form>
+      <div class="actions"><a class="btn btn-secondary" href="horario.html">Elegir otro horario</a></div>
+    </div>
     <p class="small"><a href="revisar-tomado.html">Simular: horario tomado</a> · <a href="revisar-error-red.html">Simular: error de red</a> · <a href="revisar-enviando.html">Simular: confirmando</a></p>
   </main>
-  <footer class="proto" aria-label="Navegación del prototipo">
-    <div class="wrap small">
-      <h2>Estados de esta pantalla</h2><ul><li><a href="revisar.html">Por defecto</a></li><li><a href="revisar-enviando.html">Confirmando (cargando)</a></li><li><a href="revisar-tomado.html">Error: horario tomado</a></li><li><a href="revisar-error-red.html">Error de red al confirmar</a></li></ul>
-      <p><a href="index.html">Índice del prototipo turnos-peluqueria</a> · Prototipo de diseño con datos de ejemplo, borrador v0.</p>
+  <footer class="site-footer">
+    <div class="wrap">
+      <h2 class="h3">¿Necesitás ayuda?</h2>
+      <p><strong>Tijera Fina</strong> · Teléfono: <a href="tel:+541155550100">11 5555 0100</a></p>
+      <p class="small muted">Av. Siempreviva 742, CABA · Martes a sábado, de 9 a 19 h</p>
     </div>
   </footer>
+  <aside class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      <h2>Estados de esta pantalla</h2><ul><li><a href="revisar.html">Por defecto</a></li><li><a href="revisar-enviando.html">Confirmando (cargando)</a></li><li><a href="revisar-tomado.html">Error: horario tomado</a></li><li><a href="revisar-error-red.html">Error de red al confirmar</a></li></ul>
+      <p><a href="index.html">Índice del prototipo turnos-peluqueria</a> · Prototipo de diseño con datos de ejemplo, ronda 1.</p>
+    </div>
+  </aside>
 </body>
 </html>

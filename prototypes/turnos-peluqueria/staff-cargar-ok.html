@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Turno cargado — Tijera Fina (prototipo)</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="staff">
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="bar">
+      <a class="brand" href="staff-agenda.html">Tijera Fina · Staff</a>
+      <nav class="staff-nav" aria-label="Secciones del staff"><ul><li><a href="staff-agenda.html">Agenda del día</a></li><li><a href="staff-agenda-semana.html">Semana</a></li><li><a href="staff-cargar.html" aria-current="page">Cargar turno</a></li><li><a href="staff-bloquear.html">Bloquear horario</a></li><li><a href="staff-ingreso.html">Salir</a></li></ul></nav>
+    </div>
+  </header>
+  <main id="main">
+    <div class="alert alert-success" role="status">
+      <h1 tabindex="-1" autofocus><span aria-hidden="true">✓</span> Cargaste el turno de Rosa Gómez</h1>
+      <p>Corte de pelo · con Martín · jueves 22 de octubre, 16:15 a 17:00.</p>
+      <p>Le mandamos la confirmación a rosa@ejemplo.com, con el link para cancelar o reprogramar.</p>
+    </div>
+    <div class="actions"><a class="btn btn-primary" href="staff-agenda.html">Ver agenda</a><a class="btn btn-secondary" href="staff-turno-manual.html">Ver el turno</a><a class="btn btn-secondary" href="staff-cargar.html">Cargar otro turno</a></div>
+  </main>
+  <aside class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      <h2>Estados de esta pantalla</h2><ul><li><a href="staff-cargar.html">Por defecto</a></li><li><a href="staff-cargar-vacio.html">Sin horarios ese día</a></li><li><a href="staff-cargar-error.html">Validación</a></li><li><a href="staff-cargar-tomado.html">Horario tomado al guardar</a></li><li><a href="staff-cargar-error-red.html">Error de red al guardar</a></li><li><a href="staff-cargar-ok.html">Éxito</a></li></ul>
+      <p><a href="index.html">Índice del prototipo turnos-peluqueria</a> · Prototipo de diseño con datos de ejemplo, ronda 1.</p>
+    </div>
+  </aside>
+</body>
+</html>

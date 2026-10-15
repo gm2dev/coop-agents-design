@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bloquear horario (feriado) — Tijera Fina (prototipo)</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="staff">
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="bar">
+      <a class="brand" href="staff-agenda.html">Tijera Fina · Staff</a>
+      <nav class="staff-nav" aria-label="Secciones del staff"><ul><li><a href="staff-agenda.html">Agenda del día</a></li><li><a href="staff-agenda-semana.html">Semana</a></li><li><a href="staff-cargar.html">Cargar turno</a></li><li><a href="staff-bloquear.html" aria-current="page">Bloquear horario</a></li><li><a href="staff-ingreso.html">Salir</a></li></ul></nav>
+    </div>
+  </header>
+  <main id="main">
+    <h1>Bloquear horario</h1>
+    <p>Marcá un período en el que un profesional (o toda la peluquería) no toma turnos: almuerzo, capacitación, feriado. No se va a poder reservar online. El horario es el de la peluquería.</p>
+    <div class="alert alert-info"><p>Los feriados se cargan como un bloqueo de <strong>toda la peluquería</strong>, <strong>todo el día</strong>, con motivo «Feriado». No hay calendario de feriados automático en el MVP.</p></div>
+    <form action="staff-bloqueado.html" method="get" class="panel" novalidate>
+      <div class="field"><label for="b-pro">Profesional</label>
+        <select id="b-pro" name="pro"><option>Martín</option><option>Lucía</option><option>Sofía</option><option selected>Toda la peluquería</option></select></div>
+      <div class="field"><label for="b-fecha">Día</label><input type="date" id="b-fecha" name="fecha" value="2026-11-23"></div>
+      <label class="check"><input type="checkbox" name="todo-el-dia" checked> <span>Todo el día</span></label>
+      <div class="row-2">
+        <div class="field"><label for="b-desde">Desde</label><input type="time" id="b-desde" name="desde" value="" step="900"></div>
+        <div class="field"><label for="b-hasta">Hasta</label><input type="time" id="b-hasta" name="hasta" value="" step="900"></div>
+      </div>
+      <div class="field"><label for="b-motivo">Motivo <span class="opt">(opcional, solo lo ve el staff)</span></label>
+        <span class="hint" id="hint-b-motivo">Ej.: Almuerzo, Capacitación, Feriado.</span>
+        <input type="text" id="b-motivo" name="motivo" value="Feriado" aria-describedby="hint-b-motivo"></div>
+      <div class="actions"><button class="btn btn-primary" type="submit">Bloquear horario</button><a class="btn btn-secondary" href="staff-agenda.html">Cancelar</a></div>
+    </form>
+    <p class="small"><a href="staff-bloquear-error.html">Simular: error de validación</a> · <a href="staff-bloquear-conflicto.html">Simular: hay turnos en ese horario</a> · <a href="staff-bloquear-error-guardar.html">Simular: error al guardar</a></p>
+  </main>
+  <aside class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      <h2>Estados de esta pantalla</h2><ul><li><a href="staff-bloquear.html">Por defecto</a></li><li><a href="staff-bloquear-feriado.html">Ejemplo: feriado (toda la peluquería, todo el día)</a></li><li><a href="staff-bloquear-error.html">Validación</a></li><li><a href="staff-bloquear-conflicto.html">Conflicto con turnos</a></li><li><a href="staff-bloquear-confirmar.html">Confirmar cancelación de turnos</a></li><li><a href="staff-bloquear-error-guardar.html">Error de red al guardar</a></li><li><a href="staff-bloqueado.html">Éxito sin turnos afectados</a></li><li><a href="staff-bloqueado-cancelados.html">Éxito con 2 turnos cancelados</a></li></ul>
+      <p><a href="index.html">Índice del prototipo turnos-peluqueria</a> · Prototipo de diseño con datos de ejemplo, ronda 1.</p>
+    </div>
+  </aside>
+</body>
+</html>

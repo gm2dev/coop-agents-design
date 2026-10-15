@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Confirmar cancelación de turnos — Tijera Fina (prototipo)</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="staff">
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="bar">
+      <a class="brand" href="staff-agenda.html">Tijera Fina · Staff</a>
+      <nav class="staff-nav" aria-label="Secciones del staff"><ul><li><a href="staff-agenda.html">Agenda del día</a></li><li><a href="staff-agenda-semana.html">Semana</a></li><li><a href="staff-cargar.html">Cargar turno</a></li><li><a href="staff-bloquear.html" aria-current="page">Bloquear horario</a></li><li><a href="staff-ingreso.html">Salir</a></li></ul></nav>
+    </div>
+  </header>
+  <main id="main">
+    <p><a class="back" href="staff-bloquear-conflicto.html">← Volver al bloqueo</a></p>
+    <h1>¿Bloquear y cancelar 2 turnos?</h1>
+    <section class="panel stack">
+      <p>Vas a bloquear a <strong>Martín</strong> el <strong>jueves 22 de octubre, de 11:00 a 16:00</strong> y a cancelar estos turnos:</p>
+      <ul>
+        <li>11:30 a 12:15 · Corte de pelo · Tomás L. (tomas@ejemplo.com)</li>
+        <li>15:30 a 16:15 · Corte de pelo · Ana P. (ana@ejemplo.com)</li>
+      </ul>
+      <form action="staff-bloqueado-cancelados.html" method="get">
+        <div class="field">
+          <label for="bc-motivo">Motivo para las clientas</label>
+          <span class="hint" id="hint-bc-motivo">Se incluye en el email que les mandamos.</span>
+          <select id="bc-motivo" name="motivo" aria-describedby="hint-bc-motivo"><option>El profesional no está disponible</option><option>La peluquería va a estar cerrada</option><option>Otro</option></select>
+        </div>
+        <div class="alert alert-warning"><p><span aria-hidden="true">!</span> A cada clienta le avisamos <strong>por email</strong> que su turno se canceló. Esta acción no se puede deshacer.</p></div>
+        <div class="actions"><button class="btn btn-danger" type="submit">Sí, bloquear y cancelar 2 turnos</button><a class="btn btn-secondary" href="staff-bloquear-conflicto.html">No, volver</a></div>
+      </form>
+    </section>
+  </main>
+  <aside class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      <h2>Estados de esta pantalla</h2><ul><li><a href="staff-bloquear.html">Por defecto</a></li><li><a href="staff-bloquear-feriado.html">Ejemplo: feriado (toda la peluquería, todo el día)</a></li><li><a href="staff-bloquear-error.html">Validación</a></li><li><a href="staff-bloquear-conflicto.html">Conflicto con turnos</a></li><li><a href="staff-bloquear-confirmar.html">Confirmar cancelación de turnos</a></li><li><a href="staff-bloquear-error-guardar.html">Error de red al guardar</a></li><li><a href="staff-bloqueado.html">Éxito sin turnos afectados</a></li><li><a href="staff-bloqueado-cancelados.html">Éxito con 2 turnos cancelados</a></li></ul>
+      <p><a href="index.html">Índice del prototipo turnos-peluqueria</a> · Prototipo de diseño con datos de ejemplo, ronda 1.</p>
+    </div>
+  </aside>
+</body>
+</html>
