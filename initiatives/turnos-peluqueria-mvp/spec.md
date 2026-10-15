@@ -38,9 +38,9 @@ con el formato `<Paso o pantalla> — <local>` (prefijo `Error: ` cuando la pág
 | **Error de campo** | Formularios | Debajo del input: ⚠ + texto en `feedback.danger.text` semibold; input con `aria-invalid="true"` y borde 2px* `feedback.danger.border`; el id del error se agrega a `aria-describedby`. |
 | **Resumen de errores** | Formularios | Alerta `danger` arriba del formulario, `role="alert"`, `tabindex="-1"`, recibe el foco al enviar; título “Revisá N datos para …” + lista de links que llevan el foco a cada campo. |
 | **Alerta** | Mensajes | Variantes `danger`, `success`, `warning`, `info` (`feedback.*.text/bg/border`, borde 2px*). Título en negrita + texto. Errores: `role="alert"` y foco. Estados informativos: `role="status"`. |
-| **Bloque “Guardá tu link privado”** | Confirmación | Fondo `feedback.warning.bg`, borde 2px* `feedback.warning.border`, `radius.lg`. h2 con ⚠, frase en negrita, campo de solo lectura con el link (label visible), botón primario “Copiar link”, secundario “Agregar al calendario”, región `role="status"` para el resultado de copiar. |
+| **Bloque “Guardá tu link privado”** | Confirmación | Fondo `feedback.warning.bg`, borde 2px* `feedback.warning.border`, `radius.lg`. h2 con ⚠, frase en negrita, campo de solo lectura con el link (label visible) y botón primario “Copiar link” pegado al campo (arriba del pliegue en 360×640), secundario “Agregar al calendario”, región `role="status"` para el resultado de copiar. |
 | **Botones** | Acciones | Primario `action.primary` / `text.on-action` (hover `action.primary-hover`); secundario `surface.default` + borde y texto `action.primary`. Alto `size.target.comfortable`. En celular ocupan el ancho; desde `breakpoint.md`, ancho automático y el primario a la derecha (orden del DOM: primario primero). Enviando: `aria-disabled="true"`, spinner + “Confirmando…”, `surface.disabled`. |
-| **Badge** | Estado, origen, avisos | Píldora con borde y texto; siempre con palabra (“Origen: Web”, “✓ Confirmado”, “⚠ Sin servicios”). Web = `info`, Panel = neutro, Confirmado = `success`, avisos = `warning`. |
+| **Badge** | Estado, origen, avisos | Píldora con borde y texto; siempre con palabra (“Origen: Web”, “✓ Confirmado”, “⚠ Sin servicios”). Web = `info` (en H1 todos los turnos son Web; “Origen: Panel” neutro llega con CU-13 en H2), Confirmado = `success`, avisos = `warning`. |
 | **Resumen (dl)** | Revisar, confirmación, link | `dl` en 2 columnas (`dt` en `text.muted`, `dd` semibold): servicio, peluquero, fecha, hora inicio–fin (hora del local), duración, precio (orientativo, se paga en el local) y, en revisar/confirmación, nombre y teléfono. |
 | **Cargando** | Listas y envíos | Spinner decorativo + texto en `role="status"`; esqueleto `aria-hidden`. Con `prefers-reduced-motion` el spinner no gira. |
 | **Tarjeta de turno** | Agenda | Borde `border.strong` con filete izquierdo `action.primary`; hora inicio–fin (bold) · duración; servicio · cliente; contacto como link `tel:`/`mailto:` o “Sin contacto”; badges de origen y estado. |
@@ -94,7 +94,7 @@ con el formato `<Paso o pantalla> — <local>` (prefijo `Error: ` cuando la pág
 ### P6 · Horario ocupado (`horario-ocupado.html`) — CU-04
 
 - Es P3 con: alerta danger arriba (role="alert", foco) **“Ese horario se acaba de ocupar, elegí otro”** + “Alguien reservó el viernes 16 a las 15:30 justo antes que vos. Ya actualizamos los horarios libres.” + “Tu servicio y tus datos quedan guardados: después de elegir otro horario vas directo a confirmar.”
-- Horarios del mismo día **actualizados** (sin el ocupado), `legend` “Horarios libres del … (actualizados)”. Botón “Continuar a confirmar” → P5 (no pasa por P4). “Volver” lleva a revisar.
+- Horarios del mismo día **actualizados** (sin el ocupado), `legend` “Horarios libres del … (actualizados)”. Botón “Continuar a confirmar” → P5 (no pasa por P4). “← Volver: peluquero” (el anterior del paso 3, coherente con el progreso; para no perder lo elegido, el camino recomendado es “Continuar a confirmar”).
 - Con “Cualquiera disponible”, si queda otro peluquero libre, no se ve esta pantalla: se confirma con ese.
 
 ### P7 · Confirmación (`confirmacion.html`) — CU-05
@@ -102,7 +102,7 @@ con el formato `<Paso o pantalla> — <local>` (prefijo `Error: ` cuando la pág
 Orden (y jerarquía) fijo, pensado para que en 360 px el bloque del link quede en la primera pantalla:
 
 1. **h1** “Tu turno está confirmado” (recibe el foco al llegar) + alerta success de una línea: “✓ **Viernes 16 de octubre, 15:30** · Corte y barba con **Bruno**” (siempre el peluquero asignado).
-2. **Bloque “Guardá tu link privado”** (ver componente): “Es la única forma de volver a ver tu turno. No se envía por email, SMS ni WhatsApp: guardalo ahora.” · campo “Tu link privado” (solo lectura, seleccionable) · ayuda “Copialo y guardalo en tus notas, o agregá el turno a tu calendario: el evento incluye el link.” · **Copiar link** (primario) · **Agregar al calendario** (secundario, descarga `.ics`).
+2. **Bloque “Guardá tu link privado”** (ver componente): “Es la única forma de volver a ver tu turno. No se envía por email, SMS ni WhatsApp.” · campo “Tu link privado” (solo lectura, seleccionable) con **Copiar link** (primario) pegado al campo (debajo en celular, a la derecha desde 40rem) para que quede arriba del pliegue en 360×640 · región de estado · ayuda “Guardalo en tus notas, o agregá el turno a tu calendario: el evento incluye el link.” · **Agregar al calendario** (secundario, descarga `.ics`).
    - Copiar OK → se anuncia “Link copiado. Pegalo en tus notas o en un chat con vos mismo para tenerlo a mano.”
    - Copiar falla → se selecciona el link y se anuncia “No se pudo copiar automáticamente. El link quedó seleccionado: copialo a mano.”
 3. **Resumen del turno:** servicio, peluquero, fecha, hora inicio–fin (hora del local), duración, precio (orientativo, se paga en el local), a nombre de, teléfono (o “No lo dejaste”).
@@ -125,7 +125,7 @@ Orden (y jerarquía) fijo, pensado para que en 360 px el bloque del link quede e
 
 - Sin navegación de secciones. **h1** “Ingresar al panel”.
 - Campos **Usuario** (`autocomplete="username"`, sin autocapitalizar) y **Contraseña** (`autocomplete="current-password"`) + checkbox “Mostrar contraseña”. Pegar está permitido.
-- “Ingresar” (primario). Debajo: “Si olvidaste tu contraseña, pedí que te la reseteen.” (sin link, sin email).
+- “Ingresar” (primario). Debajo: “Si olvidaste tu contraseña, pedile a quien administra el panel que te la resetee.” (sin link, sin email).
 - **Estados:** campos vacíos (error junto al campo + resumen) · ingresando (`-cargando`) · **error genérico** (`-error`: “Usuario o contraseña incorrectos. Revisalos y probá de nuevo.”; conserva el usuario, vacía la contraseña; no dice cuál falló) · **demasiados intentos** (`-bloqueado`: “Demasiados intentos. Por seguridad, el ingreso quedó pausado un rato. Esperá unos minutos y probá de nuevo.” + texto de reseteo; no revela si el usuario existe) · **sin sesión** (`admin-sesion`: formulario con aviso “Para ver el panel, primero iniciá sesión.”; ningún dato del panel).
 
 ### A2 · Agenda (`admin-agenda-dia.html`, `-semana`) — CU-12

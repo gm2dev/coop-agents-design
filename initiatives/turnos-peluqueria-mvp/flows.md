@@ -131,7 +131,7 @@ flowchart TD
   err --> val
   chk -->|Superó el límite de intentos| blk[admin-ingresar-bloqueado<br/>'Demasiados intentos', mensaje genérico]
   blk -.->|Más tarde| login
-  login -.->|Olvidó la contraseña| manual([Texto: 'pedí que te la reseteen'<br/>reseteo manual, sin email])
+  login -.->|Olvidó la contraseña| manual([Texto: 'pedile a quien administra<br/>el panel que te la resetee'<br/>reseteo manual, sin email])
 ```
 
 ## CU-09 — Gestionar servicios

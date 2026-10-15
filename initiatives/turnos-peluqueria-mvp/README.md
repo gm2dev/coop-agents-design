@@ -48,7 +48,7 @@ No se diseñan ahora. Quedan anotados los puntos de enganche para no tener que r
 | CU-06 Cambiar y CU-07 Cancelar desde el link | `turno.html`: debajo del resumen, antes de “Dónde” (hay un comentario HTML en ese lugar). En H1 ese bloque dice “Si necesitás cambiar o cancelar el turno, llamá al local” con el teléfono (RN-17). La confirmación (`confirmacion.html`) no cambia. |
 | CU-06/07: mensaje de anticipación mínima | Mismo lugar en `turno.html`, reemplaza las acciones cuando faltan menos de N horas (CU-15). |
 | CU-11 Bloqueos | Nueva sección “Bloqueos” en la navegación del panel (después de Peluqueros). En el cliente no cambia la UI: los días bloqueados se ven como “Sin horarios” o “Cerrado” en el selector de días. |
-| CU-13 Cargar, mover y cancelar turnos | Agenda: botón “Cargar turno” en la barra de herramientas y acciones por turno (Mover, Cancelar) en cada tarjeta. El badge “Origen: Panel” ya existe. |
+| CU-13 Cargar, mover y cancelar turnos | Agenda: botón “Cargar turno” en la barra de herramientas y acciones por turno (Mover, Cancelar) en cada tarjeta. Se suma el badge “Origen: Panel” (estilo neutro: `surface.subtle` + `text.muted` + `border.strong`, 6.99:1) junto al “Origen: Web” que ya muestra la tarjeta; en H1 no aparece en los datos de ejemplo. |
 | CU-14 Asistencia | Agenda: en turnos pasados, badge “Sin marcar” y acciones Asistió / No asistió en la tarjeta. El badge de estado ya reserva el lugar. |
 | CU-15 Anticipación mínima | Nueva sección o campo en “Datos del local” (configuración del local). |
 | CU-10 (H2) turnos afectados por cambio de horario o desactivación | Mensaje de éxito de `admin-peluqueros-guardado` (hoy dice “Los turnos ya confirmados no se modifican”): en H2 suma la lista de turnos afectados con link a la agenda. |
@@ -60,7 +60,7 @@ Las decisiones del CDO para esta entrega se respetan tal cual; acá van cómo se
 
 | ID | Decisión | Por qué |
 |---|---|---|
-| DD-01 | **Confirmación: el aviso “Guardá tu link privado” va segundo, inmediatamente después del título y una línea de éxito, antes del resumen.** Bloque con fondo y borde de advertencia, h2 propio, ícono + texto, link en un campo de solo lectura, botón primario “Copiar link” y secundario “Agregar al calendario”. | Es el único momento de entrega (D-1): si el cliente no guarda el link, lo pierde. No puede quedar debajo del pliegue en un celular de 360 px. |
+| DD-01 | **Confirmación: el aviso “Guardá tu link privado” va segundo, inmediatamente después del título y una línea de éxito, antes del resumen.** Bloque con fondo y borde de advertencia, h2 propio, ícono + texto, link en un campo de solo lectura, botón primario “Copiar link” pegado al campo (termina en y≈594 en 360×640, arriba del pliegue) y secundario “Agregar al calendario”. | Es el único momento de entrega (D-1): si el cliente no guarda el link, lo pierde. No puede quedar debajo del pliegue en un celular de 360 px. |
 | DD-02 | **Copiar link** anuncia el resultado en una región `role="status"` (aria-live polite), con alternativa si el portapapeles falla (selecciona el texto y lo dice). | Feedback explícito (principio 5) y criterio 4.1.3. |
 | DD-03 | **Texto sin promesas de aviso automático:** “No se envía por email, SMS ni WhatsApp”, “No te vamos a mandar mensajes”, teléfono “para que el local pueda contactarte si hay un cambio”. Nunca “te avisamos” ni “te recordamos”. | D-1, RN-12 y ajuste del PO Reviewer. |
 | DD-04 | **Paso extra “Revisar y confirmar” (paso 5).** El flujo de producto dice “datos → confirmar”: lo interpreto como una pantalla de revisión con el botón “Confirmar turno”. | Es el último momento para corregir antes de crear el turno; cada dato tiene “Cambiar” y vuelve con lo elegido conservado. |
@@ -70,8 +70,8 @@ Las decisiones del CDO para esta entrega se respetan tal cual; acá van cómo se
 | DD-08 | **Día cerrado o fuera de ventana: no es un link** (se ve atenuado, borde punteado y texto “Cerrado” / “No disponible”). **Día sin horarios: sí es un link** y muestra “Sin horarios disponibles” con un botón al próximo día con horarios. | Lo que no se puede elegir no recibe foco; lo que puede quedar vacío se explica. |
 | DD-09 | **CU-04:** al fallar la confirmación por horario ocupado, se vuelve al paso 3 con el mensaje “Ese horario se acaba de ocupar, elegí otro” arriba (role="alert", recibe el foco), horarios actualizados y el botón “Continuar a confirmar”, que lleva directo a revisar con servicio y datos conservados. | Decisión del CDO 6; evita re-tipear datos. |
 | DD-10 | **Errores de formulario:** resumen arriba (recibe foco, links a cada campo) + mensaje junto al campo asociado con `aria-describedby` + `aria-invalid`; nunca se borra lo tipeado. El título de la página pasa a empezar con “Error:”. | Decisión del CDO 3; WCAG 3.3.1, 3.3.3. |
-| DD-11 | **Ingreso del panel:** usuario + contraseña, “Mostrar contraseña”, autocomplete `username`/`current-password` (permite gestores de contraseñas), error genérico “Usuario o contraseña incorrectos”, estado “Demasiados intentos” sin dar detalles del límite, texto “Si olvidaste tu contraseña, pedí que te la reseteen”. Sin magic link, sin email. | Decisión del CDO 7; WCAG 3.3.8 (autenticación sin prueba cognitiva). |
-| DD-12 | **Agenda:** vista Día en columnas por peluquero (apiladas en celular, en grilla desde 1024 px) y vista Semana en 7 días (apilados en celular, 7 columnas en escritorio). Tarjeta de turno: hora inicio–fin, duración, servicio, cliente, contacto (tel/mail como link o “Sin contacto”), badges “Origen: Web/Panel” y estado con ícono + texto. Filtro por peluquero con `select` + botón “Filtrar” (sin cambio de contexto automático). | Decisión del CDO 8; WCAG 3.2.2. |
+| DD-11 | **Ingreso del panel:** usuario + contraseña, “Mostrar contraseña”, autocomplete `username`/`current-password` (permite gestores de contraseñas), error genérico “Usuario o contraseña incorrectos”, estado “Demasiados intentos” sin dar detalles del límite, texto “Si olvidaste tu contraseña, pedile a quien administra el panel que te la resetee”. Sin magic link, sin email. | Decisión del CDO 7; WCAG 3.3.8 (autenticación sin prueba cognitiva). |
+| DD-12 | **Agenda:** vista Día en columnas por peluquero (apiladas en celular, en grilla desde 1024 px) y vista Semana en 7 días (apilados en celular, 7 columnas en escritorio). Tarjeta de turno: hora inicio–fin, duración, servicio, cliente, contacto (tel/mail como link o “Sin contacto”), badge “Origen: Web” (en H1 todos los turnos vienen de la web; “Panel” llega con CU-13) y estado con ícono + texto. Filtro por peluquero con `select` + botón “Filtrar” (sin cambio de contexto automático). | Decisión del CDO 8; WCAG 3.2.2. |
 | DD-13 | **Horario semanal:** un `fieldset` por día con 0..n rangos “Desde/Hasta” (`input type="time"`, pasos de 15 min), “+ Agregar rango” y “Quitar”; los errores (fin ≤ inicio, superposición) se marcan en el rango y en el resumen. | CU-10; varios rangos por día (9–13 y 15–19). |
 | DD-14 | **Avisos de configuración incompleta en listas del panel:** badge “⚠ Sin peluqueros asignados” en servicios y “⚠ Sin servicios” en peluqueros, con la consecuencia en texto (“No se ofrece en la web…”). | CU-09, CU-10, RN-15. |
 | DD-15 | **El precio de referencia es opcional en el panel.** CU-09 solo valida nombre y duración. | No inventar una validación que producto no pidió. Ver P-D2. |
@@ -121,3 +121,14 @@ nuevos). Si el CDO prefiere generarlo con un script, conviene un PR aparte del d
 
 - v0.1 — primera versión del Hito 1 (flujos, spec, accesibilidad y prototipo). Reemplaza a la iniciativa
   `turnos-peluqueria` (revertida en el PR #2), sin reutilizar sus supuestos (magic link, notificaciones).
+- v0.2 — ronda 1 del Designer Reviewer:
+  - CU-10 (bloqueante): `legend` del horario semanal sin `float` (el `clear` no llegaba a los rangos cuando
+    “No trabaja.” estaba oculto); rangos y filas de listas con `minmax(0,1fr)`/`min-width:0`. Sin scroll
+    horizontal a 320 px en las 46 páginas.
+  - CU-12: los turnos de ejemplo de H1 son todos “Origen: Web” (sin carga manual hasta CU-13 en H2).
+  - Confirmación: “Copiar link” pegado al campo, arriba del pliegue en 360×640 (termina en y≈594).
+  - `turno.ics` plegado según RFC 5545 (≤ 75 octetos por línea).
+  - Contraseña olvidada: “pedile a quien administra el panel que te la resetee”.
+  - `horario-ocupado`: “← Volver: peluquero” (coherente con el paso 3).
+  - `accessibility.md`: estados actualizados con la verificación en Chromium headless; pendientes reales:
+    lector de pantalla, zoom 200 % y preview de Vercel.

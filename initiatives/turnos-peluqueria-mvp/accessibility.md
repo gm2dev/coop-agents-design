@@ -3,12 +3,15 @@
 - **Estándar:** WCAG 2.2 nivel AA como piso (incluye el 2.1 AA que pide RNF-02 del
   [documento de producto](https://github.com/gm2dev/coop-agents-product/blob/po/turnos-peluqueria-mvp/initiatives/turnos-peluqueria-mvp/casos-de-uso.md#7-requisitos-no-funcionales)).
   Aplica a la web del cliente **y** al panel.
-- **Qué se verificó:** de forma **estática** (en el contenedor no hay navegador): HTML, CSS, orden del DOM,
-  referencias ARIA, links y contraste calculado de los tokens. Script de chequeo sobre las 46 páginas del
-  prototipo (45 de la iniciativa + el índice general).
-- **PENDIENTE** (persona de diseño, sobre el preview de Vercel): teclado real, reflow a 320 px y zoom al 200 %,
-  lector de pantalla (VoiceOver iOS + NVDA o TalkBack), espaciado de texto y el preview en sí. No se reporta como
-  hecho nada que no se haya ejecutado.
+- **Qué se verificó:** de forma **estática** (HTML, CSS, orden del DOM, referencias ARIA, links y contraste
+  calculado de los tokens) y **en navegador** con Playwright + Chromium headless sobre las 46 páginas del
+  prototipo (45 de la iniciativa + el índice general), por el Designer Reviewer y repetido por el Designer en la
+  ronda 1: axe-core 0 violaciones (WCAG 2.0/2.1/2.2 A y AA + best-practice), reflow a 320 px sin scroll
+  horizontal (`scrollWidth ≤ 320`, también a 360 y 1280 px), espaciado de texto 1.4.12 sin desbordes, teclado
+  básico (Tab, flechas en radios, foco visible), resumen de errores con foco, `aria-describedby` y “Copiar link”
+  con anuncio en `role="status"`.
+- **PENDIENTE** (persona de diseño): lector de pantalla (VoiceOver iOS + NVDA o TalkBack), zoom al 200 % real
+  del navegador y la prueba sobre el preview de Vercel. No se reporta como hecho nada que no se haya ejecutado.
 
 ## 1. Verificación estática realizada
 
@@ -36,7 +39,7 @@ más los pares nuevos que usa este prototipo (calculados con la fórmula de lumi
 | Par | Uso | Ratio | Mínimo | |
 |---|---|---|---|---|
 | text.link / surface.subtle | links sobre el fondo de página | 5.88 | 4.5 | OK |
-| text.muted / surface.subtle | texto secundario sobre el fondo; badge “Origen: Panel” | 6.99 | 4.5 | OK |
+| text.muted / surface.subtle | texto secundario sobre el fondo; badge “Origen: Panel” (solo H2, CU-13) | 6.99 | 4.5 | OK |
 | text.muted / surface.disabled | día “Cerrado” / “No disponible” | 6.51 | 4.5 | OK |
 | border.strong / surface.disabled | borde de día cerrado | 4.16 | 3 | OK |
 | text.default / feedback.warning.bg | label del link en el bloque “Guardá tu link” | 16.18 | 4.5 | OK |
@@ -71,24 +74,24 @@ implementación · **PENDIENTE** = requiere navegador o tecnología asistiva · 
 | 1.3.5 Propósito de los campos | `autocomplete` name, tel, email, username, current-password, organization, street-address. | OK (estático) |
 | 1.4.1 Uso del color | Elegido: fondo + borde 2px + ✓/semibold; errores: ícono + texto + borde; estados y origen con palabra; día cerrado con borde punteado + texto; día actual con `aria-current`; links subrayados. | OK (estático) |
 | 1.4.3 Contraste mínimo | Ver § 2. | OK (calculado) |
-| 1.4.4 Cambio de tamaño | Tipografía en `rem`; sin alturas fijas en contenedores de texto. | PENDIENTE (200 % en el preview) |
-| 1.4.10 Reflow | Mobile-first, grids `auto-fill`, `overflow-wrap: anywhere` (link privado, emails), sin anchos fijos. Objetivo 320 px (producto pide 360 px). | PENDIENTE (320 px en el preview) |
+| 1.4.4 Cambio de tamaño | Tipografía en `rem`; sin alturas fijas en contenedores de texto. | OK (estático) · PENDIENTE (zoom 200 % real en el preview) |
+| 1.4.10 Reflow | Mobile-first, grids `auto-fill`, `overflow-wrap: anywhere` (link privado, emails), sin anchos fijos. Objetivo 320 px (producto pide 360 px). Rangos horarios y filas de listas con `minmax(0,1fr)`/`min-width:0`. | OK (Playwright: 46 páginas, `scrollWidth ≤ 320`) |
 | 1.4.11 Contraste no textual | Bordes de controles `border.strong` (4.83:1), foco ≥ 6:1, elegido 6.36:1. | OK (calculado) |
-| 1.4.12 Espaciado de texto | Sin alturas fijas en texto; contenedores crecen. | PENDIENTE (bookmarklet de espaciado) |
+| 1.4.12 Espaciado de texto | Sin alturas fijas en texto; contenedores crecen. | OK (Playwright: estilos 1.4.12 inyectados a 320 px, sin desbordes) |
 | 1.4.13 Contenido al pasar el puntero | No hay tooltips ni contenido en hover. | N/A |
 
 ### Operable
 
 | Criterio | Cómo se cumple | Estado |
 |---|---|---|
-| 2.1.1 Teclado | Solo controles nativos (`a`, `button`, `input`, `select`); radios con flechas; sin `div` clicables. | OK (estático) · PENDIENTE (teclado real) |
+| 2.1.1 Teclado | Solo controles nativos (`a`, `button`, `input`, `select`); radios con flechas; sin `div` clicables. | OK (Playwright: Tab, flechas en radios) · recorrido completo en el preview pendiente |
 | 2.1.2 Sin trampas | No hay diálogos ni widgets que capturen el foco. | OK (estático) |
 | 2.4.1 Saltar bloques | “Saltar al contenido” en todas las páginas. | OK (estático) |
 | 2.4.2 Título de página | Un título por paso y estado (“Paso 3 de 5: Elegí día y horario — La Esquina Peluquería”). | OK (estático) |
-| 2.4.3 Orden del foco | DOM lineal, sin `tabindex` positivo; foco programático solo en mensajes de error/éxito y en el h1 de la confirmación. | OK (estático) · PENDIENTE |
+| 2.4.3 Orden del foco | DOM lineal, sin `tabindex` positivo; foco programático solo en mensajes de error/éxito y en el h1 de la confirmación. | OK (Playwright: resumen de errores recibe el foco) |
 | 2.4.4 Propósito de los links | Textos explícitos (“Volver: peluquero”, “Ver el próximo día con horarios: martes 20”, “Editar Corte y barba” con texto oculto). | OK (estático) |
 | 2.4.6 Encabezados y etiquetas | h1 por pantalla, h2/h3 por sección; labels descriptivos. | OK (estático) |
-| 2.4.7 Foco visible | Ver § 1. | OK (estático) · PENDIENTE |
+| 2.4.7 Foco visible | Ver § 1. | OK (Playwright) |
 | 2.4.11 Foco no oculto (mínimo) | Sin headers sticky ni overlays. | OK (estático) |
 | 2.5.3 Etiqueta en el nombre | El nombre accesible empieza con el texto visible (días: “Vie 16 Con horarios, viernes 16 de octubre”; rangos: “Desde (rango 2)”; “Editar Corte y barba”). | OK (estático) |
 | 2.5.7 Movimientos de arrastre | No hay arrastre (la agenda no usa drag & drop; mover turnos en H2 debe tener alternativa sin arrastre). | OK (estático) |
@@ -114,7 +117,7 @@ implementación · **PENDIENTE** = requiere navegador o tecnología asistiva · 
 | Criterio | Cómo se cumple | Estado |
 |---|---|---|
 | 4.1.2 Nombre, rol, valor | Controles nativos; `aria-current` en paso de nav, día y sección; `aria-disabled` en botón enviando. | OK (estático) |
-| 4.1.3 Mensajes de estado | “Link copiado” en `role="status"` (aria-live polite); cargando con `role="status"`; errores con `role="alert"` + foco; agregar/quitar rango anunciado; filtro aplicado anunciado. | OK (estático) · PENDIENTE (lector de pantalla) |
+| 4.1.3 Mensajes de estado | “Link copiado” en `role="status"` (aria-live polite); cargando con `role="status"`; errores con `role="alert"` + foco; agregar/quitar rango anunciado; filtro aplicado anunciado. | OK (Playwright: “Copiar link” escribe el resultado en `role="status"`) · PENDIENTE (lector de pantalla) |
 
 ## 4. Puntos de atención para la implementación
 
@@ -128,10 +131,11 @@ implementación · **PENDIENTE** = requiere navegador o tecnología asistiva · 
 
 ## 5. PENDIENTE — para la persona de diseño sobre el preview de Vercel
 
-1. Recorrido cliente completo solo con teclado (Tab, Shift+Tab, flechas en radios, Enter/Espacio).
-2. Recorrido panel completo solo con teclado, incluido agregar y quitar rangos.
-3. Reflow a 320 px y 360 px sin scroll horizontal (especialmente el link privado, el selector de días y la agenda semanal).
-4. Zoom al 200 % y espaciado de texto (WCAG 1.4.12).
-5. VoiceOver en iOS (Safari) y TalkBack o NVDA: confirmación (anuncio de “Link copiado”), CU-04 (lectura del mensaje con foco), errores de datos, días con `aria-current`.
-6. Descargar `turno.ics` y abrirlo en iOS, Android y un calendario de escritorio (fecha, hora en zona del local, link en la descripción).
-7. Revisar el preview de Vercel (links relativos desde la URL del PR).
+Ya verificado en Chromium headless (no repetir salvo regresión): axe-core, reflow 320 px, espaciado de texto,
+teclado básico, foco en resumen de errores, anuncio de Copiar. Queda:
+
+1. Zoom real al 200 % del navegador (cliente y panel, en especial agenda semanal y horario por día).
+2. Recorridos completos solo con teclado en un navegador real (Safari/Firefox además de Chromium).
+3. VoiceOver en iOS (Safari) y TalkBack o NVDA: confirmación (anuncio de “Link copiado”), CU-04 (lectura del mensaje con foco), errores de datos, días con `aria-current`.
+4. Descargar `turno.ics` y abrirlo en iOS, Android y un calendario de escritorio (fecha, hora en zona del local, link en la descripción).
+5. Revisar el preview de Vercel (links relativos desde la URL del PR).
