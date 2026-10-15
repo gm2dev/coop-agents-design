@@ -2,7 +2,8 @@
  * JS mínimo del prototipo, solo para estados de interacción:
  * 1. Copiar link con feedback anunciado (aria-live).
  * 2. Validación de formularios con resumen de errores y mensajes junto al campo.
- * 3. Foco al mensaje en pantallas de error/estado (simula la respuesta del servidor).
+ * 3. Foco al mensaje en pantallas de error/estado (simula la respuesta del servidor);
+ *    aviso de carga lenta a los 3 s en el link privado.
  * 4. "Volver conserva lo elegido": guarda las opciones en sessionStorage.
  * 5. Mostrar contraseña.
  * 6. Agregar/quitar rangos del horario semanal.
@@ -32,7 +33,7 @@
 
   /* 2. Validación */
   var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  var telRe = /^[0-9 +()-]{8,20}$/;
+  var telRe = /^[0-9 +().-]+$/; /* S-6: caracteres laxos; se guardan solo los dígitos, entre 8 y 15 */
   function setError(field, msg) {
     var err = document.getElementById(field.id + '-error');
     if (!err) return;
@@ -53,9 +54,15 @@
     var label = f.getAttribute('data-label') || f.name;
     if (f.hasAttribute('data-required') && !v) return 'Ingresá ' + label + '.';
     if (v && f.type === 'email' && !emailRe.test(v)) return 'Revisá el email: tiene que tener la forma nombre@ejemplo.com.';
-    if (v && f.type === 'tel' && !telRe.test(v)) return 'Revisá el teléfono: usá solo números, espacios o guiones (mínimo 8 dígitos).';
+    if (v && f.type === 'tel') {
+      var digits = v.replace(/\D/g, '').length;
+      if (!telRe.test(v) || digits < 8 || digits > 15) return 'Revisá el teléfono: tiene que tener entre 8 y 15 números (podés usar espacios o guiones).';
+    }
     if (f.type === 'number' && f.hasAttribute('data-min')) {
-      if (!v || Number(v) < Number(f.getAttribute('data-min'))) return f.getAttribute('data-min-msg');
+      var n = Number(v);
+      var max = f.hasAttribute('data-max') ? Number(f.getAttribute('data-max')) : Infinity;
+      var step = f.hasAttribute('data-step') ? Number(f.getAttribute('data-step')) : 0;
+      if (!v || isNaN(n) || n < Number(f.getAttribute('data-min')) || n > max || (step && n % step !== 0)) return f.getAttribute('data-min-msg');
     }
     return '';
   }
@@ -93,6 +100,11 @@
       var t = document.getElementById(a.getAttribute('href').slice(1));
       if (t) { x.preventDefault(); t.focus(); }
     });
+  });
+
+  /* 2b. Carga lenta (P-D5): a los 3 s se suma "Puede tardar unos segundos." dentro del role=status */
+  document.querySelectorAll('[data-slow-hint]').forEach(function (el) {
+    setTimeout(function () { el.hidden = false; }, 3000);
   });
 
   /* 3. Foco al mensaje */

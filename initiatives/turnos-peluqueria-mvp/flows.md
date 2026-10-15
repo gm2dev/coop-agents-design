@@ -107,7 +107,7 @@ flowchart TD
   cp -->|No| cpno[Selecciona el link + anuncio:<br/>'copialo a mano']
   act -->|Agregar al calendario| ics[Descarga turno.ics<br/>fecha, hora, duración, servicio,<br/>dirección vigente y link en la descripción]
   act -->|Reservar otro turno| s1([servicios])
-  open([Cliente abre su link más tarde]) --> tl[turno-cargando] --> found{¿Token válido?}
+  open([Cliente abre su link más tarde]) --> tl[turno-cargando<br/>a los 3 s: 'Puede tardar unos segundos'] --> found{¿Token válido?}
   found -->|No| nf[turno-no-encontrado<br/>sin datos de ningún turno + teléfono del local]
   found -->|Sí| tv[turno<br/>resumen en solo lectura, estado vigente<br/>+ Agregar al calendario + teléfono del local]
   tv -.-> h2[[H2: Cambiar / Cancelar<br/>CU-06, CU-07]]
@@ -119,9 +119,9 @@ No hay ninguna rama de envío (email, SMS, WhatsApp): RN-12.
 
 ```mermaid
 flowchart TD
-  any([Abre cualquier URL del panel]) --> auth{¿Sesión válida?}
+  any([Abre cualquier URL del panel]) --> auth{¿Sesión válida?<br/>dura 12 h}
   auth -->|Sí| agenda([admin-agenda-dia])
-  auth -->|No| ses[admin-sesion<br/>'Para ver el panel, primero iniciá sesión'<br/>sin datos de agenda ni clientes]
+  auth -->|No| ses[admin-sesion<br/>mismo formulario con aviso<br/>'Para ver el panel, primero iniciá sesión'<br/>sin datos de agenda ni clientes]
   login[admin-ingresar] & ses -->|Ingresar| val{¿Campos completos?}
   val -->|No| fe[Error junto al campo + resumen con foco]
   fe --> val
@@ -129,8 +129,8 @@ flowchart TD
   chk -->|Credenciales válidas| agenda
   chk -->|Inválidas| err[admin-ingresar-error<br/>'Usuario o contraseña incorrectos'<br/>conserva el usuario, vacía la contraseña]
   err --> val
-  chk -->|Superó el límite de intentos| blk[admin-ingresar-bloqueado<br/>'Demasiados intentos', mensaje genérico]
-  blk -.->|Más tarde| login
+  chk -->|5 intentos fallidos| blk[admin-ingresar-bloqueado<br/>'Demasiados intentos'<br/>'Probá de nuevo en 15 minutos']
+  blk -.->|Después de 15 min| login
   login -.->|Olvidó la contraseña| manual([Texto: 'pedile a quien administra<br/>el panel que te la resetee'<br/>reseteo manual, sin email])
 ```
 
@@ -141,7 +141,7 @@ flowchart TD
   l{¿Hay servicios?} -->|No| e[admin-servicios-vacio<br/>explica el efecto en la web + 'Agregar el primer servicio']
   l -->|Sí| list[admin-servicios<br/>nombre, duración, precio, activo,<br/>peluqueros, badge 'Sin peluqueros asignados']
   e & list -->|Agregar / Editar| f[admin-servicio-editar<br/>nombre, duración min, precio ref. opcional,<br/>peluqueros, activo]
-  f -->|Guardar| v{¿Nombre y duración ≥ 5?}
+  f -->|Guardar| v{¿Nombre y duración<br/>de 5 a 480 min, múltiplo de 5?}
   v -->|No| fe[admin-servicio-error<br/>resumen + error junto al campo, no se guarda]
   fe --> v
   v -->|Sí| ok[admin-servicios-guardado<br/>'Aplica a reservas nuevas, los confirmados<br/>conservan su duración']

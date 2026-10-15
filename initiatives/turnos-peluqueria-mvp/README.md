@@ -70,7 +70,7 @@ Las decisiones del CDO para esta entrega se respetan tal cual; acá van cómo se
 | DD-08 | **Día cerrado o fuera de ventana: no es un link** (se ve atenuado, borde punteado y texto “Cerrado” / “No disponible”). **Día sin horarios: sí es un link** y muestra “Sin horarios disponibles” con un botón al próximo día con horarios. | Lo que no se puede elegir no recibe foco; lo que puede quedar vacío se explica. |
 | DD-09 | **CU-04:** al fallar la confirmación por horario ocupado, se vuelve al paso 3 con el mensaje “Ese horario se acaba de ocupar, elegí otro” arriba (role="alert", recibe el foco), horarios actualizados y el botón “Continuar a confirmar”, que lleva directo a revisar con servicio y datos conservados. | Decisión del CDO 6; evita re-tipear datos. |
 | DD-10 | **Errores de formulario:** resumen arriba (recibe foco, links a cada campo) + mensaje junto al campo asociado con `aria-describedby` + `aria-invalid`; nunca se borra lo tipeado. El título de la página pasa a empezar con “Error:”. | Decisión del CDO 3; WCAG 3.3.1, 3.3.3. |
-| DD-11 | **Ingreso del panel:** usuario + contraseña, “Mostrar contraseña”, autocomplete `username`/`current-password` (permite gestores de contraseñas), error genérico “Usuario o contraseña incorrectos”, estado “Demasiados intentos” sin dar detalles del límite, texto “Si olvidaste tu contraseña, pedile a quien administra el panel que te la resetee”. Sin magic link, sin email. | Decisión del CDO 7; WCAG 3.3.8 (autenticación sin prueba cognitiva). |
+| DD-11 | **Ingreso del panel:** usuario + contraseña, “Mostrar contraseña”, autocomplete `username`/`current-password` (permite gestores de contraseñas), error genérico “Usuario o contraseña incorrectos”, estado “Demasiados intentos” con el tiempo de espera fijo (“Probá de nuevo en 15 minutos”, P-D4) sin decir cuántos intentos quedan, texto “Si olvidaste tu contraseña, pedile a quien administra el panel que te la resetee”. Sin magic link, sin email. | Decisión del CDO 7; WCAG 3.3.8 (autenticación sin prueba cognitiva). |
 | DD-12 | **Agenda:** vista Día en columnas por peluquero (apiladas en celular, en grilla desde 1024 px) y vista Semana en 7 días (apilados en celular, 7 columnas en escritorio). Tarjeta de turno: hora inicio–fin, duración, servicio, cliente, contacto (tel/mail como link o “Sin contacto”), badge “Origen: Web” (en H1 todos los turnos vienen de la web; “Panel” llega con CU-13) y estado con ícono + texto. Filtro por peluquero con `select` + botón “Filtrar” (sin cambio de contexto automático). | Decisión del CDO 8; WCAG 3.2.2. |
 | DD-13 | **Horario semanal:** un `fieldset` por día con 0..n rangos “Desde/Hasta” (`input type="time"`, pasos de 15 min), “+ Agregar rango” y “Quitar”; los errores (fin ≤ inicio, superposición) se marcan en el rango y en el resumen. | CU-10; varios rangos por día (9–13 y 15–19). |
 | DD-14 | **Avisos de configuración incompleta en listas del panel:** badge “⚠ Sin peluqueros asignados” en servicios y “⚠ Sin servicios” en peluqueros, con la consecuencia en texto (“No se ofrece en la web…”). | CU-09, CU-10, RN-15. |
@@ -81,12 +81,12 @@ Las decisiones del CDO para esta entrega se respetan tal cual; acá van cómo se
 
 - S-1. La zona horaria del local es Buenos Aires (UTC−3) y se muestra solo como “hora del local” (RN-05). El `.ics` la declara explícitamente.
 - S-2. La “fecha de hoy” del prototipo es el jueves 15 de octubre de 2026; la ventana de 30 días llega al sábado 14 de noviembre.
-- S-3. Duraciones múltiplos de 5 min y rangos horarios en pasos de 15 min. Si el Architect usa otra granularidad, cambia solo el `step` de los inputs.
-- S-4. El link privado tiene la forma `https://<dominio>/t/<token>`; el dominio real lo define el Architect (sin dominio propio en Hobby, §10).
+- S-3. ✅ **Confirmado por el Architect:** rangos horarios en pasos de 15 min (`step="900"`) y los turnos pueden empezar cada 15 minutos (el intervalo se configura en un solo lugar si producto prefiere 30). Los horarios de ejemplo del prototipo caen todos en :00/:15/:30/:45 y muestran solo inicios libres con la duración completa. Las duraciones, en múltiplos de 5 (ver P-D3).
+- S-4. ✅ **Confirmado por el Architect:** el link privado tiene la forma `https://<proyecto>.vercel.app/t/<código>`, sin dominio propio, con un código aleatorio de 22 caracteres. Ejemplo ficticio del prototipo: `https://turnos-la-esquina.vercel.app/t/Q7mK2pXv9RtL4wNc8bHd3s` (confirmación, `turno.ics` y su `URL`).
 - S-5. “Agregar al calendario” descarga un `.ics` (funciona en iOS, Android y escritorio). El prototipo incluye un `.ics` de ejemplo con fecha, hora, duración, servicio, dirección vigente y el link privado en la descripción.
-- S-6. La validación del teléfono es laxa (números, espacios, guiones, mínimo 8 dígitos) porque es opcional; la regla exacta la define el Architect.
-- S-7. El panel no muestra “Recordarme”: la duración de la sesión la define el Architect.
-- S-8. En el link privado **no** se muestran nombre ni teléfono del cliente (solo datos del turno y del local), para minimizar datos expuestos si el link se comparte (RNF-04).
+- S-6. ✅ **Confirmado por el Architect:** validación laxa del teléfono (opcional): se aceptan números, espacios, guiones, puntos, paréntesis y `+`; se guardan solo los dígitos y tienen que ser entre 8 y 15. Error: “Revisá el teléfono: tiene que tener entre 8 y 15 números (podés usar espacios o guiones).”
+- S-7. ✅ **Confirmado por el Architect:** sin “Recordarme”; lo cubre la sesión de 12 horas.
+- S-8. ✅ **Confirmado por el Architect:** en el link privado **no** se muestran nombre ni teléfono del cliente (solo datos del turno y del local), para minimizar datos expuestos si el link se comparte (RNF-04).
 
 ## Preguntas abiertas
 
@@ -94,11 +94,11 @@ Las decisiones del CDO para esta entrega se respetan tal cual; acá van cómo se
 |---|---|---|---|
 | P-D1 | ¿Cómo se ve un turno **movido por el admin** en el link privado en H1? CU-05 dice que muestra el estado vigente; en H1 el admin todavía no puede mover turnos (CU-13 es H2). | CPO | En H1 solo existe “Confirmado”. En H2 sumar un aviso “El local cambió tu turno: ahora es…”. |
 | P-D2 | ¿El precio de referencia es obligatorio al crear un servicio? CU-09 no lo valida. | CPO | Opcional; si está vacío la web muestra “Consultá el precio en el local”. |
-| P-D3 | ¿Hay un máximo de duración de servicio o un mínimo distinto de 5 min? | CPO / Architect | Mínimo 5 min, sin máximo. |
-| P-D4 | ¿Cuánto dura el bloqueo por **demasiados intentos** y cuántos intentos? El texto dice “unos minutos” sin cifra. | Architect | Mostrar el tiempo exacto solo si es fijo (“Probá de nuevo en 15 minutos”). |
-| P-D5 | ¿El link privado se puede abrir sin conexión al servidor (arranque en frío, RNF-06)? Diseñé un estado “Cargando tu turno…”; si el arranque en frío supera ~3 s conviene un texto extra (“Puede tardar unos segundos”). | Architect | Agregar el texto después de 3 s. |
+| P-D3 | ¿Hay un máximo de duración de servicio o un mínimo distinto de 5 min? | CPO / Architect | ✅ **Respondida (Architect):** mínimo 5 min, múltiplos de 5, máximo 8 horas (480 min). Aplicado en `admin-servicio-editar`/`-error` (`min=5 max=480 step=5`, hint y mensaje “La duración tiene que ser de 5 a 480 minutos (8 horas), en múltiplos de 5.”) y en spec/flows. El máximo lo propuso el Architect: **queda para validación del CPO** si producto prefiere otro valor (cambia solo `max`, el hint y el mensaje). |
+| P-D4 | ¿Cuánto dura el bloqueo por **demasiados intentos** y cuántos intentos? | Architect | ✅ **Respondida (Architect):** 5 intentos fallidos → bloqueo fijo de 15 minutos. `admin-ingresar-bloqueado` dice “Por seguridad, pausamos el ingreso. Probá de nuevo en 15 minutos.” (antes “unos minutos”); spec y flows actualizados. |
+| P-D5 | ¿Cuánto tarda el link privado con arranque en frío (RNF-06)? | Architect | ✅ **Respondida (Architect):** con la base inactiva la primera carga tarda ~1 s. Se mantiene como protección: a los 3 s, `turno-cargando` suma “Puede tardar unos segundos.” dentro del mismo `role="status"` (agregado al prototipo en v0.3; spec y flows). |
 | P-D6 | En la agenda semanal, ¿alcanza con la lista por día o la encargada necesita una grilla horaria (eje de horas)? | CPO (validar en la demo) | Lista por día para H1; observar en la demo. |
-| P-D7 | ¿El panel necesita un estado “sin sesión / sesión vencida” distinto del de ingreso? Diseñé `admin-sesion` (“Para ver el panel, primero iniciá sesión”). | Architect | Mismo formulario con aviso. |
+| P-D7 | ¿El panel necesita un estado “sin sesión / sesión vencida” distinto del de ingreso? | Architect | ✅ **Respondida (Architect):** mismo formulario con aviso (`admin-sesion`, sin cambios). La sesión dura 12 horas. |
 
 ## Tokens propuestos (decide el CDO)
 
@@ -132,3 +132,14 @@ nuevos). Si el CDO prefiere generarlo con un script, conviene un PR aparte del d
   - `horario-ocupado`: “← Volver: peluquero” (coherente con el paso 3).
   - `accessibility.md`: estados actualizados con la verificación en Chromium headless; pendientes reales:
     lector de pantalla, zoom 200 % y preview de Vercel.
+- v0.3 — respuestas del Architect a las preguntas abiertas (P-D1, P-D2 y P-D6 siguen abiertas para el CPO):
+  - P-D4: bloqueo fijo de 15 min tras 5 intentos; `admin-ingresar-bloqueado` dice “Probá de nuevo en 15 minutos”.
+  - P-D5: `turno-cargando` suma “Puede tardar unos segundos.” a los 3 s (protección; la carga en frío es ~1 s).
+  - P-D7 / S-7: mismo formulario con aviso para sesión vencida; sesión de 12 h, sin “Recordarme”.
+  - P-D3: duración de servicio de 5 a 480 min en múltiplos de 5 (input, hint, mensaje de error y validación JS);
+    máximo pendiente de validación del CPO.
+  - S-3: inicios cada 15 min y rangos en pasos de 15 min; horarios de ejemplo verificados como coherentes.
+  - S-4: link `https://<proyecto>.vercel.app/t/<código>` (código de 22 caracteres) en la confirmación y en
+    `turno.ics` (replegado ≤ 75 octetos por línea, CRLF).
+  - S-6: teléfono con 8 a 15 dígitos (se guardan solo los dígitos); mensaje de error y validación JS ajustados.
+  - S-8: confirmado, sin cambios.

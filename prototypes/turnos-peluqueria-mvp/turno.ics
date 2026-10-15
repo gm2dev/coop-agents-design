@@ -13,7 +13,7 @@ TZNAME:-03
 END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
-UID:prototipo-k7Q2-9xRm-4LpZ-a81c@reservas.example
+UID:prototipo-Q7mK2pXv9RtL4wNc8bHd3s@turnos-la-esquina.vercel.app
 DTSTAMP:20261015T120000Z
 DTSTART;TZID=America/Argentina/Buenos_Aires:20261016T153000
 DTEND;TZID=America/Argentina/Buenos_Aires:20261016T161500
@@ -21,8 +21,8 @@ SUMMARY:Corte y barba en La Esquina Peluquería (con Bruno)
 LOCATION:Calle Ejemplo 1234\, Villa Prueba
 DESCRIPTION:Turno de prueba (prototipo). Corte y barba\, 45 min\, con Bruno
  . Precio orientativo $ 11.000\, se paga en el local. Teléfono del local: 
- 011 4000-0000. Tu link privado: https://reservas.example/t/k7Q2-9xRm-4LpZ-
- a81c
-URL:https://reservas.example/t/k7Q2-9xRm-4LpZ-a81c
+ 011 4000-0000. Tu link privado: https://turnos-la-esquina.vercel.app/t/Q7m
+ K2pXv9RtL4wNc8bHd3s
+URL:https://turnos-la-esquina.vercel.app/t/Q7mK2pXv9RtL4wNc8bHd3s
 END:VEVENT
 END:VCALENDAR

@@ -33,7 +33,7 @@ con el formato `<Paso o pantalla> — <local>` (prefijo `Error: ` cuando la pág
 | **Selección actual** | Pasos 2–4 | Caja `surface.default` con lo elegido (“Corte y barba · 45 min · con …”) + link “Cambiar”. |
 | **Opción (radio-tarjeta)** | Servicio, peluquero | `input type=radio` nativo dentro de `label`; borde `border.strong` 1px*; elegido: `surface.selected`, borde 2px* `border.selected`, texto `text.selected`; foco: anillo `focus.ring` en la tarjeta. |
 | **Selector de días** | Paso 3 | `nav` con `ul` de links (7 por vista), el día elegido con `aria-current="date"` (+ fondo, borde 2px* y semibold). Cada día dice su estado en texto (“Hoy”, “Con horarios”, “Sin horarios”, “Cerrado”, “Último día”, “No disponible”). Cerrado / fuera de ventana: no es link, `surface.disabled`, borde punteado, `text.muted`. Nombre accesible completo con texto oculto (“, viernes 16 de octubre”). Navegación “← Semana anterior / Semana siguiente →”. |
-| **Horarios** | Paso 3 | `fieldset` + `legend` “Horarios del <día>” + hint (hora de inicio, hora del local, duración). Radio group nativo en grilla `auto-fill` (min `size.grid.slot-min`*), cada horario alto `size.target.comfortable`. Elegido: `surface.selected`, borde 2px*, ✓ visible. Flechas para moverse dentro del grupo, Tab para salir. |
+| **Horarios** | Paso 3 | `fieldset` + `legend` “Horarios del <día>” + hint (hora de inicio, hora del local, duración). Los turnos pueden empezar cada 15 minutos (S-3, Architect; el intervalo se configura en un solo lugar si producto prefiere 30): la grilla muestra solo los inicios libres con la duración completa, por eso los ejemplos saltan (10:00, 10:45…). Radio group nativo en grilla `auto-fill` (min `size.grid.slot-min`*), cada horario alto `size.target.comfortable`. Elegido: `surface.selected`, borde 2px*, ✓ visible. Flechas para moverse dentro del grupo, Tab para salir. |
 | **Campo de texto** | Formularios | `label` visible arriba; “(opcional)” en `text.muted` dentro del label; hint debajo del label asociado con `aria-describedby`; input alto `size.target.comfortable`, fuente `font.size.200` (evita zoom en iOS), borde `border.strong`. |
 | **Error de campo** | Formularios | Debajo del input: ⚠ + texto en `feedback.danger.text` semibold; input con `aria-invalid="true"` y borde 2px* `feedback.danger.border`; el id del error se agrega a `aria-describedby`. |
 | **Resumen de errores** | Formularios | Alerta `danger` arriba del formulario, `role="alert"`, `tabindex="-1"`, recibe el foco al enviar; título “Revisá N datos para …” + lista de links que llevan el foco a cada campo. |
@@ -83,7 +83,7 @@ con el formato `<Paso o pantalla> — <local>` (prefijo `Error: ` cuando la pág
   - **Email (opcional)** — hint: “Solo lo ve el local.” (`type="email"`, `autocomplete="email"`).
 - Nota: “No te vamos a mandar mensajes: tu turno lo ves en la pantalla de confirmación y en tu link privado.”
 - Acción: “Continuar” → P5.
-- **Errores** (`datos-error`): nombre vacío → “Ingresá tu nombre.”; email inválido → “Revisá el email: tiene que tener la forma nombre@ejemplo.com.”; teléfono inválido → “Revisá el teléfono: usá solo números, espacios o guiones (mínimo 8 dígitos).” Resumen con foco + error junto al campo + lo tipeado se conserva. Sin teléfono ni email, avanza igual.
+- **Errores** (`datos-error`): nombre vacío → “Ingresá tu nombre.”; email inválido → “Revisá el email: tiene que tener la forma nombre@ejemplo.com.”; teléfono inválido → “Revisá el teléfono: tiene que tener entre 8 y 15 números (podés usar espacios o guiones).” (validación laxa: se aceptan espacios, guiones, puntos, paréntesis y +; se guardan solo los dígitos, entre 8 y 15 — S-6, Architect) Resumen con foco + error junto al campo + lo tipeado se conserva. Sin teléfono ni email, avanza igual.
 
 ### P5 · Revisá y confirmá (`revisar.html`) — CU-03
 
@@ -102,22 +102,22 @@ con el formato `<Paso o pantalla> — <local>` (prefijo `Error: ` cuando la pág
 Orden (y jerarquía) fijo, pensado para que en 360 px el bloque del link quede en la primera pantalla:
 
 1. **h1** “Tu turno está confirmado” (recibe el foco al llegar) + alerta success de una línea: “✓ **Viernes 16 de octubre, 15:30** · Corte y barba con **Bruno**” (siempre el peluquero asignado).
-2. **Bloque “Guardá tu link privado”** (ver componente): “Es la única forma de volver a ver tu turno. No se envía por email, SMS ni WhatsApp.” · campo “Tu link privado” (solo lectura, seleccionable) con **Copiar link** (primario) pegado al campo (debajo en celular, a la derecha desde 40rem) para que quede arriba del pliegue en 360×640 · región de estado · ayuda “Guardalo en tus notas, o agregá el turno a tu calendario: el evento incluye el link.” · **Agregar al calendario** (secundario, descarga `.ics`).
+2. **Bloque “Guardá tu link privado”** (ver componente): “Es la única forma de volver a ver tu turno. No se envía por email, SMS ni WhatsApp.” · campo “Tu link privado” (solo lectura, seleccionable; forma `https://<proyecto>.vercel.app/t/<código>` con código aleatorio de 22 caracteres, sin dominio propio — S-4, Architect; ejemplo del prototipo `https://turnos-la-esquina.vercel.app/t/Q7mK2pXv9RtL4wNc8bHd3s`) con **Copiar link** (primario) pegado al campo (debajo en celular, a la derecha desde 40rem) para que quede arriba del pliegue en 360×640 · región de estado · ayuda “Guardalo en tus notas, o agregá el turno a tu calendario: el evento incluye el link.” · **Agregar al calendario** (secundario, descarga `.ics`).
    - Copiar OK → se anuncia “Link copiado. Pegalo en tus notas o en un chat con vos mismo para tenerlo a mano.”
    - Copiar falla → se selecciona el link y se anuncia “No se pudo copiar automáticamente. El link quedó seleccionado: copialo a mano.”
 3. **Resumen del turno:** servicio, peluquero, fecha, hora inicio–fin (hora del local), duración, precio (orientativo, se paga en el local), a nombre de, teléfono (o “No lo dejaste”).
 4. **Dónde:** nombre, dirección y teléfono del local + “Si perdés el link o necesitás cambiar algo, llamá al local.”
 5. Link “Reservar otro turno”.
 
-**Archivo `.ics`:** `SUMMARY` “<servicio> en <local> (con <peluquero>)”, `DTSTART/DTEND` con la zona del local, `LOCATION` = dirección vigente (CU-16), `DESCRIPTION` con servicio, duración, peluquero, precio orientativo, teléfono del local y el link privado; `URL` = link privado. Sin alarmas (`VALARM`): el recordatorio lo decide el calendario del cliente (no prometemos aviso).
+**Archivo `.ics`:** `SUMMARY` “<servicio> en <local> (con <peluquero>)”, `DTSTART/DTEND` con la zona del local, `LOCATION` = dirección vigente (CU-16), `DESCRIPTION` con servicio, duración, peluquero, precio orientativo, teléfono del local y el link privado; `URL` = link privado. Líneas ≤ 75 octetos, plegadas con CRLF + espacio (RFC 5545), sin partir caracteres UTF-8. Sin alarmas (`VALARM`): el recordatorio lo decide el calendario del cliente (no prometemos aviso).
 
 ### P8 · Link privado (`turno.html`) — CU-05
 
 - **h1** “Tu turno” + badge “✓ Confirmado” + “Estado actualizado al abrir este link.”
-- Resumen (sin nombre ni teléfono del cliente, S-8) + “Agregar al calendario”.
+- Resumen (sin nombre ni teléfono del cliente, S-8, confirmado por el Architect) + “Agregar al calendario”.
 - Dónde + “Si necesitás cambiar o cancelar el turno, llamá al local: <teléfono>.” (H1). **Enganche H2:** acciones Cambiar / Cancelar en este lugar.
 - “Este link es privado: no lo compartas.”
-- **Estados:** cargando (`turno-cargando`) · **Turno no encontrado** (`turno-no-encontrado`: h1 “Turno no encontrado”, “Este link no corresponde a ningún turno. Revisá que lo hayas copiado completo.” + teléfono del local + “Reservar un turno”; nunca datos de un turno; misma respuesta para token inválido o inexistente).
+- **Estados:** cargando (`turno-cargando`: spinner + “Cargando tu turno…”; si a los 3 s sigue cargando se suma “Puede tardar unos segundos.” dentro de la misma región `role="status"`. Con la base inactiva la primera carga tarda ~1 s, así que es una protección: P-D5, Architect) · **Turno no encontrado** (`turno-no-encontrado`: h1 “Turno no encontrado”, “Este link no corresponde a ningún turno. Revisá que lo hayas copiado completo.” + teléfono del local + “Reservar un turno”; nunca datos de un turno; misma respuesta para token inválido o inexistente).
 
 ## 3. Panel del local
 
@@ -126,7 +126,7 @@ Orden (y jerarquía) fijo, pensado para que en 360 px el bloque del link quede e
 - Sin navegación de secciones. **h1** “Ingresar al panel”.
 - Campos **Usuario** (`autocomplete="username"`, sin autocapitalizar) y **Contraseña** (`autocomplete="current-password"`) + checkbox “Mostrar contraseña”. Pegar está permitido.
 - “Ingresar” (primario). Debajo: “Si olvidaste tu contraseña, pedile a quien administra el panel que te la resetee.” (sin link, sin email).
-- **Estados:** campos vacíos (error junto al campo + resumen) · ingresando (`-cargando`) · **error genérico** (`-error`: “Usuario o contraseña incorrectos. Revisalos y probá de nuevo.”; conserva el usuario, vacía la contraseña; no dice cuál falló) · **demasiados intentos** (`-bloqueado`: “Demasiados intentos. Por seguridad, el ingreso quedó pausado un rato. Esperá unos minutos y probá de nuevo.” + texto de reseteo; no revela si el usuario existe) · **sin sesión** (`admin-sesion`: formulario con aviso “Para ver el panel, primero iniciá sesión.”; ningún dato del panel).
+- **Estados:** campos vacíos (error junto al campo + resumen) · ingresando (`-cargando`) · **error genérico** (`-error`: “Usuario o contraseña incorrectos. Revisalos y probá de nuevo.”; conserva el usuario, vacía la contraseña; no dice cuál falló) · **demasiados intentos** (`-bloqueado`: “Demasiados intentos. Por seguridad, pausamos el ingreso. Probá de nuevo en 15 minutos.” + texto de reseteo; se activa con 5 intentos fallidos y el bloqueo es fijo de 15 minutos (P-D4, Architect); no revela si el usuario existe ni cuántos intentos quedan) · **sin sesión o sesión vencida** (`admin-sesion`: el mismo formulario con aviso “Para ver el panel, primero iniciá sesión.”; ningún dato del panel). La sesión dura 12 horas y no hay “Recordarme” (P-D7, S-7, Architect).
 
 ### A2 · Agenda (`admin-agenda-dia.html`, `-semana`) — CU-12
 
@@ -141,13 +141,13 @@ Orden (y jerarquía) fijo, pensado para que en 360 px el bloque del link quede e
 ### A3 · Servicios (`admin-servicios.html`, `admin-servicio-editar.html`) — CU-09
 
 - Lista: “Agregar servicio” (primario) + nota “La web solo muestra los servicios activos que tienen al menos un peluquero asignado.” Cada fila: nombre + badge Activo/Inactivo, “45 min · $ 11.000 (precio de referencia)”, peluqueros, y si no tiene: **badge “⚠ Sin peluqueros asignados” + “No se ofrece en la web hasta que le asignes al menos uno.”** Botón “Editar <nombre>” (nombre accesible completo).
-- Formulario: **Nombre** · **Duración (minutos)** (number, min 5, paso 5; hint “Si la cambiás, aplica a las reservas nuevas. Los turnos ya confirmados conservan su duración.”) · **Precio de referencia (opcional)** (hint “Se muestra como orientativo. No se cobra en la web.”) · **Peluqueros que lo hacen** (checkboxes; hint “El cliente solo ve a estos peluqueros. Sin ninguno, el servicio no se ofrece en la web.”) · **Activo** (hint “Si lo desactivás, deja de aparecer en la web. Los turnos ya confirmados se mantienen.”). “Guardar” / “Cancelar”.
-- **Estados:** vacío (`-vacio`, explica el efecto en la web) · errores (`admin-servicio-error`: “Ingresá el nombre del servicio.”, “La duración tiene que ser de al menos 5 minutos.”) · guardado (`-guardado`: alerta success con foco).
+- Formulario: **Nombre** · **Duración (minutos)** (number, `min=5`, `max=480`, `step=5`; hint “De 5 a 480 minutos (8 horas), en múltiplos de 5. Si la cambiás, aplica a las reservas nuevas. Los turnos ya confirmados conservan su duración.”) · **Precio de referencia (opcional)** (hint “Se muestra como orientativo. No se cobra en la web.”) · **Peluqueros que lo hacen** (checkboxes; hint “El cliente solo ve a estos peluqueros. Sin ninguno, el servicio no se ofrece en la web.”) · **Activo** (hint “Si lo desactivás, deja de aparecer en la web. Los turnos ya confirmados se mantienen.”). “Guardar” / “Cancelar”.
+- **Estados:** vacío (`-vacio`, explica el efecto en la web) · errores (`admin-servicio-error`: “Ingresá el nombre del servicio.”, “La duración tiene que ser de 5 a 480 minutos (8 horas), en múltiplos de 5.” para vacío, menor que 5, mayor que 480 o no múltiplo de 5; P-D3, Architect) · guardado (`-guardado`: alerta success con foco).
 
 ### A4 · Peluqueros (`admin-peluqueros.html`, `admin-peluquero-editar.html`) — CU-10
 
 - Lista: nombre + Activo/Inactivo, servicios, resumen del horario; sin servicios → **badge “⚠ Sin servicios” + “No aparece en la reserva hasta que tenga al menos un servicio.”**
-- Formulario: **Nombre** · **Servicios que hace** (checkboxes) · **Horario semanal**: h2 + hint (“Uno o más rangos por día, en hora del local… Si cambiás el horario, los turnos ya confirmados no se borran ni se modifican.”); un `fieldset` por día (legend = día): “No trabaja.” si no hay rangos; cada rango “Desde / Hasta” (`type="time"`, paso 15 min; nombres accesibles “Desde (rango 2)”) + “Quitar” (“Quitar rango 2 del martes”); “+ Agregar rango al <día>”. Agregar/quitar mueve el foco (al nuevo “Desde” / al botón “Agregar”) y se anuncia en `role="status"`. · **Activo** (hint “Sus turnos futuros se mantienen”).
+- Formulario: **Nombre** · **Servicios que hace** (checkboxes) · **Horario semanal**: h2 + hint (“Uno o más rangos por día, en hora del local… Si cambiás el horario, los turnos ya confirmados no se borran ni se modifican.”); un `fieldset` por día (legend = día): “No trabaja.” si no hay rangos; cada rango “Desde / Hasta” (`type="time"`, `step="900"`: rangos en pasos de 15 min, S-3, Architect; nombres accesibles “Desde (rango 2)”) + “Quitar” (“Quitar rango 2 del martes”); “+ Agregar rango al <día>”. Agregar/quitar mueve el foco (al nuevo “Desde” / al botón “Agregar”) y se anuncia en `role="status"`. · **Activo** (hint “Sus turnos futuros se mantienen”).
 - **Validaciones** (`admin-peluquero-error`): “La hora de fin tiene que ser posterior a la de inicio.” · “Este rango se superpone con el rango 1 (10:00 a 13:00).” — en el rango (inputs `aria-invalid`) y en el resumen (“Martes, rango 2: …”).
 - **Estados:** vacío · errores · guardado (“Los turnos ya confirmados no se modifican.”; enganche H2: turnos afectados).
 
@@ -204,7 +204,7 @@ Sin anchos fijos: todo en `rem` / grid `auto-fill`, `overflow-wrap: anywhere` pa
 | | Inválidas: error genérico | ✔ `admin-ingresar-error` |
 | | (Decisión CDO) límite de intentos | ✔ `admin-ingresar-bloqueado` |
 | CU-09 | Crear con nombre, duración, precio | ✔ A3 |
-| | Nombre vacío o duración 0: error | ✔ `admin-servicio-error` |
+| | Nombre vacío o duración fuera de 5–480 min / no múltiplo de 5: error | ✔ `admin-servicio-error` |
 | | Cambio de duración solo para nuevas | ✔ hint + mensaje de guardado |
 | | Desactivar | ✔ checkbox Activo + hint |
 | | Peluqueros asignados | ✔ checkboxes |
