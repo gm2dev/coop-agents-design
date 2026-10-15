@@ -19,7 +19,7 @@
   <main id="main">
     <h1>Datos del local</h1>
     <div class="alert alert-danger" id="error-summary" role="alert" tabindex="-1" data-autofocus>
-      <p class="alert-title">Revisá 2 datos para guardar</p><ul><li><a href="#l-direccion">Ingresá la dirección del local.</a></li><li><a href="#l-telefono">Ingresá el teléfono de contacto.</a></li></ul>
+      <p class="alert-title"><span aria-hidden="true">✕ </span><span class="visually-hidden">Error: </span>Revisá 2 datos para guardar</p><ul><li><a href="#l-direccion">Ingresá la dirección del local.</a></li><li><a href="#l-telefono">Ingresá el teléfono de contacto.</a></li></ul>
     </div>
     <p class="small muted">Todos los campos son obligatorios. Se muestran en la web de reservas, en la confirmación y en el evento del calendario.</p>
     <form class="panel" action="admin-local-guardado.html" method="get" data-validate>
@@ -27,19 +27,19 @@
         <label for="l-nombre">Nombre del local</label>
         <p class="hint" id="l-nombre-hint">Como lo ven los clientes.</p>
         <input id="l-nombre" type="text" autocomplete="organization" data-required data-label="el nombre del local" value="La Esquina Peluquería" aria-describedby="l-nombre-hint">
-        <p class="field-error" id="l-nombre-error" hidden><span aria-hidden="true">⚠</span><span class="msg"></span></p>
+        <p class="field-error" id="l-nombre-error" hidden><span aria-hidden="true">✕</span><span class="visually-hidden">Error: </span><span class="msg"></span></p>
       </div>
       <div class="field">
         <label for="l-direccion">Dirección</label>
         <p class="hint" id="l-direccion-hint">Calle, número y barrio o localidad.</p>
         <input id="l-direccion" type="text" autocomplete="street-address" data-required data-label="la dirección del local" value="" aria-describedby="l-direccion-hint l-direccion-error" aria-invalid="true">
-        <p class="field-error" id="l-direccion-error"><span aria-hidden="true">⚠</span><span class="msg">Ingresá la dirección del local.</span></p>
+        <p class="field-error" id="l-direccion-error"><span aria-hidden="true">✕</span><span class="visually-hidden">Error: </span><span class="msg">Ingresá la dirección del local.</span></p>
       </div>
       <div class="field">
         <label for="l-telefono">Teléfono de contacto</label>
         <p class="hint" id="l-telefono-hint">Aparece en todos los mensajes que piden “llamá al local”.</p>
         <input id="l-telefono" type="tel" autocomplete="tel" data-required data-label="el teléfono de contacto" value="" aria-describedby="l-telefono-hint l-telefono-error" aria-invalid="true">
-        <p class="field-error" id="l-telefono-error"><span aria-hidden="true">⚠</span><span class="msg">Ingresá el teléfono de contacto.</span></p>
+        <p class="field-error" id="l-telefono-error"><span aria-hidden="true">✕</span><span class="visually-hidden">Error: </span><span class="msg">Ingresá el teléfono de contacto.</span></p>
       </div>
       <div class="actions"><button class="btn btn-primary" type="submit">Guardar</button></div>
     </form>
@@ -47,7 +47,7 @@
   <aside class="proto" aria-label="Navegación del prototipo">
     <div class="wrap small">
       <h2>Estados de esta pantalla</h2><ul><li><a href="admin-local.html">Formulario (probá guardar con un campo vacío)</a></li><li><a href="admin-local-error.html">Error: campos vacíos</a></li><li><a href="admin-local-guardado.html">Éxito: datos guardados</a></li></ul>
-      <p><a href="index.html">Índice del prototipo y recorridos de demo</a> · Prototipo de diseño · Hito 1 · datos ficticios · v0.4</p>
+      <p><a href="index.html">Índice del prototipo y recorridos de demo</a> · Prototipo de diseño · Hito 1 · datos ficticios · v0.5</p>
     </div>
   </aside>
   <script src="app.js"></script>

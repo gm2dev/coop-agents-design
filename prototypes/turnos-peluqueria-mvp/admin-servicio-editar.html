@@ -26,14 +26,14 @@
       <div class="field">
         <label for="s-nombre">Nombre</label>
         <input id="s-nombre" name="nombre" type="text" data-required data-label="el nombre del servicio" value="Corte y barba">
-        <p class="field-error" id="s-nombre-error" hidden><span aria-hidden="true">⚠</span><span class="msg"></span></p>
+        <p class="field-error" id="s-nombre-error" hidden><span aria-hidden="true">✕</span><span class="visually-hidden">Error: </span><span class="msg"></span></p>
       </div>
       <div class="inline-fields">
         <div class="field">
           <label for="s-duracion">Duración (minutos)</label>
           <input id="s-duracion" name="duracion" type="number" inputmode="numeric" min="5" max="480" step="5" data-min="5" data-max="480" data-step="5" data-min-msg="La duración tiene que ser de 5 a 480 minutos (8 horas), en múltiplos de 5." value="45" aria-describedby="s-duracion-hint">
           <p class="hint" id="s-duracion-hint">De 5 a 480 minutos (8 horas), en múltiplos de 5. Si la cambiás, aplica a las reservas nuevas. Los turnos ya confirmados conservan su duración.</p>
-          <p class="field-error" id="s-duracion-error" hidden><span aria-hidden="true">⚠</span><span class="msg"></span></p>
+          <p class="field-error" id="s-duracion-error" hidden><span aria-hidden="true">✕</span><span class="visually-hidden">Error: </span><span class="msg"></span></p>
         </div>
         <div class="field">
           <label for="s-precio">Precio de referencia <span class="optional">(opcional)</span></label>
@@ -61,7 +61,7 @@
   <aside class="proto" aria-label="Navegación del prototipo">
     <div class="wrap small">
       <h2>Estados de esta pantalla</h2><ul><li><a href="admin-servicios.html">Lista con avisos</a></li><li><a href="admin-servicios-vacio.html">Vacío: sin servicios</a></li><li><a href="admin-servicio-editar.html">Editar servicio</a></li><li><a href="admin-servicio-error.html">Editar: errores de validación</a></li><li><a href="admin-servicios-guardado.html">Éxito: servicio guardado</a></li></ul>
-      <p><a href="index.html">Índice del prototipo y recorridos de demo</a> · Prototipo de diseño · Hito 1 · datos ficticios · v0.4</p>
+      <p><a href="index.html">Índice del prototipo y recorridos de demo</a> · Prototipo de diseño · Hito 1 · datos ficticios · v0.5</p>
     </div>
   </aside>
   <script src="app.js"></script>

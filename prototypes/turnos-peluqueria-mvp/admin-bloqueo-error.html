@@ -20,7 +20,7 @@
     <p><a class="back" href="admin-bloqueos.html">← Volver a bloqueos</a></p>
     <h1>Nuevo bloqueo</h1>
     <div class="alert alert-danger" id="error-summary" role="alert" tabindex="-1" data-autofocus>
-      <p class="alert-title">Revisá 2 datos para guardar</p>
+      <p class="alert-title"><span aria-hidden="true">✕ </span><span class="visually-hidden">Error: </span>Revisá 2 datos para guardar</p>
       <ul><li><a href="#b-hasta">La fecha “hasta” tiene que ser igual o posterior a la fecha “desde”.</a></li><li><a href="#b-hfin">La hora de fin tiene que ser posterior a la de inicio.</a></li></ul>
     </div>
     <form class="panel" action="admin-bloqueo-afectados.html" method="get" data-reveal-form>
@@ -49,7 +49,7 @@
           <div class="field reveal" id="b-hasta-wrap">
             <label for="b-hasta">Fecha hasta (inclusive)</label>
             <input id="b-hasta" name="hasta" type="date" value="2026-11-02" aria-invalid="true" aria-describedby="b-hasta-error">
-          <p class="field-error" id="b-hasta-error"><span aria-hidden="true">⚠</span><span class="msg">La fecha “hasta” tiene que ser igual o posterior a la fecha “desde”.</span></p>
+          <p class="field-error" id="b-hasta-error"><span aria-hidden="true">✕</span><span class="visually-hidden">Error: </span><span class="msg">La fecha “hasta” tiene que ser igual o posterior a la fecha “desde”.</span></p>
           </div>
         </div>
       </fieldset>
@@ -62,7 +62,7 @@
         <div class="range reveal" id="b-horas-wrap">
           <div class="field"><label for="b-hini">Desde</label><input id="b-hini" name="hini" type="time" step="900" value="15:00"></div>
           <div class="field"><label for="b-hfin">Hasta</label><input id="b-hfin" name="hfin" type="time" step="900" value="13:00" aria-invalid="true" aria-describedby="b-hfin-error">
-          <p class="field-error" id="b-hfin-error"><span aria-hidden="true">⚠</span><span class="msg">La hora de fin tiene que ser posterior a la de inicio.</span></p></div>
+          <p class="field-error" id="b-hfin-error"><span aria-hidden="true">✕</span><span class="visually-hidden">Error: </span><span class="msg">La hora de fin tiene que ser posterior a la de inicio.</span></p></div>
         </div>
         <p class="hint">En hora del local, cada 15 minutos. Si elegís varios días, el rango se aplica a cada uno.</p>
       </fieldset>
@@ -72,7 +72,7 @@
   <aside class="proto" aria-label="Navegación del prototipo">
     <div class="wrap small">
       <h2>Estados de esta pantalla</h2><ul><li><a href="admin-bloqueos.html">Lista con bloqueos</a></li><li><a href="admin-bloqueos-vacio.html">Vacía</a></li><li><a href="admin-bloqueo-nuevo.html">Nuevo bloqueo</a></li><li><a href="admin-bloqueo-error.html">Nuevo bloqueo con errores</a></li><li><a href="admin-bloqueo-guardado.html">Guardado sin turnos afectados</a></li><li><a href="admin-bloqueo-afectados.html">Guardado con turnos confirmados dentro</a></li><li><a href="admin-bloqueo-eliminar.html">Eliminar: confirmación</a></li><li><a href="admin-bloqueos-eliminado.html">Eliminado</a></li><li><a href="horario-bloqueado.html">Vista del cliente: días bloqueados</a></li></ul>
-      <p><a href="index.html">Índice del prototipo y recorridos de demo</a> · Prototipo de diseño · Hito 2 · datos ficticios · v0.4</p>
+      <p><a href="index.html">Índice del prototipo y recorridos de demo</a> · Prototipo de diseño · Hito 2 · datos ficticios · v0.5</p>
     </div>
   </aside>
   <script src="app.js"></script>

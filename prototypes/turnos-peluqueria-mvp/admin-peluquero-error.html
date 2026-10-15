@@ -20,13 +20,13 @@
     <p><a class="back" href="admin-peluqueros.html">← Volver a peluqueros</a></p>
     <h1>Editar peluquero</h1>
     <div class="alert alert-danger" id="error-summary" role="alert" tabindex="-1" data-autofocus>
-      <p class="alert-title">Revisá 2 rangos del horario para guardar</p><ul><li><a href="#mar-2-desde">Martes, rango 2: Este rango se superpone con el rango 1 (10:00 a 13:00).</a></li><li><a href="#sab-1-desde">Sábado, rango 1: La hora de fin tiene que ser posterior a la de inicio.</a></li></ul>
+      <p class="alert-title"><span aria-hidden="true">✕ </span><span class="visually-hidden">Error: </span>Revisá 2 rangos del horario para guardar</p><ul><li><a href="#mar-2-desde">Martes, rango 2: Este rango se superpone con el rango 1 (10:00 a 13:00).</a></li><li><a href="#sab-1-desde">Sábado, rango 1: La hora de fin tiene que ser posterior a la de inicio.</a></li></ul>
     </div>
     <form class="panel" action="admin-peluqueros-guardado.html" method="get">
       <div class="field">
         <label for="p-nombre">Nombre</label>
         <input id="p-nombre" name="nombre" type="text" data-required data-label="el nombre del peluquero" value="Bruno">
-        <p class="field-error" id="p-nombre-error" hidden><span aria-hidden="true">⚠</span><span class="msg"></span></p>
+        <p class="field-error" id="p-nombre-error" hidden><span aria-hidden="true">✕</span><span class="visually-hidden">Error: </span><span class="msg"></span></p>
       </div>
       <fieldset aria-describedby="p-servs-hint">
         <legend>Servicios que hace</legend>
@@ -64,7 +64,7 @@
               <div class="field"><label for="mar-2-desde" data-part="l" data-for="desde">Desde<span class="visually-hidden rn"> (rango 2)</span></label><input id="mar-2-desde" data-part="desde" type="time" step="900" value="12:00" aria-invalid="true" aria-describedby="mar-2-error"></div>
               <div class="field"><label for="mar-2-hasta" data-part="l" data-for="hasta">Hasta<span class="visually-hidden rn"> (rango 2)</span></label><input id="mar-2-hasta" data-part="hasta" type="time" step="900" value="19:00" aria-invalid="true" aria-describedby="mar-2-error"></div>
               <button class="btn btn-danger-link remove" type="button" aria-label="Quitar rango 2 del martes">Quitar</button>
-              <p class="field-error" id="mar-2-error"><span aria-hidden="true">⚠</span><span class="msg">Rango 2: Este rango se superpone con el rango 1 (10:00 a 13:00).</span></p>
+              <p class="field-error" id="mar-2-error"><span aria-hidden="true">✕</span><span class="visually-hidden">Error: </span><span class="msg">Rango 2: Este rango se superpone con el rango 1 (10:00 a 13:00).</span></p>
             </li>
           </ul>
           <button class="btn btn-link" type="button" data-add-range="r-mar">+ Agregar rango<span class="visually-hidden"> al martes</span></button>
@@ -116,7 +116,7 @@
               <div class="field"><label for="sab-1-desde" data-part="l" data-for="desde">Desde<span class="visually-hidden rn"> (rango 1)</span></label><input id="sab-1-desde" data-part="desde" type="time" step="900" value="14:00" aria-invalid="true" aria-describedby="sab-1-error"></div>
               <div class="field"><label for="sab-1-hasta" data-part="l" data-for="hasta">Hasta<span class="visually-hidden rn"> (rango 1)</span></label><input id="sab-1-hasta" data-part="hasta" type="time" step="900" value="09:00" aria-invalid="true" aria-describedby="sab-1-error"></div>
               <button class="btn btn-danger-link remove" type="button" aria-label="Quitar rango 1 del sábado">Quitar</button>
-              <p class="field-error" id="sab-1-error"><span aria-hidden="true">⚠</span><span class="msg">Rango 1: La hora de fin tiene que ser posterior a la de inicio.</span></p>
+              <p class="field-error" id="sab-1-error"><span aria-hidden="true">✕</span><span class="visually-hidden">Error: </span><span class="msg">Rango 1: La hora de fin tiene que ser posterior a la de inicio.</span></p>
             </li>
           </ul>
           <button class="btn btn-link" type="button" data-add-range="r-sab">+ Agregar rango<span class="visually-hidden"> al sábado</span></button>
@@ -147,7 +147,7 @@
   <aside class="proto" aria-label="Navegación del prototipo">
     <div class="wrap small">
       <h2>Estados de esta pantalla</h2><ul><li><a href="admin-peluqueros.html">Lista</a></li><li><a href="admin-peluqueros-vacio.html">Vacía</a></li><li><a href="admin-peluquero-editar.html">Editar y horario semanal</a></li><li><a href="admin-peluquero-error.html">Errores en rangos</a></li><li><a href="admin-peluqueros-guardado.html">Guardado sin turnos afectados</a></li><li><a href="admin-peluqueros-afectados.html">H2: guardado con turnos fuera del nuevo horario</a></li><li><a href="admin-peluqueros-desactivado.html">H2: desactivado con turnos futuros</a></li></ul>
-      <p><a href="index.html">Índice del prototipo y recorridos de demo</a> · Prototipo de diseño · Hito 1 · datos ficticios · v0.4</p>
+      <p><a href="index.html">Índice del prototipo y recorridos de demo</a> · Prototipo de diseño · Hito 1 · datos ficticios · v0.5</p>
     </div>
   </aside>
   <script src="app.js"></script>

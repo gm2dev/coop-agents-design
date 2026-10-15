@@ -320,6 +320,10 @@ input[readonly] { background: var(--color-surface-subtle); }
 .appt .btn, .appt .badge { white-space: normal; }
 .attendance legend { font-size: var(--font-size-100); margin-bottom: var(--space-100); }
 .attendance .appt-actions { margin-top: 0; }
+/* Error al guardar la asistencia: alerta dentro de la tarjeta, debajo de los botones */
+.att-error { margin: var(--space-200) 0 0; padding: var(--space-200) var(--space-300); }
+.att-error .alert-title { font-size: var(--font-size-200); }
+.att-error p { margin: 0 0 var(--space-200); }
 .compare { display: grid; gap: var(--space-300); margin-bottom: var(--space-300); }
 .compare .panel { margin: 0; }
 .compare-before dd { color: var(--color-text-muted); }
