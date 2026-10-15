@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cancelar turno — Tijera Fina (prototipo)</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="bar">
+      <a class="brand" href="index.html">Tijera Fina</a>
+      
+    </div>
+  </header>
+  <main id="main">
+    <p><a class="back" href="turno.html">← Tu turno</a></p>
+    <h1>¿Cancelar tu turno?</h1>
+    <form action="turno-cancelado.html" method="get" class="panel">
+      <p><strong>Corte de pelo</strong> · jueves 22 de octubre, 15:30 · con Martín</p>
+      <div class="field">
+        <label for="motivo">Motivo <span class="opt">(opcional)</span></label>
+        <select id="motivo" name="motivo"><option value="">Prefiero no decirlo</option><option>No puedo ir ese día</option><option>Me equivoqué al reservar</option><option>Otro</option></select>
+      </div>
+      <p>El horario queda libre para otra persona. Esta acción no se puede deshacer. Te mandamos la confirmación por email.</p>
+      <div class="actions"><button class="btn btn-danger" type="submit">Sí, cancelar turno</button><a class="btn btn-secondary" href="turno.html">No, mantener turno</a></div>
+      <p class="small muted">¿Querés otro día? <a href="reprogramar.html">Reprogramá en lugar de cancelar</a>.</p>
+    </form>
+    <p class="small"><a href="cancelar-error.html">Simular: error al cancelar</a></p>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <h2 class="h3">¿Necesitás ayuda?</h2>
+      <p><strong>Tijera Fina</strong> · Teléfono: <a href="tel:+541155550100">11 5555 0100</a></p>
+      <p class="small muted">Av. Siempreviva 742, CABA · Martes a sábado, de 9 a 19 h</p>
+    </div>
+  </footer>
+  <aside class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      <h2>Estados de esta pantalla</h2><ul><li><a href="cancelar.html">Por defecto</a></li><li><a href="cancelar-error.html">Error de red al cancelar</a></li><li><a href="turno-cancelado.html">Éxito: cancelado</a></li></ul>
+      <p><a href="index.html">Índice del prototipo turnos-peluqueria</a> · Prototipo de diseño con datos de ejemplo, v0.2.</p>
+    </div>
+  </aside>
+</body>
+</html>

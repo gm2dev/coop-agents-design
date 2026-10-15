@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cancelar turno — Tijera Fina (prototipo)</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="staff">
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="bar">
+      <a class="brand" href="staff-agenda.html">Tijera Fina · Staff</a>
+      <nav class="staff-nav" aria-label="Secciones del staff"><ul><li><a href="staff-agenda.html">Agenda del día</a></li><li><a href="staff-agenda-semana.html">Semana</a></li><li><a href="staff-cargar.html">Cargar turno</a></li><li><a href="staff-bloquear.html">Bloquear horario</a></li><li><a href="staff-ingreso.html">Salir</a></li></ul></nav>
+    </div>
+  </header>
+  <main id="main">
+    <p><a class="back" href="staff-turno.html">← Detalle del turno</a></p>
+    <h1>¿Cancelar el turno de Ana P.?</h1>
+    <form action="staff-turno-cancelado.html" method="get" class="panel">
+      <p><strong>Corte de pelo</strong> · jueves 22 de octubre, 15:30 · con Martín</p>
+      <div class="field">
+        <label for="s-motivo">Motivo para la clienta</label>
+        <span class="hint" id="hint-s-motivo">Se incluye en el email que le mandamos.</span>
+        <select id="s-motivo" name="motivo" aria-describedby="hint-s-motivo"><option>El profesional no está disponible</option><option>La clienta pidió cancelar</option><option>Otro</option></select>
+      </div>
+      <label class="check"><input type="checkbox" name="avisar" checked> <span>Avisar a la clienta por email (ana@ejemplo.com)</span></label>
+      <p>El horario queda libre. Esta acción no se puede deshacer.</p>
+      <div class="actions"><button class="btn btn-danger" type="submit">Sí, cancelar turno</button><a class="btn btn-secondary" href="staff-turno.html">No, volver</a></div>
+    </form>
+    <p class="small"><a href="staff-cancelar-error.html">Simular: error al cancelar</a></p>
+  </main>
+  <aside class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      <h2>Estados de esta pantalla</h2><ul><li><a href="staff-cancelar.html">Por defecto</a></li><li><a href="staff-cancelar-error.html">Error de red al cancelar</a></li><li><a href="staff-turno-cancelado.html">Éxito: agenda con confirmación</a></li></ul>
+      <p><a href="index.html">Índice del prototipo turnos-peluqueria</a> · Prototipo de diseño con datos de ejemplo, v0.2.</p>
+    </div>
+  </aside>
+</body>
+</html>

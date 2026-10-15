@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agenda del día — Tijera Fina (prototipo)</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="staff">
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="bar">
+      <a class="brand" href="staff-agenda.html">Tijera Fina · Staff</a>
+      <nav class="staff-nav" aria-label="Secciones del staff"><ul><li><a href="staff-agenda.html" aria-current="page">Agenda del día</a></li><li><a href="staff-agenda-semana.html">Semana</a></li><li><a href="staff-cargar.html">Cargar turno</a></li><li><a href="staff-bloquear.html">Bloquear horario</a></li><li><a href="staff-ingreso.html">Salir</a></li></ul></nav>
+    </div>
+  </header>
+  <main id="main">
+    
+    <h1>Agenda · jueves 22 de octubre</h1>
+    <p><a class="btn btn-primary" href="staff-cargar.html">Cargar turno</a></p>
+    <form class="toolbar" action="staff-agenda.html" method="get" aria-label="Filtros de agenda">
+      <div class="field"><label for="f-fecha">Día</label><input type="date" id="f-fecha" name="fecha" value="2026-10-22"></div>
+      <div class="field"><label for="f-pro">Profesional</label><select id="f-pro" name="pro"><option>Todos</option><option>Lucía</option><option>Martín</option><option>Sofía</option></select></div>
+      <button class="btn btn-secondary" type="submit">Ver</button>
+    </form>
+    <div class="datenav"><a class="btn btn-secondary" href="staff-agenda.html">← Día anterior</a><a class="btn btn-secondary" href="staff-agenda.html">Hoy</a><a class="btn btn-secondary" href="staff-agenda.html">Día siguiente →</a></div>
+    <div style="margin-top:var(--space-500)">
+    <div role="status" aria-live="polite"><p>Cargando la agenda…</p></div><ul class="skeleton" aria-hidden="true"><li></li><li></li><li></li><li></li><li></li><li></li></ul>
+    </div>
+    <p class="small"><a href="staff-agenda-cargando.html">Simular: cargando</a> · <a href="staff-agenda-vacia.html">Simular: sin turnos</a> · <a href="staff-agenda-error.html">Simular: error</a></p>
+  
+  </main>
+  <aside class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      <h2>Estados de esta pantalla</h2><ul><li><a href="staff-agenda.html">Con turnos</a></li><li><a href="staff-agenda-cargando.html">Cargando</a></li><li><a href="staff-agenda-vacia.html">Sin turnos</a></li><li><a href="staff-agenda-error.html">Error de red</a></li><li><a href="staff-turno-cancelado.html">Después de cancelar un turno</a></li></ul>
+      <p><a href="index.html">Índice del prototipo turnos-peluqueria</a> · Prototipo de diseño con datos de ejemplo, v0.2.</p>
+    </div>
+  </aside>
+</body>
+</html>

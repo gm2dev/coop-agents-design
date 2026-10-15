@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reservá tu turno — Tijera Fina (prototipo)</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="bar">
+      <a class="brand" href="index.html">Tijera Fina</a>
+      
+    </div>
+  </header>
+  <main id="main">
+    <h1>Reservá tu turno en Tijera Fina</h1>
+    <p>Elegí servicio, día y horario en pocos pasos. Sin crear cuenta.</p>
+    <p class="small muted">¿Ya tenés turno? Para cancelarlo o cambiarlo, usá el link del email de confirmación.</p>
+    <div class="actions"><a class="btn btn-primary" href="servicio.html">Reservar turno</a></div>
+
+    <section class="panel stack" aria-labelledby="demo" style="margin-top:var(--space-600)">
+      <h2 id="demo">Recorrido de demo (MVP) <span class="badge badge-ok"><span aria-hidden="true">✓</span> MVP demo</span></h2>
+      <p class="small muted">Camino paso a paso para mostrar el MVP. El plazo de cancelación online queda fijo en 2 h. Las pantallas marcadas «Después del MVP» siguen navegables, pero no son parte de la demo.</p>
+      <h3 id="demo-clienta">Clienta: reservar y cancelar</h3>
+      <ol aria-labelledby="demo-clienta">
+        <li><a href="servicio.html">Elegir servicio</a></li>
+        <li><a href="profesional.html">Elegir profesional</a></li>
+        <li><a href="horario.html">Elegir día y horario</a> · estado: <a href="horario-vacio.html">día sin horarios</a></li>
+        <li><a href="datos.html">Completar datos</a> · estado: <a href="datos-error.html">datos con errores</a></li>
+        <li><a href="revisar.html">Revisar y confirmar</a> · estado: <a href="revisar-tomado.html">horario tomado</a> → <a href="revisar-alternativa.html">revisar con horario alternativo</a></li>
+        <li><a href="confirmado.html">Turno confirmado</a></li>
+        <li><a href="turno.html">Mi turno (desde el link del email)</a></li>
+        <li><a href="cancelar.html">Cancelar el turno</a></li>
+        <li><a href="turno-cancelado.html">Turno cancelado</a></li>
+        <li><a href="link-invalido.html">Link inválido o vencido</a></li>
+      </ol>
+      <h3 id="demo-staff">Peluquería: ingresar, ver la agenda y bloquear</h3>
+      <ol aria-labelledby="demo-staff">
+        <li><a href="staff-ingreso.html">Ingresar con email</a></li>
+        <li><a href="staff-ingreso-enviado.html">Revisá tu email (link mágico)</a></li>
+        <li><a href="staff-agenda.html">Agenda del día</a></li>
+        <li><a href="staff-turno.html">Detalle de un turno</a></li>
+        <li><a href="staff-bloquear.html">Bloquear horario</a> · ejemplo: <a href="staff-bloquear-feriado.html">feriado</a></li>
+        <li><a href="staff-bloqueado.html">Horario bloqueado</a></li>
+      </ol>
+      <p class="small muted">En la demo, algunos links laterales llevan a pantallas «Después del MVP» (Reprogramar en Mi turno y Cancelar; Semana, Cargar turno, detalle de bloqueo y Cancelar turno en el staff; «Simular: hay turnos» en Bloquear). Siguen funcionando; ver el README de la iniciativa.</p>
+    </section>
+
+    <section class="panel stack" aria-labelledby="mapa" style="margin-top:var(--space-600)">
+      <h2 id="mapa">Mapa completo del prototipo (v0.2)</h2>
+      <p class="small muted">Prototipo de diseño con datos de ejemplo. Los nombres, emails, teléfonos y la dirección son ficticios. 65 pantallas y estados.</p>
+      <h3>CU1 · Cliente reserva un turno <span class="badge badge-ok"><span aria-hidden="true">✓</span> MVP demo</span></h3>
+      <ol>
+        <li><a href="servicio.html">P1 Servicio</a> (<a href="servicio-error.html">validación</a>)</li>
+        <li><a href="profesional.html">P2 Profesional</a></li>
+        <li><a href="horario.html">P3 Día y horario</a> (<a href="horario-cargando.html">cargando</a>, <a href="horario-vacio.html">vacío</a>, <a href="horario-error-red.html">error de red</a>)</li>
+        <li><a href="datos.html">P4 Tus datos</a> (<a href="datos-error.html">validación</a>)</li>
+        <li><a href="revisar.html">P5 Revisar y confirmar</a> (<a href="revisar-enviando.html">confirmando</a>, <a href="revisar-tomado.html">horario tomado</a> → <a href="revisar-alternativa.html">alternativa 16:15</a> / <a href="revisar-alternativa-1700.html">17:00</a>, <a href="revisar-error-red.html">error de red</a>)</li>
+        <li><a href="confirmado.html">P6 Confirmación</a></li>
+      </ol>
+      <h3>CU2 · Consultar, cancelar o reprogramar (solo con el link del email)</h3>
+      <ul>
+        <li><span class="badge badge-ok"><span aria-hidden="true">✓</span> MVP demo</span> <a href="turno.html">P8 Mi turno</a> (<a href="turno-fuera-de-plazo.html">fuera de plazo</a>, <a href="link-invalido.html">P7 link inválido o vencido</a>)</li>
+        <li><span class="badge badge-ok"><span aria-hidden="true">✓</span> MVP demo</span> <a href="cancelar.html">P9 Cancelar</a> (<a href="cancelar-error.html">error de red</a>) → <a href="turno-cancelado.html">P10 Cancelado</a></li>
+        <li><span class="badge badge-off"><span aria-hidden="true">→</span> Después del MVP</span> <a href="reprogramar.html">P11 Reprogramar</a> (<a href="reprogramar-cargando.html">cargando</a>, <a href="reprogramar-vacio.html">vacío</a>, <a href="reprogramar-error-red.html">error al cargar</a>, <a href="reprogramar-tomado.html">horario tomado</a> → <a href="reprogramar-alternativa.html">alternativa 17:00</a> / <a href="reprogramar-alternativa-1830.html">18:30</a>, <a href="reprogramar-error-guardar.html">error al confirmar</a>) → <a href="reprogramado.html">P12 Reprogramado</a></li>
+      </ul>
+      <h3>CU5 · Staff ingresa (link mágico) <span class="badge badge-ok"><span aria-hidden="true">✓</span> MVP demo</span></h3>
+      <ul>
+        <li><a href="staff-ingreso.html">S0 Ingreso con email</a> (<a href="staff-ingreso-error.html">validación</a>) → <a href="staff-ingreso-enviado.html">Revisá tu email</a> · <a href="staff-ingreso-vencido.html">link vencido</a></li>
+      </ul>
+      <h3>CU3 · Staff ve la agenda</h3>
+      <ul>
+        <li><span class="badge badge-ok"><span aria-hidden="true">✓</span> MVP demo</span> <a href="staff-agenda.html">S1 Agenda del día</a> (<a href="staff-agenda-cargando.html">cargando</a>, <a href="staff-agenda-vacia.html">sin turnos</a>, <a href="staff-agenda-error.html">error</a>)</li>
+        <li><span class="badge badge-off"><span aria-hidden="true">→</span> Después del MVP</span> <a href="staff-agenda-semana.html">S2 Agenda de la semana</a></li>
+        <li><span class="badge badge-ok"><span aria-hidden="true">✓</span> MVP demo</span> <a href="staff-turno.html">S3 Detalle del turno</a> · <span class="badge badge-off"><span aria-hidden="true">→</span> Después del MVP</span> <a href="staff-turno-manual.html">cargado por el staff</a></li>
+      </ul>
+      <h3>CU4 · Staff bloquea horarios y cancela turnos</h3>
+      <ul>
+        <li><span class="badge badge-ok"><span aria-hidden="true">✓</span> MVP demo</span> <a href="staff-bloquear.html">S4 Bloquear horario</a> (<a href="staff-bloquear-feriado.html">feriado</a>, <a href="staff-bloquear-error.html">validación</a>, <a href="staff-bloquear-error-guardar.html">error al guardar</a>) → <a href="staff-bloqueado.html">S5 Bloqueado</a></li>
+        <li><span class="badge badge-off"><span aria-hidden="true">→</span> Después del MVP</span> S4 con turnos en el horario: <a href="staff-bloquear-conflicto.html">conflicto con turnos</a> → <a href="staff-bloquear-confirmar.html">confirmar cancelación</a> → <a href="staff-bloqueado-cancelados.html">S5 con turnos cancelados</a></li>
+        <li><span class="badge badge-off"><span aria-hidden="true">→</span> Después del MVP</span> <a href="staff-bloqueo.html">S7 Detalle del bloqueo</a> → <a href="staff-bloqueo-editar.html">editar</a> (<a href="staff-bloqueo-editar-error.html">error</a>) · <a href="staff-bloqueo-quitar.html">quitar</a> (<a href="staff-bloqueo-quitar-error.html">error</a>) → <a href="staff-bloqueo-quitado.html">quitado</a></li>
+        <li><span class="badge badge-off"><span aria-hidden="true">→</span> Después del MVP</span> <a href="staff-cancelar.html">S6 Cancelar turno</a> (<a href="staff-cancelar-error.html">error de red</a>) → <a href="staff-turno-cancelado.html">S1 con confirmación</a></li>
+      </ul>
+      <h3>CU6 · Staff carga un turno a mano <span class="badge badge-off"><span aria-hidden="true">→</span> Después del MVP</span></h3>
+      <ul>
+        <li><a href="staff-cargar.html">S8 Cargar turno</a> (<a href="staff-cargar-vacio.html">sin horarios</a>, <a href="staff-cargar-error.html">validación</a>, <a href="staff-cargar-tomado.html">horario tomado</a>, <a href="staff-cargar-error-red.html">error al guardar</a>) → <a href="staff-cargar-ok.html">S9 Turno cargado</a></li>
+      </ul>
+      <p class="small muted">También después del MVP: el email de recordatorio (no tiene pantalla en el prototipo).</p>
+      <p class="small"><a href="../index.html">← Todos los prototipos</a></p>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <h2 class="h3">¿Necesitás ayuda?</h2>
+      <p><strong>Tijera Fina</strong> · Teléfono: <a href="tel:+541155550100">11 5555 0100</a></p>
+      <p class="small muted">Av. Siempreviva 742, CABA · Martes a sábado, de 9 a 19 h</p>
+    </div>
+  </footer>
+  <aside class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      <p><a href="index.html">Índice del prototipo turnos-peluqueria</a> · Prototipo de diseño con datos de ejemplo, v0.2.</p>
+    </div>
+  </aside>
+</body>
+</html>

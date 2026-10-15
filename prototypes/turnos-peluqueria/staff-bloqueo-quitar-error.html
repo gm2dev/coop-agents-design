@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quitar bloqueo (error) — Tijera Fina (prototipo)</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="staff">
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="bar">
+      <a class="brand" href="staff-agenda.html">Tijera Fina · Staff</a>
+      <nav class="staff-nav" aria-label="Secciones del staff"><ul><li><a href="staff-agenda.html">Agenda del día</a></li><li><a href="staff-agenda-semana.html">Semana</a></li><li><a href="staff-cargar.html">Cargar turno</a></li><li><a href="staff-bloquear.html">Bloquear horario</a></li><li><a href="staff-ingreso.html">Salir</a></li></ul></nav>
+    </div>
+  </header>
+  <main id="main">
+    <p><a class="back" href="staff-bloqueo.html">← Detalle del bloqueo</a></p>
+    <h1>¿Quitar el bloqueo de Lucía?</h1>
+    <div class="alert alert-danger" role="alert" tabindex="-1" autofocus>
+      <h2><span aria-hidden="true">⚠</span> No pudimos quitar el bloqueo</h2>
+      <p>Hubo un problema de conexión. El horario <strong>sigue bloqueado</strong>. Probá de nuevo.</p>
+    </div>
+    <form action="staff-bloqueo-quitado.html" method="get" class="panel">
+      <p><strong>Jueves 22 de octubre, 13:00 a 14:00</strong> · Almuerzo</p>
+      <p>Ese período vuelve a estar disponible para reservar online. Los turnos cancelados al crear el bloqueo no se recuperan.</p>
+      <div class="actions"><button class="btn btn-danger" type="submit">Reintentar</button><a class="btn btn-secondary" href="staff-bloqueo.html">No, volver</a></div>
+    </form>
+    <p class="small"><a href="staff-bloqueo-quitar-error.html">Simular: error al quitar</a></p>
+  </main>
+  <aside class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      <h2>Estados de esta pantalla</h2><ul><li><a href="staff-bloqueo.html">Detalle del bloqueo</a></li><li><a href="staff-bloqueo-editar.html">Editar</a></li><li><a href="staff-bloqueo-editar-error.html">Error de red al guardar cambios</a></li><li><a href="staff-bloqueo-quitar.html">Confirmar quitar</a></li><li><a href="staff-bloqueo-quitar-error.html">Error de red al quitar</a></li><li><a href="staff-bloqueo-quitado.html">Éxito: bloqueo quitado</a></li></ul>
+      <p><a href="index.html">Índice del prototipo turnos-peluqueria</a> · Prototipo de diseño con datos de ejemplo, v0.2.</p>
+    </div>
+  </aside>
+</body>
+</html>

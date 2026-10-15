@@ -15,15 +15,18 @@
     ul { padding-left: 0; list-style: none; }
     li a { display: inline-flex; align-items: center; min-height: 44px; }
     .muted { color: #4b5563; }
+    .skip-link { position: absolute; left: 8px; top: -100px; background: #ffffff; padding: 8px 16px; }
+    .skip-link:focus { top: 8px; }
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
   <main id="main">
     <h1>Prototipos</h1>
     <p class="muted">Prototipos estáticos de diseño. No son código de producto ni usan datos reales.</p>
     <h2>Iniciativas</h2>
     <ul id="iniciativas">
-      <li class="muted">Todavía no hay prototipos publicados.</li>
+      <li><a href="turnos-peluqueria/index.html">Turnos para peluquería</a> <span class="muted">— v0.2 (CU1–CU6)</span> · <a href="turnos-peluqueria/index.html#demo">Recorrido de demo (MVP)</a></li>
     </ul>
   </main>
 </body>

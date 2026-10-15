@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ingresar al staff — Tijera Fina (prototipo)</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="staff">
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="bar">
+      <span class="brand">Tijera Fina · Staff</span>
+      
+    </div>
+  </header>
+  <main id="main">
+    <h1>Ingresar al staff</h1>
+    <p>Te mandamos un link a tu email para entrar. No hace falta contraseña.</p>
+    <form action="staff-ingreso-enviado.html" method="get" class="panel" novalidate>
+      <div class="field">
+        <label for="s-email">Email</label>
+        <span class="hint" id="hint-s-email">El email con el que la peluquería te dio de alta.</span>
+        <input type="email" id="s-email" name="email" autocomplete="email" value="" aria-describedby="hint-s-email">
+      </div>
+      <div class="actions"><button class="btn btn-primary" type="submit">Mandarme el link</button></div>
+    </form>
+    <p class="small"><a href="staff-ingreso-error.html">Simular: email inválido</a> · <a href="staff-ingreso-vencido.html">Simular: abrir un link vencido</a></p>
+  </main>
+  <aside class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      <h2>Estados de esta pantalla</h2><ul><li><a href="staff-ingreso.html">Ingreso</a></li><li><a href="staff-ingreso-error.html">Validación: email inválido</a></li><li><a href="staff-ingreso-enviado.html">Revisá tu email (link enviado)</a></li><li><a href="staff-ingreso-vencido.html">Link vencido o inválido</a></li><li><a href="staff-agenda.html">Después de entrar: agenda</a></li></ul>
+      <p><a href="index.html">Índice del prototipo turnos-peluqueria</a> · Prototipo de diseño con datos de ejemplo, v0.2.</p>
+    </div>
+  </aside>
+</body>
+</html>
