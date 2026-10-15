@@ -314,7 +314,10 @@ input[readonly] { background: var(--color-surface-subtle); }
 .appt.is-unmarked { border-left-color: var(--color-feedback-warning-border); }
 .appt-free { color: var(--color-text-muted); }
 .appt-actions { display: flex; flex-wrap: wrap; gap: var(--space-200); margin-top: var(--space-200); }
-.attendance { border: 0; padding: 0; margin: var(--space-200) 0 0; }
+.attendance { border: 0; padding: 0; margin: var(--space-200) 0 0; min-width: 0; }
+/* 1.4.12: con espaciado aumentado los botones y la tarjeta pueden achicarse y partir el texto */
+.appt { min-width: 0; overflow-wrap: anywhere; }
+.appt .btn, .appt .badge { white-space: normal; }
 .attendance legend { font-size: var(--font-size-100); margin-bottom: var(--space-100); }
 .attendance .appt-actions { margin-top: 0; }
 .compare { display: grid; gap: var(--space-300); margin-bottom: var(--space-300); }
