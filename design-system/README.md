@@ -45,6 +45,14 @@ primario (focus.ring / action.primary sería 1.05:1).
   acompañado de texto, ícono con nombre accesible o cambio de forma (borde, tachado, check).
 - Objetivos táctiles: mínimo `size.target.min` (24 px), recomendado `size.target.comfortable` (44 px).
 - Tipografía del sistema (sin fuentes remotas).
+- Color, tipografía, espaciado, radios, objetivos táctiles y foco salen **siempre** de tokens. Los
+  valores **estructurales** que todavía no tienen token (anchos de borde, alturas de progreso, anchos
+  máximos de layout, mínimos de grilla, duraciones de animación) se agrupan como variables locales al
+  inicio del CSS del prototipo y se documentan como **propuesta** de token (`border.width.*`,
+  `layout.*`, `motion.*`) pendiente de aprobación; no se agregan a `tokens.json` sin decisión del CDO.
+- `prototypes/shared/tokens.css` es un espejo generado de `tokens.json` (ruta del token unida por
+  guiones: `color.feedback.danger.text` → `--color-feedback-danger-text`): regenerar con
+  `node scripts/tokens-to-css.mjs` y comprobar con `--check`; no editar a mano.
 
 ## Proponer cambios
 

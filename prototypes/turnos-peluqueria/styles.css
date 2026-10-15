@@ -8,7 +8,7 @@
   --x-border-width-thin: 1px;      /* propuesta border.width.thin */
   --x-border-width-thick: 2px;     /* propuesta border.width.thick (seleccionado, error, encabezado de tabla) */
   --x-border-width-accent: 6px;    /* propuesta border.width.accent (borde izquierdo de Alert y turno) */
-  --x-progress-height: var(--x-progress-height);        /* propuesta layout.progress.height */
+  --x-progress-height: 6px; /* propuesta layout.progress.height */
   --x-stripe-a: 8px;               /* propuesta layout.stripe.size (rayado de bloqueos: 8/16 px) */
   --x-stripe-b: 16px;
   --x-staff-max: 64rem;            /* propuesta layout.staff.max (= breakpoint.lg) */

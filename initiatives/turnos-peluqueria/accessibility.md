@@ -44,7 +44,7 @@ estáticas, sobre las 63. Lo que requiere tecnología asistiva o dispositivo rea
 | 1.4.11 Contraste no textual | bordes `color.border.strong` 4.83 / 4.47 / 4.16 (sobre `surface.disabled`) :1; foco ≥ 5.9:1 | calculado | OK |
 | 1.4.12 Espaciado de texto | `overflow-wrap: anywhere` en `main`, Alerts y resúmenes | Chromium 320/640 px con override (line-height 1.5, letter .12em, word .16em, párrafo 2em) | OK — 62/62, incluido `reprogramado.html` (antes +5 px) |
 | 1.4.13 Contenido en hover/foco | sin tooltips ni popovers | estática | N/A |
-| 2.1.1 Teclado | solo elementos nativos | Tab real a 375 px en 62 páginas (1070 paradas) | OK |
+| 2.1.1 Teclado | solo elementos nativos | Tab real a 375 px en 62 páginas (1088 paradas, 0 sin foco visible; en las 31 pantallas de resultado/error el foco inicial está en el mensaje y Tab sigue desde ahí) | OK |
 | 2.1.2 Sin trampas | sin modales; el recorrido de Tab vuelve al inicio en todas | Chromium | OK |
 | 2.4.1 Saltar bloques | skip link en las 63 páginas | estática + 1.ª parada de Tab | OK |
 | 2.4.2 Título de página | `<title>` por pantalla y estado | estática | OK |
