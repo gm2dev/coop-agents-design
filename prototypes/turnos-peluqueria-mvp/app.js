@@ -1,9 +1,9 @@
 /*
  * JS mínimo del prototipo, solo para estados de interacción:
- * 1. Copiar link con feedback anunciado (aria-live).
- * 2. Validación de formularios con resumen de errores y mensajes junto al campo.
- * 3. Foco al mensaje en pantallas de error/estado (simula la respuesta del servidor);
- *    aviso de carga lenta a los 3 s en el link privado.
+ * 1. (v0.7) Ya no hay "Copiar link": el link privado se eliminó (D-33).
+ * 2. Validación de formularios con resumen de errores y mensajes junto al campo
+ *    (incluye el WhatsApp opcional de CU-16, data-whatsapp; regla provisional, ver DD-38).
+ * 3. Foco al mensaje en pantallas de error/estado (simula la respuesta del servidor).
  * 4. "Volver conserva lo elegido": guarda las opciones en sessionStorage.
  * 5. Mostrar contraseña.
  * 6. Agregar/quitar rangos del horario semanal.
@@ -14,25 +14,6 @@
  */
 (function () {
   'use strict';
-
-  /* 1. Copiar link */
-  document.querySelectorAll('[data-copy-target]').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var input = document.getElementById(btn.getAttribute('data-copy-target'));
-      var status = document.getElementById(btn.getAttribute('data-copy-status'));
-      var ok = function () { status.textContent = 'Link copiado. Pegalo en tus notas o en un chat con vos mismo para tenerlo a mano.'; };
-      var fail = function () {
-        input.focus(); input.select();
-        status.textContent = 'No se pudo copiar automáticamente. El link quedó seleccionado: copialo a mano.';
-      };
-      status.textContent = '';
-      if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(input.value).then(ok, fail);
-      } else {
-        try { input.select(); document.execCommand('copy') ? ok() : fail(); } catch (e) { fail(); }
-      }
-    });
-  });
 
   /* 2. Validación */
   var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -57,9 +38,15 @@
     var label = f.getAttribute('data-label') || f.name;
     if (f.hasAttribute('data-required') && !v) return 'Ingresá ' + label + '.';
     if (v && f.type === 'email' && !emailRe.test(v)) return 'Revisá el email: tiene que tener la forma nombre@ejemplo.com.';
-    if (v && f.type === 'tel') {
+    if (v && f.type === 'tel' && !f.hasAttribute('data-whatsapp')) {
       var digits = v.replace(/\D/g, '').length;
       if (!telRe.test(v) || digits < 8 || digits > 15) return 'Revisá el teléfono: tiene que tener entre 8 y 15 números (podés usar espacios o guiones).';
+    }
+    /* DD-38 (provisional, pendiente de producto): WhatsApp internacional con código de país,
+       empieza con +, solo números, espacios y guiones; entre 10 y 15 dígitos. */
+    if (v && f.hasAttribute('data-whatsapp')) {
+      var waDigits = v.replace(/\D/g, '').length;
+      if (!/^\+[0-9][0-9 -]*$/.test(v) || waDigits < 10 || waDigits > 15) return 'Revisá el WhatsApp: escribilo con + y el código de país, por ejemplo +54 9 11 1234-5678.';
     }
     if (f.type === 'number' && f.hasAttribute('data-min')) {
       var n = Number(v);
@@ -79,7 +66,13 @@
         if (msg) errors.push({ id: f.id, msg: msg });
       });
       var summary = document.getElementById('error-summary');
-      if (!errors.length) { if (summary) summary.hidden = true; return; }
+      if (!errors.length) {
+        if (summary) summary.hidden = true;
+        /* CU-16 / D-36: si el WhatsApp opcional queda vacío, se muestra el guardado que avisa que se verá el teléfono */
+        var wa = form.querySelector('[data-whatsapp]');
+        if (wa && !wa.value.trim() && form.getAttribute('data-action-empty-whatsapp')) form.action = form.getAttribute('data-action-empty-whatsapp');
+        return;
+      }
       ev.preventDefault();
       if (!summary) { document.getElementById(errors[0].id).focus(); return; }
       /* DD-34: error = ✕ (decorativo) + "Error:" para lector de pantalla */
@@ -104,11 +97,6 @@
       var t = document.getElementById(a.getAttribute('href').slice(1));
       if (t) { x.preventDefault(); t.focus(); }
     });
-  });
-
-  /* 2b. Carga lenta (P-D5): a los 3 s se suma "Puede tardar unos segundos." dentro del role=status */
-  document.querySelectorAll('[data-slow-hint]').forEach(function (el) {
-    setTimeout(function () { el.hidden = false; }, 3000);
   });
 
   /* 3. Foco al mensaje */

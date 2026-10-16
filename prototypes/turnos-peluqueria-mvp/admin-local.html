@@ -21,8 +21,8 @@
     <div class="alert alert-danger" id="error-summary" role="alert" tabindex="-1" hidden>
       <p class="alert-title"></p><ul></ul>
     </div>
-    <p class="small muted">Todos los campos son obligatorios. Se muestran en la web de reservas, en la confirmación y en el evento del calendario.</p>
-    <form class="panel" action="admin-local-guardado.html" method="get" data-validate>
+    <p class="small muted">Nombre, dirección y teléfono son obligatorios; el WhatsApp es opcional. Se muestran en la web de reservas y en la confirmación.</p>
+    <form class="panel" action="admin-local-guardado.html" method="get" data-validate data-action-empty-whatsapp="admin-local-guardado-sin-whatsapp.html">
       <div class="field">
         <label for="l-nombre">Nombre del local</label>
         <p class="hint" id="l-nombre-hint">Como lo ven los clientes.</p>
@@ -41,13 +41,20 @@
         <input id="l-telefono" type="tel" autocomplete="tel" data-required data-label="el teléfono de contacto" value="011 4000-0000" aria-describedby="l-telefono-hint">
         <p class="field-error" id="l-telefono-error" hidden><span aria-hidden="true">✕</span><span class="visually-hidden">Error: </span><span class="msg"></span></p>
       </div>
+      <div class="field">
+        <label for="l-whatsapp">WhatsApp para cambios y cancelaciones <span class="optional">(opcional)</span></label>
+        <p class="hint" id="l-whatsapp-hint">Con + y código de país, por ejemplo +54 9 11 1234-5678. Los clientes lo ven para pedir cambios o cancelaciones.</p>
+        <input id="l-whatsapp" type="tel" inputmode="tel" autocomplete="off" data-whatsapp data-label="el WhatsApp" value="+54 9 11 4000-0000" aria-describedby="l-whatsapp-hint l-whatsapp-nota">
+        <p class="field-error" id="l-whatsapp-error" hidden><span aria-hidden="true">✕</span><span class="visually-hidden">Error: </span><span class="msg"></span></p>
+        <p class="small muted" id="l-whatsapp-nota">Si lo dejás vacío, los clientes van a ver el teléfono de contacto para pedir cambios o cancelaciones.</p>
+      </div>
       <div class="actions"><button class="btn btn-primary" type="submit">Guardar</button></div>
     </form>
   </main>
   <aside class="proto" aria-label="Navegación del prototipo">
     <div class="wrap small">
-      <h2>Estados de esta pantalla</h2><ul><li><a href="admin-local.html">Formulario (probá guardar con un campo vacío)</a></li><li><a href="admin-local-error.html">Error: campos vacíos</a></li><li><a href="admin-local-guardado.html">Éxito: datos guardados</a></li></ul>
-      <p><a href="index.html">Índice del prototipo y recorridos de demo</a> · Prototipo de diseño · Hito 1 · datos ficticios · v0.6</p>
+      <h2>Estados de esta pantalla</h2><ul><li><a href="admin-local.html">Formulario (probá guardar con un campo vacío o un WhatsApp sin código de país)</a></li><li><a href="admin-local-error.html">Error: campos vacíos y WhatsApp con formato inválido</a></li><li><a href="admin-local-guardado.html">Éxito: datos guardados</a></li><li><a href="admin-local-guardado-sin-whatsapp.html">Éxito: guardado sin WhatsApp (D-36)</a></li></ul>
+      <p><a href="index.html">Índice del prototipo y recorridos de demo</a> · Prototipo de diseño · Hito 1 · datos ficticios · v0.7</p>
     </div>
   </aside>
   <script src="app.js"></script>

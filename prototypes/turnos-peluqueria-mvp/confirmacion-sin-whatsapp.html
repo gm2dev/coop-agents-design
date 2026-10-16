@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Turno confirmado — La Esquina Peluquería</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="bar"><a class="brand" href="servicios.html">La Esquina Peluquería</a><span class="small muted">Reserva de turnos</span></div>
+  </header>
+  <main id="main">
+    <h1 tabindex="-1" data-autofocus>Tu turno está confirmado</h1>
+    <div class="alert alert-success">
+      <p class="lead"><span aria-hidden="true">✓ </span><strong>Viernes 16 de octubre, 15:30</strong> · Corte y barba con <strong>Bruno</strong></p>
+    </div>
+
+    <section class="panel" aria-labelledby="resumen-titulo">
+      <h2 class="h3" id="resumen-titulo">Resumen del turno</h2>
+      <dl class="summary">
+        <dt>Servicio</dt><dd>Corte y barba</dd>
+        <dt>Peluquero</dt><dd>Bruno</dd>
+        <dt>Fecha</dt><dd>Viernes 16 de octubre</dd>
+        <dt>Hora</dt><dd>15:30 a 16:15 <span class="muted">(hora del local)</span></dd>
+        <dt>Duración</dt><dd>45 min</dd>
+        <dt>Precio</dt><dd>$ 11.000 <span class="muted">(orientativo, se paga en el local)</span></dd>
+        <dt>Dirección</dt><dd>La Esquina Peluquería · Calle Ejemplo 1234, Villa Prueba</dd>
+        <dt>A nombre de</dt><dd><span data-fill="datos:nombre">Lucía</span></dd><dt>Teléfono</dt><dd><span data-fill="datos:telefono" data-empty="No lo dejaste">11 5555-0199</span></dd>
+      </dl>
+      <p class="save-note"><strong>Guardá estos datos:</strong> sacale una captura o anotalos. No te vamos a enviar nada y, al cerrar esta pantalla, no vas a poder volver a verla.</p>
+    </section>
+
+<section class="contact-note contact-note-strong" aria-labelledby="cambios-titulo">
+      <h2 class="contact-note-title" id="cambios-titulo">Cambios y cancelaciones</h2>
+      <p>Para cambiarlo o cancelarlo, llamanos al <a class="contact-tel" href="tel:+541140000000">011 4000-0000</a>.</p>
+    </section>
+
+    <p><a href="servicios.html">Reservar otro turno</a></p>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <h2 class="h3">La Esquina Peluquería</h2>
+      <p>Calle Ejemplo 1234, Villa Prueba</p>
+      <p>Teléfono: <a href="tel:+541140000000">011 4000-0000</a></p>
+      <p class="small muted">Todos los horarios están en hora del local (Buenos Aires).</p>
+    </div>
+  </footer>
+  <aside class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      <h2>Estados de esta pantalla</h2><ul><li><a href="confirmacion.html">Éxito: turno confirmado</a></li><li><a href="confirmacion-sin-whatsapp.html">Sin WhatsApp cargado: aviso con el teléfono (D-36)</a></li></ul>
+      <p><a href="index.html">Índice del prototipo y recorridos de demo</a> · Prototipo de diseño · Hito 1 · datos ficticios · v0.7</p>
+    </div>
+  </aside>
+  <script src="app.js"></script>
+</body>
+</html>

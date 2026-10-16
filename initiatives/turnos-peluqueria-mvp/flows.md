@@ -16,30 +16,53 @@ flowchart LR
   F -->|Sí| G[confirmacion]
   F -->|No| C2[horario-ocupado<br/>CU-04]
   C2 --> E
-  G -->|Copiar link / Agregar al calendario| G
-  G -.->|Abre el link más tarde| H[turno<br/>solo lectura]
+  G -->|Reservar otro turno| A
   E -.->|Cambiar| A & C & D
   B -.->|Volver| A
   C -.->|Volver| B
   D -.->|Volver| C
 ```
 
+Desde v0.7 (D-33, D-34) no hay link privado, “Agregar al calendario” ni cambio o cancelación por el cliente:
+después de cerrar la confirmación, la web no vuelve a mostrar el turno. El aviso de contacto para cambios
+(DD-37) está en `servicios` (portada) y en `confirmacion`; en los pasos intermedios el contacto queda en el pie.
+
+## Cliente quiere cambiar o cancelar su turno (D-33, RN-25)
+
+```mermaid
+flowchart TD
+  need([Cliente con turno quiere cambiarlo o cancelarlo]) --> where{¿Dónde lo ve?}
+  where -->|Entra a la web| s[servicios<br/>'¿Ya tenés un turno?' arriba de la lista]
+  where -->|Todavía en la confirmación| c[confirmacion<br/>bloque 'Cambios y cancelaciones'<br/>debajo del resumen]
+  s & c --> wa{¿El local cargó WhatsApp? CU-16}
+  wa -->|Sí| link[Link 'Escribir por WhatsApp al número'<br/>abre wa.me con el número del local]
+  wa -->|No, D-36| tel[Texto 'llamanos al teléfono'<br/>link tel:, sin WhatsApp]
+  link --> chat([Le escribe al local por WhatsApp<br/>fuera del sistema, no es notificación: RN-12])
+  tel --> call([Llama al local])
+  chat & call --> admin[Admin en el panel: agenda → Mover / Cancelar<br/>CU-13]
+  admin --> mv[admin-mover → admin-agenda-movido]
+  admin --> cc[admin-cancelar → admin-agenda-cancelado]
+  mv & cc --> reply([El local le responde al cliente por su cuenta<br/>el sistema no le envía nada, D-1, D-3])
+```
+
 ## CU-01 — Ver servicios
 
 ```mermaid
 flowchart TD
-  start([Cliente entra a la web]) --> load[servicios-cargando]
+  start([Cliente entra a la web]) --> load[servicios-cargando<br/>con aviso '¿Ya tenés un turno?' arriba]
   load --> ok{¿Respuesta?}
-  ok -->|Error de red| err[servicios-error<br/>alerta + Reintentar + teléfono del local]
+  ok -->|Error de red| err[servicios-error<br/>alerta + Reintentar + teléfono del local<br/>+ aviso de cambios debajo]
   err -->|Reintentar| load
   ok -->|OK| any{¿Hay servicios activos<br/>con al menos 1 peluquero activo?}
-  any -->|No| empty[servicios-vacio<br/>'Por ahora no hay reservas online'<br/>+ teléfono del local]
+  any -->|No| empty[servicios-vacio<br/>'Por ahora no hay reservas online'<br/>+ teléfono del local y, en la misma alerta,<br/>WhatsApp para cambios]
   empty --> exit1([Salida: llama al local])
-  any -->|Sí| list[servicios<br/>nombre · duración · precio<br/>'orientativos, se paga en el local']
+  any -->|Sí| list[servicios<br/>aviso '¿Ya tenés un turno?' + WhatsApp<br/>nombre · duración · precio<br/>'orientativos, se paga en el local']
+  list -.->|Quiere cambiar o cancelar| wa([WhatsApp del local → CU-13])
   list -->|Elige y Continuar| next([Paso 2: peluquero])
 ```
 
 Inactivos y sin peluqueros no se listan (RN-15): no hay estado de UI para ellos del lado del cliente.
+Sin WhatsApp cargado (D-36), el aviso dice “llamanos al <teléfono>” (`servicios-sin-whatsapp`).
 
 ## CU-02 — Ver horarios libres
 
@@ -97,23 +120,19 @@ flowchart TD
 
 La reasignación con “Cualquiera disponible” es transparente: el cliente solo ve el peluquero final en la confirmación.
 
-## CU-05 — Confirmación, calendario y link privado
+## CU-05 — Ver la confirmación
 
 ```mermaid
 flowchart TD
-  conf[confirmacion<br/>1. título + línea de éxito<br/>2. bloque 'Guardá tu link privado'<br/>3. resumen  4. datos del local] --> act{Acción}
-  act -->|Copiar link| cp{¿Portapapeles disponible?}
-  cp -->|Sí| cpok[Anuncio: 'Link copiado…']
-  cp -->|No| cpno[Selecciona el link + anuncio:<br/>'copialo a mano']
-  act -->|Agregar al calendario| ics[Descarga turno.ics<br/>fecha, hora, duración, servicio,<br/>dirección vigente y link en la descripción]
-  act -->|Reservar otro turno| s1([servicios])
-  open([Cliente abre su link más tarde]) --> tl[turno-cargando<br/>a los 3 s: 'Puede tardar unos segundos'] --> found{¿Token válido?}
-  found -->|No| nf[turno-no-encontrado<br/>sin datos de ningún turno + teléfono del local]
-  found -->|Sí| tv[turno<br/>resumen en solo lectura, estado vigente<br/>+ Agregar al calendario + teléfono del local]
-  tv -.-> h2[[H2: Cambiar / Cancelar<br/>CU-06, CU-07]]
+  conf[confirmacion<br/>1. título + línea de éxito<br/>2. resumen: servicio, peluquero, fecha y hora, dirección<br/>+ 'Guardá estos datos: captura o anotalos'<br/>3. bloque 'Cambios y cancelaciones'] --> wa{¿WhatsApp cargado?}
+  wa -->|Sí| l[Link 'Escribir por WhatsApp al número'<br/>se abre WhatsApp]
+  wa -->|No, D-36| t[confirmacion-sin-whatsapp<br/>'llamanos al tel:']
+  conf -->|Reservar otro turno| s1([servicios])
+  conf -->|Cierra la pantalla| gone([No puede volver a ver el turno, D-33])
 ```
 
-No hay ninguna rama de envío (email, SMS, WhatsApp): RN-12.
+No hay ninguna rama de envío (email, SMS, WhatsApp del sistema): RN-12. Sin link privado, calendario ni
+Cambiar/Cancelar (D-33, D-34; CU-06 y CU-07 eliminados).
 
 ## CU-08 — Ingresar al panel
 
@@ -187,78 +206,25 @@ flowchart TD
 
 ## CU-16 — Configurar datos del local
 
+Validación del WhatsApp provisional (DD-38, pendiente de producto): `+` y código de país, 10 a 15 dígitos.
+
 ```mermaid
 flowchart TD
-  f[admin-local<br/>nombre, dirección, teléfono: obligatorios] -->|Guardar| v{¿Los 3 completos?}
-  v -->|No| fe[admin-local-error<br/>error junto a cada campo vacío + resumen]
+  f[admin-local<br/>nombre, dirección, teléfono: obligatorios<br/>WhatsApp para cambios: opcional] -->|Guardar| v{¿Los 3 completos y<br/>WhatsApp vacío o válido?}
+  v -->|No| fe[admin-local-error<br/>error junto a cada campo vacío o al WhatsApp inválido + resumen]
   fe --> v
-  v -->|Sí| ok[admin-local-guardado<br/>'Ya se muestran en la web y en las confirmaciones']
-  ok -.-> use([Se usan en: footer del cliente, confirmación,<br/>link privado, mensajes 'llamá al local', .ics])
+  v -->|Sí, con WhatsApp| ok[admin-local-guardado<br/>'Ya se muestran en la web y en las confirmaciones']
+  v -->|Sí, sin WhatsApp| ok2[admin-local-guardado-sin-whatsapp<br/>'los clientes van a ver el teléfono', D-36]
+  ok & ok2 -.-> use([Se usan en: footer del cliente, confirmación,<br/>aviso de cambios y cancelaciones, mensajes 'llamá al local'])
 ```
 
 <a id="hito-2"></a>
 ## Hito 2
 
-### CU-05 (H2) — Estados del link privado
+### CU-05 (H2), CU-06 y CU-07 — Eliminados (v0.7)
 
-```mermaid
-flowchart TD
-  open([Cliente abre su link]) --> load[turno-cargando]
-  load --> found{¿Existe el turno?}
-  found -->|No| nf[turno-no-encontrado<br/>sin datos + teléfono]
-  found -->|Sí| st{Estado}
-  st -->|Cancelado por el local| cl[turno-cancelado-local<br/>✕ + teléfono, sin acciones]
-  st -->|Cancelado por el cliente| cv[turno-cancelado<br/>✕ Cancelado por vos, sin acciones]
-  st -->|Ya empezó / pasó| pa[turno-pasado<br/>◷ sin acciones]
-  st -->|Vigente| mv{¿Lo movió el local?}
-  mv -->|Sí| mov[turno-movido<br/>↻ 'El local cambió tu turno: ahora es…'<br/>+ borrar evento anterior]
-  mv -->|No| conf[turno ✓ Confirmado]
-  mov --> two{¿Faltan 2 h o más?<br/>RN-08, exactamente 2 h = sí}
-  conf --> two
-  two -->|Sí| acc[Bloque 'Cambiar día u horario' / 'Cancelar turno']
-  two -->|No| m2[turno-menos-2h<br/>'Faltan menos de 2 horas…' + tel:]
-  cl & cv & pa -.-> new([Reservar un turno nuevo])
-  acc -->|Cambiar| cu6([CU-06])
-  acc -->|Cancelar| cu7([CU-07])
-```
-
-### CU-06 — Cambiar el turno desde el link
-
-```mermaid
-flowchart TD
-  t[turno] -->|Cambiar día u horario| load[cambiar-cargando]
-  load -->|Error| err[cambiar-error<br/>Reintentar + teléfono]
-  err -->|Reintentar| load
-  load --> pick[cambiar · Paso 1 de 2<br/>mismo servicio y peluquero o 'cualquiera'<br/>30 días, inicios cada 15 min]
-  pick -.->|'¿Otro servicio?' Cancelá y reservá| cu7([CU-07])
-  pick -->|Continuar| rev[cambiar-revisar · Paso 2<br/>Antes → Después]
-  rev -.->|No cambiar| t
-  rev -->|Confirmar cambio| send[cambiar-enviando]
-  send --> res{Respuesta}
-  res -->|Horario ocupado| occ[cambiar-ocupado<br/>role=alert + foco<br/>turno original intacto]
-  occ --> pick
-  res -->|Faltan menos de 2 h| late[turno-plazo-vencido<br/>alert + tel:, turno intacto]
-  res -->|Error de red| neterr[cambiar-error-envio<br/>turno intacto, Reintentar]
-  neterr --> send
-  res -->|OK| ok[cambiar-confirmado<br/>mismo link · Agregar al calendario .ics nuevo<br/>· borrar el evento anterior]
-  ok --> t
-```
-
-### CU-07 — Cancelar el turno desde el link
-
-```mermaid
-flowchart TD
-  t[turno] -->|Cancelar turno| ask[cancelar<br/>'¿Cancelar tu turno?' + resumen]
-  ask -->|No, mantener turno| t
-  ask -->|Sí, cancelar turno| send[cancelar-enviando]
-  send --> res{Respuesta}
-  res -->|Error de red| err[cancelar-error<br/>turno sigue vigente, Reintentar]
-  err --> send
-  res -->|Faltan menos de 2 h| late[turno-plazo-vencido]
-  res -->|OK| done[cancelar-listo<br/>cancelado + borrar del calendario]
-  done -.-> new([Reservar un turno nuevo])
-  done -.->|Abre el link después| cv[turno-cancelado]
-```
+Los estados del link privado, cambiar y cancelar desde el link se eliminaron por D-33 (RN-07, RN-08, RN-09 y
+RN-18 eliminadas). El camino que los reemplaza es [Cliente quiere cambiar o cancelar su turno](#cliente-quiere-cambiar-o-cancelar-su-turno-d-33-rn-25).
 
 ### CU-11 — Bloqueos
 
@@ -296,10 +262,10 @@ flowchart TD
   save -->|Error| aerr[admin-agenda-asistencia-error<br/>vuelve al valor previo · aria-pressed restaurado<br/>role=alert en la tarjeta · foco en el botón tocado]
   aerr -->|Probá de nuevo / tocar otra vez| save
   card -->|Vigente futuro| fut[Mover / Cancelar<br/>sin control de asistencia]
-  card -->|Cancelado| canc[✕ Cancelado por el cliente / local<br/>tachado + 'Horario libre', sin acciones]
+  card -->|Cancelado| canc[✕ Cancelado<br/>tachado + 'Horario libre', sin acciones]
   fut & past -->|Mover| cu13m([CU-13 Mover])
   fut & past -->|Cancelar| cu13c([CU-13 Cancelar])
-  ag -.->|Día siguiente| vie[admin-agenda-viernes<br/>cambios y cancelaciones del cliente]
+  ag -.->|Día siguiente| vie[admin-agenda-viernes<br/>con un cancelado]
   ag -.->|Semana| sem[admin-agenda-semana-h2<br/>bloqueos: '⊘ Bloqueado' + motivo si hay]
   ag -.->|Día con bloqueos| blq[admin-agenda-dia-bloqueo<br/>todo el día: inicio de la columna<br/>rango: entre los turnos por hora de inicio]
 ```
@@ -312,7 +278,8 @@ foco no se mueve del botón tocado; el resumen “N sin marcar” no cambia. El 
 
 ```mermaid
 flowchart TD
-  card[Tarjeta vigente] -->|Mover| form[admin-mover<br/>peluquero · fecha · hora step 15 · duración<br/>sin límite de 30 días ni de 2 h]
+  wa([Pedido del cliente por WhatsApp o teléfono, D-33]) -.-> card
+  card[Tarjeta vigente] -->|Mover| form[admin-mover<br/>peluquero · fecha · hora step 15 · duración<br/>sin límite de 30 días]
   form -.->|Volver sin mover| ag[agenda]
   form -->|Guardar cambio| send[admin-mover-guardando]
   send --> chk{Validación}
@@ -326,7 +293,7 @@ flowchart TD
   rev -->|OK| ok
   chk -->|Error de red| err[admin-mover-error<br/>turno sin cambios]
   err --> form
-  chk -->|OK| ok[admin-agenda-movido<br/>'Avisale al cliente: tel:'<br/>link del cliente muestra 'El local cambió tu turno']
+  chk -->|OK| ok[admin-agenda-movido<br/>'Avisale al cliente: tel:'<br/>el cliente solo se entera si el local lo contacta]
   card -->|Cancelar| ask[admin-cancelar<br/>segundo paso]
   ask -->|No, volver| ag
   ask -->|Sí, cancelar turno| r{Respuesta}
@@ -337,7 +304,7 @@ flowchart TD
 
 El servidor valida todo de una vez (P-D12, Architect): la superposición gana y no trae advertencias; fuera de horario y bloqueo llegan juntos en una sola advertencia; “Mover igual” revalida antes de guardar.
 
-El panel no crea turnos (D-23) ni acceso al link privado (D-29); nada se envía al cliente (D-1).
+El panel no crea turnos (D-23, D-35); nada se envía al cliente (D-1). Si el pedido llegó por WhatsApp, el local le responde por ahí.
 
 ### CU-10 (H2) — Turnos afectados por horario o desactivación
 

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Paso 1 de 5: Elegí un servicio — La Esquina Peluquería</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="bar"><a class="brand" href="servicios.html">La Esquina Peluquería</a><span class="small muted">Reserva de turnos</span></div>
+  </header>
+  <main id="main">
+    <p class="step">Paso 1 de 5 · Servicio</p>
+    <ol class="progress" aria-hidden="true"><li aria-current="step"></li><li></li><li></li><li></li><li></li></ol>
+    <h1>Elegí un servicio</h1>
+    <p>Reservá tu turno en 5 pasos, sin crear cuenta.</p>
+    <section class="contact-note" aria-labelledby="turno-existente">
+      <h2 class="contact-note-title" id="turno-existente">¿Ya tenés un turno?</h2>
+      <p>Para cambiarlo o cancelarlo, llamanos al <a class="contact-tel" href="tel:+541140000000">011 4000-0000</a>.</p>
+    </section>
+    <form action="peluquero.html" method="get" data-persist="servicio">
+      <fieldset aria-describedby="precio-hint">
+        <legend>Servicio</legend>
+        <p class="hint" id="precio-hint">Los precios son orientativos: se paga en el local.</p>
+        <ul class="options">
+          <li><label class="option"><input type="radio" name="servicio" value="corte" required><span class="option-body"><span class="option-title">Corte de pelo</span><span class="option-meta">30 min · $ 8.000</span></span></label></li>
+          <li><label class="option"><input type="radio" name="servicio" value="corte-barba" checked required><span class="option-body"><span class="option-title">Corte y barba</span><span class="option-meta">45 min · $ 11.000</span></span></label></li>
+          <li><label class="option"><input type="radio" name="servicio" value="color" required><span class="option-body"><span class="option-title">Color</span><span class="option-meta">90 min · $ 25.000</span></span></label></li>
+          <li><label class="option"><input type="radio" name="servicio" value="peinado" required><span class="option-body"><span class="option-title">Peinado</span><span class="option-meta">45 min · $ 9.500</span></span></label></li>
+        </ul>
+      </fieldset>
+      <div class="actions"><button class="btn btn-primary" type="submit">Continuar</button></div>
+    </form>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <h2 class="h3">La Esquina Peluquería</h2>
+      <p>Calle Ejemplo 1234, Villa Prueba</p>
+      <p>Teléfono: <a href="tel:+541140000000">011 4000-0000</a></p>
+      <p class="small muted">Todos los horarios están en hora del local (Buenos Aires).</p>
+    </div>
+  </footer>
+  <aside class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      <h2>Estados de esta pantalla</h2><ul><li><a href="servicios.html">Con servicios</a></li><li><a href="servicios-cargando.html">Cargando</a></li><li><a href="servicios-vacio.html">Vacío: el local no tiene servicios activos</a></li><li><a href="servicios-error.html">Error al cargar</a></li><li><a href="servicios-sin-whatsapp.html">Sin WhatsApp cargado: aviso con el teléfono (D-36)</a></li></ul>
+      <p><a href="index.html">Índice del prototipo y recorridos de demo</a> · Prototipo de diseño · Hito 1 · datos ficticios · v0.7</p>
+    </div>
+  </aside>
+  <script src="app.js"></script>
+</body>
+</html>

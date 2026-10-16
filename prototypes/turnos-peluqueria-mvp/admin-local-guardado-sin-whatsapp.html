@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Datos guardados — Datos del local — Panel de La Esquina Peluquería</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin">
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="bar">
+      <a class="brand" href="admin-agenda-hoy.html">Panel · La Esquina Peluquería</a>
+      <span class="small"><span class="muted">Usuario: admin</span> · <a href="admin-ingresar.html">Salir</a></span>
+    </div>
+    <nav class="admin-nav wrap" aria-label="Secciones del panel"><ul><li><a href="admin-agenda-hoy.html">Agenda</a></li><li><a href="admin-servicios.html">Servicios</a></li><li><a href="admin-peluqueros.html">Peluqueros</a></li><li><a href="admin-bloqueos.html">Bloqueos</a></li><li><a href="admin-local.html" aria-current="page">Datos del local</a></li></ul></nav>
+  </header>
+  <main id="main">
+    <h1>Datos del local</h1>
+    <div class="alert alert-success" role="status" tabindex="-1" data-autofocus>
+      <p><span aria-hidden="true">✓ </span>Guardamos los datos del local. Ya se muestran en la web de reservas y en las confirmaciones.</p>
+      <p>No cargaste WhatsApp: para cambios y cancelaciones, los clientes van a ver el teléfono de contacto (011 4000-0000).</p>
+    </div>
+    <div class="alert alert-danger" id="error-summary" role="alert" tabindex="-1" hidden>
+      <p class="alert-title"></p><ul></ul>
+    </div>
+    <p class="small muted">Nombre, dirección y teléfono son obligatorios; el WhatsApp es opcional. Se muestran en la web de reservas y en la confirmación.</p>
+    <form class="panel" action="admin-local-guardado.html" method="get" data-validate>
+      <div class="field">
+        <label for="l-nombre">Nombre del local</label>
+        <p class="hint" id="l-nombre-hint">Como lo ven los clientes.</p>
+        <input id="l-nombre" type="text" autocomplete="organization" data-required data-label="el nombre del local" value="La Esquina Peluquería" aria-describedby="l-nombre-hint">
+        <p class="field-error" id="l-nombre-error" hidden><span aria-hidden="true">✕</span><span class="visually-hidden">Error: </span><span class="msg"></span></p>
+      </div>
+      <div class="field">
+        <label for="l-direccion">Dirección</label>
+        <p class="hint" id="l-direccion-hint">Calle, número y barrio o localidad.</p>
+        <input id="l-direccion" type="text" autocomplete="street-address" data-required data-label="la dirección del local" value="Calle Ejemplo 1234, Villa Prueba" aria-describedby="l-direccion-hint">
+        <p class="field-error" id="l-direccion-error" hidden><span aria-hidden="true">✕</span><span class="visually-hidden">Error: </span><span class="msg"></span></p>
+      </div>
+      <div class="field">
+        <label for="l-telefono">Teléfono de contacto</label>
+        <p class="hint" id="l-telefono-hint">Aparece en todos los mensajes que piden “llamá al local”.</p>
+        <input id="l-telefono" type="tel" autocomplete="tel" data-required data-label="el teléfono de contacto" value="011 4000-0000" aria-describedby="l-telefono-hint">
+        <p class="field-error" id="l-telefono-error" hidden><span aria-hidden="true">✕</span><span class="visually-hidden">Error: </span><span class="msg"></span></p>
+      </div>
+      <div class="field">
+        <label for="l-whatsapp">WhatsApp para cambios y cancelaciones <span class="optional">(opcional)</span></label>
+        <p class="hint" id="l-whatsapp-hint">Con + y código de país, por ejemplo +54 9 11 1234-5678. Los clientes lo ven para pedir cambios o cancelaciones.</p>
+        <input id="l-whatsapp" type="tel" inputmode="tel" autocomplete="off" data-whatsapp data-label="el WhatsApp" value="" aria-describedby="l-whatsapp-hint l-whatsapp-nota">
+        <p class="field-error" id="l-whatsapp-error" hidden><span aria-hidden="true">✕</span><span class="visually-hidden">Error: </span><span class="msg"></span></p>
+        <p class="small muted" id="l-whatsapp-nota">Si lo dejás vacío, los clientes van a ver el teléfono de contacto para pedir cambios o cancelaciones.</p>
+      </div>
+      <div class="actions"><button class="btn btn-primary" type="submit">Guardar</button></div>
+    </form>
+  </main>
+  <aside class="proto" aria-label="Navegación del prototipo">
+    <div class="wrap small">
+      <h2>Estados de esta pantalla</h2><ul><li><a href="admin-local.html">Formulario (probá guardar con un campo vacío o un WhatsApp sin código de país)</a></li><li><a href="admin-local-error.html">Error: campos vacíos y WhatsApp con formato inválido</a></li><li><a href="admin-local-guardado.html">Éxito: datos guardados</a></li><li><a href="admin-local-guardado-sin-whatsapp.html">Éxito: guardado sin WhatsApp (D-36)</a></li></ul>
+      <p><a href="index.html">Índice del prototipo y recorridos de demo</a> · Prototipo de diseño · Hito 1 · datos ficticios · v0.7</p>
+    </div>
+  </aside>
+  <script src="app.js"></script>
+</body>
+</html>

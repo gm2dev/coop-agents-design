@@ -209,19 +209,23 @@ input[readonly] { background: var(--color-surface-subtle); }
 .badge-danger { background: var(--color-feedback-danger-bg); color: var(--color-feedback-danger-text); border-color: var(--color-feedback-danger-border); }
 .badge-neutral { background: var(--color-surface-subtle); color: var(--color-text-muted); border-color: var(--color-border-strong); }
 
-/* Bloque destacado del link privado (confirmación) */
-.keep-link { background: var(--color-feedback-warning-bg); color: var(--color-feedback-warning-text);
-             border: var(--border-width-strong) solid var(--color-feedback-warning-border); border-radius: var(--radius-lg);
-             padding: var(--space-400); margin-bottom: var(--space-400); }
-.keep-link h2 { font-size: var(--font-size-400); }
-.keep-link label { color: var(--color-text-default); }
-.keep-link p { margin-bottom: var(--space-200); }
-.keep-link .actions { margin-top: var(--space-300); }
-.keep-link .keep-link-note { margin: var(--space-300) 0 0; } /* D-24: línea secundaria debajo de los botones */
-/* Campo + botón Copiar: apilados en celular (botón a ancho completo), en fila desde 40rem. */
-.copy-field { display: flex; flex-direction: column; gap: var(--space-200); }
-.copy-field .btn { width: 100%; }
-.copy-status { min-height: calc(var(--font-size-200) * var(--font-line-height-base)); font-weight: var(--font-weight-semibold); margin: var(--space-100) 0 var(--space-200); }
+/* Aviso de contacto para cambios (D-33, D-36, DD-37 = P-10). Info estática: región con h2, nunca role=alert.
+ * Informativo (fondo y borde info) en servicios; con borde fuerte en la confirmación. */
+.contact-note { background: var(--color-feedback-info-bg); color: var(--color-text-default);
+                border: var(--border-width-default) solid var(--color-feedback-info-border); border-radius: var(--radius-md);
+                padding: var(--space-300) var(--space-400); margin-bottom: var(--space-400); }
+.contact-note-strong { border-width: var(--border-width-strong); border-radius: var(--radius-lg); padding: var(--space-400); }
+.contact-note-title { font-size: var(--font-size-200); font-weight: var(--font-weight-bold); color: var(--color-feedback-info-text); margin-bottom: var(--space-100); }
+.contact-note-strong .contact-note-title { font-size: var(--font-size-300); }
+.contact-note p { margin-bottom: var(--space-200); }
+.contact-note > :last-child { margin-bottom: 0; }
+.contact-tel { font-weight: var(--font-weight-semibold); white-space: nowrap; display: inline-flex; align-items: center; min-height: var(--size-target-comfortable); }
+/* Link con aspecto de botón secundario: ancho completo en celular, objetivo ≥ 44 px (size.target.comfortable). */
+.contact-btn { width: 100%; }
+.contact-merged .contact-btn { color: var(--color-text-link); font-weight: var(--font-weight-semibold); }
+.contact-icon { flex: none; width: var(--space-500); height: var(--space-500); }
+/* Confirmación: indicación de guardar los datos (no se puede volver a ver el turno). */
+.save-note { margin: var(--space-300) 0 0; padding-top: var(--space-300); border-top: var(--border-width-default) solid var(--color-border-default); }
 
 /* Resumen */
 .summary { display: grid; grid-template-columns: max-content 1fr; gap: var(--space-200) var(--space-400); margin: 0 0 var(--space-300); }
@@ -341,9 +345,7 @@ input[readonly] { background: var(--color-surface-subtle); }
   .actions { flex-direction: row-reverse; justify-content: flex-start; }
   .actions .btn { width: auto; }
   .inline-fields { grid-template-columns: 1fr 1fr; }
-  .copy-field { flex-direction: row; align-items: stretch; }
-  .copy-field input { flex: 1 1 auto; min-width: 0; }
-  .copy-field .btn { width: auto; flex: 0 0 auto; }
+  .contact-btn { width: auto; }
   .range { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; }
   .range .remove { grid-column: auto; }
   .date-nav h2 { flex: 1 1 auto; order: 0; }
