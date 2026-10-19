@@ -12,7 +12,7 @@
 <header class="app-header"><div class="app-header__inner"><a class="brand" href="../index.html">← Todos los prototipos</a></div></header>
 <main id="main" class="page">
   <h1>Reservas con recompra para spas · MVP</h1>
-  <p>Primeros prototipos básicos (baja-media fidelidad) del <strong>Roadmap B</strong> (decidido el 19/10/2026). Datos ficticios. Spa de ejemplo: «Spa Lúa», con su color y logo aplicados por la capa de marca.</p>
+  <p>Prototipos básicos v0.2 (baja-media fidelidad) del <strong>Roadmap B</strong> (decidido el 19/10/2026). Datos ficticios. Spa de ejemplo: «Spa Lúa», con su color y logo aplicados por la capa de marca.</p>
   <div class="alert alert--info">
     <p class="alert__title">Antes de mirar</p>
     <p>No hay PRD todavía: la fuente es la presentación ejecutiva. Supuestos, decisiones y preguntas abiertas en <code>initiatives/spa-reservas-mvp/README.md</code>.</p>
@@ -21,8 +21,8 @@
   <section class="card" aria-labelledby="h-c">
     <h2 id="h-c">Clienta <span class="small muted">(mobile, PWA)</span></h2>
     <ol>
-      <li><a href="c-ingresar.html">Ingresar con WhatsApp</a> → <a href="c-codigo.html">código</a> · estado: <a href="c-codigo-error.html">código incorrecto</a></li>
-      <li><a href="c-inicio.html">Inicio del spa</a> (con aviso «te toca volver») · <a href="c-inicio-con-turno.html">con turno reservado</a></li>
+      <li><a href="c-ingresar.html">Ingresar con WhatsApp</a> → <a href="c-codigo.html">código</a> · estado: <a href="c-codigo-error.html">código incorrecto</a> · <a href="c-codigo-bloqueado.html">sin intentos</a></li>
+      <li><a href="c-inicio.html">Inicio del spa</a> (con aviso «te toca volver») · <a href="c-inicio-con-turno.html">con turno reservado</a> · <a href="c-inicio-con-pack.html">con pack activo («Mi pack» y baja en el menú)</a></li>
       <li>Reservar: <a href="c-reservar-servicios.html">servicios</a> → <a href="c-reservar-profesional.html">profesional (opcional)</a> → <a href="c-reservar-horario.html">día y horario</a> → <a href="c-reservar-confirmar.html">confirmar (permiso de ofertas + política)</a> → <a href="c-reservado.html">reservado</a>
         <br><span class="small">Estados: <a href="c-reservar-sin-horarios.html">sin horarios</a> · <a href="c-reservar-error.html">horario recién ocupado</a></span></li>
       <li><a href="c-mis-turnos.html">Mis turnos</a> → <a href="c-cancelar.html">cancelar</a> → <a href="c-cancelado.html">cancelado</a>
@@ -36,7 +36,7 @@
   <section class="card" aria-labelledby="h-p">
     <h2 id="h-p">Profesional <span class="small muted">(mobile, PWA)</span></h2>
     <ul>
-      <li><a href="p-agenda.html">Agenda de hoy</a> · <a href="p-agenda-semana.html">semana</a> · estado: <a href="p-agenda-vacia.html">día sin turnos</a></li>
+      <li><a href="p-agenda.html">Agenda de hoy</a> · <a href="p-agenda-dia-anterior.html">día anterior</a> · <a href="p-agenda-semana.html">semana</a> · estado: <a href="p-agenda-vacia.html">día sin turnos</a></li>
       <li><a href="p-bloquear.html">Bloquear horario</a> → <a href="p-bloquear-conflicto.html">rango con turnos</a> → <a href="p-bloqueado.html">bloqueado</a></li>
     </ul>
   </section>
@@ -56,8 +56,8 @@
       <li><a href="a-servicios.html">Servicios</a> (duración, precio, «te toca volver»)</li>
       <li><a href="a-profesionales.html">Profesionales y horarios</a> → <a href="a-profesionales-ok.html">guardado</a></li>
       <li><a href="a-ajustes.html">Reservas y avisos</a> (elegir profesional, política, recordatorios)</li>
-      <li><a href="a-marca.html">Marca: logo y color</a> (con chequeo de contraste)</li>
-      <li><a href="a-campana.html">Campaña de Navidad</a> → <a href="a-campana-enviada.html">programada</a></li>
+      <li><a href="a-marca.html">Marca: nombre, logo y un color</a> (con chequeo de contraste)</li>
+      <li><a href="a-campana.html">Campaña de Navidad</a> → <a href="a-campana-enviada.html">programada</a> → <a href="a-campana-cancelada.html">envío cancelado</a></li>
       <li><a href="a-importar.html">Importar clientas por CSV</a> → <a href="a-importar-resultado.html">revisión</a> → <a href="a-importar-ok.html">importadas</a></li>
     </ul>
   </section>

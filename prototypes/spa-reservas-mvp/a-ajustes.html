@@ -13,7 +13,7 @@
 <header class="app-header">
   <div class="app-header__inner">
     <a class="brand" href="a-panel.html"><img class="brand__logo" src="assets/logo-spa-lua.svg" alt="" width="36" height="36"><span>Spa Lúa<span class="muted small"> · Administración</span></span></a>
-    <p class="small muted" style="margin:0">Valeria · administradora</p>
+    <p class="small muted u-m-0">Valeria · administradora</p>
   </div>
 </header>
 <div class="admin-layout"><nav class="side-nav" aria-label="Administración"><ul><li><a href="a-panel.html">Panel</a></li><li><a href="a-servicios.html">Servicios</a></li><li><a href="a-profesionales.html">Profesionales y horarios</a></li><li><a href="a-ajustes.html" aria-current="page">Reservas y avisos</a></li><li><a href="a-marca.html">Marca</a></li><li><a href="a-campana.html">Campaña de Navidad</a></li><li><a href="a-importar.html">Importar clientas</a></li></ul></nav>
@@ -23,20 +23,21 @@
 <form action="a-ajustes.html">
   <section class="card" aria-labelledby="r1">
     <h2 id="r1">Reservas</h2>
-    <ul class="choices" style="margin-bottom:var(--space-400)">
+    <ul class="choices u-mb-400">
       <li class="choice"><input type="checkbox" id="elegir-pro" checked><label for="elegir-pro"><span class="choice__body"><span class="choice__title">Las clientas pueden elegir profesional</span><span class="choice__meta">Si lo desactivás, el spa asigna a quien esté libre.</span></span></label></li>
     </ul>
     <div class="field"><label for="pol">Política de cancelación</label>
       <span class="hint" id="pol-hint">Se muestra al reservar y al cancelar.</span>
       <textarea id="pol" aria-describedby="pol-hint">Podés cancelar desde la app hasta 24 horas antes del turno. Si es más tarde, avisanos por WhatsApp para liberar el horario.</textarea></div>
-    <div class="field"><label for="plazo">Cancelación desde la app hasta (horas antes)</label><input type="number" id="plazo" value="24" min="0" style="max-width:10rem"></div>
+    <div class="field"><label for="plazo">Cancelación desde la app hasta (horas antes)</label><input type="number" id="plazo" value="24" min="0" class="input--narrow"></div>
   </section>
   <section class="card" aria-labelledby="r2">
     <h2 id="r2">Recordatorios por WhatsApp</h2>
     <div class="inline-fields">
-      <div class="field"><label for="rec1">Primer recordatorio</label><select id="rec1"><option selected>24 h antes</option><option>48 h antes</option><option>No enviar</option></select></div>
+      <div class="field"><label for="rec1">Primer recordatorio</label><select id="rec1" aria-describedby="rec1-hint"><option>24 h antes</option><option selected>48 h antes</option><option>No enviar</option></select></div>
       <div class="field"><label for="rec2">Segundo recordatorio</label><select id="rec2"><option selected>2 h antes</option><option>1 h antes</option><option>No enviar</option></select></div>
     </div>
+    <p class="hint" id="rec1-hint">Conviene que el primer recordatorio salga antes del plazo para cancelar desde la app (hoy 24 h), así la clienta todavía puede cancelar si no puede venir.</p>
   </section>
   <button class="btn" type="submit">Guardar cambios</button>
 </form>

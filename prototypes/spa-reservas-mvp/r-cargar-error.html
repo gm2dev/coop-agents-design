@@ -20,10 +20,9 @@
 
 <a class="back" href="r-agenda.html">← Volver a la agenda</a>
 <h1>Cargar turno para una clienta</h1>
-<div class="alert alert--danger" role="alert"><p class="alert__title"><span aria-hidden="true">✕ </span>Revisá estos datos</p><ul><li><a href="#r-tel">El WhatsApp tiene 8 dígitos: tienen que ser 10.</a></li></ul></div>
-<div class="alert alert--danger error-summary" role="alert" tabindex="-1" hidden>
+<div class="alert alert--danger error-summary" role="alert" tabindex="-1">
   <p class="alert__title"><span aria-hidden="true">✕ </span>Revisá estos datos</p>
-  <ul></ul>
+  <ul><li><a href="#r-tel">El WhatsApp tiene 8 dígitos: tienen que ser 10.</a></li><li><a href="#r-nombre">Ingresá el nombre de la clienta.</a></li></ul>
 </div>
 <form action="r-turno-cargado.html" data-validate novalidate>
 <div class="grid-2">
@@ -43,12 +42,14 @@
       <input type="tel" id="r-tel" name="tel" inputmode="tel" aria-describedby="r-tel-hint r-tel-error" value="11 5555 01" aria-invalid="true" data-required data-digits="10,10" data-error-id="r-tel-error" data-msg="Ingresá el WhatsApp de la clienta: 10 dígitos con código de área."></div>
       <p class="field-error" id="r-tel-error"><span aria-hidden="true">✕</span> Ingresá 10 dígitos con código de área, sin 0 ni 15.</p>
     </div>
-    
+    <div id="datos-existente" hidden>
+      <div class="alert alert--info"><p>Si ya es clienta, la buscamos por el WhatsApp al completarlo.</p></div>
+    </div>
     <div id="datos-nueva">
       <div class="field">
         <label for="r-nombre">Nombre y apellido</label>
-        <input type="text" id="r-nombre" name="nombre" autocomplete="off" data-required data-error-id="r-nombre-error" data-msg="Ingresá el nombre de la clienta." aria-describedby="r-nombre-error">
-        <p class="field-error" id="r-nombre-error" hidden><span aria-hidden="true">✕</span> Ingresá el nombre de la clienta.</p>
+        <input type="text" id="r-nombre" name="nombre" autocomplete="off" data-required data-error-id="r-nombre-error" data-msg="Ingresá el nombre de la clienta." aria-describedby="r-nombre-error" aria-invalid="true">
+        <p class="field-error" id="r-nombre-error"><span aria-hidden="true">✕</span> Ingresá el nombre de la clienta.</p>
       </div>
       <p class="small muted">El permiso para ofertas lo da la clienta: le llega un WhatsApp para aceptarlo. Recepción no lo marca por ella.</p>
     </div>

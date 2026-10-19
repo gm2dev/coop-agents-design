@@ -3,6 +3,10 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
+/* WCAG 2.4.11: el foco no puede quedar tapado por la barra de resumen fija.
+   scroll-padding-bottom >= alto máximo de la barra (medido 105–129 px a 320–640 px de ancho;
+   10rem = 160 px deja margen con texto al 200 %). Excepción de layout documentada en spec.md. */
+html:has(.summary-bar) { scroll-padding-bottom: 10rem; }
 body {
   margin: 0;
   font-family: var(--font-family-base);
@@ -61,7 +65,7 @@ a:hover { text-decoration-thickness: 2px; }
 .page { padding-top: var(--space-500); padding-bottom: var(--space-600); }
 .back { display: inline-flex; align-items: center; min-height: var(--size-target-comfortable); margin-bottom: var(--space-200); }
 
-.wide .app-header__inner, .wide .page { max-width: 80rem; }
+.wide .app-header__inner, .wide .page { max-width: 80rem; } /* excepción de layout L-02 */
 
 /* Admin: navegación lateral desde lg */
 .admin-layout { display: block; }
@@ -70,7 +74,7 @@ a:hover { text-decoration-thickness: 2px; }
 .side-nav a { display: inline-flex; align-items: center; min-height: var(--size-target-comfortable); padding: 0 var(--space-200); border-radius: var(--radius-md); }
 .side-nav a[aria-current="page"] { background: var(--color-surface-selected); color: var(--color-text-selected); font-weight: var(--font-weight-bold); }
 @media (min-width: 64rem) {
-  .admin-layout { display: grid; grid-template-columns: 15rem minmax(0, 1fr); min-height: calc(100vh - 60px); }
+  .admin-layout { display: grid; grid-template-columns: 15rem minmax(0, 1fr); } /* L-03 */
   .side-nav { border-bottom: 0; border-right: 1px solid var(--color-border-default); }
   .side-nav ul { flex-direction: column; padding: var(--space-500) var(--space-300); }
   .admin-layout .page { max-width: 64rem; margin: 0; padding-left: var(--space-600); padding-right: var(--space-600); }
@@ -113,6 +117,7 @@ a:hover { text-decoration-thickness: 2px; }
 .btn--block { display: flex; width: 100%; }
 .btn--link { background: none; border: 0; color: var(--color-text-link); text-decoration: underline; padding: var(--space-200) var(--space-100); font-weight: var(--font-weight-regular); }
 .btn--link:hover { background: none; }
+.btn--link:disabled, .btn--link[aria-disabled="true"] { color: var(--color-text-muted); text-decoration: none; cursor: not-allowed; }
 .actions { display: flex; flex-direction: column; gap: var(--space-300); margin-top: var(--space-500); }
 @media (min-width: 40rem) { .actions--inline { flex-direction: row; flex-wrap: wrap; } }
 
@@ -213,8 +218,14 @@ legend { font-weight: var(--font-weight-semibold); font-size: var(--font-size-30
 .appt { display: grid; grid-template-columns: 4.5rem minmax(0, 1fr); gap: var(--space-300); align-items: start; }
 .appt__time { font-weight: var(--font-weight-bold); }
 .appt--block { background: var(--color-surface-disabled); border-radius: var(--radius-md); padding: var(--space-300); }
-.summary-bar { position: sticky; bottom: 0; background: var(--color-surface-default); border-top: 1px solid var(--color-border-strong);
+.summary-bar { background: var(--color-surface-default); border-top: 1px solid var(--color-border-strong);
   padding: var(--space-300) var(--space-400); margin: var(--space-500) calc(-1 * var(--space-400)) 0; }
+.summary-bar > p { margin-bottom: var(--space-200); }
+/* Fija abajo solo si la pantalla es lo bastante alta (>= 30rem = 480 px). En pantallas bajas
+   (apaisado, zoom) queda en el flujo para no tapar contenido ni foco (WCAG 2.4.11). */
+@media (min-height: 30rem) {
+  .summary-bar { position: sticky; bottom: 0; }
+}
 
 /* Métricas */
 .metric { font-size: var(--font-size-500); font-weight: var(--font-weight-bold); line-height: var(--font-line-height-tight); margin: var(--space-100) 0; }
@@ -245,6 +256,21 @@ th { font-weight: var(--font-weight-semibold); background: var(--color-surface-s
 /* Marca: previsualización */
 .swatch { display: inline-block; width: var(--size-target-comfortable); height: var(--size-target-comfortable); border-radius: var(--radius-md); border: 1px solid var(--color-border-strong); vertical-align: middle; }
 .preview { border: 1px dashed var(--color-border-strong); border-radius: var(--radius-lg); padding: var(--space-400); background: var(--color-surface-subtle); }
+
+/* Utilidades (reemplazan estilos inline; solo tokens) */
+.u-m-0 { margin: 0; }
+.list-plain { list-style: none; margin: 0 0 var(--space-400); padding: 0; }
+.u-mb-400 { margin-bottom: var(--space-400); }
+.u-mb-500 { margin-bottom: var(--space-500); }
+.u-mt-400 { margin-top: var(--space-400); }
+.u-mt-500 { margin-top: var(--space-500); }
+.u-w-auto { width: auto; }
+.u-bold { font-weight: var(--font-weight-bold); }
+.input--narrow { max-width: 10rem; }  /* L-05: campo numérico corto (horas) */
+.input--date { max-width: 14rem; }    /* L-06: fecha sola en una fila */
+.day-title { font-size: var(--font-size-300); margin-bottom: var(--space-100); }
+.preview__band { border-top: var(--space-100) solid var(--color-action-primary); padding-top: var(--space-300); }
+.nav-badge { margin-left: var(--space-100); }
 
 /* Navegación del prototipo (no es parte del producto) */
 .proto { border-top: 2px dashed var(--color-border-strong); background: var(--color-surface-default); margin-top: var(--space-600); }

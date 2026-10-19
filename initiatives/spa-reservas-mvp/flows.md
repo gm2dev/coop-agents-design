@@ -11,8 +11,8 @@ flowchart TD
   B -->|número inválido| B1[Error en el campo + resumen] --> B
   B -->|Enviarme el código| C[c-codigo: código de 6 números]
   C -->|código incorrecto| C1[c-codigo-error: quedan N intentos] --> C
-  C -->|no llegó| C2[Reenviar a los 45 s] --> C
-  C1 -->|sin intentos| C3[Bloqueo temporal: pedir código nuevo] --> B
+  C -->|no llegó| C2[Reenviar: deshabilitado hasta 45 s] --> C
+  C1 -->|sin intentos| C3[c-codigo-bloqueado: espera 15 min, pedir código nuevo] --> B
   C -->|correcto| D[c-inicio]
   B -.->|Cambiar número| B
 ```
@@ -60,7 +60,7 @@ flowchart TD
   R -->|elige horario| C[c-reservar-confirmar] --> OK[c-reservado]
   R -->|Ver más días| H[c-reservar-horario]
   R -->|Otros servicios| S[c-reservar-servicios]
-  X([Turno reservado]) --> R1[WhatsApp 24 h antes] --> R2[WhatsApp 2 h antes]
+  X([Turno reservado]) --> R1[WhatsApp 48 h antes: todavía puede cancelar] --> R2[WhatsApp 2 h antes]
   R1 -->|link| M[c-mis-turnos]
 ```
 
@@ -69,6 +69,9 @@ flowchart TD
 ```mermaid
 flowchart TD
   A[c-inicio: Ver packs] --> P[c-pack: 3 o 12 meses, condiciones]
+  I2[c-inicio-con-pack: tarjeta Mi pack] -->|Ver mi pack| OK
+  I2 -->|Darme de baja del pack| B
+  N([Navegación: Mi pack, siempre con pack activo]) --> OK
   P -->|Pagar con Mercado Pago| MP([Mercado Pago del spa])
   MP -->|aprobado| OK[c-pack-activo: Mi pack + Darme de baja]
   MP -->|rechazado| E[c-pack-pago-error: no se cobró] --> P
@@ -83,6 +86,8 @@ flowchart TD
 ```mermaid
 flowchart TD
   A[p-agenda: hoy] <--> W[p-agenda-semana]
+  A <-->|día anterior / siguiente| Y[p-agenda-dia-anterior]
+  W -->|un día| A
   A -->|día sin turnos| V[p-agenda-vacia]
   A -->|Bloquear un horario| B[p-bloquear: día, desde, hasta, motivo]
   B -->|falta el día| B1[Error en el campo] --> B
@@ -99,7 +104,7 @@ flowchart TD
 flowchart TD
   A[r-agenda: día por profesional] --> F[r-cargar-turno]
   F --> Q{¿Ya es clienta?}
-  Q -->|sí| T[Buscar por WhatsApp → muestra nombre y permiso]
+  Q -->|sí| T[Buscar por WhatsApp → muestra nombre y permiso; sin permiso: se le pide por WhatsApp]
   Q -->|no| N[Nombre + WhatsApp; el permiso lo da ella por WhatsApp]
   T --> S[Servicios, profesional, día, horario]
   N --> S
@@ -118,10 +123,13 @@ flowchart TD
   P --> PR[a-profesionales: equipo + horario semanal] --> PRO[a-profesionales-ok]
   P --> AJ[a-ajustes: elegir profesional, política, recordatorios]
   P --> MA[a-marca: nombre, logo, color]
-  MA -->|color < 4,5:1| MA1[Aviso: solo en franja; botones con color base]
+  MA -->|< 4,5:1 contra blanco o surface.subtle| MA1[Aviso: solo en franja; botones y links con color del sistema]
   P --> CA[a-campana: segmento con permiso + plantilla + fecha]
   CA -->|oferta vacía| CA1[Error en el campo] --> CA
   CA -->|Programar| CAO[a-campana-enviada: cancelar hasta la hora]
+  CAO -->|Cancelar envío| CC{Confirmación en el lugar}
+  CC -->|No, mantener| CAO
+  CC -->|Sí, cancelar| CAX[a-campana-cancelada: borrador] -->|Volver a programar| CA
   P --> IM[a-importar: formato + subir CSV] --> IR[a-importar-resultado: válidas, con permiso, errores]
   IR -->|Importar válidas| IO[a-importar-ok: no se envían mensajes]
   IR -->|corregir| IM

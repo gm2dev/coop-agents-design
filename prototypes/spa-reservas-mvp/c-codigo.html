@@ -33,14 +33,16 @@
   </div>
   <button type="submit" class="btn btn--block">Ingresar</button>
 </form>
-<p>¿No te llegó? <a href="c-codigo.html">Reenviar código</a> <span class="muted small">(disponible en 45 s)</span></p>
-<p class="small"><a href="c-codigo-error.html">Ver estado: código incorrecto</a></p>
+<p class="u-m-0">¿No te llegó?</p>
+<p><button type="button" class="btn btn--link" data-countdown="45" data-countdown-label="reenvio-espera" aria-describedby="reenvio-espera">Reenviar código</button>
+  <span class="muted small" id="reenvio-espera">Podés pedir otro en 45 s.</span></p>
+<p class="visually-hidden" role="status" id="reenvio-status"></p>
 
 </main>
 <aside class="proto" aria-label="Navegación del prototipo">
   <div class="proto__inner">
     <h2>Prototipo (no es parte del producto)</h2>
-    <ul><li><a href="c-ingresar.html">Ingresar</a></li><li><a href="c-inicio.html">Inicio</a></li><li><a href="c-reservar-servicios.html">Reservar</a></li><li><a href="c-mis-turnos.html">Mis turnos</a></li><li><a href="c-whatsapp.html">Mensajes de WhatsApp (mock)</a></li><li><a href="c-pack.html">Pack prepago (Fase 2)</a></li><li><a href="index.html">Índice del prototipo</a></li></ul>
+    <ul><li><a href="c-ingresar.html">Ingresar</a></li><li><a href="c-inicio.html">Inicio</a></li><li><a href="c-reservar-servicios.html">Reservar</a></li><li><a href="c-mis-turnos.html">Mis turnos</a></li><li><a href="c-whatsapp.html">Mensajes de WhatsApp (mock)</a></li><li><a href="c-pack.html">Pack prepago (Fase 2)</a></li><li><a href="c-codigo-error.html">Estado: código incorrecto</a></li><li><a href="c-codigo-bloqueado.html">Estado: sin intentos</a></li><li><a href="index.html">Índice del prototipo</a></li></ul>
   </div>
 </aside>
 <script src="app.js"></script>
