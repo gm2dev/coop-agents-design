@@ -1,6 +1,12 @@
 # Look and feel de la plataforma — 3 direcciones
 
-Estado: propuesta para decidir · Pedido: Fidel Cossio (socio) · Coordina: CDO · Diseño: Designer
+Estado: **decidida — A · Sereno** (Fidel Cossio, 19/10/2026; aprobada por el CDO) · Pedido: Fidel Cossio (socio) · Coordina: CDO · Diseño: Designer
+
+> **Decisión:** se eligió la dirección **A · Sereno** y se consolidó en el design system v1
+> ([`design-system/tokens.json`](../../design-system/tokens.json), [`design-system/README.md`](../../design-system/README.md)).
+> **B · Preciso** y **C · Cercano** quedan **descartadas**; sus tokens (`tokens-b-preciso.json`, `tokens-c-cercano.json`) y
+> el comparador se conservan como histórico de la exploración. `tokens-a-sereno.json` también queda como histórico: la
+> fuente de verdad ahora es `design-system/tokens.json`.
 
 **Prototipo:** [`prototypes/look-and-feel/index.html`](../../prototypes/look-and-feel/index.html) (comparador: elegís dirección y
 negocio de ejemplo; se puede enlazar un estado con `#dir=b&tenant=faro`).
@@ -19,8 +25,8 @@ barberías y peluquerías caninas; de 3 a 100 negocios). Tiene que cumplir dos c
 Contexto de producto: `gm2dev/coop-agents-product`, rama `po/spa-roadmap-presentacion`,
 `roadmap-mvp-reservas/presentacion-ejecutiva.html` (perfiles, PWA, «marca del spa: logo y colores» en Fase 1).
 
-Estas son **propuestas**: no modifican `design-system/tokens.json` ni `principles.md`. La dirección elegida se
-incorpora al design system en un PR propio, decidido por el CDO.
+Estas eran **propuestas** y no modificaban `design-system/tokens.json` ni `principles.md`. La dirección elegida (A) se
+incorporó al design system en un PR propio (rama `design/ds-sereno`), ver §Decisiones D8.
 
 ## Dónde vive cada marca (decisión CDO)
 
@@ -162,10 +168,14 @@ Los ajustes que antes eran selectores `[data-dir]` en `stage-admin.css` ahora so
 | `density.control-height-touch` / `row-height-touch` | = desktop (48/56) | **44 / 44** | = desktop (48/52) |
 | `font.size.075` / `font.size.050` / `font.tracking.caps` | microtexto «elegido/ocupado», etiqueta «provisorio» | ídem | ídem |
 
-**A tokenizar al consolidar** (quedan como valores fijos de componente, comunes a las 3 direcciones, no de personalidad):
-ancho de la barra lateral (220 px), tamaños de logo (28/40/56/64 px), chip de color derivado (24 px), borde del
-preset (2 px), offset de subrayado de links (3 px), borde izquierdo de avisos (4 px), ancho mínimo de día (56 px)
-y columna de horarios (5.5rem).
+**Tokenizado al consolidar** (en `design-system/tokens.json`; el CSS del comparador sigue con los valores literales,
+que coinciden): ancho de la barra lateral → `size.sidebar.width` (220 px); logos → `size.logo.wordmark` (28),
+`size.logo.header` (40), `size.logo.preview` (56), `size.logo.upload-box` (64) y `size.logo.wordmark-sm` (16, pie);
+chip de color derivado → `size.swatch` (24); borde del preset → `border.width-strong` / `component.preset.border-width`
+(2 px); offset de subrayado → `link.underline-offset` (3 px); borde izquierdo de avisos → `border.width-accent` /
+`component.notice.border-width` (4 px); ancho mínimo de día → `component.day.min-width` (56 px); columna de horarios →
+`component.slot.min-width` (5.5rem). Además: tamaños de íconos `icon.size.sm/md/lg` (16/22/28) y
+`density.target-touch` (44 px en mobile/`pointer:coarse`).
 
 El **marco del comparador** (tarjetas de pantalla, contorno del teléfono y de la ventana, cabecera y controles) no es
 parte de ninguna dirección: declara sus valores como `--frame-*` en un único bloque comentado al inicio de
@@ -190,6 +200,12 @@ parte de ninguna dirección: declara sus valores como `--frame-*` en un único b
 - **D7 (Designer) — Seleccionado nunca solo por color:** servicios, días y horarios comparten patrón (borde
   `brand.border` + doble trazo + «✓ elegido»).
 
+- **D8 (Fidel Cossio, 19/10/2026; aprueba CDO) — Dirección elegida: A · Sereno.** Se consolida en el design system v1
+  (`design-system/tokens.json`, `tokens.css` generado y README con contrastes y regla de derivación de marca). B y C
+  descartadas. Consecuencias: D3 (foco sobre oscuro de B) y D5/pregunta 7 (fuente redondeada de C) dejan de aplicar;
+  D4 se generaliza como regla de 44 px táctiles (`density.*-touch`). En v1 `surface.selected`/`text.selected` siguen
+  siendo del sistema (no se derivan de la marca).
+
 ## Preguntas abiertas
 
 1. **Nombre de la empresa SaaS** (todavía no definido). El wordmark «Nombre» con la etiqueta «provisorio» y el ícono de
@@ -201,11 +217,10 @@ parte de ninguna dirección: declara sus valores como `--frame-*` en un único b
 4. ¿Modo oscuro? No está contemplado; la derivación habría que repetirla contra superficies oscuras. (CDO)
 5. ¿La clienta ve «Reservas con Nombre» también en los mensajes de WhatsApp? (CPO)
 6. ¿Planes pagos pueden ocultar el pie «Reservas con»? (CPO, comercial)
-7. Si se elige C: ¿aceptamos que la tipografía redondeada solo se vea en Apple, o evaluamos autoalojar una fuente?
-   **Sigue abierta** (decisión CDO: no se empaqueta ahora; ver §Decisiones).
+7. ~~Si se elige C: tipografía redondeada~~ — **cerrada**: se eligió A (D8).
 8. Tamaño y formato del logo: el prototipo muestra 40 px de alto en el header; ¿pedimos versión cuadrada y horizontal? (CPO)
 
-## Propuestas al design system (las decide el CDO)
+## Propuestas al design system (las decide el CDO) — incorporadas en v1 (D8), salvo las exclusivas de B
 
 - Agregar el grupo `brand` y la extensión `com.coop-agents.tenant` (qué se puede sobreescribir).
 - `color.surface.canvas`, `color.surface.sunken`, `color.platform.*`, `radius.control`, `radius.button`, `border.width`,
