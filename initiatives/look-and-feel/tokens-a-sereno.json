@@ -344,6 +344,73 @@
           }
         }
       }
+    },
+    "sidebar": {
+      "bg": {
+        "$value": "{color.surface.default}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "text": {
+        "$value": "{color.text.default}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "text-strong": {
+        "$value": "{color.platform.accent-strong}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "muted": {
+        "$value": "{color.text.muted}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "tag-border": {
+        "$value": "{color.border.strong}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "item-hover": {
+        "$value": "{color.surface.subtle}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "item-active-bg": {
+        "$value": "{color.platform.accent-subtle}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "item-active-text": {
+        "$value": "{color.platform.accent-strong}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "indicator": {
+        "$value": "{color.platform.accent}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "chip-bg": {
+        "$value": "{color.surface.subtle}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "chip-border": {
+        "$value": "{color.border.default}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "chip-text": {
+        "$value": "{color.text.default}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "focus-ring": {
+        "$value": "{color.focus.ring}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      }
     }
   },
   "brand": {
@@ -524,6 +591,21 @@
         "$value": "2.75rem",
         "$type": "dimension",
         "$description": "titular de landing"
+      },
+      "label": {
+        "$value": "{font.size.100}",
+        "$type": "dimension",
+        "$description": "Etiquetas de tabla, KPI y eyebrow"
+      },
+      "075": {
+        "$value": "0.75rem",
+        "$type": "dimension",
+        "$description": "Microtexto: «✓ elegido» / «ocupado» en opciones; etiquetas en mayúsculas de B"
+      },
+      "050": {
+        "$value": "0.6875rem",
+        "$type": "dimension",
+        "$description": "Etiqueta «provisorio» del wordmark"
       }
     },
     "weight": {
@@ -543,6 +625,16 @@
         "$value": 500,
         "$type": "fontWeight",
         "$description": "Peso de títulos"
+      },
+      "kpi": {
+        "$value": 500,
+        "$type": "fontWeight",
+        "$description": "Cifra de los KPI"
+      },
+      "hero": {
+        "$value": "{font.weight.heading}",
+        "$type": "fontWeight",
+        "$description": "Título del hero de la landing"
       }
     },
     "line-height": {
@@ -563,6 +655,18 @@
       "label": {
         "$value": "0.02em",
         "$type": "dimension"
+      },
+      "caps": {
+        "$value": "0.04em",
+        "$type": "dimension",
+        "$description": "Etiquetas cortas en mayúsculas (wordmark)"
+      }
+    },
+    "case": {
+      "label": {
+        "$value": "none",
+        "$type": "string",
+        "$description": "text-transform de etiquetas"
       }
     }
   },
@@ -667,6 +771,16 @@
     "section-gap": {
       "$value": "{space.700}",
       "$type": "dimension"
+    },
+    "control-height-touch": {
+      "$value": "{density.control-height}",
+      "$type": "dimension",
+      "$description": "Alto de controles en mobile/táctil (<64rem o pointer:coarse). Decisión CDO: ≥ 44 px"
+    },
+    "row-height-touch": {
+      "$value": "{density.row-height}",
+      "$type": "dimension",
+      "$description": "Alto de filas en mobile/táctil (<64rem o pointer:coarse). Decisión CDO: ≥ 44 px"
     }
   },
   "icon": {
@@ -746,6 +860,99 @@
       "$value": "64rem",
       "$type": "dimension",
       "$description": "1024px"
+    }
+  },
+  "component": {
+    "client": {
+      "body-padding-top": {
+        "$value": "{space.600}",
+        "$type": "dimension",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      }
+    },
+    "panel": {
+      "content-padding": {
+        "$value": "{space.500}",
+        "$type": "dimension",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      },
+      "content-gap": {
+        "$value": "{component.panel.content-padding}",
+        "$type": "dimension",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      }
+    },
+    "kpi": {
+      "font-family": {
+        "$value": "{font.family.heading}",
+        "$type": "fontFamily",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      },
+      "size": {
+        "$value": "{font.size.500}",
+        "$type": "dimension",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      }
+    },
+    "card": {
+      "border-width": {
+        "$value": "1px",
+        "$type": "dimension",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      }
+    },
+    "nav": {
+      "radius": {
+        "$value": "{radius.md}",
+        "$type": "dimension",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      },
+      "indicator-width": {
+        "$value": "3px",
+        "$type": "dimension",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      }
+    },
+    "badge": {
+      "radius": {
+        "$value": "{radius.sm}",
+        "$type": "dimension",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      }
+    },
+    "day": {
+      "radius": {
+        "$value": "{radius.control}",
+        "$type": "dimension",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      }
+    },
+    "hero": {
+      "bg": {
+        "$value": "{color.platform.accent-subtle}",
+        "$type": "color",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      },
+      "divider": {
+        "$value": "transparent",
+        "$type": "color",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      },
+      "icon-bg": {
+        "$value": "transparent",
+        "$type": "color",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      },
+      "icon-padding": {
+        "$value": "0px",
+        "$type": "dimension",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      },
+      "icon-box": {
+        "$value": "{icon.size}",
+        "$type": "dimension",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      }
     }
   }
 }

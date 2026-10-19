@@ -85,7 +85,7 @@
     a: { 'c1-title': '¿Qué te gustaría hacerte?', 'c1-cta': 'Elegir horario', 'c2-title': '¿Cuándo te queda bien?', 'c2-cta': 'Confirmar viernes 23, 15:00',
       'c3-ok': 'Tu turno quedó reservado', 'c3-ok-d': 'Te enviamos el detalle por WhatsApp.', 'c3-title': 'Detalle del turno',
       'c3-remind': 'Te avisamos un día antes. Y cuando sea momento de volver, también.', 'c3-cta': 'Agregar al calendario', 'c3-cancel': 'Cancelar o cambiar el turno', 'foot': 'Reservas con',
-      'a-title': 'Agenda de hoy', 'a-cta': 'Nuevo turno', 'a-k3l': 'Suscriptoras activas', 'a-k3': '3 nuevas esta semana', 'a-cap': 'Turnos de hoy · 5',
+      'a-title': 'Agenda de hoy', 'a-cta': 'Nuevo turno', 'a-k2': '31 de 53 clientas', 'a-k3l': 'Suscriptoras activas', 'a-k3': '3 nuevas esta semana', 'a-cap': 'Turnos de hoy · 5',
       'a-rec': 'Es momento de volver', 'a-rec-d': 'Clientas que ya pasaron su frecuencia habitual.',
       'l-title': 'Que cada clienta vuelva a tiempo.', 'l-lead': 'Reservas online, recordatorios y avisos de recompra para tu spa, peluquería o barbería. Con tu logo y tu color.',
       'l-b1': 'Recordatorios por WhatsApp que bajan las ausencias.', 'l-b2': 'Avisos de recompra, ofertas de temporada y packs prepagos.', 'l-b3': 'Tu clienta ve tu marca, no la nuestra.',
@@ -94,7 +94,7 @@
     b: { 'c1-title': 'Elegí el servicio', 'c1-cta': 'Continuar', 'c2-title': 'Elegí día y horario', 'c2-cta': 'Confirmar: vie 23, 15:00',
       'c3-ok': 'Turno confirmado', 'c3-ok-d': 'Detalle enviado por WhatsApp.', 'c3-title': 'Resumen',
       'c3-remind': 'Recordatorio: 24 h antes. Aviso de recompra según tu frecuencia.', 'c3-cta': 'Agregar al calendario', 'c3-cancel': 'Cancelar o reprogramar', 'foot': 'Reservas con',
-      'a-title': 'Agenda', 'a-cta': '+ Turno', 'a-k3l': 'Suscriptoras activas', 'a-k3': '+3 en 7 días', 'a-cap': 'Hoy · 5 turnos',
+      'a-title': 'Agenda', 'a-cta': '+ Turno', 'a-k2': '31/53 clientas', 'a-k3l': 'Suscriptoras activas', 'a-k3': '+3 en 7 días', 'a-cap': 'Hoy · 5 turnos',
       'a-rec': 'Recompra pendiente', 'a-rec-d': 'Superaron su frecuencia habitual.',
       'l-title': 'Agenda, recordatorios y recompra en un solo panel.', 'l-lead': 'La plataforma de turnos para negocios de belleza y cuidado. Multi-sucursal, con tu marca.',
       'l-b1': 'Recordatorios por WhatsApp: menos ausencias.', 'l-b2': 'Recompra, ofertas de temporada y packs prepagos.', 'l-b3': 'Marca propia en la web de reservas.',
@@ -103,7 +103,7 @@
     c: { 'c1-title': '¡Hola! ¿Qué te hacemos hoy?', 'c1-cta': 'Sigamos: elegí horario', 'c2-title': '¿Cuándo venís?', 'c2-cta': 'Me quedo con el viernes 23, 15:00',
       'c3-ok': '¡Listo, te esperamos!', 'c3-ok-d': 'Te pasamos todo por WhatsApp.', 'c3-title': 'Tu turno',
       'c3-remind': 'Te escribimos el día anterior para que no se te pase. Y cuando te toque volver, te avisamos.', 'c3-cta': 'Sumarlo a mi calendario', 'c3-cancel': '¿Te surgió algo? Cambiá o cancelá acá', 'foot': 'Reservas con',
-      'a-title': '¡Buen día! Así viene hoy', 'a-cta': 'Agendar turno', 'a-k3l': 'Suscriptoras', 'a-k3': '¡3 se sumaron esta semana!', 'a-cap': 'Tus turnos de hoy (5)',
+      'a-title': '¡Buen día! Así viene hoy', 'a-cta': 'Agendar turno', 'a-k2': '¡31 de tus 53 clientas!', 'a-k3l': 'Suscriptoras', 'a-k3': '¡3 se sumaron esta semana!', 'a-cap': 'Tus turnos de hoy (5)',
       'a-rec': 'Les toca volver', 'a-rec-d': 'Ya pasó su tiempo de siempre: un mensajito las trae de vuelta.',
       'l-title': 'Tus clientas vuelven. Vos no tenés que acordarte.', 'l-lead': 'Turnos online, recordatorios y avisos de «te toca volver» para tu spa, peluquería o barbería. Con tu logo y tus colores.',
       'l-b1': 'Recordatorios por WhatsApp, para que nadie falte.', 'l-b2': 'Ofertas de temporada y packs para que vuelvan seguido.', 'l-b3': 'Tu clienta ve tu marca, no la nuestra.',
@@ -115,10 +115,11 @@
   // ---------- Estado y render ----------
   var stage = document.getElementById('escenario');
   var preview = document.querySelector('[data-tenant-scope="preview"]');
+  // state = BORRADOR de «Marca del negocio» (solo se ve en la vista previa). saved = lo guardado (se ve en todas las pantallas).
   var state = { dir: 'a', tenant: 'esmalte', color: TENANTS.esmalte.color, logo: null, name: TENANTS.esmalte.name };
   function $$(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
   function surfaces() { var cs = getComputedStyle(stage); return [cs.getPropertyValue('--s-default').trim(), cs.getPropertyValue('--s-canvas').trim()]; }
-  function logoHtml(color) { return state.logo ? '<img src="' + state.logo + '" alt="">' : LOGOS[state.tenant](color); }
+  function logoHtml(logo, color) { return logo ? '<img src="' + logo + '" alt="">' : LOGOS[state.tenant](color); }
 
   function renderTenantContent() {
     var t = TENANTS[state.tenant];
@@ -130,11 +131,11 @@
     $$('[data-t="c1-offer-t"]').forEach(function (el) { el.textContent = t.offer[0]; });
     $$('[data-t="c1-offer-d"]').forEach(function (el) { el.textContent = t.offer[1]; });
   }
-  function renderIdentity(scopeEls, color) {
-    scopeEls.forEach(function (root) {
-      $$('[data-tenant-name]', root).forEach(function (el) { el.textContent = state.name; });
-      $$('[data-tenant-logo],[data-tenant-logo-sm],[data-tenant-logo-lg]', root).forEach(function (el) { el.innerHTML = logoHtml(color); });
-    });
+  // id = {color, logo, name}. Si root es el escenario, se excluye la vista previa y el formulario (borrador).
+  function renderIdentity(root, id, excludeDraft) {
+    function inDraft(el) { return excludeDraft && (preview.contains(el) || el.closest('#brand-form')); }
+    $$('[data-tenant-name]', root).forEach(function (el) { if (!inDraft(el)) el.textContent = id.name; });
+    $$('[data-tenant-logo],[data-tenant-logo-sm],[data-tenant-logo-lg]', root).forEach(function (el) { if (!inDraft(el)) el.innerHTML = logoHtml(id.logo, id.color); });
   }
   function renderDir() {
     stage.setAttribute('data-dir', state.dir);
@@ -165,17 +166,18 @@
     return rows.map(function (r) { return '<li><span class="chip" style="background:' + r[0] + '" aria-hidden="true"></span><span>' + r[1] + ' <span class="num">' + r[0] + '</span></span><small>' + r[2] + '</small></li>'; }).join('');
   }
 
-  var saved = {}; // color guardado por tenant (la "base de datos" de la demo)
-  function savedColor() { return saved[state.tenant] || TENANTS[state.tenant].color; }
+  var saved = {}; // marca guardada por tenant: {color, logo, name} (la "base de datos" de la demo)
+  function savedBrand() { var t = TENANTS[state.tenant]; return saved[state.tenant] || { color: t.color, logo: null, name: t.name }; }
 
   function renderBrand() {
     var s = surfaces();
-    var dStage = derive(savedColor(), s[0], s[1]);
-    applyBrand(stage, dStage);
-    renderIdentity([stage], savedColor());
+    var sb = savedBrand();
+    applyBrand(stage, derive(sb.color, s[0], s[1]));
+    renderIdentity(stage, sb, true);            // pantallas 1-2 y chip: solo lo guardado
     var dPrev = derive(state.color, s[0], s[1]);
     applyBrand(preview, dPrev);
-    renderIdentity([preview], state.color);
+    renderIdentity(preview, state, false);      // vista previa: el borrador
+    var lg = document.querySelector('#brand-form [data-tenant-logo-lg]'); if (lg) lg.innerHTML = logoHtml(state.logo, state.color);
     document.getElementById('derived').innerHTML = derivedHtml(dPrev);
     document.getElementById('b-msg').innerHTML = warnHtml(dPrev);
     $$('#presets .preset').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-c') === state.color.toLowerCase())); });
@@ -209,7 +211,7 @@
   colorIn.addEventListener('input', function () { setColor(colorIn.value, 'picker'); });
   hexIn.addEventListener('input', function () { var v = hexIn.value.trim(); if (/^#?[0-9a-f]{6}$/i.test(v)) setColor(v[0] === '#' ? v : '#' + v, 'hex'); });
   hexIn.addEventListener('change', function () { if (!/^#?[0-9a-f]{6}$/i.test(hexIn.value.trim())) showHexError(); });
-  nameIn.addEventListener('input', function () { state.name = nameIn.value.trim() || TENANTS[state.tenant].name; renderIdentity([preview], state.color); });
+  nameIn.addEventListener('input', function () { state.name = nameIn.value.trim() || TENANTS[state.tenant].name; renderIdentity(preview, state, false); });
   document.getElementById('b-logo').addEventListener('change', function (e) {
     var f = e.target.files && e.target.files[0]; if (!f) return;
     var r = new FileReader(); r.onload = function () { state.logo = r.result; renderBrand(); }; r.readAsDataURL(f);
@@ -217,14 +219,14 @@
   document.getElementById('b-reset').addEventListener('click', function () { setColor(TENANTS[state.tenant].color, 'reset'); });
   document.getElementById('brand-form').addEventListener('submit', function () {
     if (!/^#?[0-9a-f]{6}$/i.test(hexIn.value.trim())) { showHexError(); hexIn.focus(); return; }
-    saved[state.tenant] = state.color; renderBrand();
+    saved[state.tenant] = { color: state.color, logo: state.logo, name: state.name }; renderBrand();
     var d = derive(state.color, surfaces()[0], surfaces()[1]);
-    document.getElementById('b-msg').innerHTML = '<div class="alert alert--success"><svg class="ic" aria-hidden="true"><use href="#i-ok"/></svg><div><strong>Guardamos tu marca</strong><p>Ya se ve en tu web de reservas' + (d.solidAdjusted || d.textAdjusted ? ', con el ajuste de contraste aplicado' : '') + '. Mirá las pantallas de arriba.</p></div></div>';
+    document.getElementById('b-msg').innerHTML = '<div class="alert alert--success"><svg class="ic" aria-hidden="true"><use href="#i-ok"/></svg><div><strong>Guardamos tu marca</strong><p>Ya se ve en tu web de reservas' + (d.solidAdjusted || d.textAdjusted ? ', con el ajuste de contraste aplicado' : '') + '. Color, logo y nombre ya están aplicados en las pantallas de arriba.</p></div></div>';
   });
 
   function onTenant(id) {
-    state.tenant = id; state.logo = null; state.name = TENANTS[id].name;
-    state.color = savedColor(); nameIn.value = state.name; colorIn.value = state.color; hexIn.value = state.color; clearHexError();
+    state.tenant = id; var sb = savedBrand();
+    state.color = sb.color; state.logo = sb.logo; state.name = sb.name; nameIn.value = state.name; colorIn.value = state.color; hexIn.value = state.color; clearHexError();
     renderTenantContent(); renderDir(); renderBrand();
   }
   $$('input[name="dir"]').forEach(function (r) { r.addEventListener('change', function () { state.dir = r.value; renderDir(); renderBrand(); }); });

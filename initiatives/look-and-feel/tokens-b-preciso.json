@@ -441,6 +441,73 @@
           }
         }
       }
+    },
+    "sidebar": {
+      "bg": {
+        "$value": "{color.chrome.bg}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "text": {
+        "$value": "{color.chrome.text}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "text-strong": {
+        "$value": "{color.chrome.text-strong}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "muted": {
+        "$value": "{color.slate.200}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "tag-border": {
+        "$value": "{color.slate.200}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "item-hover": {
+        "$value": "{color.chrome.item-active}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "item-active-bg": {
+        "$value": "{color.chrome.item-active}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "item-active-text": {
+        "$value": "{color.chrome.text-strong}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "indicator": {
+        "$value": "{color.chrome.indicator}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "chip-bg": {
+        "$value": "{color.chrome.chip-bg}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "chip-border": {
+        "$value": "{color.chrome.chip-border}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "chip-text": {
+        "$value": "{color.chrome.text-strong}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "focus-ring": {
+        "$value": "{color.chrome.focus-ring}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      }
     }
   },
   "brand": {
@@ -620,6 +687,21 @@
         "$value": "2.25rem",
         "$type": "dimension",
         "$description": "titular de landing"
+      },
+      "label": {
+        "$value": "{font.size.075}",
+        "$type": "dimension",
+        "$description": "Etiquetas de tabla, KPI y eyebrow"
+      },
+      "075": {
+        "$value": "0.75rem",
+        "$type": "dimension",
+        "$description": "Microtexto: «✓ elegido» / «ocupado» en opciones; etiquetas en mayúsculas de B"
+      },
+      "050": {
+        "$value": "0.6875rem",
+        "$type": "dimension",
+        "$description": "Etiqueta «provisorio» del wordmark"
       }
     },
     "weight": {
@@ -639,6 +721,16 @@
         "$value": 600,
         "$type": "fontWeight",
         "$description": "Peso de títulos"
+      },
+      "kpi": {
+        "$value": 700,
+        "$type": "fontWeight",
+        "$description": "Cifra de los KPI"
+      },
+      "hero": {
+        "$value": "{font.weight.heading}",
+        "$type": "fontWeight",
+        "$description": "Título del hero de la landing"
       }
     },
     "line-height": {
@@ -659,6 +751,18 @@
       "label": {
         "$value": "0.04em",
         "$type": "dimension"
+      },
+      "caps": {
+        "$value": "0.04em",
+        "$type": "dimension",
+        "$description": "Etiquetas cortas en mayúsculas (wordmark)"
+      }
+    },
+    "case": {
+      "label": {
+        "$value": "uppercase",
+        "$type": "string",
+        "$description": "text-transform de etiquetas"
       }
     }
   },
@@ -763,6 +867,16 @@
     "section-gap": {
       "$value": "{space.700}",
       "$type": "dimension"
+    },
+    "control-height-touch": {
+      "$value": "44px",
+      "$type": "dimension",
+      "$description": "Alto de controles en mobile/táctil (<64rem o pointer:coarse). Decisión CDO: ≥ 44 px"
+    },
+    "row-height-touch": {
+      "$value": "44px",
+      "$type": "dimension",
+      "$description": "Alto de filas en mobile/táctil (<64rem o pointer:coarse). Decisión CDO: ≥ 44 px"
     }
   },
   "icon": {
@@ -842,6 +956,99 @@
       "$value": "64rem",
       "$type": "dimension",
       "$description": "1024px"
+    }
+  },
+  "component": {
+    "client": {
+      "body-padding-top": {
+        "$value": "{space.500}",
+        "$type": "dimension",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      }
+    },
+    "panel": {
+      "content-padding": {
+        "$value": "{space.400}",
+        "$type": "dimension",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      },
+      "content-gap": {
+        "$value": "{component.panel.content-padding}",
+        "$type": "dimension",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      }
+    },
+    "kpi": {
+      "font-family": {
+        "$value": "{font.family.numeric}",
+        "$type": "fontFamily",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      },
+      "size": {
+        "$value": "{font.size.400}",
+        "$type": "dimension",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      }
+    },
+    "card": {
+      "border-width": {
+        "$value": "1px",
+        "$type": "dimension",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      }
+    },
+    "nav": {
+      "radius": {
+        "$value": "{radius.md}",
+        "$type": "dimension",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      },
+      "indicator-width": {
+        "$value": "3px",
+        "$type": "dimension",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      }
+    },
+    "badge": {
+      "radius": {
+        "$value": "{radius.sm}",
+        "$type": "dimension",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      }
+    },
+    "day": {
+      "radius": {
+        "$value": "{radius.control}",
+        "$type": "dimension",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      }
+    },
+    "hero": {
+      "bg": {
+        "$value": "{color.surface.default}",
+        "$type": "color",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      },
+      "divider": {
+        "$value": "{color.border.default}",
+        "$type": "color",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      },
+      "icon-bg": {
+        "$value": "transparent",
+        "$type": "color",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      },
+      "icon-padding": {
+        "$value": "0px",
+        "$type": "dimension",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      },
+      "icon-box": {
+        "$value": "{icon.size}",
+        "$type": "dimension",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      }
     }
   }
 }

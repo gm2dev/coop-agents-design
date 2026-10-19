@@ -77,36 +77,53 @@ la advertencia a la administradora. El relleno se oscurece solo cuando ni blanco
 **Límite conocido:** `brand.solid` claro (amarillo, rosa) tiene < 3:1 contra el fondo; no es requisito para un botón con
 texto (el texto del botón es el que comunica, 1.4.11 no exige contraste del contorno de un botón identificable por su
 etiqueta), pero el estado **seleccionado** nunca se apoya en `solid`: usa `brand.border` (= `brand.text`, ≥ 4.5:1) +
-check + texto «Elegido». Los días elegidos usan `solid` como relleno con `on` como texto (≥ 4.5:1) y además están marcados
-como `:checked` en un radio nativo.
+doble trazo + check + texto «Elegido/elegido».
+
+**Corrección (ronda 2):** en la ronda 1 el **día elegido** se marcaba solo con relleno `brand.solid`, que con tenants
+claros daba 1,64–2,34:1 contra los días no elegidos (falla 1.4.1 y 1.4.11; axe no lo detecta). Ahora usa el mismo patrón
+que horarios y servicios: fondo `brand.subtle`, borde `brand.border` + `inset 1px` y el texto «✓ elegido» (`::after`).
+Medido con estilos computados (Playwright, 360 px, 3 direcciones × 4 negocios):
+
+| Medida | Mín. | Peor caso | Mejor caso |
+|---|---|---|---|
+| Borde del día elegido vs fondo del día no elegido | 3 | 4,89 (B/C + Don Faro) | 8,68 (Nativa) |
+| Borde del día elegido vs fondo de la web (`surface.canvas`) | 3 | 4,56 (A Esmalte / B Don Faro) | 8,15 |
+| Texto «✓ elegido» (`brand.text`) sobre `brand.subtle` | 4,5 | 4,51 (B/C Pelos & Patas) | 7,10 |
+| Texto del día sobre `brand.subtle` | 4,5 | 12,06 | 17,14 |
+| Relleno elegido vs no elegido (informativo: el estado ya no depende de esto) | — | 1,06 | 1,22 |
+
+Indicador no cromático presente en las 12 combinaciones (`content: "✓ elegido"`).
 
 ## 3. Verificación en navegador (Playwright + axe-core, headless Chromium)
 
-Corrido el 19/10/2026 sobre `file://` con Playwright (Chromium headless) + axe-core, reglas `wcag2a`, `wcag2aa`,
-`wcag21a`, `wcag21aa`, `wcag22aa` y `best-practice`. Scripts fuera del repo (skill `prototype-browser-check`).
+Ronda 2, corrido el 19/10/2026 sobre `file://` con Playwright (Chromium headless) + axe-core, reglas `wcag2a`,
+`wcag2aa`, `wcag21a`, `wcag21aa`, `wcag22aa` y `best-practice`. Scripts fuera del repo (skill `prototype-browser-check`).
+Se reportan **violaciones e incompletos** (los incompletos son nodos que axe no pudo decidir y hay que revisar a mano).
 
 | Prueba | Alcance | Resultado |
 |---|---|---|
-| axe (0 violaciones) | `look-and-feel/index.html` a 360 y 1280 px × 3 direcciones × 4 negocios (24 corridas) + 320 px × 3 direcciones con Barbería Don Faro + `prototypes/index.html` a 320/360/1280 | **0 violaciones** en las 30 corridas |
-| axe `color-contrast` | B + Don Faro a 1280 px | 226 nodos aprobados, 0 incompletos |
-| Reflujo 1.4.10 (`scrollWidth ≤ ancho`) | mismas 30 corridas, incluye 320 px | **OK** en todas |
-| Espaciado de texto 1.4.12 (line-height 1.5, letter-spacing .12em, word-spacing .16em, párrafos 2em) | mismas 30 corridas | **OK** en todas (sin desborde horizontal) |
-| Recursos rotos / errores JS | mismas 30 corridas (`requestfailed` en fase de carga, `pageerror`) | 0 / 0 |
-| Theming | B + Don Faro: `--brand-solid` #f5c400, `--brand-on` #111111, `--brand-text` #896e00, advertencia visible | OK |
-| Interacción «Marca del negocio» | preset negro → «Tu color se lee bien»; fucsia → advertencia con #c12e6e (5,40:1); hex «rojo» → `aria-invalid` + error asociado; hex válido limpia el error; Guardar → éxito y el escenario toma el color guardado | OK; axe tras la interacción: 0 violaciones |
-| Teclado | flecha derecha en el grupo de direcciones cambia de B a C | OK |
+| axe: violaciones | `look-and-feel/index.html` a 320, 360 y 1280 px × 3 direcciones × 4 negocios (**36 corridas**) | **0** |
+| axe: incompletos | mismas 36 corridas | **0** (ronda 1: 7 `color-contrast` por el degradado del hero de A + 1 `aria-prohibited-attr` por `aria-label` en el `div#escenario`; ambos corregidos: hero con fondo sólido `component.hero.bg` y `#escenario` ahora es `<section>` con nombre) |
+| Reflujo 1.4.10 (`scrollWidth ≤ ancho`) | 36 corridas, incluye 320 px | **OK** en todas |
+| Espaciado de texto 1.4.12 (line-height 1.5, letter-spacing .12em, word-spacing .16em, párrafos 2em) | 36 corridas | **OK** en todas |
+| Recursos rotos / errores JS | 36 corridas | 0 / 0 |
+| Día elegido | 12 combinaciones a 360 px | ver tabla de §2 (borde ≥ 4,89:1 vs no elegido + «✓ elegido») |
+| Links del área del tenant | todos los `a:not(.btn)` dentro de `.phone` y `.mini`, 12 combinaciones a 1280 px | color computado = `--brand-text` del contenedor en **12/12**. B + Don Faro: «Volver», «Cancelar o reprogramar» y «Ver política de cancelación» = `rgb(137,110,0)` = **#896e00** (antes índigo #3a3f9e) |
+| Densidad táctil de B (D4) | input del login y ítem de navegación | 320 y 360 px: **44 px**; 1280 px con puntero: 40 px |
+| Flujo «Marca del negocio» (B + Don Faro) | subir logo PNG + nombre «Barbería El Faro Nuevo» + preset fucsia, luego Guardar | Antes de guardar: solo la vista previa (y el logo del formulario) cambian; header de la clienta y chip del panel siguen con nombre, logo y `--brand-solid` #f5c400. Después de guardar: header, chip y escenario con nombre nuevo, logo subido y `--brand-solid` #d6337a; mensaje «Guardamos tu marca…». axe después de la interacción: 0 violaciones, 0 incompletos |
+| `data-t="a-k2"` | texto del KPI | existe en COPY para las 3 direcciones (B: «31/53 clientas») |
 
 No reemplaza: lector de pantalla real, zoom 200 % real, Safari/iOS ni Android (PENDIENTES, ver §4).
 
 ## 4. Checklist WCAG 2.2 AA del prototipo
 
 - [x] 1.3.1 Estructura: `header`/`main`, h1 → h2 por pantalla → h3/h4 dentro del marco; radios nativos agrupados en `fieldset`/`legend`; tabla de agenda con `caption` y `th scope`.
-- [x] 1.4.1 Uso del color: seleccionado = borde + check + «Elegido»; ocupado = tachado + borde punteado + texto «ocupado»; estados de turno con texto e ícono; advertencias con ícono + título.
-- [x] 1.4.3 / 1.4.11 Contraste: tablas 1 y 2; axe `color-contrast` sin violaciones en las 12 combinaciones dirección × negocio.
+- [x] 1.4.1 Uso del color: seleccionado (servicios, **días** y horarios) = borde `brand.border` + doble trazo + «✓ elegido»; ocupado = tachado + borde punteado + texto «ocupado»; estados de turno con texto e ícono; advertencias con ícono + título.
+- [x] 1.4.3 / 1.4.11 Contraste: tablas 1 y 2; axe `color-contrast` sin violaciones ni incompletos en las 36 corridas; día elegido medido aparte (axe no evalúa 1.4.11 de estados).
 - [x] 1.4.10 Reflujo a 320 px y 1.4.12 espaciado de texto: medido (ver §3).
 - [x] 2.1.1 Teclado: todo es nativo (radios, botones, links, inputs); flechas cambian dirección y negocio; la tabla con scroll horizontal es enfocable (`tabindex=0`, `role=region`).
-- [x] 2.4.1 Saltar al escenario; 2.4.7 / 2.4.13 foco 3 px con offset 2 px, propio sobre el chrome oscuro de B.
-- [x] 2.5.8 Objetivos ≥ 44 px en botones, opciones, horarios, días y presets de color; en B los controles del panel son de 40 px (≥ 24 px mínimo).
+- [x] 2.4.1 Saltar al escenario (destino `<section id=escenario>` con nombre accesible); 2.4.7 / 2.4.13 foco 3 px con offset 2 px, propio sobre el chrome oscuro de B.
+- [x] 2.5.8 Objetivos ≥ 44 px en botones, opciones, horarios, días y presets de color; en B los controles del panel son de 40 px solo en desktop con puntero (≥ 24 px mínimo) y de 44 px en mobile/táctil (D4).
 - [x] 3.3.1 / 3.3.3 Errores: email sin dominio y código de color inválido con `aria-invalid`, mensaje asociado por `aria-describedby`, ícono y cómo corregir.
 - [x] 4.1.3 Mensajes de estado: advertencia de contraste y «Guardamos tu marca» en `role=status` con `aria-live=polite`; la ficha de la dirección se anuncia al cambiar.
 - [ ] **PENDIENTE (persona de diseño, preview de Vercel):** lector de pantalla real (VoiceOver iOS / NVDA), zoom 200 % real, teclado en Safari, y cómo se ve `ui-rounded` / `ui-serif` en Android y Windows (caen a Nunito/Georgia o al sistema).
