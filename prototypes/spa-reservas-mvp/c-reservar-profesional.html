@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="tenant-spa-lua.css">
 </head>
-<body>
+<body class="tenant">
 <a class="skip-link" href="#main">Saltar al contenido</a>
 <header class="app-header">
   <div class="app-header__inner">
@@ -20,17 +20,18 @@
 
 <a class="back" href="c-reservar-servicios.html">← Cambiar servicios</a>
 <p class="steps">Paso 2 de 4</p>
+<p><span class="badge badge--success">Beneficio de tu pack</span></p>
 <h1>¿Con quién?</h1>
 <p class="muted">Retiro de semipermanente + Esmaltado semipermanente · 90 min</p>
 <form action="c-reservar-horario.html">
   <fieldset>
     <legend>Profesional</legend>
-    <ul class="choices"><li class="choice"><input type="radio" name="profesional" id="p0" ><label for="p0"><span class="choice__body"><span class="choice__title">Cualquier profesional</span><span class="choice__meta">Te mostramos todos los horarios libres</span></span></label></li><li class="choice"><input type="radio" name="profesional" id="p1" checked ><label for="p1"><span class="choice__body"><span class="choice__title">Carla</span><span class="choice__meta">Manos y kapping</span></span></label></li><li class="choice"><input type="radio" name="profesional" id="p2" ><label for="p2"><span class="choice__body"><span class="choice__title">Jimena</span><span class="choice__meta">Manos y pies</span></span></label></li></ul>
+    <ul class="choices"><li class="choice"><input type="radio" name="profesional" id="p0" ><label for="p0"><span class="choice__body"><span class="choice__title">La primera profesional disponible</span><span class="choice__meta">Te mostramos todos los horarios libres</span></span></label></li><li class="choice"><input type="radio" name="profesional" id="p1" checked ><label for="p1"><span class="choice__body"><span class="choice__title">Carla</span><span class="choice__meta">Manos y kapping</span></span></label></li><li class="choice"><input type="radio" name="profesional" id="p2" ><label for="p2"><span class="choice__body"><span class="choice__title">Jimena</span><span class="choice__meta">Manos y pies</span></span></label></li></ul>
   </fieldset>
   <p class="small muted">Te mostramos solo a quienes hacen todos los servicios que elegiste.</p>
   <button type="submit" class="btn btn--block">Continuar</button>
 </form>
-<p class="small muted">Este paso aparece solo si el spa activa la elección de profesional. Si no, pasás directo al horario.</p>
+<p class="small muted">Nota de diseño: este paso lo ven solo las clientas con pack, si el spa activó «Elegir profesional» como beneficio del pack (decisión confirmada por Fidel). Sin pack se reserva con la primera profesional disponible y se pasa directo al horario. En el prototipo, el paso siguiente muestra la variante sin pack.</p>
 
 </main>
 <aside class="proto" aria-label="Navegación del prototipo">

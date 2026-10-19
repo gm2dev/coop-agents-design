@@ -1,5 +1,5 @@
 /* JS mínimo del prototipo: validación con resumen de errores, totales en vivo,
-   alternar "clienta nueva", vista previa de marca con chequeo de contraste,
+   alternar "clienta nueva" (actualiza el resumen de errores), asistencia, vista previa de marca (derivación PR #6),
    cuenta regresiva de reenvío y confirmación en el lugar. Sin JS todo sigue navegable. */
 (function () {
   function $(s, c) { return (c || document).querySelector(s); }
@@ -90,51 +90,97 @@
       var existente = $('#datos-existente');
       if (nueva) nueva.hidden = !esNueva;
       if (existente) existente.hidden = esNueva;
+      // El resumen de errores lista solo campos visibles: al alternar, se rehace con los que siguen marcados.
+      var summary = $('.error-summary');
+      if (summary && !summary.hidden) {
+        var ul = $('ul', summary);
+        $$('li', ul).forEach(function (li) {
+          var a = $('a', li), t = a && document.getElementById(a.getAttribute('href').slice(1));
+          if (t && t.closest('[hidden]')) li.hidden = true;
+          else if (t && t.getAttribute('aria-invalid') === 'true') li.hidden = false;
+        });
+        var visibles = $$('li', ul).filter(function (li) { return !li.hidden; }).length;
+        summary.hidden = visibles === 0;
+      }
     });
   });
 
-  // Marca: vista previa y regla de contraste (DD-05 / PDS-01).
-  // El color del spa se usa en botones y links solo si da >= 4,5:1 contra blanco (text.on-action)
-  // Y contra surface.subtle (#f5f6f8, el fondo más oscuro donde aparecen links). Si no, botones,
-  // links y borde seleccionado quedan con los valores del sistema y el color va solo a la franja.
+  // Asistencia: «Asistió» / «No vino» con aria-pressed; el estado se anuncia en texto (aria-live).
+  $$('.attendance').forEach(function (g) {
+    var badge = $('[data-att-badge]', g), by = $('[data-att-by]', g);
+    $$('[data-att]', g).forEach(function (b) {
+      b.addEventListener('click', function () {
+        var on = b.getAttribute('aria-pressed') !== 'true';
+        $$('[data-att]', g).forEach(function (o) { o.setAttribute('aria-pressed', 'false'); });
+        var v = on ? b.dataset.att : null;
+        if (on) b.setAttribute('aria-pressed', 'true');
+        badge.className = 'badge ' + (v === 'si' ? 'badge--success' : v === 'no' ? 'badge--danger' : 'badge--neutral');
+        badge.textContent = v === 'si' ? 'Asistió' : v === 'no' ? 'No vino' : 'Sin marcar';
+        by.textContent = v ? ' · marcado recién' : '';
+      });
+    });
+  });
+
+  // Marca: vista previa con la derivación de PR #6 (design-system/README.md §Marca del tenant;
+  // misma lógica que design-system/tools/tokens.py derive_brand). Nunca bloquea el guardado: si hubo que
+  // oscurecer solid o text, muestra un aviso (role=status) con el valor resultante y su contraste.
   var color = $('#color-marca');
   if (color) {
-    // Valores de design-system/tokens.json (no se modifican): action.primary, action.primary-hover,
-    // text.link, border.selected, surface.default, surface.subtle.
-    var SYS = { primary: '#0e6b63', hover: '#0a524c', link: '#0e6b63', selected: '#0e6b63' };
-    var WHITE = '#ffffff', SUBTLE = '#f5f6f8', MIN = 4.5;
+    var WHITE = '#ffffff', NEAR_BLACK = '#111111', BLACK = '#000000';
+    var SURF_DEFAULT = '#fffdf9', SURF_CANVAS = '#f6f2eb'; // color.surface.default y color.surface.canvas (= subtle)
+    var rgb = function (h) { return [1, 3, 5].map(function (i) { return parseInt(h.substr(i, 2), 16) / 255; }); };
     var lum = function (hex) {
-      var c = [1, 3, 5].map(function (i) { return parseInt(hex.substr(i, 2), 16) / 255; })
-        .map(function (v) { return v <= 0.04045 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); });
+      var c = rgb(hex).map(function (v) { return v <= 0.04045 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); });
       return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
     };
     var contrast = function (a, b) { var x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
-    // Hover (PDS-01): mezcla en sRGB con 20 % de negro: canal * 0,8, redondeado. #8a2b6a -> #6e2255.
-    var hoverOf = function (hex) {
-      return '#' + [1, 3, 5].map(function (i) {
-        var n = Math.round(parseInt(hex.substr(i, 2), 16) * 0.8); return ('0' + n.toString(16)).slice(-2);
-      }).join('');
+    var trunc = function (r) { return Math.floor(r * 100) / 100; };          // nunca redondear hacia arriba
+    var mix = function (a, b, t) {                                           // interpolación lineal en sRGB
+      var A = rgb(a), B = rgb(b);
+      return '#' + [0, 1, 2].map(function (i) { return ('0' + Math.round((A[i] * (1 - t) + B[i] * t) * 255).toString(16)).slice(-2); }).join('');
     };
-    var fmt = function (n) { return n.toFixed(2).replace('.', ','); };
+    var darkenUntil = function (c, ok) {                                     // pasos de 2 % hacia negro
+      var k = 0, out = c;
+      while (!ok(out) && k < 1) { k = Math.round((k + 0.02) * 100) / 100; out = mix(c, BLACK, k); }
+      return out;
+    };
+    var derive = function (primary) {
+      var on = contrast(WHITE, primary) >= contrast(NEAR_BLACK, primary) ? WHITE : NEAR_BLACK;
+      var solid = primary;
+      if (contrast(on, primary) < 4.5) { solid = darkenUntil(primary, function (c) { return contrast(c, WHITE) >= 4.5; }); on = WHITE; }
+      var hover = on === WHITE ? mix(solid, BLACK, 0.15) : mix(solid, WHITE, 0.30);
+      var subtle = mix(primary, SURF_DEFAULT, 0.88);
+      var surfaces = [SURF_DEFAULT, SURF_CANVAS, subtle];
+      var text = darkenUntil(primary, function (c) { return surfaces.every(function (s) { return contrast(c, s) >= 4.5; }); });
+      return { primary: primary, solid: solid, on: on, hover: hover, subtle: subtle, text: text,
+        textHover: mix(text, BLACK, 0.15), border: text, surfaces: surfaces };
+    };
+    var fmt = function (n) { return trunc(n).toFixed(2).replace('.', ','); };
     var check = function () {
       var c = color.value.toLowerCase();
-      var rW = contrast(c, WHITE), rS = contrast(c, SUBTLE);
+      var t = derive(c);
       var prev = $('#preview');
+      [['primary', t.primary], ['solid', t.solid], ['on-primary', t.on], ['primary-hover', t.hover], ['text', t.text],
+        ['text-hover', t.textHover], ['subtle', t.subtle], ['border', t.border]].forEach(function (x) {
+        prev.style.setProperty('--brand-' + x[0], x[1]);
+      });
       var out = $('#contraste');
-      var datos = 'Contraste con texto blanco: ' + fmt(rW) + ':1 · como link sobre fondo gris claro: ' + fmt(rS) + ':1 (mínimo 4,5:1 en los dos).';
-      var ok = rW >= MIN && rS >= MIN;
-      prev.style.setProperty('--color-action-primary', ok ? c : SYS.primary);
-      prev.style.setProperty('--color-action-primary-hover', ok ? hoverOf(c) : SYS.hover);
-      prev.style.setProperty('--color-text-link', ok ? c : SYS.link);
-      prev.style.setProperty('--color-border-selected', ok ? c : SYS.selected);
-      if (ok) {
+      var rText = t.surfaces.map(function (s) { return fmt(contrast(t.text, s)); });
+      var datos = 'Botones: texto ' + (t.on === WHITE ? 'blanco' : 'casi negro') + ' sobre ' + t.solid + ' = ' + fmt(contrast(t.on, t.solid)) +
+        ':1. Links y textos de marca (' + t.text + '): ' + rText[0] + ':1 sobre blanco, ' + rText[1] + ':1 sobre el fondo de página y ' +
+        rText[2] + ':1 sobre el tinte de tu color (mínimo 4,5:1 en todos).';
+      var adjusted = [];
+      if (t.solid !== c) adjusted.push('los botones usan ' + t.solid);
+      if (t.text !== c) adjusted.push('los links y textos de marca usan ' + t.text);
+      if (!adjusted.length) {
         out.className = 'alert alert--success';
-        out.innerHTML = '<p class="alert__title"><span aria-hidden="true">✓ </span>Se lee bien</p><p>' + datos + ' Lo vamos a usar en botones, links y la franja superior.</p>';
+        out.innerHTML = '<p class="alert__title"><span aria-hidden="true">✓ </span>Se lee bien tal cual</p><p>' + datos + '</p>';
       } else {
         out.className = 'alert alert--warning';
-        out.innerHTML = '<p class="alert__title"><span aria-hidden="true">⚠ </span>Este color no se lee bien en botones y links</p><p>' + datos + ' Lo vamos a usar solo en la franja superior; botones y links quedan con el color base de la plataforma. Probá un tono más oscuro.</p>';
+        out.innerHTML = '<p class="alert__title"><span aria-hidden="true">⚠ </span>Ajustamos tu color para que se lea bien</p><p>' +
+          'Tu color (' + c + ') queda en la franja, el logo y los fondos suaves; ' + adjusted.join(' y ') + ', un tono más oscuro. ' +
+          datos + ' Podés guardar igual; si preferís elegirlo vos, probá un tono más oscuro.</p>';
       }
-      $('#franja').style.borderTopColor = c;
     };
     color.addEventListener('input', check);
     $$('[data-try-color]').forEach(function (b) { b.addEventListener('click', function () { color.value = b.dataset.tryColor; check(); }); });

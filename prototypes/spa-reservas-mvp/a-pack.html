@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pack — Spa Lúa · Prototipo spa-reservas-mvp</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="tenant-spa-lua.css">
+</head>
+<body class="wide">
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="app-header">
+  <div class="app-header__inner">
+    <a class="brand brand--chip" href="a-panel.html"><img class="brand__logo" src="assets/logo-spa-lua.svg" alt="" width="36" height="36"><span>Spa Lúa<span class="muted small"> · Administración</span></span></a>
+    <p class="small muted u-m-0">Valeria · administradora</p>
+  </div>
+</header>
+<div class="admin-layout"><nav class="side-nav" aria-label="Administración"><ul><li><a href="a-panel.html">Panel</a></li><li><a href="a-servicios.html">Servicios</a></li><li><a href="a-profesionales.html">Profesionales y horarios</a></li><li><a href="a-ajustes.html">Reservas y avisos</a></li><li><a href="a-pack.html" aria-current="page">Pack</a></li><li><a href="a-marca.html">Marca</a></li><li><a href="a-campana.html">Campaña de Navidad</a></li><li><a href="a-importar.html">Importar clientas</a></li></ul></nav>
+<main id="main" class="page">
+
+<h1>Pack</h1>
+<p><span class="badge badge--neutral">Fase 2</span> Pack prepago que tus clientas pagan por Mercado Pago.</p>
+<div class="alert alert--warning"><p class="alert__title"><span aria-hidden="true">⚠ </span>Propuesta provisoria</p><p>Condiciones del pack propuestas por el CPO. Las decide Fidel y <strong>no tienen revisión legal</strong>.</p></div>
+<form action="a-pack.html">
+  <section class="card" aria-labelledby="pk-serv">
+    <h2 id="pk-serv">Servicios que entran en el pack</h2>
+    <fieldset>
+      <legend>Cada mes, la clienta elige 1 de estos servicios</legend>
+      <ul class="choices">
+        <li class="choice"><input type="checkbox" id="pk-s1" checked><label for="pk-s1"><span class="choice__body"><span class="choice__title">Manicura tradicional</span><span class="choice__meta">Precio normal $ 12.000</span></span></label></li>
+        <li class="choice"><input type="checkbox" id="pk-s3" checked><label for="pk-s3"><span class="choice__body"><span class="choice__title">Esmaltado semipermanente</span><span class="choice__meta">Precio normal $ 18.000</span></span></label></li>
+        <li class="choice"><input type="checkbox" id="pk-s4"><label for="pk-s4"><span class="choice__body"><span class="choice__title">Kapping en gel</span><span class="choice__meta">Precio normal $ 25.000</span></span></label></li>
+        <li class="choice"><input type="checkbox" id="pk-s5" checked><label for="pk-s5"><span class="choice__body"><span class="choice__title">Pedicura spa</span><span class="choice__meta">Precio normal $ 20.000</span></span></label></li>
+      </ul>
+    </fieldset>
+  </section>
+  <section class="card" aria-labelledby="pk-precio">
+    <h2 id="pk-precio">Precio por servicio con el pack</h2>
+    <div class="inline-fields">
+      <div class="field"><label for="pk-p3">Pack 3 meses ($ por servicio)</label><input type="number" id="pk-p3" value="15000" min="0" step="500" class="input--narrow"></div>
+      <div class="field"><label for="pk-p12">Pack 12 meses ($ por servicio)</label><input type="number" id="pk-p12" value="14000" min="0" step="500" class="input--narrow"></div>
+    </div>
+    <p class="hint">La clienta paga 3 o 12 servicios a este precio. Si se da de baja, se le devuelven los servicios sin usar a este mismo precio (o todo, si es dentro de los 10 días de la compra y no usó ninguno).</p>
+  </section>
+  <section class="card" aria-labelledby="pk-ben">
+    <h2 id="pk-ben">Beneficios</h2>
+    <ul class="choices">
+      <li class="choice"><input type="checkbox" id="pk-elegir-pro" checked aria-describedby="pk-elegir-pro-hint"><label for="pk-elegir-pro"><span class="choice__body"><span class="choice__title">Elegir profesional</span><span class="choice__meta" id="pk-elegir-pro-hint">Las clientas con pack eligen con quién atenderse. Las demás reservan con la primera profesional disponible.</span></span></label></li>
+    </ul>
+  </section>
+  <section class="card" aria-labelledby="pk-mp">
+    <h2 id="pk-mp">Cobro</h2>
+    <p>Mercado Pago de Spa Lúa: <span class="badge badge--success">Configurado</span></p>
+    <p class="small muted">En el piloto, la plataforma carga las credenciales de Mercado Pago de cada spa a mano. Esta pantalla no las muestra ni las edita.</p>
+  </section>
+  <button class="btn" type="submit">Guardar pack</button>
+</form>
+<p class="small muted">Nota de diseño: pregunta abierta a Fidel, si en la Fase 1 (sin packs) el spa puede abrir «Elegir profesional» para todas las clientas. Hasta que decida, es solo para clientas con pack.</p>
+
+</main>
+</div>
+<aside class="proto" aria-label="Navegación del prototipo">
+  <div class="proto__inner">
+    <h2>Prototipo (no es parte del producto)</h2>
+    <ul><li><a href="a-panel.html">Panel</a></li><li><a href="a-panel-vacio.html">Estado: panel sin datos</a></li><li><a href="a-servicios.html">Servicios</a></li><li><a href="a-profesionales.html">Profesionales y horarios</a></li><li><a href="a-ajustes.html">Reservas y avisos</a></li><li><a href="a-marca.html">Marca</a></li><li><a href="a-campana.html">Campaña</a></li><li><a href="a-importar.html">Importar CSV</a></li><li><a href="index.html">Índice del prototipo</a></li></ul>
+  </div>
+</aside>
+<script src="app.js"></script>
+</body>
+</html>

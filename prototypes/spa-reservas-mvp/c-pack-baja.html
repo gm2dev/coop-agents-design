@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="tenant-spa-lua.css">
 </head>
-<body>
+<body class="tenant">
 <a class="skip-link" href="#main">Saltar al contenido</a>
 <header class="app-header">
   <div class="app-header__inner">
@@ -20,10 +20,10 @@
 
 <a class="back" href="c-pack-activo.html">← Volver a mi pack</a>
 <h1>¿Te das de baja del pack?</h1>
-<p>Pack 3 meses · vigente hasta febrero 2027.</p>
+<p>Pack 3 meses · comprado el 15/12/2026 · vigente hasta febrero 2027. Usaste 1 de 3 servicios.</p>
 <div class="alert alert--info">
-  <p class="alert__title">Qué pasa con lo que ya pagaste</p>
-  <p>[A definir por producto y legales: reintegro de los meses no usados y plazos.] Te mandamos el comprobante de la baja por WhatsApp.</p>
+  <p class="alert__title">Te devolvemos $ 30.000 por 2 servicios sin usar</p>
+  <p>Pasaron más de 10 días desde la compra, así que te devolvemos los servicios que no usaste a precio de pack ($ 15.000 cada uno), al mismo medio con el que pagaste en Mercado Pago. Te mandamos el comprobante por WhatsApp.</p>
 </div>
 <form action="c-pack-baja-ok.html">
   <div class="actions">
@@ -31,12 +31,14 @@
     <a class="btn btn--secondary" href="c-pack-activo.html">No, seguir con mi pack</a>
   </div>
 </form>
+<div class="alert alert--warning"><p class="alert__title"><span aria-hidden="true">⚠ </span>Propuesta provisoria</p><p>Condiciones del pack propuestas por el CPO. Las decide Fidel y <strong>no tienen revisión legal</strong>.</p></div>
+<p class="small muted">Nota de diseño: dentro de los 10 días de la compra y sin servicios usados, el aviso dice «Te devolvemos todo: $ 45.000».</p>
 
 </main>
 <aside class="proto" aria-label="Navegación del prototipo">
   <div class="proto__inner">
     <h2>Prototipo (no es parte del producto)</h2>
-    <ul><li><a href="c-ingresar.html">Ingresar</a></li><li><a href="c-inicio.html">Inicio</a></li><li><a href="c-reservar-servicios.html">Reservar</a></li><li><a href="c-mis-turnos.html">Mis turnos</a></li><li><a href="c-whatsapp.html">Mensajes de WhatsApp (mock)</a></li><li><a href="c-pack.html">Pack prepago (Fase 2)</a></li><li><a href="c-pack-activo.html">Pack activo (con botón de baja)</a></li><li><a href="c-pack-pago-error.html">Estado: pago rechazado</a></li><li><a href="c-pack-baja.html">Darse de baja</a></li><li><a href="index.html">Índice del prototipo</a></li></ul>
+    <ul><li><a href="c-ingresar.html">Ingresar</a></li><li><a href="c-inicio.html">Inicio</a></li><li><a href="c-reservar-servicios.html">Reservar</a></li><li><a href="c-mis-turnos.html">Mis turnos</a></li><li><a href="c-whatsapp.html">Mensajes de WhatsApp (mock)</a></li><li><a href="c-pack.html">Pack prepago (Fase 2)</a></li><li><a href="c-pack-activo.html">Pack activo (con botón de baja)</a></li><li><a href="c-pack-pago-pendiente.html">Estado: pago pendiente</a></li><li><a href="c-pack-pago-error.html">Estado: pago rechazado</a></li><li><a href="c-pack-baja.html">Darse de baja</a></li><li><a href="index.html">Índice del prototipo</a></li></ul>
   </div>
 </aside>
 <script src="app.js"></script>

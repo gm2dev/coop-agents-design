@@ -12,7 +12,7 @@
 <a class="skip-link" href="#main">Saltar al contenido</a>
 <header class="app-header">
   <div class="app-header__inner">
-    <a class="brand" href="r-cargar-turno.html"><img class="brand__logo" src="assets/logo-spa-lua.svg" alt="" width="36" height="36"><span>Spa Lúa<span class="muted small"> · Recepción</span></span></a>
+    <a class="brand brand--chip" href="r-cargar-turno.html"><img class="brand__logo" src="assets/logo-spa-lua.svg" alt="" width="36" height="36"><span>Spa Lúa<span class="muted small"> · Recepción</span></span></a>
     <nav class="app-nav" aria-label="Principal"><ul><li><a href="r-agenda.html">Agenda</a></li><li><a href="r-cargar-turno.html" aria-current="page">Cargar turno</a></li></ul></nav>
   </div>
 </header>
@@ -51,7 +51,12 @@
         <input type="text" id="r-nombre" name="nombre" autocomplete="off" data-required data-error-id="r-nombre-error" data-msg="Ingresá el nombre de la clienta." aria-describedby="r-nombre-error" aria-invalid="true">
         <p class="field-error" id="r-nombre-error"><span aria-hidden="true">✕</span> Ingresá el nombre de la clienta.</p>
       </div>
-      <p class="small muted">El permiso para ofertas lo da la clienta: le llega un WhatsApp para aceptarlo. Recepción no lo marca por ella.</p>
+      <div class="choices">
+        <div class="choice">
+          <input type="checkbox" id="optin-persona-n" name="optin_persona" aria-describedby="optin-persona-n-hint">
+          <label for="optin-persona-n"><span class="choice__body"><span class="choice__title">Me dijo en persona que acepta recibir ofertas por WhatsApp</span><span class="choice__meta" id="optin-persona-n-hint">Marcalo solo si te lo dijo hoy. Queda guardado quién lo registró, cuándo y que fue en persona.</span></span></label>
+        </div>
+      </div>
     </div>
   </section>
   <section class="card" aria-labelledby="ss">

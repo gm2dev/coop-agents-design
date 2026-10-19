@@ -12,7 +12,7 @@
 <a class="skip-link" href="#main">Saltar al contenido</a>
 <header class="app-header">
   <div class="app-header__inner">
-    <a class="brand" href="p-agenda.html"><img class="brand__logo" src="assets/logo-spa-lua.svg" alt="" width="36" height="36"><span>Spa Lúa<span class="muted small"> · Profesional</span></span></a>
+    <a class="brand brand--chip" href="p-agenda.html"><img class="brand__logo" src="assets/logo-spa-lua.svg" alt="" width="36" height="36"><span>Spa Lúa<span class="muted small"> · Profesional</span></span></a>
     <nav class="app-nav" aria-label="Principal"><ul><li><a href="p-agenda.html" aria-current="page">Hoy</a></li><li><a href="p-agenda-semana.html">Semana</a></li><li><a href="p-bloquear.html">Bloquear horario</a></li></ul></nav>
   </div>
 </header>
@@ -20,13 +20,14 @@
 
 <h1>Hoy, sábado 28/11</h1>
 <p class="muted">Carla · 4 turnos · 10:00 a 20:00</p>
+<p class="small">Cuando termina cada turno, marcá si la clienta vino. Recepción y administración también pueden marcarlo o corregirlo.</p>
 <div class="row u-mb-400">
   <a class="btn btn--secondary" href="p-agenda-dia-anterior.html">← Día anterior</a>
   <a class="btn btn--secondary" href="p-agenda-vacia.html">Día siguiente →</a>
 </div>
 <ol class="list card" aria-label="Turnos y bloqueos de hoy">
-  <li class="appt"><span class="appt__time">10:30</span><div><strong>Sofía M.</strong><br>Retiro + Esmaltado semipermanente · hasta 12:00</div></li>
-  <li class="appt"><span class="appt__time">12:30</span><div><strong>Lucía G.</strong><br>Kapping en gel · hasta 14:00 <span class="badge badge--info">Cargado por recepción</span></div></li>
+  <li class="appt"><span class="appt__time">10:30</span><div><strong>Sofía M.</strong><br>Retiro + Esmaltado semipermanente · hasta 12:00<div class="attendance" role="group" aria-label="Asistencia de Sofía M., 10:30"><p class="attendance__status small" aria-live="polite">Asistencia: <span class="badge badge--success" data-att-badge>Asistió</span><span data-att-by> · marcado por vos</span></p><button type="button" class="btn btn--secondary btn--sm" aria-pressed="true" data-att="si">Asistió</button><button type="button" class="btn btn--secondary btn--sm" aria-pressed="false" data-att="no">No vino</button></div></div></li>
+  <li class="appt"><span class="appt__time">12:30</span><div><strong>Lucía G.</strong><br>Kapping en gel · hasta 14:00 <span class="badge badge--info">Cargado por recepción</span><div class="attendance" role="group" aria-label="Asistencia de Lucía G., 12:30"><p class="attendance__status small" aria-live="polite">Asistencia: <span class="badge badge--neutral" data-att-badge>Sin marcar</span><span data-att-by></span></p><button type="button" class="btn btn--secondary btn--sm" aria-pressed="false" data-att="si">Asistió</button><button type="button" class="btn btn--secondary btn--sm" aria-pressed="false" data-att="no">No vino</button></div></div></li>
   <li class="appt appt--block"><span class="appt__time">14:00</span><div><strong>Bloqueado</strong><br>hasta 15:00 · Almuerzo</div></li>
   <li class="appt"><span class="appt__time">15:30</span><div><strong>Ana P.</strong><br>Manicura tradicional · hasta 16:15</div></li>
   <li class="appt"><span class="appt__time">17:00</span><div><strong>Marta R.</strong><br>Esmaltado semipermanente · hasta 18:00</div></li>

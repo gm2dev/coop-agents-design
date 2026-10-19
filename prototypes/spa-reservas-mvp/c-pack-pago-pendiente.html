@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pago pendiente — Spa Lúa · Prototipo spa-reservas-mvp</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="tenant-spa-lua.css">
+</head>
+<body class="tenant">
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="app-header">
+  <div class="app-header__inner">
+    <a class="brand" href="c-inicio.html"><img class="brand__logo" src="assets/logo-spa-lua.svg" alt="" width="36" height="36"><span>Spa Lúa</span></a>
+    <nav class="app-nav" aria-label="Principal"><ul><li><a href="c-ingresar.html">Ingresar</a></li></ul></nav>
+  </div>
+</header>
+<main id="main" class="page">
+
+<div class="alert alert--info" role="status">
+  <p class="alert__title">Tu pago está pendiente</p>
+  <p>Mercado Pago todavía no nos confirmó el pago del Pack 3 meses ($ 45.000). Puede pasar con pagos en efectivo o transferencias.</p>
+</div>
+<h1>Te avisamos por WhatsApp cuando se acredite</h1>
+<p>Cuando Mercado Pago lo confirme, te mandamos un WhatsApp y tu pack queda activo. No hace falta que pagues de nuevo.</p>
+<p>Si en 48 horas no recibiste el mensaje, escribile al spa.</p>
+<div class="actions">
+  <a class="btn" href="c-ingresar.html">Ingresar para ver mi pack</a>
+  <a class="btn btn--secondary" href="c-whatsapp.html">Escribirle al spa por WhatsApp</a>
+</div>
+<p class="small muted">Nota de diseño: esta pantalla funciona sin sesión (la clienta puede volver de Mercado Pago desde otro navegador). No muestra datos personales: solo el pack y el monto.</p>
+
+</main>
+<aside class="proto" aria-label="Navegación del prototipo">
+  <div class="proto__inner">
+    <h2>Prototipo (no es parte del producto)</h2>
+    <ul><li><a href="c-ingresar.html">Ingresar</a></li><li><a href="c-inicio.html">Inicio</a></li><li><a href="c-reservar-servicios.html">Reservar</a></li><li><a href="c-mis-turnos.html">Mis turnos</a></li><li><a href="c-whatsapp.html">Mensajes de WhatsApp (mock)</a></li><li><a href="c-pack.html">Pack prepago (Fase 2)</a></li><li><a href="c-pack-activo.html">Pack activo (con botón de baja)</a></li><li><a href="c-pack-pago-pendiente.html">Estado: pago pendiente</a></li><li><a href="c-pack-pago-error.html">Estado: pago rechazado</a></li><li><a href="c-pack-baja.html">Darse de baja</a></li><li><a href="index.html">Índice del prototipo</a></li></ul>
+  </div>
+</aside>
+<script src="app.js"></script>
+</body>
+</html>

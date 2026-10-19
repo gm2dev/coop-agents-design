@@ -1,24 +1,28 @@
 # Spec de UI (breve) · spa-reservas-mvp
 
-Baja-media fidelidad. Solo tokens semánticos de `design-system/tokens.json` (espejo en
-`prototypes/shared/tokens.css`). Capa tenant: `prototypes/spa-reservas-mvp/tenant-spa-lua.css`.
+Media fidelidad, look «Sereno» (design system v1, PR #6). Solo tokens semánticos; `prototypes/shared/tokens.css`
+se genera desde `design-system/tokens.json` de PR #6 (ver README §Look y tokens). Marca del tenant:
+`prototypes/spa-reservas-mvp/tenant-spa-lua.css` (valores derivados).
 
 ## Reglas generales
 
 - **Layout.** Clienta y profesional: una columna, `size.content.max` (40rem), padding `space.400`.
   Recepción y administradora: hasta 80rem (L-02); desde `breakpoint.lg` la administradora tiene
-  navegación lateral (15rem, L-03) y grillas de 2/3 columnas; debajo, navegación en fila que envuelve.
+  navegación lateral (`size.sidebar-width`, colores `color.sidebar.*`) y grillas de 2/3 columnas; debajo,
+  navegación en fila que envuelve. Títulos con `font.family.heading` (serif del sistema); tarjetas con
+  `radius.lg` + `shadow.card`; controles con `density.control-height` (44 px).
   Sin estilos inline: todo vive en `styles.css` (utilidades `.u-*` con tokens).
-- **Encabezado.** Logo del spa (36 px, L-01, decorativo: `alt=""` porque el nombre va al lado) + nombre +
-  navegación principal (`nav aria-label="Principal"`, `aria-current="page"`). Franja superior de
-  `space.100` en `color.action.primary` (color del spa). Clienta con pack activo: la navegación suma
-  «Mi pack» (DD-12).
+- **Encabezado.** Logo del spa (`size.logo-header`, decorativo: `alt=""` porque el nombre va al lado) +
+  nombre + navegación principal (`nav aria-label="Principal"`, `aria-current="page"`). Franja superior de
+  `border.width-accent`: en la web de la clienta `brand.primary`; en los paneles `color.platform.accent`
+  y el spa como chip (`color.sidebar.chip-*`). Clienta con pack activo: la navegación suma «Mi pack» (DD-12).
 - **Acción principal** por pantalla: `.btn` primario, ancho completo en mobile, mínimo
   `size.target.comfortable` (44 px). Destructivas: `color.action.danger` (relleno en la confirmación,
   contorno en la lista).
 - **Selección** (servicios, profesional, día, horario, pack): tarjeta seleccionable sobre
-  `input` nativo (checkbox/radio) con `label`; seleccionado = `border.selected` 2 px +
-  `surface.selected` + marca (círculo/cuadro relleno o ✓); no disponible = `surface.disabled` + tachado +
+  `input` nativo (checkbox/radio) con `label`; seleccionado en la web de la clienta = `brand.border` +
+  doble trazo + `brand.subtle` + marcador relleno y «✓ elegido» en días/horarios; en los paneles =
+  `border.selected` + `surface.selected` + `text.selected`. No disponible = `surface.disabled` + tachado +
   texto («completo»). Nunca solo color.
 - **Mensajes.** `alert--success` (`role=status`) tras cada acción; `alert--danger` (`role=alert`) para
   errores con salida; `alert--warning` para estados sin horarios / fuera de plazo; `alert--info` para
@@ -35,11 +39,10 @@ Baja-media fidelidad. Solo tokens semánticos de `design-system/tokens.json` (es
 |---|---|---|
 | Nombre | Encabezado, títulos, mensajes de WhatsApp | Texto; hasta ~30 caracteres, envuelve |
 | Logo | Encabezado (36 px), vista previa | PNG/SVG cuadrado ≤ 1 MB; decorativo junto al nombre |
-| Color primario | `action.primary`, `action.primary-hover`, `text.link`, `border.selected`, franja | Si contraste ≥ 4,5:1 contra blanco (`text.on-action`) **y** contra `surface.subtle` (#f5f6f8) → todos los usos (≈ ≥ 4,87:1 contra blanco). Si no → solo franja; el resto queda con el valor del sistema (`#0e6b63`). Hover = cada canal × 0,8 (PDS-01) |
-| `surface.selected`, `text.selected` | — | No se derivan del spa en el MVP: valores del sistema (DD-10) |
+| Color principal (`brand.primary`) | franja, logo, base de los derivados | Único color que define el spa (DP-06) |
+| Derivados (`brand.solid`, `on-primary`, `primary-hover`, `text`, `text-hover`, `subtle`, `border`) | botones, links, seleccionado de la web de la clienta | Regla de PR #6: `on-primary` blanco o casi negro (el de más contraste); si < 4,5:1, `solid` se oscurece. `text` ≥ 4,5:1 contra `surface.default`, `surface.canvas`/`subtle` y `brand.subtle`; si no, se oscurece en pasos de 2 %. Ajuste automático + aviso; no bloquea. `brand.text` nunca sobre `surface.sunken`/`disabled` |
 
-El foco (`color.focus.ring`, 3 px + offset 2 px) no cambia con la marca. Con el color de ejemplo
-`#8a2b6a`, el anillo azul sobre la superficie da 6,70:1 (el offset evita medirlo contra el botón).
+El foco (`color.focus.ring` + offset) no cambia con la marca.
 
 ## Pantallas
 
@@ -50,25 +53,26 @@ El foco (`color.focus.ring`, 3 px + offset 2 px) no cambia con la marca. Con el 
 | `c-ingresar` | Prefijo +54 9 fijo + número; «Enviarme el código» | Error de formato (10 dígitos) |
 | `c-codigo` | Código 6 dígitos (`autocomplete=one-time-code`); «Ingresar»; «Reenviar código» deshabilitado con cuenta regresiva de 45 s (texto asociado), se habilita al llegar a 0 | `c-codigo-error`: intentos restantes · `c-codigo-bloqueado`: sin intentos, espera 15 min, volver a ingresar el número |
 | `c-inicio` | Aviso «te toca volver» (info), próximo turno, datos del spa, pack (Fase 2) | Sin turno (CTA reservar) / `c-inicio-con-turno` / `c-inicio-con-pack`: «Mi pack» en la navegación + tarjeta «Mi pack» con «Ver mi pack» y «Darme de baja del pack» |
-| `c-reservar-servicios` | Paso 1/4. Checkboxes con duración y precio; barra de resumen con total en vivo (`aria-live=polite`) y «Continuar», fija abajo solo con alto ≥ 30rem | Ninguno elegido → error |
-| `c-reservar-profesional` | Paso 2/4. «Cualquier profesional» por defecto + quienes hacen todos los servicios | Paso omitido si el spa lo desactiva |
-| `c-reservar-horario` | Paso 3/4. Días (con «completo» deshabilitado) y horarios de inicio; semana siguiente | `c-reservar-sin-horarios`: próximo libre + alternativa |
-| `c-reservar-confirmar` | Paso 4/4. Resumen, política de cancelación, opt-in de ofertas (destildado, opcional); «Confirmar turno» | `c-reservar-error`: horario recién ocupado |
+| `c-reservar-servicios` | Paso 1/3 (1/4 con pack). Checkboxes con duración y precio; barra de resumen con total en vivo (`aria-live=polite`) y «Continuar», fija abajo solo con alto ≥ 30rem | Ninguno elegido → error |
+| `c-reservar-profesional` | Solo con pack y beneficio activo (DP-03): badge «Beneficio de tu pack»; «La primera profesional disponible» + quienes hacen todos los servicios | Sin pack: no aparece |
+| `c-reservar-horario` | Paso 2/3. «Con la primera profesional disponible»; días (con «completo» deshabilitado) y horarios donde entra el bloque entero | `c-reservar-sin-horarios`: próximo libre + servicios más cortos |
+| `c-reservar-confirmar` | Paso 3/3. Resumen (con quién quedó asignada), política (12 h), opt-in de ofertas (destildado); «Confirmar turno» | `c-reservar-error`: horario tomado mientras confirmaba (no se reserva antes) |
 | `c-reservado` | Éxito + resumen + qué avisos va a recibir + cómo cancelar | — |
 | `c-mis-turnos` | Próximos con plazo de cancelación y «Cancelar turno»; anteriores con estado (badge con texto) | `c-mis-turnos-vacio` |
 | `c-cancelar` | Turno + política + «Sí, cancelar» / «No, mantener» | `c-cancelar-fuera-plazo` |
 | `c-cancelado` | Éxito + «Elegir otro día y horario» (cancelar y volver a reservar) | — |
-| `c-te-toca-volver` | Repetir lo último con la misma profesional; 3 horarios; más días / otros servicios | — |
-| `c-whatsapp` | Mock: recordatorios 48 h (con plazo para cancelar) y 2 h, «te toca volver», oferta con BAJA | — |
-| `c-pack` (Fase 2) | Pack 3 y 12 meses (sin «elegís profesional», pendiente de P-01), condiciones (pago único, no se renueva, baja); «Pagar con Mercado Pago» | `c-pack-pago-error` |
-| `c-pack-activo` | Vigencia, uso del mes, pago; sección «Baja del pack» con «Darme de baja». Accesible siempre desde «Mi pack» en la navegación | — |
-| `c-pack-baja`, `c-pack-baja-ok` | Confirmación de baja; comprobante con número de trámite | Reintegro: placeholder a definir |
+| `c-te-toca-volver` | Repetir lo último (primera profesional disponible); 3 horarios; más días / otros servicios | — |
+| `c-whatsapp` | Mock: recordatorios 24 h (con plazo para cancelar) y 2 h, «te toca volver», primera oferta con baja en un toque, confirmación del pago del pack, comprobante de baja | — |
+| `c-whatsapp-baja-ofertas` | Resultado de la baja en un toque, sin sesión; los recordatorios siguen | — |
+| `c-pack` (Fase 2) | Pack 3 y 12 meses: 1 servicio por mes de la lista del spa a precio de pack + elegís profesional; condiciones (pago único, no se renueva, devolución); aviso «propuesta provisoria, sin revisión legal» | `c-pack-pago-pendiente`, `c-pack-pago-error` (ambos sin sesión) |
+| `c-pack-activo` | Vigencia, qué incluye, usados, pago y precio por servicio; «Baja del pack» con reglas de devolución | — |
+| `c-pack-baja`, `c-pack-baja-ok` | «Te devolvemos $X por N servicios sin usar»; comprobante con trámite, uso y devolución | Dentro de 10 días sin uso: devolución total |
 
 ### Profesional (mobile)
 
 | Pantalla | Contenido | Estados |
 |---|---|---|
-| `p-agenda` | Día: lista ordenada de turnos y bloqueos (bloqueo con fondo `surface.disabled` + texto «Bloqueado»); día anterior (`p-agenda-dia-anterior`) / siguiente; «Bloquear un horario» | `p-agenda-vacia` |
+| `p-agenda` | Día: lista ordenada de turnos y bloqueos (bloqueo con fondo `surface.sunken` + texto «Bloqueado»); en cada turno, asistencia («Asistió» / «No vino», `aria-pressed`, estado en texto); día anterior / siguiente; «Bloquear un horario» | `p-agenda-vacia`; turno «Sin marcar» |
 | `p-agenda-semana` | Resumen por día (cantidad, completo, bloqueos) con link al día | — |
 | `p-bloquear` | Día, desde, hasta (pasos de 15 min), motivo opcional | Falta día; `p-bloquear-conflicto` (el bloqueo no cancela turnos) |
 | `p-bloqueado` | Éxito + «Deshacer bloqueo» | — |
@@ -77,19 +81,20 @@ El foco (`color.focus.ring`, 3 px + offset 2 px) no cambia con la marca. Con el 
 
 | Pantalla | Contenido | Estados |
 |---|---|---|
-| `r-agenda` | Día por profesional en 3 columnas (1 en mobile); «Cargar turno» | — |
-| `r-cargar-turno` | Dos bloques: 1. Clienta (existente: WhatsApp → «Encontramos a…» con permiso y cómo se le pide por WhatsApp; nueva: nombre + WhatsApp; el bloque de la otra opción se oculta) · 2. Turno (servicios, profesional, día, horario) | `r-cargar-error`: un único resumen de errores, campos inválidos, sin horarios |
-| `r-turno-cargado` | Éxito + «Cargar otro turno» | — |
+| `r-agenda` | Día por profesional en 3 columnas (1 en mobile); marcar o corregir asistencia de los turnos que ya empezaron; «Cargar turno» | — |
+| `r-cargar-turno` | Dos bloques: 1. Clienta (existente: WhatsApp → «Encontramos a…» con permiso; nueva: nombre + WhatsApp; en ambos, checkbox «Me dijo en persona que acepta recibir ofertas», destildado, DP-05) · 2. Turno (servicios, profesional, día, horario) | `r-cargar-error`: un único resumen de errores que se rehace al alternar «Ya es clienta» (no lista campos ocultos), sin horarios |
+| `r-turno-cargado` | Éxito + permiso registrado (quién, cuándo, «en persona») + «Cargar otro turno» | — |
 
 ### Administradora (desktop, responsive)
 
 | Pantalla | Contenido | Estados |
 |---|---|---|
-| `a-panel` | Período; 3 métricas (turnos, % asistencia, recompra 60 d) con definición en texto; próximos pasos; tabla por profesional | `a-panel-vacio`: checklist de puesta en marcha |
+| `a-panel` | Período; 3 métricas (turnos con desglose «sin marcar», % asistencia sobre turnos marcados, recompra 60 d) con definición en texto; tarjeta «N turnos sin marcar» con marcado en el lugar; tabla por profesional con columna «Sin marcar» | `a-panel-vacio`: checklist de puesta en marcha |
 | `a-servicios` | Tabla (apilada < 40rem) + alta: nombre, duración, precio, días para «te toca volver» | Errores por campo |
 | `a-profesionales` | Equipo + horario semanal editable por profesional | `a-profesionales-ok` |
-| `a-ajustes` | Elegir profesional on/off, política (texto + horas), recordatorios 1 (48 h por defecto) y 2, con aviso de que el primero salga antes del plazo de cancelación | — |
-| `a-marca` | Nombre, logo, un color + chequeo de contraste en vivo (blanco y `surface.subtle`) + vista previa; colores de prueba | Color con contraste insuficiente: vista previa con los valores del sistema y aviso |
+| `a-ajustes` | Política (texto + horas, 12 por defecto), recordatorios 1 (24 h) y 2 (2 h); remite a «Pack» para elegir profesional | — |
+| `a-pack` (Fase 2) | Servicios del pack, precio por servicio (3 y 12 meses), beneficio «Elegir profesional», cobro «Configurado» (credenciales cargadas a mano en el piloto); aviso de propuesta provisoria | — |
+| `a-marca` | Nombre, logo, un color; derivación en vivo (PR #6) con contrastes contra `surface.default`, `canvas` y `brand.subtle`; vista previa con link sobre fondo de página y sobre blanco, seleccionado y botón | Color ajustado: aviso con el tono usado y su contraste (se puede guardar) |
 | `a-campana` | 1. Segmento (único) con conteo con/sin permiso · 2. Plantilla con campos y vista previa · 3. Fecha | Oferta vacía; `a-campana-enviada` → «Cancelar envío» con confirmación → `a-campana-cancelada` |
 | `a-importar` | Formato de columnas, planilla de ejemplo, subir archivo | — |
 | `a-importar-resultado` | Válidas / con permiso / con error + tabla de errores | `a-importar-ok` |
@@ -105,7 +110,8 @@ Estados de cada componente propuesto. Foco siempre `color.focus.ring` 3 px + off
 | Resumen de errores `.error-summary` | oculto (`hidden`) | — | recibe foco al aparecer (`tabindex=-1`) | `alert--danger` + `role=alert` + links a cada campo | — | — |
 | Barra de resumen `.summary-bar` | en el flujo; fija abajo solo con alto ≥ 30rem; `scroll-padding-bottom: 10rem` + ajuste de scroll en `focusin` para no tapar el foco | — | — | total en vivo `aria-live=polite` | — | — |
 | Tabla apilada `.table-stack` | < 40rem: cada fila es un bloque con etiqueta (`data-label`) + valor | — | — | — | — | — |
-| Burbuja de mensaje `.bubble` | `surface.default`, borde `border.strong`, hora `text.muted` | — | links internos con foco estándar | — | — | — |
+| Burbuja de mensaje `.bubble` | `surface.default`, borde `border.default`, `shadow.card`, hora `text.muted`; el chat usa `surface.sunken` y por eso los links van solo dentro de la burbuja | — | links internos con foco estándar | — | — | — |
+| Asistencia `.attendance` | estado en texto («Asistencia: Sin marcar») + 2 botones secundarios chicos (44 px) | como `.btn--secondary` | anillo | `aria-pressed=true`: `surface.selected` + `border.selected` + «✓»; badge «Asistió» (success) / «No vino» (danger) | — | — |
 | Confirmación en el lugar | oculta | — | el título recibe foco al abrir; al cerrar vuelve al botón | botón disparador `aria-expanded=true` | — | — |
 | Botón-link con cuenta regresiva (`.btn--link[data-countdown]`) | `text.link` subrayado | grosor de subrayado | anillo | — | `disabled` + `text.muted`, sin subrayado; texto asociado «Podés pedir otro en N s» | — |
 
@@ -116,14 +122,14 @@ se proponen como token si se repiten (PDS-03):
 
 | Id | Medida | Dónde | Motivo |
 |---|---|---|---|
-| L-01 | 36 px | `.brand__logo` (logo del encabezado) | tamaño de logo legible dentro de un encabezado de 56 px; candidato `size.logo.sm` |
+| L-01 | ~~36 px~~ | `.brand__logo` | resuelto con `size.logo-header` (Sereno) |
 | L-02 | 80rem | `.wide` (recepción, administración), `.proto__inner` | ancho de contenido para tablas y 2 columnas; candidato `size.content.wide` |
-| L-03 | 15rem | columna de la navegación lateral de administración | ancho de etiquetas largas («Profesionales y horarios»); candidato `size.sidebar` |
+| L-03 | ~~15rem~~ | navegación lateral | resuelto con `size.sidebar-width` (Sereno) |
 | L-04 | 10rem | `scroll-padding-bottom` cuando hay `.summary-bar` | ≥ alto máximo medido de la barra (129 px) con margen; deriva de un alto, no es token |
 | L-05 | 10rem | `.input--narrow` (horas en `a-ajustes`) | campo numérico corto |
 | L-06 | 14rem | `.input--date` (fecha de envío en `a-campana`) | fecha sola en una fila |
 | L-07 | 30rem | `@media (min-height: 30rem)` de la barra fija | por debajo de 480 px de alto la barra no se fija |
-| — | 56 px, 4,5rem, 5,5rem, 6rem, 7rem, 8rem, 32rem, 20 px | alto mínimo del encabezado, columnas de horarios/días, `textarea`, tabla apilada, `.choice__body`, burbuja, marcador | heredadas de v0.1, mismas condiciones |
+| — | 56 px, 6rem, 7rem, 8rem, 32rem, 20 px | alto mínimo del encabezado, `textarea`, tabla apilada, `.choice__body`, burbuja, marcador | heredadas de v0.1; columnas de días/horarios pasan a `component.day-min-width`/`slot-min-width` |
 
 (Se quitó `min-height: calc(100vh - 60px)` del layout de administración: no era necesario.)
 

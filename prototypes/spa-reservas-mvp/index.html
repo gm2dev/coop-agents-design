@@ -12,7 +12,7 @@
 <header class="app-header"><div class="app-header__inner"><a class="brand" href="../index.html">← Todos los prototipos</a></div></header>
 <main id="main" class="page">
   <h1>Reservas con recompra para spas · MVP</h1>
-  <p>Prototipos básicos v0.2 (baja-media fidelidad) del <strong>Roadmap B</strong> (decidido el 19/10/2026). Datos ficticios. Spa de ejemplo: «Spa Lúa», con su color y logo aplicados por la capa de marca.</p>
+  <p>Prototipos v0.3 (media fidelidad, look «Sereno» del design system v1) del <strong>Roadmap B</strong> (decidido el 19/10/2026). Datos ficticios. Spa de ejemplo: «Spa Lúa», con su color y logo aplicados por la capa de marca.</p>
   <div class="alert alert--info">
     <p class="alert__title">Antes de mirar</p>
     <p>No hay PRD todavía: la fuente es la presentación ejecutiva. Supuestos, decisiones y preguntas abiertas en <code>initiatives/spa-reservas-mvp/README.md</code>.</p>
@@ -23,20 +23,20 @@
     <ol>
       <li><a href="c-ingresar.html">Ingresar con WhatsApp</a> → <a href="c-codigo.html">código</a> · estado: <a href="c-codigo-error.html">código incorrecto</a> · <a href="c-codigo-bloqueado.html">sin intentos</a></li>
       <li><a href="c-inicio.html">Inicio del spa</a> (con aviso «te toca volver») · <a href="c-inicio-con-turno.html">con turno reservado</a> · <a href="c-inicio-con-pack.html">con pack activo («Mi pack» y baja en el menú)</a></li>
-      <li>Reservar: <a href="c-reservar-servicios.html">servicios</a> → <a href="c-reservar-profesional.html">profesional (opcional)</a> → <a href="c-reservar-horario.html">día y horario</a> → <a href="c-reservar-confirmar.html">confirmar (permiso de ofertas + política)</a> → <a href="c-reservado.html">reservado</a>
+      <li>Reservar: <a href="c-reservar-servicios.html">servicios</a> → (<a href="c-reservar-profesional.html">profesional, solo con pack</a>) → <a href="c-reservar-horario.html">día y horario</a> → <a href="c-reservar-confirmar.html">confirmar (permiso de ofertas + política)</a> → <a href="c-reservado.html">reservado</a>
         <br><span class="small">Estados: <a href="c-reservar-sin-horarios.html">sin horarios</a> · <a href="c-reservar-error.html">horario recién ocupado</a></span></li>
       <li><a href="c-mis-turnos.html">Mis turnos</a> → <a href="c-cancelar.html">cancelar</a> → <a href="c-cancelado.html">cancelado</a>
         <br><span class="small">Estados: <a href="c-mis-turnos-vacio.html">sin turnos</a> · <a href="c-cancelar-fuera-plazo.html">fuera de plazo</a></span></li>
       <li><a href="c-te-toca-volver.html">Te toca volver</a> (repetir lo último)</li>
-      <li><a href="c-whatsapp.html">Mensajes de WhatsApp (mock)</a>: recordatorio, «te toca volver», oferta</li>
-      <li><span class="badge badge--neutral">Fase 2</span> <a href="c-pack.html">Pack prepago 3/12 meses</a> → <a href="c-pack-activo.html">mi pack (botón de baja)</a> → <a href="c-pack-baja.html">darme de baja</a> → <a href="c-pack-baja-ok.html">baja confirmada</a> · estado: <a href="c-pack-pago-error.html">pago rechazado</a></li>
+      <li><a href="c-whatsapp.html">Mensajes de WhatsApp (mock)</a>: recordatorios 24 h y 2 h, «te toca volver», primera oferta con <a href="c-whatsapp-baja-ofertas.html">baja en un toque</a>, confirmación y baja del pack</li>
+      <li><span class="badge badge--neutral">Fase 2</span> <a href="c-pack.html">Pack prepago 3/12 meses</a> → <a href="c-pack-activo.html">mi pack (botón de baja)</a> → <a href="c-pack-baja.html">darme de baja</a> → <a href="c-pack-baja-ok.html">baja confirmada</a> · estados: <a href="c-pack-pago-pendiente.html">pago pendiente</a> · <a href="c-pack-pago-error.html">pago rechazado</a> (sin sesión)</li>
     </ol>
   </section>
 
   <section class="card" aria-labelledby="h-p">
     <h2 id="h-p">Profesional <span class="small muted">(mobile, PWA)</span></h2>
     <ul>
-      <li><a href="p-agenda.html">Agenda de hoy</a> · <a href="p-agenda-dia-anterior.html">día anterior</a> · <a href="p-agenda-semana.html">semana</a> · estado: <a href="p-agenda-vacia.html">día sin turnos</a></li>
+      <li><a href="p-agenda.html">Agenda de hoy (marcar asistencia)</a> · <a href="p-agenda-dia-anterior.html">día anterior</a> · <a href="p-agenda-semana.html">semana</a> · estado: <a href="p-agenda-vacia.html">día sin turnos</a></li>
       <li><a href="p-bloquear.html">Bloquear horario</a> → <a href="p-bloquear-conflicto.html">rango con turnos</a> → <a href="p-bloqueado.html">bloqueado</a></li>
     </ul>
   </section>
@@ -44,19 +44,20 @@
   <section class="card" aria-labelledby="h-r">
     <h2 id="h-r">Recepción <span class="small muted">(tablet/desktop)</span></h2>
     <ul>
-      <li><a href="r-agenda.html">Agenda del día</a></li>
-      <li><a href="r-cargar-turno.html">Cargar turno para una clienta</a> → <a href="r-turno-cargado.html">turno cargado</a> · estado: <a href="r-cargar-error.html">clienta nueva, error y sin horarios</a></li>
+      <li><a href="r-agenda.html">Agenda del día (marcar o corregir asistencia)</a></li>
+      <li><a href="r-cargar-turno.html">Cargar turno para una clienta (permiso de ofertas en persona)</a> → <a href="r-turno-cargado.html">turno cargado</a> · estado: <a href="r-cargar-error.html">clienta nueva, error y sin horarios</a></li>
     </ul>
   </section>
 
   <section class="card" aria-labelledby="h-a">
     <h2 id="h-a">Administradora <span class="small muted">(desktop, responsive)</span></h2>
     <ul>
-      <li><a href="a-panel.html">Panel con métricas básicas</a> · estado: <a href="a-panel-vacio.html">sin datos</a></li>
+      <li><a href="a-panel.html">Panel con métricas básicas y turnos sin marcar</a> · estado: <a href="a-panel-vacio.html">sin datos</a></li>
       <li><a href="a-servicios.html">Servicios</a> (duración, precio, «te toca volver»)</li>
       <li><a href="a-profesionales.html">Profesionales y horarios</a> → <a href="a-profesionales-ok.html">guardado</a></li>
-      <li><a href="a-ajustes.html">Reservas y avisos</a> (elegir profesional, política, recordatorios)</li>
-      <li><a href="a-marca.html">Marca: nombre, logo y un color</a> (con chequeo de contraste)</li>
+      <li><a href="a-ajustes.html">Reservas y avisos</a> (plazo para cancelar 12 h, recordatorios 24 h y 2 h)</li>
+      <li><span class="badge badge--neutral">Fase 2</span> <a href="a-pack.html">Pack</a> (servicios, precio, beneficio «elegir profesional»)</li>
+      <li><a href="a-marca.html">Marca: nombre, logo y un color</a> (el resto se deriva; ajuste automático con aviso)</li>
       <li><a href="a-campana.html">Campaña de Navidad</a> → <a href="a-campana-enviada.html">programada</a> → <a href="a-campana-cancelada.html">envío cancelado</a></li>
       <li><a href="a-importar.html">Importar clientas por CSV</a> → <a href="a-importar-resultado.html">revisión</a> → <a href="a-importar-ok.html">importadas</a></li>
     </ul>
