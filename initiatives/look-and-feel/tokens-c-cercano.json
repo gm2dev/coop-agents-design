@@ -1,0 +1,968 @@
+{
+  "$description": "Dirección C «Cercano» — PROPUESTA de look and feel (no reemplaza design-system/tokens.json). Contrastes en initiatives/look-and-feel/accessibility.md. Capa tenant: solo brand.primary (+ logo y nombre) es sobreescribible.",
+  "color": {
+    "sand": {
+      "0": {
+        "$value": "#ffffff",
+        "$type": "color"
+      },
+      "50": {
+        "$value": "#fbf7f4",
+        "$type": "color"
+      },
+      "100": {
+        "$value": "#f2eae4",
+        "$type": "color"
+      },
+      "200": {
+        "$value": "#e8dcd3",
+        "$type": "color"
+      },
+      "500": {
+        "$value": "#7d6c62",
+        "$type": "color"
+      },
+      "600": {
+        "$value": "#5b4c43",
+        "$type": "color"
+      },
+      "900": {
+        "$value": "#261c17",
+        "$type": "color"
+      }
+    },
+    "terracotta": {
+      "50": {
+        "$value": "#fcefea",
+        "$type": "color"
+      },
+      "100": {
+        "$value": "#f8ddd3",
+        "$type": "color"
+      },
+      "600": {
+        "$value": "#b3472c",
+        "$type": "color"
+      },
+      "700": {
+        "$value": "#8f361f",
+        "$type": "color"
+      }
+    },
+    "red": {
+      "50": {
+        "$value": "#fef3f2",
+        "$type": "color"
+      },
+      "600": {
+        "$value": "#b42318",
+        "$type": "color"
+      },
+      "700": {
+        "$value": "#912018",
+        "$type": "color"
+      }
+    },
+    "green": {
+      "50": {
+        "$value": "#ecfdf3",
+        "$type": "color"
+      },
+      "700": {
+        "$value": "#05603a",
+        "$type": "color"
+      }
+    },
+    "amber": {
+      "50": {
+        "$value": "#fffaeb",
+        "$type": "color"
+      },
+      "800": {
+        "$value": "#7a2e0e",
+        "$type": "color"
+      }
+    },
+    "blue": {
+      "50": {
+        "$value": "#eff6ff",
+        "$type": "color"
+      },
+      "700": {
+        "$value": "#1d4ed8",
+        "$type": "color"
+      },
+      "800": {
+        "$value": "#1e40af",
+        "$type": "color"
+      }
+    },
+    "text": {
+      "default": {
+        "$value": "{color.sand.900}",
+        "$type": "color",
+        "$description": "16.65:1 sobre surface.default"
+      },
+      "muted": {
+        "$value": "{color.sand.600}",
+        "$type": "color",
+        "$description": "8.2:1 sobre surface.default"
+      },
+      "on-action": {
+        "$value": "{color.sand.0}",
+        "$type": "color",
+        "$description": "5.45:1 sobre action.primary"
+      },
+      "link": {
+        "$value": "{color.terracotta.600}",
+        "$type": "color",
+        "$description": "5.45:1 sobre surface.default"
+      },
+      "selected": {
+        "$value": "{color.terracotta.700}",
+        "$type": "color",
+        "$description": "6.88:1 sobre surface.selected"
+      }
+    },
+    "surface": {
+      "default": {
+        "$value": "{color.sand.0}",
+        "$type": "color",
+        "$description": "Tarjetas, paneles, inputs"
+      },
+      "canvas": {
+        "$value": "{color.sand.50}",
+        "$type": "color",
+        "$description": "Fondo de página (nuevo respecto de la base v0)"
+      },
+      "subtle": {
+        "$value": "{color.sand.50}",
+        "$type": "color"
+      },
+      "sunken": {
+        "$value": "{color.sand.100}",
+        "$type": "color",
+        "$description": "Zonas hundidas, chips neutros (nuevo)"
+      },
+      "selected": {
+        "$value": "{color.terracotta.50}",
+        "$type": "color"
+      },
+      "disabled": {
+        "$value": "{color.sand.100}",
+        "$type": "color"
+      }
+    },
+    "border": {
+      "default": {
+        "$value": "{color.sand.200}",
+        "$type": "color",
+        "$description": "Solo divisores decorativos; no para delimitar controles"
+      },
+      "strong": {
+        "$value": "{color.sand.500}",
+        "$type": "color",
+        "$description": "Bordes de controles; 5.01:1 sobre surface.default"
+      },
+      "selected": {
+        "$value": "{color.terracotta.600}",
+        "$type": "color"
+      }
+    },
+    "action": {
+      "primary": {
+        "$value": "{color.terracotta.600}",
+        "$type": "color",
+        "$description": "CTA de la plataforma (chrome del panel, login). En la web de la clienta se usa brand.*"
+      },
+      "primary-hover": {
+        "$value": "{color.terracotta.700}",
+        "$type": "color"
+      },
+      "danger": {
+        "$value": "{color.red.600}",
+        "$type": "color",
+        "$description": "Acción destructiva; 6.57:1 con blanco"
+      }
+    },
+    "feedback": {
+      "danger": {
+        "text": {
+          "$value": "{color.red.700}",
+          "$type": "color",
+          "$extensions": {
+            "com.coop-agents.tenant": {
+              "overridable": false
+            }
+          }
+        },
+        "bg": {
+          "$value": "{color.red.50}",
+          "$type": "color",
+          "$extensions": {
+            "com.coop-agents.tenant": {
+              "overridable": false
+            }
+          }
+        },
+        "border": {
+          "$value": "{color.red.600}",
+          "$type": "color",
+          "$extensions": {
+            "com.coop-agents.tenant": {
+              "overridable": false
+            }
+          }
+        }
+      },
+      "success": {
+        "text": {
+          "$value": "{color.green.700}",
+          "$type": "color",
+          "$extensions": {
+            "com.coop-agents.tenant": {
+              "overridable": false
+            }
+          }
+        },
+        "bg": {
+          "$value": "{color.green.50}",
+          "$type": "color",
+          "$extensions": {
+            "com.coop-agents.tenant": {
+              "overridable": false
+            }
+          }
+        },
+        "border": {
+          "$value": "{color.green.700}",
+          "$type": "color",
+          "$extensions": {
+            "com.coop-agents.tenant": {
+              "overridable": false
+            }
+          }
+        }
+      },
+      "warning": {
+        "text": {
+          "$value": "{color.amber.800}",
+          "$type": "color",
+          "$extensions": {
+            "com.coop-agents.tenant": {
+              "overridable": false
+            }
+          }
+        },
+        "bg": {
+          "$value": "{color.amber.50}",
+          "$type": "color",
+          "$extensions": {
+            "com.coop-agents.tenant": {
+              "overridable": false
+            }
+          }
+        },
+        "border": {
+          "$value": "{color.amber.800}",
+          "$type": "color",
+          "$extensions": {
+            "com.coop-agents.tenant": {
+              "overridable": false
+            }
+          }
+        }
+      },
+      "info": {
+        "text": {
+          "$value": "{color.blue.800}",
+          "$type": "color",
+          "$extensions": {
+            "com.coop-agents.tenant": {
+              "overridable": false
+            }
+          }
+        },
+        "bg": {
+          "$value": "{color.blue.50}",
+          "$type": "color",
+          "$extensions": {
+            "com.coop-agents.tenant": {
+              "overridable": false
+            }
+          }
+        },
+        "border": {
+          "$value": "{color.blue.800}",
+          "$type": "color",
+          "$extensions": {
+            "com.coop-agents.tenant": {
+              "overridable": false
+            }
+          }
+        }
+      }
+    },
+    "focus": {
+      "ring": {
+        "$value": "{color.blue.700}",
+        "$type": "color",
+        "$description": "Indicador de foco; común a las 3 direcciones y NO sobreescribible por el tenant",
+        "$extensions": {
+          "com.coop-agents.tenant": {
+            "overridable": false
+          }
+        }
+      }
+    },
+    "platform": {
+      "accent": {
+        "$value": "{color.terracotta.600}",
+        "$type": "color",
+        "$description": "Acento propio de la plataforma (terracota). Marca SaaS: login, chrome del panel, pie 'Reservas con'.",
+        "$extensions": {
+          "com.coop-agents.tenant": {
+            "overridable": false
+          }
+        }
+      },
+      "accent-strong": {
+        "$value": "{color.terracotta.700}",
+        "$type": "color",
+        "$extensions": {
+          "com.coop-agents.tenant": {
+            "overridable": false
+          }
+        }
+      },
+      "accent-subtle": {
+        "$value": "{color.terracotta.50}",
+        "$type": "color",
+        "$extensions": {
+          "com.coop-agents.tenant": {
+            "overridable": false
+          }
+        }
+      }
+    },
+    "sidebar": {
+      "bg": {
+        "$value": "{color.surface.default}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "text": {
+        "$value": "{color.text.default}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "text-strong": {
+        "$value": "{color.platform.accent-strong}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "muted": {
+        "$value": "{color.text.muted}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "tag-border": {
+        "$value": "{color.border.strong}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "item-hover": {
+        "$value": "{color.surface.subtle}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "item-active-bg": {
+        "$value": "{color.platform.accent-subtle}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "item-active-text": {
+        "$value": "{color.platform.accent-strong}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "indicator": {
+        "$value": "{color.platform.accent}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "chip-bg": {
+        "$value": "{color.surface.subtle}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "chip-border": {
+        "$value": "{color.border.default}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "chip-text": {
+        "$value": "{color.text.default}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      },
+      "focus-ring": {
+        "$value": "{color.focus.ring}",
+        "$type": "color",
+        "$description": "PROPUESTA. Barra lateral del panel (chrome de la plataforma)."
+      }
+    }
+  },
+  "brand": {
+    "$description": "Capa TENANT. El negocio solo define brand.primary (y logo + nombre); el resto se DERIVA en runtime con las reglas de initiatives/look-and-feel/README.md §Theming. Valores por defecto = acento de la plataforma.",
+    "primary": {
+      "$value": "{color.platform.accent}",
+      "$type": "color",
+      "$description": "Color elegido por el negocio. ÚNICO token de color sobreescribible por el tenant.",
+      "$extensions": {
+        "com.coop-agents.tenant": {
+          "overridable": true
+        }
+      }
+    },
+    "solid": {
+      "$value": "{brand.primary}",
+      "$type": "color",
+      "$description": "Relleno de botones/destacados. = primary si on-primary logra ≥4.5:1; si no, primary oscurecido en pasos de 2 % hacia negro hasta ≥4.5:1 con blanco.",
+      "$extensions": {
+        "com.coop-agents.tenant": {
+          "derived": "solid(primary)"
+        }
+      }
+    },
+    "on-primary": {
+      "$value": "{color.sand.0}",
+      "$type": "color",
+      "$description": "Texto/ícono sobre brand.solid: blanco (#ffffff) o casi negro (#111111), el de mayor contraste (≥4.5:1).",
+      "$extensions": {
+        "com.coop-agents.tenant": {
+          "derived": "onColor(solid)"
+        }
+      }
+    },
+    "primary-hover": {
+      "$value": "{color.terracotta.700}",
+      "$type": "color",
+      "$description": "Hover: si on-primary es blanco, solid mezclado 15 % con negro; si es casi negro, solid mezclado 30 % con blanco.",
+      "$extensions": {
+        "com.coop-agents.tenant": {
+          "derived": "hover(solid,on)"
+        }
+      }
+    },
+    "text": {
+      "$value": "{color.terracotta.600}",
+      "$type": "color",
+      "$description": "Links y texto de marca sobre fondo claro: primary oscurecido en pasos de 2 % hasta ≥4.5:1 sobre surface.default, surface.canvas y brand.subtle.",
+      "$extensions": {
+        "com.coop-agents.tenant": {
+          "derived": "textOnLight(primary)"
+        }
+      }
+    },
+    "subtle": {
+      "$value": "{color.terracotta.50}",
+      "$type": "color",
+      "$description": "Tinte suave para seleccionado/fondos: primary 12 % + surface.default 88 %.",
+      "$extensions": {
+        "com.coop-agents.tenant": {
+          "derived": "tint(primary,0.12)"
+        }
+      }
+    },
+    "border": {
+      "$value": "{brand.text}",
+      "$type": "color",
+      "$description": "Borde de opción seleccionada (≥3:1 garantizado porque brand.text ≥4.5:1).",
+      "$extensions": {
+        "com.coop-agents.tenant": {
+          "derived": "= text"
+        }
+      }
+    },
+    "logo": {
+      "$value": "",
+      "$type": "string",
+      "$description": "Logo del negocio (SVG/PNG, alto máx. 40 px en el header). Sobreescribible por el tenant.",
+      "$extensions": {
+        "com.coop-agents.tenant": {
+          "overridable": true
+        }
+      }
+    },
+    "name": {
+      "$value": "",
+      "$type": "string",
+      "$description": "Nombre del negocio. Sobreescribible por el tenant.",
+      "$extensions": {
+        "com.coop-agents.tenant": {
+          "overridable": true
+        }
+      }
+    }
+  },
+  "font": {
+    "family": {
+      "base": {
+        "$value": [
+          "ui-rounded",
+          "SF Pro Rounded",
+          "Nunito",
+          "system-ui",
+          "-apple-system",
+          "Segoe UI",
+          "Roboto",
+          "Arial",
+          "sans-serif"
+        ],
+        "$type": "fontFamily",
+        "$extensions": {
+          "com.coop-agents.tenant": {
+            "overridable": false
+          }
+        }
+      },
+      "heading": {
+        "$value": [
+          "ui-rounded",
+          "SF Pro Rounded",
+          "Nunito",
+          "Varela Round",
+          "Arial Rounded MT Bold",
+          "system-ui",
+          "sans-serif"
+        ],
+        "$type": "fontFamily",
+        "$description": "Títulos",
+        "$extensions": {
+          "com.coop-agents.tenant": {
+            "overridable": false
+          }
+        }
+      },
+      "numeric": {
+        "$value": [
+          "ui-rounded",
+          "SF Pro Rounded",
+          "Nunito",
+          "system-ui",
+          "-apple-system",
+          "Segoe UI",
+          "Roboto",
+          "Arial",
+          "sans-serif"
+        ],
+        "$type": "fontFamily",
+        "$description": "Horarios y cifras (tabular-nums)",
+        "$extensions": {
+          "com.coop-agents.tenant": {
+            "overridable": false
+          }
+        }
+      }
+    },
+    "size": {
+      "100": {
+        "$value": "0.875rem",
+        "$type": "dimension",
+        "$description": "14px · texto auxiliar"
+      },
+      "200": {
+        "$value": "1rem",
+        "$type": "dimension",
+        "$description": "16px · cuerpo (mínimo en inputs)"
+      },
+      "300": {
+        "$value": "1.125rem",
+        "$type": "dimension",
+        "$description": "18px"
+      },
+      "400": {
+        "$value": "1.375rem",
+        "$type": "dimension",
+        "$description": "h2"
+      },
+      "500": {
+        "$value": "2rem",
+        "$type": "dimension",
+        "$description": "h1"
+      },
+      "600": {
+        "$value": "2.75rem",
+        "$type": "dimension",
+        "$description": "titular de landing"
+      },
+      "label": {
+        "$value": "{font.size.100}",
+        "$type": "dimension",
+        "$description": "Etiquetas de tabla, KPI y eyebrow"
+      },
+      "075": {
+        "$value": "0.75rem",
+        "$type": "dimension",
+        "$description": "Microtexto: «✓ elegido» / «ocupado» en opciones; etiquetas en mayúsculas de B"
+      },
+      "050": {
+        "$value": "0.6875rem",
+        "$type": "dimension",
+        "$description": "Etiqueta «provisorio» del wordmark"
+      }
+    },
+    "weight": {
+      "regular": {
+        "$value": 400,
+        "$type": "fontWeight"
+      },
+      "semibold": {
+        "$value": 600,
+        "$type": "fontWeight"
+      },
+      "bold": {
+        "$value": 700,
+        "$type": "fontWeight"
+      },
+      "heading": {
+        "$value": 700,
+        "$type": "fontWeight",
+        "$description": "Peso de títulos"
+      },
+      "kpi": {
+        "$value": 700,
+        "$type": "fontWeight",
+        "$description": "Cifra de los KPI"
+      },
+      "hero": {
+        "$value": "{font.weight.black}",
+        "$type": "fontWeight",
+        "$description": "Título del hero de la landing"
+      },
+      "black": {
+        "$value": 800,
+        "$type": "fontWeight",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      }
+    },
+    "line-height": {
+      "tight": {
+        "$value": 1.2,
+        "$type": "number"
+      },
+      "base": {
+        "$value": 1.5,
+        "$type": "number"
+      }
+    },
+    "tracking": {
+      "heading": {
+        "$value": "-0.01em",
+        "$type": "dimension"
+      },
+      "label": {
+        "$value": "0",
+        "$type": "dimension"
+      },
+      "caps": {
+        "$value": "0.04em",
+        "$type": "dimension",
+        "$description": "Etiquetas cortas en mayúsculas (wordmark)"
+      }
+    },
+    "case": {
+      "label": {
+        "$value": "none",
+        "$type": "string",
+        "$description": "text-transform de etiquetas"
+      }
+    }
+  },
+  "space": {
+    "050": {
+      "$value": "2px",
+      "$type": "dimension"
+    },
+    "100": {
+      "$value": "4px",
+      "$type": "dimension"
+    },
+    "200": {
+      "$value": "8px",
+      "$type": "dimension"
+    },
+    "300": {
+      "$value": "12px",
+      "$type": "dimension"
+    },
+    "400": {
+      "$value": "16px",
+      "$type": "dimension"
+    },
+    "500": {
+      "$value": "24px",
+      "$type": "dimension"
+    },
+    "600": {
+      "$value": "28px",
+      "$type": "dimension"
+    },
+    "700": {
+      "$value": "40px",
+      "$type": "dimension"
+    },
+    "800": {
+      "$value": "56px",
+      "$type": "dimension"
+    }
+  },
+  "radius": {
+    "sm": {
+      "$value": "10px",
+      "$type": "dimension"
+    },
+    "md": {
+      "$value": "16px",
+      "$type": "dimension"
+    },
+    "lg": {
+      "$value": "24px",
+      "$type": "dimension"
+    },
+    "pill": {
+      "$value": "999px",
+      "$type": "dimension"
+    },
+    "control": {
+      "$value": "{radius.md}",
+      "$type": "dimension",
+      "$description": "Inputs, opciones"
+    },
+    "button": {
+      "$value": "{radius.pill}",
+      "$type": "dimension",
+      "$description": "Botones"
+    }
+  },
+  "border": {
+    "width": {
+      "$value": "2px",
+      "$type": "dimension",
+      "$description": "Borde de tarjetas y controles"
+    }
+  },
+  "shadow": {
+    "card": {
+      "$value": "0 2px 0 rgba(38,28,23,.06)",
+      "$type": "string",
+      "$description": "CSS box-shadow (string por simplicidad)"
+    },
+    "raised": {
+      "$value": "0 10px 28px rgba(179,71,44,.14)",
+      "$type": "string",
+      "$description": "CSS box-shadow (string por simplicidad)"
+    }
+  },
+  "density": {
+    "control-height": {
+      "$value": "48px",
+      "$type": "dimension"
+    },
+    "row-height": {
+      "$value": "52px",
+      "$type": "dimension"
+    },
+    "card-padding": {
+      "$value": "{space.500}",
+      "$type": "dimension"
+    },
+    "section-gap": {
+      "$value": "{space.700}",
+      "$type": "dimension"
+    },
+    "control-height-touch": {
+      "$value": "{density.control-height}",
+      "$type": "dimension",
+      "$description": "Alto de controles en mobile/táctil (<64rem o pointer:coarse). Decisión CDO: ≥ 44 px"
+    },
+    "row-height-touch": {
+      "$value": "{density.row-height}",
+      "$type": "dimension",
+      "$description": "Alto de filas en mobile/táctil (<64rem o pointer:coarse). Decisión CDO: ≥ 44 px"
+    }
+  },
+  "icon": {
+    "stroke-width": {
+      "$value": 2.0,
+      "$type": "number"
+    },
+    "linecap": {
+      "$value": "round",
+      "$type": "string"
+    },
+    "size": {
+      "$value": "22px",
+      "$type": "dimension"
+    },
+    "style": {
+      "$value": "trazo grueso redondeado, con relleno de tinte",
+      "$type": "string"
+    }
+  },
+  "size": {
+    "target": {
+      "min": {
+        "$value": "24px",
+        "$type": "dimension",
+        "$description": "Mínimo WCAG 2.5.8"
+      },
+      "comfortable": {
+        "$value": "44px",
+        "$type": "dimension",
+        "$description": "Recomendado (y obligatorio en la web de la clienta)"
+      }
+    },
+    "content": {
+      "max": {
+        "$value": "40rem",
+        "$type": "dimension"
+      }
+    }
+  },
+  "focus": {
+    "width": {
+      "$value": "3px",
+      "$type": "dimension",
+      "$extensions": {
+        "com.coop-agents.tenant": {
+          "overridable": false
+        }
+      }
+    },
+    "offset": {
+      "$value": "2px",
+      "$type": "dimension",
+      "$extensions": {
+        "com.coop-agents.tenant": {
+          "overridable": false
+        }
+      }
+    },
+    "style": {
+      "$value": "solid",
+      "$type": "strokeStyle",
+      "$extensions": {
+        "com.coop-agents.tenant": {
+          "overridable": false
+        }
+      }
+    }
+  },
+  "breakpoint": {
+    "md": {
+      "$value": "40rem",
+      "$type": "dimension",
+      "$description": "640px"
+    },
+    "lg": {
+      "$value": "64rem",
+      "$type": "dimension",
+      "$description": "1024px"
+    }
+  },
+  "component": {
+    "client": {
+      "body-padding-top": {
+        "$value": "{space.500}",
+        "$type": "dimension",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      }
+    },
+    "panel": {
+      "content-padding": {
+        "$value": "{space.500}",
+        "$type": "dimension",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      },
+      "content-gap": {
+        "$value": "{component.panel.content-padding}",
+        "$type": "dimension",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      }
+    },
+    "kpi": {
+      "font-family": {
+        "$value": "{font.family.heading}",
+        "$type": "fontFamily",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      },
+      "size": {
+        "$value": "{font.size.500}",
+        "$type": "dimension",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      }
+    },
+    "card": {
+      "border-width": {
+        "$value": "{border.width}",
+        "$type": "dimension",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      }
+    },
+    "nav": {
+      "radius": {
+        "$value": "{radius.pill}",
+        "$type": "dimension",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      },
+      "indicator-width": {
+        "$value": "0px",
+        "$type": "dimension",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      }
+    },
+    "badge": {
+      "radius": {
+        "$value": "{radius.pill}",
+        "$type": "dimension",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      }
+    },
+    "day": {
+      "radius": {
+        "$value": "{radius.pill}",
+        "$type": "dimension",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      }
+    },
+    "hero": {
+      "bg": {
+        "$value": "{color.platform.accent-subtle}",
+        "$type": "color",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      },
+      "divider": {
+        "$value": "transparent",
+        "$type": "color",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      },
+      "icon-bg": {
+        "$value": "{color.surface.default}",
+        "$type": "color",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      },
+      "icon-padding": {
+        "$value": "6px",
+        "$type": "dimension",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      },
+      "icon-box": {
+        "$value": "36px",
+        "$type": "dimension",
+        "$description": "PROPUESTA (ajuste de personalidad por dirección). Ver README §Ajustes de personalidad."
+      }
+    }
+  }
+}
