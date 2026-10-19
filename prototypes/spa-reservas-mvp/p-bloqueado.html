@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Horario bloqueado — Spa Lúa · Prototipo spa-reservas-mvp</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="tenant-spa-lua.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="app-header">
+  <div class="app-header__inner">
+    <a class="brand" href="p-agenda.html"><img class="brand__logo" src="assets/logo-spa-lua.svg" alt="" width="36" height="36"><span>Spa Lúa<span class="muted small"> · Profesional</span></span></a>
+    <nav class="app-nav" aria-label="Principal"><ul><li><a href="p-agenda.html">Hoy</a></li><li><a href="p-agenda-semana.html">Semana</a></li><li><a href="p-bloquear.html" aria-current="page">Bloquear horario</a></li></ul></nav>
+  </div>
+</header>
+<main id="main" class="page">
+
+<div class="alert alert--success" role="status">
+  <p class="alert__title"><span aria-hidden="true">✓ </span>Bloqueaste el viernes 27/11 de 16:00 a 20:00</p>
+  <p>Ya no se pueden reservar turnos nuevos con vos en ese horario.</p>
+</div>
+<h1>Horario bloqueado</h1>
+<div class="actions">
+  <a class="btn" href="p-agenda-semana.html">Ver mi semana</a>
+  <a class="btn btn--secondary" href="p-agenda.html">Deshacer bloqueo</a>
+</div>
+
+</main>
+<aside class="proto" aria-label="Navegación del prototipo">
+  <div class="proto__inner">
+    <h2>Prototipo (no es parte del producto)</h2>
+    <ul><li><a href="p-agenda.html">Agenda de hoy</a></li><li><a href="p-agenda-vacia.html">Estado: día sin turnos</a></li><li><a href="p-agenda-semana.html">Semana</a></li><li><a href="p-bloquear.html">Bloquear horario</a></li><li><a href="p-bloquear-conflicto.html">Estado: bloqueo con turnos</a></li><li><a href="index.html">Índice del prototipo</a></li></ul>
+  </div>
+</aside>
+<script src="app.js"></script>
+</body>
+</html>

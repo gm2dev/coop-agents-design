@@ -1,0 +1,14 @@
+/* Capa tenant (datos del spa, no tokens del design system).
+   Solo sobreescribe el color primario. El nombre y el logo van en el HTML.
+   Regla (ver initiatives/spa-reservas-mvp/spec.md §Marca): el color de marca se usa como
+   action.primary solo si da >= 4.5:1 contra text.on-action (#ffffff) y contra surface.default;
+   si no, la plataforma mantiene action.primary del sistema y usa la marca solo en la franja
+   superior y el logo (decorativos).
+   Spa Lúa (ficticio): #8a2b6a -> 7.97:1 sobre blanco (OK). Hover: el tenant guarda una variante
+   más oscura calculada por la plataforma (#6e2255, 10.38:1). */
+:root {
+  --color-action-primary: #8a2b6a;
+  --color-action-primary-hover: #6e2255;
+  --color-text-link: #8a2b6a;
+  --color-border-selected: #8a2b6a;
+}

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Elegí día y horario — Spa Lúa · Prototipo spa-reservas-mvp</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="tenant-spa-lua.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="app-header">
+  <div class="app-header__inner">
+    <a class="brand" href="c-inicio.html"><img class="brand__logo" src="assets/logo-spa-lua.svg" alt="" width="36" height="36"><span>Spa Lúa</span></a>
+    <nav class="app-nav" aria-label="Principal"><ul><li><a href="c-inicio.html">Inicio</a></li><li><a href="c-reservar-servicios.html" aria-current="page">Reservar</a></li><li><a href="c-mis-turnos.html">Mis turnos</a></li></ul></nav>
+  </div>
+</header>
+<main id="main" class="page">
+
+<a class="back" href="c-reservar-profesional.html">← Cambiar profesional</a>
+<p class="steps">Paso 3 de 4</p>
+<h1>¿Cuándo?</h1>
+<p class="muted">90 min · Cualquier profesional</p>
+<form action="c-reservar-confirmar.html">
+  <fieldset>
+    <legend>Día</legend>
+    <ul class="days"><li class="choice"><input type="radio" name="dia" id="d1" ><label for="d1"><span class="choice__body"><span class="choice__title">Mar</span><span class="choice__meta">24/11</span></span></label></li><li class="choice"><input type="radio" name="dia" id="d2" ><label for="d2"><span class="choice__body"><span class="choice__title">Mié</span><span class="choice__meta">25/11</span></span></label></li><li class="choice"><input type="radio" name="dia" id="d3" disabled ><label for="d3"><span class="choice__body"><span class="choice__title">Jue</span><span class="choice__meta">26/11 · completo</span></span></label></li><li class="choice"><input type="radio" name="dia" id="d4" ><label for="d4"><span class="choice__body"><span class="choice__title">Vie</span><span class="choice__meta">27/11</span></span></label></li><li class="choice"><input type="radio" name="dia" id="d5" checked ><label for="d5"><span class="choice__body"><span class="choice__title">Sáb</span><span class="choice__meta">28/11</span></span></label></li></ul>
+  </fieldset>
+  <fieldset>
+    <legend>Horario del sábado 28/11</legend>
+    <p class="hint" id="hora-hint">Es la hora de inicio. Terminás 90 min después.</p>
+    <ul class="slots"><li class="choice"><input type="radio" name="hora" id="h1030" checked aria-describedby="hora-hint"><label for="h1030"><span class="choice__body"><span class="choice__title">10:30</span></span></label></li><li class="choice"><input type="radio" name="hora" id="h1100" aria-describedby="hora-hint"><label for="h1100"><span class="choice__body"><span class="choice__title">11:00</span></span></label></li><li class="choice"><input type="radio" name="hora" id="h1230" aria-describedby="hora-hint"><label for="h1230"><span class="choice__body"><span class="choice__title">12:30</span></span></label></li><li class="choice"><input type="radio" name="hora" id="h1400" aria-describedby="hora-hint"><label for="h1400"><span class="choice__body"><span class="choice__title">14:00</span></span></label></li><li class="choice"><input type="radio" name="hora" id="h1530" aria-describedby="hora-hint"><label for="h1530"><span class="choice__body"><span class="choice__title">15:30</span></span></label></li><li class="choice"><input type="radio" name="hora" id="h1700" aria-describedby="hora-hint"><label for="h1700"><span class="choice__body"><span class="choice__title">17:00</span></span></label></li><li class="choice"><input type="radio" name="hora" id="h1830" aria-describedby="hora-hint"><label for="h1830"><span class="choice__body"><span class="choice__title">18:30</span></span></label></li></ul>
+  </fieldset>
+  <p><a href="c-reservar-horario.html">Ver la semana siguiente →</a></p>
+  <button type="submit" class="btn btn--block">Continuar</button>
+</form>
+
+</main>
+<aside class="proto" aria-label="Navegación del prototipo">
+  <div class="proto__inner">
+    <h2>Prototipo (no es parte del producto)</h2>
+    <ul><li><a href="c-ingresar.html">Ingresar</a></li><li><a href="c-inicio.html">Inicio</a></li><li><a href="c-reservar-servicios.html">Reservar</a></li><li><a href="c-mis-turnos.html">Mis turnos</a></li><li><a href="c-whatsapp.html">Mensajes de WhatsApp (mock)</a></li><li><a href="c-pack.html">Pack prepago (Fase 2)</a></li><li><a href="c-reservar-sin-horarios.html">Estado: sin horarios</a></li><li><a href="c-reservar-error.html">Estado: horario ocupado</a></li><li><a href="index.html">Índice del prototipo</a></li></ul>
+  </div>
+</aside>
+<script src="app.js"></script>
+</body>
+</html>

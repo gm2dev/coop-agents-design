@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mis turnos — Spa Lúa · Prototipo spa-reservas-mvp</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="tenant-spa-lua.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="app-header">
+  <div class="app-header__inner">
+    <a class="brand" href="c-inicio.html"><img class="brand__logo" src="assets/logo-spa-lua.svg" alt="" width="36" height="36"><span>Spa Lúa</span></a>
+    <nav class="app-nav" aria-label="Principal"><ul><li><a href="c-inicio.html">Inicio</a></li><li><a href="c-reservar-servicios.html">Reservar</a></li><li><a href="c-mis-turnos.html" aria-current="page">Mis turnos</a></li></ul></nav>
+  </div>
+</header>
+<main id="main" class="page">
+
+<h1>Mis turnos</h1>
+<section aria-labelledby="prox">
+  <h2 id="prox">Próximos</h2>
+  <ul class="list">
+    <li class="card card--outlined">
+      <h3>Sábado 28/11 · 10:30 a 12:00</h3>
+      <p>Retiro de semipermanente + Esmaltado semipermanente · con Carla</p>
+      <p class="small muted">Podés cancelar hasta el viernes 27/11 a las 10:30.</p>
+      <div class="actions actions--inline">
+        <a class="btn btn--danger-outline" href="c-cancelar.html">Cancelar turno<span class="visually-hidden"> del sábado 28/11</span></a>
+      </div>
+    </li>
+    <li class="card card--outlined">
+      <h3>Martes 22/12 · 17:00 a 18:00</h3>
+      <p>Pedicura spa · con Rocío</p>
+      <p class="small muted">Podés cancelar hasta el lunes 21/12 a las 17:00.</p>
+      <div class="actions actions--inline">
+        <a class="btn btn--danger-outline" href="c-cancelar.html">Cancelar turno<span class="visually-hidden"> del martes 22/12</span></a>
+      </div>
+    </li>
+  </ul>
+  <p class="small muted">¿Querés cambiar el día? Cancelá el turno y reservá uno nuevo.</p>
+</section>
+<section aria-labelledby="pas" class="card">
+  <h2 id="pas">Anteriores</h2>
+  <ul class="list">
+    <li>Sábado 31/10 · Esmaltado semipermanente <span class="badge badge--success">Asististe</span></li>
+    <li>Sábado 3/10 · Esmaltado semipermanente <span class="badge badge--neutral">Cancelado</span></li>
+  </ul>
+</section>
+<a class="btn btn--block" href="c-reservar-servicios.html">Reservar un turno</a>
+
+</main>
+<aside class="proto" aria-label="Navegación del prototipo">
+  <div class="proto__inner">
+    <h2>Prototipo (no es parte del producto)</h2>
+    <ul><li><a href="c-ingresar.html">Ingresar</a></li><li><a href="c-inicio.html">Inicio</a></li><li><a href="c-reservar-servicios.html">Reservar</a></li><li><a href="c-mis-turnos.html">Mis turnos</a></li><li><a href="c-whatsapp.html">Mensajes de WhatsApp (mock)</a></li><li><a href="c-pack.html">Pack prepago (Fase 2)</a></li><li><a href="c-mis-turnos-vacio.html">Estado: sin turnos</a></li><li><a href="c-cancelar.html">Cancelar turno</a></li><li><a href="c-cancelar-fuera-plazo.html">Estado: fuera de plazo</a></li><li><a href="index.html">Índice del prototipo</a></li></ul>
+  </div>
+</aside>
+<script src="app.js"></script>
+</body>
+</html>

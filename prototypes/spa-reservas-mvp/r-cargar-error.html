@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cargar turno — Spa Lúa · Prototipo spa-reservas-mvp</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="tenant-spa-lua.css">
+</head>
+<body class="wide">
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="app-header">
+  <div class="app-header__inner">
+    <a class="brand" href="r-cargar-turno.html"><img class="brand__logo" src="assets/logo-spa-lua.svg" alt="" width="36" height="36"><span>Spa Lúa<span class="muted small"> · Recepción</span></span></a>
+    <nav class="app-nav" aria-label="Principal"><ul><li><a href="r-agenda.html">Agenda</a></li><li><a href="r-cargar-turno.html" aria-current="page">Cargar turno</a></li></ul></nav>
+  </div>
+</header>
+<main id="main" class="page">
+
+<a class="back" href="r-agenda.html">← Volver a la agenda</a>
+<h1>Cargar turno para una clienta</h1>
+<div class="alert alert--danger" role="alert"><p class="alert__title"><span aria-hidden="true">✕ </span>Revisá estos datos</p><ul><li><a href="#r-tel">El WhatsApp tiene 8 dígitos: tienen que ser 10.</a></li></ul></div>
+<div class="alert alert--danger error-summary" role="alert" tabindex="-1" hidden>
+  <p class="alert__title"><span aria-hidden="true">✕ </span>Revisá estos datos</p>
+  <ul></ul>
+</div>
+<form action="r-turno-cargado.html" data-validate novalidate>
+<div class="grid-2">
+  <section class="card" aria-labelledby="sc">
+    <h2 id="sc">1. Clienta</h2>
+    <fieldset>
+      <legend class="visually-hidden">Tipo de clienta</legend>
+      <ul class="choices">
+        <li class="choice"><input type="radio" name="clienta" id="clienta-existente" ><label for="clienta-existente"><span class="choice__body"><span class="choice__title">Ya es clienta</span></span></label></li>
+        <li class="choice"><input type="radio" name="clienta" id="clienta-nueva" checked ><label for="clienta-nueva"><span class="choice__body"><span class="choice__title">Clienta nueva</span></span></label></li>
+      </ul>
+    </fieldset>
+    <div class="field">
+      <label for="r-tel">WhatsApp de la clienta</label>
+      <span class="hint" id="r-tel-hint">10 dígitos con código de área. Si ya es clienta, la buscamos por el número.</span>
+      <div class="phone"><span class="phone__prefix" aria-hidden="true">+54 9</span>
+      <input type="tel" id="r-tel" name="tel" inputmode="tel" aria-describedby="r-tel-hint r-tel-error" value="11 5555 01" aria-invalid="true" data-required data-digits="10,10" data-error-id="r-tel-error" data-msg="Ingresá el WhatsApp de la clienta: 10 dígitos con código de área."></div>
+      <p class="field-error" id="r-tel-error"><span aria-hidden="true">✕</span> Ingresá 10 dígitos con código de área, sin 0 ni 15.</p>
+    </div>
+    
+    <div id="datos-nueva">
+      <div class="field">
+        <label for="r-nombre">Nombre y apellido</label>
+        <input type="text" id="r-nombre" name="nombre" autocomplete="off" data-required data-error-id="r-nombre-error" data-msg="Ingresá el nombre de la clienta." aria-describedby="r-nombre-error">
+        <p class="field-error" id="r-nombre-error" hidden><span aria-hidden="true">✕</span> Ingresá el nombre de la clienta.</p>
+      </div>
+      <p class="small muted">El permiso para ofertas lo da la clienta: le llega un WhatsApp para aceptarlo. Recepción no lo marca por ella.</p>
+    </div>
+  </section>
+  <section class="card" aria-labelledby="ss">
+    <h2 id="ss">2. Turno</h2>
+    <fieldset id="r-fs-serv" data-required data-error-id="r-serv-error" data-msg="Elegí al menos un servicio.">
+      <legend>Servicios</legend>
+      <p class="field-error" id="r-serv-error" hidden><span aria-hidden="true">✕</span> Elegí al menos un servicio.</p>
+      <ul class="choices">
+        <li class="choice"><input type="checkbox" name="servicio" id="rs1" ><label for="rs1"><span class="choice__body"><span class="choice__title">Manicura tradicional</span><span class="choice__meta">45 min</span></span><span class="choice__aside">$ 12.000</span></label></li>
+        <li class="choice"><input type="checkbox" name="servicio" id="rs4" checked ><label for="rs4"><span class="choice__body"><span class="choice__title">Kapping en gel</span><span class="choice__meta">90 min</span></span><span class="choice__aside">$ 25.000</span></label></li>
+        <li class="choice"><input type="checkbox" name="servicio" id="rs5" ><label for="rs5"><span class="choice__body"><span class="choice__title">Pedicura spa</span><span class="choice__meta">60 min</span></span><span class="choice__aside">$ 20.000</span></label></li>
+      </ul>
+    </fieldset>
+    <div class="inline-fields">
+      <div class="field"><label for="r-pro">Profesional</label>
+        <select id="r-pro" name="pro"><option>Cualquiera</option><option>Carla</option><option selected>Jimena</option></select></div>
+      <div class="field"><label for="r-dia">Día</label><input type="date" id="r-dia" name="dia" value="2026-11-28"></div>
+    </div>
+    <fieldset>
+      <legend>Horario</legend>
+      <div class="alert alert--warning" role="status"><p class="alert__title"><span aria-hidden="true">⚠ </span>Jimena no tiene horarios libres de 90 min el sábado 28/11</p>
+      <p>Próximo libre: martes 1/12 a las 11:00. <a href="r-cargar-turno.html">Ver con cualquier profesional</a></p></div>
+    </fieldset>
+  </section>
+</div>
+<div class="actions actions--inline">
+  <button type="submit" class="btn">Cargar turno</button>
+  <a class="btn btn--secondary" href="r-agenda.html">Cancelar</a>
+</div>
+<p class="small muted">Al cargarlo, le llega a la clienta la confirmación y los recordatorios por WhatsApp.</p>
+</form>
+
+</main>
+<aside class="proto" aria-label="Navegación del prototipo">
+  <div class="proto__inner">
+    <h2>Prototipo (no es parte del producto)</h2>
+    <ul><li><a href="r-agenda.html">Agenda del día</a></li><li><a href="r-cargar-turno.html">Cargar turno</a></li><li><a href="r-cargar-error.html">Estado: errores y sin horarios</a></li><li><a href="r-turno-cargado.html">Turno cargado</a></li><li><a href="index.html">Índice del prototipo</a></li></ul>
+  </div>
+</aside>
+<script src="app.js"></script>
+</body>
+</html>

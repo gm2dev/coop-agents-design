@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Servicios — Spa Lúa · Prototipo spa-reservas-mvp</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="tenant-spa-lua.css">
+</head>
+<body class="wide">
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="app-header">
+  <div class="app-header__inner">
+    <a class="brand" href="a-panel.html"><img class="brand__logo" src="assets/logo-spa-lua.svg" alt="" width="36" height="36"><span>Spa Lúa<span class="muted small"> · Administración</span></span></a>
+    <p class="small muted" style="margin:0">Valeria · administradora</p>
+  </div>
+</header>
+<div class="admin-layout"><nav class="side-nav" aria-label="Administración"><ul><li><a href="a-panel.html">Panel</a></li><li><a href="a-servicios.html" aria-current="page">Servicios</a></li><li><a href="a-profesionales.html">Profesionales y horarios</a></li><li><a href="a-ajustes.html">Reservas y avisos</a></li><li><a href="a-marca.html">Marca</a></li><li><a href="a-campana.html">Campaña de Navidad</a></li><li><a href="a-importar.html">Importar clientas</a></li></ul></nav>
+<main id="main" class="page">
+
+<div class="row row--between"><h1 style="margin:0">Servicios</h1><a class="btn" href="#nuevo">Agregar servicio</a></div>
+<p class="muted">Las clientas pueden reservar varios servicios seguidos; la duración define el largo del turno.</p>
+<div class="table-wrap">
+<table class="table-stack">
+  <caption>5 servicios activos</caption>
+  <thead><tr><th scope="col">Servicio</th><th scope="col">Duración</th><th scope="col">Precio (ARS)</th><th scope="col"><span class="visually-hidden">Acciones</span></th></tr></thead>
+  <tbody><tr><td data-label="Servicio">Manicura tradicional</td><td data-label="Duración">45 min</td><td data-label="Precio">$ 12.000</td><td data-label="Acciones"><a href="a-servicios.html">Editar<span class="visually-hidden"> Manicura tradicional</span></a></td></tr><tr><td data-label="Servicio">Retiro de semipermanente</td><td data-label="Duración">30 min</td><td data-label="Precio">$ 6.000</td><td data-label="Acciones"><a href="a-servicios.html">Editar<span class="visually-hidden"> Retiro de semipermanente</span></a></td></tr><tr><td data-label="Servicio">Esmaltado semipermanente</td><td data-label="Duración">60 min</td><td data-label="Precio">$ 18.000</td><td data-label="Acciones"><a href="a-servicios.html">Editar<span class="visually-hidden"> Esmaltado semipermanente</span></a></td></tr><tr><td data-label="Servicio">Kapping en gel</td><td data-label="Duración">90 min</td><td data-label="Precio">$ 25.000</td><td data-label="Acciones"><a href="a-servicios.html">Editar<span class="visually-hidden"> Kapping en gel</span></a></td></tr><tr><td data-label="Servicio">Pedicura spa</td><td data-label="Duración">60 min</td><td data-label="Precio">$ 20.000</td><td data-label="Acciones"><a href="a-servicios.html">Editar<span class="visually-hidden"> Pedicura spa</span></a></td></tr></tbody>
+</table>
+</div>
+<section class="card" id="nuevo" aria-labelledby="nuevo-t" style="margin-top:var(--space-500)">
+  <h2 id="nuevo-t">Agregar servicio</h2>
+  <div class="alert alert--danger error-summary" role="alert" tabindex="-1" hidden>
+  <p class="alert__title"><span aria-hidden="true">✕ </span>Revisá estos datos</p>
+  <ul></ul>
+</div>
+  <form action="a-servicios.html" data-validate novalidate>
+    <div class="field"><label for="sv-nombre">Nombre</label>
+      <input type="text" id="sv-nombre" data-required data-error-id="sv-nombre-error" data-msg="Ingresá el nombre del servicio." aria-describedby="sv-nombre-error">
+      <p class="field-error" id="sv-nombre-error" hidden><span aria-hidden="true">✕</span> Ingresá el nombre del servicio.</p></div>
+    <div class="inline-fields">
+      <div class="field"><label for="sv-dur">Duración (min)</label><input type="number" id="sv-dur" min="15" step="15" value="60"></div>
+      <div class="field"><label for="sv-precio">Precio en pesos</label><input type="number" id="sv-precio" min="0" step="100" inputmode="numeric"
+        data-required data-error-id="sv-precio-error" data-msg="Ingresá el precio en pesos." aria-describedby="sv-precio-error">
+        <p class="field-error" id="sv-precio-error" hidden><span aria-hidden="true">✕</span> Ingresá el precio.</p></div>
+    </div>
+    <div class="field"><label for="sv-vuelta">Te toca volver a los (días)</label>
+      <span class="hint" id="sv-vuelta-hint">Opcional. Cuándo avisarle a la clienta que repita este servicio. Vacío: no se avisa.</span>
+      <input type="number" id="sv-vuelta" min="7" step="1" value="21" aria-describedby="sv-vuelta-hint"></div>
+    <button class="btn" type="submit">Guardar servicio</button>
+  </form>
+</section>
+
+</main>
+</div>
+<aside class="proto" aria-label="Navegación del prototipo">
+  <div class="proto__inner">
+    <h2>Prototipo (no es parte del producto)</h2>
+    <ul><li><a href="a-panel.html">Panel</a></li><li><a href="a-panel-vacio.html">Estado: panel sin datos</a></li><li><a href="a-servicios.html">Servicios</a></li><li><a href="a-profesionales.html">Profesionales y horarios</a></li><li><a href="a-ajustes.html">Reservas y avisos</a></li><li><a href="a-marca.html">Marca</a></li><li><a href="a-campana.html">Campaña</a></li><li><a href="a-importar.html">Importar CSV</a></li><li><a href="index.html">Índice del prototipo</a></li></ul>
+  </div>
+</aside>
+<script src="app.js"></script>
+</body>
+</html>

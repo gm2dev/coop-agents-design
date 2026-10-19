@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Campaña de Navidad — Spa Lúa · Prototipo spa-reservas-mvp</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="tenant-spa-lua.css">
+</head>
+<body class="wide">
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="app-header">
+  <div class="app-header__inner">
+    <a class="brand" href="a-panel.html"><img class="brand__logo" src="assets/logo-spa-lua.svg" alt="" width="36" height="36"><span>Spa Lúa<span class="muted small"> · Administración</span></span></a>
+    <p class="small muted" style="margin:0">Valeria · administradora</p>
+  </div>
+</header>
+<div class="admin-layout"><nav class="side-nav" aria-label="Administración"><ul><li><a href="a-panel.html">Panel</a></li><li><a href="a-servicios.html">Servicios</a></li><li><a href="a-profesionales.html">Profesionales y horarios</a></li><li><a href="a-ajustes.html">Reservas y avisos</a></li><li><a href="a-marca.html">Marca</a></li><li><a href="a-campana.html" aria-current="page">Campaña de Navidad</a></li><li><a href="a-importar.html">Importar clientas</a></li></ul></nav>
+<main id="main" class="page">
+
+<h1>Campaña de Navidad</h1>
+<p class="muted">En esta versión hay una sola campaña, con una plantilla y un segmento.</p>
+<div class="alert alert--danger error-summary" role="alert" tabindex="-1" hidden>
+  <p class="alert__title"><span aria-hidden="true">✕ </span>Revisá estos datos</p>
+  <ul></ul>
+</div>
+<form action="a-campana-enviada.html" data-validate novalidate>
+<div class="grid-2">
+  <section class="card" aria-labelledby="c1">
+    <h2 id="c1">1. A quién</h2>
+    <fieldset>
+      <legend>Segmento</legend>
+      <ul class="choices">
+        <li class="choice"><input type="radio" name="seg" id="seg1" checked ><label for="seg1"><span class="choice__body"><span class="choice__title">Clientas que vinieron en los últimos 90 días</span><span class="choice__meta">Solo las que dieron permiso para ofertas</span></span><span class="choice__aside">86 clientas</span></label></li>
+      </ul>
+    </fieldset>
+    <div class="alert alert--info">
+      <p class="alert__title">Solo a clientas con permiso</p>
+      <p>De 214 clientas del segmento, 86 dieron permiso. Las otras 128 no reciben la oferta (sí sus recordatorios). Esto protege el WhatsApp del spa de bloqueos.</p>
+    </div>
+  </section>
+  <section class="card" aria-labelledby="c2">
+    <h2 id="c2">2. Qué les decimos</h2>
+    <p class="small muted">Plantilla «Oferta de temporada» (aprobada por WhatsApp). Completás solo los campos marcados.</p>
+    <div class="field"><label for="c-oferta">Oferta</label>
+      <span class="hint" id="c-oferta-hint">Hasta 60 caracteres.</span>
+      <input type="text" id="c-oferta" maxlength="60" value="15 % off en esmaltado semipermanente" aria-describedby="c-oferta-hint c-oferta-error" data-required data-error-id="c-oferta-error" data-msg="Escribí la oferta.">
+      <p class="field-error" id="c-oferta-error" hidden><span aria-hidden="true">✕</span> Escribí la oferta.</p></div>
+    <div class="inline-fields">
+      <div class="field"><label for="c-desde">Válida desde</label><input type="date" id="c-desde" value="2026-12-01"></div>
+      <div class="field"><label for="c-hasta">Hasta</label><input type="date" id="c-hasta" value="2026-12-24"></div>
+    </div>
+    <h3>Vista previa del mensaje</h3>
+    <div class="chat"><div class="bubble">
+      <p>🎄 Navidad en <strong>Spa Lúa</strong>: 15 % off en esmaltado semipermanente del 1/12 al 24/12.</p>
+      <p><span class="small">[Botón] Reservar</span></p>
+      <p class="small">Respondé BAJA si no querés recibir más ofertas.</p>
+    </div></div>
+  </section>
+</div>
+<section class="card" aria-labelledby="c3">
+  <h2 id="c3">3. Cuándo</h2>
+  <div class="field"><label for="c-envio">Fecha de envío</label><input type="date" id="c-envio" value="2026-12-01" style="max-width:14rem"></div>
+  <p class="small muted">Se envía a las 10:00. Costo estimado por mensajes de WhatsApp: [a definir con Architect].</p>
+</section>
+<div class="actions actions--inline">
+  <button class="btn" type="submit">Programar envío a 86 clientas</button>
+  <a class="btn btn--secondary" href="a-panel.html">Guardar borrador</a>
+</div>
+</form>
+
+</main>
+</div>
+<aside class="proto" aria-label="Navegación del prototipo">
+  <div class="proto__inner">
+    <h2>Prototipo (no es parte del producto)</h2>
+    <ul><li><a href="a-panel.html">Panel</a></li><li><a href="a-panel-vacio.html">Estado: panel sin datos</a></li><li><a href="a-servicios.html">Servicios</a></li><li><a href="a-profesionales.html">Profesionales y horarios</a></li><li><a href="a-ajustes.html">Reservas y avisos</a></li><li><a href="a-marca.html">Marca</a></li><li><a href="a-campana.html">Campaña</a></li><li><a href="a-importar.html">Importar CSV</a></li><li><a href="index.html">Índice del prototipo</a></li></ul>
+  </div>
+</aside>
+<script src="app.js"></script>
+</body>
+</html>

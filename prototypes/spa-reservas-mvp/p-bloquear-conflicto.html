@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bloquear horario — Spa Lúa · Prototipo spa-reservas-mvp</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="tenant-spa-lua.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="app-header">
+  <div class="app-header__inner">
+    <a class="brand" href="p-agenda.html"><img class="brand__logo" src="assets/logo-spa-lua.svg" alt="" width="36" height="36"><span>Spa Lúa<span class="muted small"> · Profesional</span></span></a>
+    <nav class="app-nav" aria-label="Principal"><ul><li><a href="p-agenda.html">Hoy</a></li><li><a href="p-agenda-semana.html">Semana</a></li><li><a href="p-bloquear.html" aria-current="page">Bloquear horario</a></li></ul></nav>
+  </div>
+</header>
+<main id="main" class="page">
+
+<a class="back" href="p-agenda.html">← Volver a la agenda</a>
+<h1>Bloquear un horario</h1>
+
+<form action="p-bloqueado.html" data-validate novalidate class="card">
+  <div class="field">
+    <label for="b-dia">Día</label>
+    <input type="date" id="b-dia" name="dia" value="2026-11-27" data-required data-error-id="b-dia-error" data-msg="Elegí el día." aria-describedby="b-dia-error">
+    <p class="field-error" id="b-dia-error" hidden><span aria-hidden="true">✕</span> Elegí el día.</p>
+  </div>
+  <div class="inline-fields">
+    <div class="field"><label for="b-desde">Desde</label><input type="time" id="b-desde" name="desde" value="16:00" step="900"></div>
+    <div class="field"><label for="b-hasta">Hasta</label><input type="time" id="b-hasta" name="hasta" value="20:00" step="900"></div>
+  </div>
+  <div class="field">
+    <label for="b-motivo">Motivo <span class="muted">(opcional, solo lo ve el spa)</span></label>
+    <input type="text" id="b-motivo" name="motivo" maxlength="60" value="Curso de capacitación">
+  </div>
+  <div class="alert alert--warning" role="alert">
+    <p class="alert__title"><span aria-hidden="true">⚠ </span>Hay 1 turno en ese rango</p>
+    <p>Viernes 27/11 · 17:00 · Julia T. · Manicura tradicional. El bloqueo no cancela turnos: pedile a recepción que la contacte o achicá el rango.</p>
+  </div>
+  <button type="submit" class="btn btn--block">Bloquear igual (el turno se mantiene)</button>
+</form>
+
+</main>
+<aside class="proto" aria-label="Navegación del prototipo">
+  <div class="proto__inner">
+    <h2>Prototipo (no es parte del producto)</h2>
+    <ul><li><a href="p-agenda.html">Agenda de hoy</a></li><li><a href="p-agenda-vacia.html">Estado: día sin turnos</a></li><li><a href="p-agenda-semana.html">Semana</a></li><li><a href="p-bloquear.html">Bloquear horario</a></li><li><a href="p-bloquear-conflicto.html">Estado: bloqueo con turnos</a></li><li><a href="index.html">Índice del prototipo</a></li></ul>
+  </div>
+</aside>
+<script src="app.js"></script>
+</body>
+</html>
