@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mi agenda de hoy — Spa Lúa · Prototipo spa-reservas-mvp</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="tenant-spa-lua.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="app-header">
+  <div class="app-header__inner">
+    <a class="brand" href="p-agenda.html"><img class="brand__logo" src="assets/logo-spa-lua.svg" alt="" width="36" height="36"><span>Spa Lúa<span class="muted small"> · Profesional</span></span></a>
+    <nav class="app-nav" aria-label="Principal"><ul><li><a href="p-agenda.html" aria-current="page">Hoy</a></li><li><a href="p-agenda-semana.html">Semana</a></li><li><a href="p-bloquear.html">Bloquear horario</a></li></ul></nav>
+  </div>
+</header>
+<main id="main" class="page">
+
+<h1>Hoy, sábado 28/11</h1>
+<p class="muted">Carla · 4 turnos · 10:00 a 20:00</p>
+<div class="row" style="margin-bottom:var(--space-400)">
+  <a class="btn btn--secondary" href="p-agenda-semana.html">← Día anterior</a>
+  <a class="btn btn--secondary" href="p-agenda-vacia.html">Día siguiente →</a>
+</div>
+<ol class="list card" aria-label="Turnos y bloqueos de hoy">
+  <li class="appt"><span class="appt__time">10:30</span><div><strong>Sofía M.</strong><br>Retiro + Esmaltado semipermanente · hasta 12:00</div></li>
+  <li class="appt"><span class="appt__time">12:30</span><div><strong>Lucía G.</strong><br>Kapping en gel · hasta 14:00 <span class="badge badge--info">Cargado por recepción</span></div></li>
+  <li class="appt appt--block"><span class="appt__time">14:00</span><div><strong>Bloqueado</strong><br>hasta 15:00 · Almuerzo</div></li>
+  <li class="appt"><span class="appt__time">15:30</span><div><strong>Ana P.</strong><br>Manicura tradicional · hasta 16:15</div></li>
+  <li class="appt"><span class="appt__time">17:00</span><div><strong>Marta R.</strong><br>Esmaltado semipermanente · hasta 18:00</div></li>
+</ol>
+<a class="btn btn--block" href="p-bloquear.html">Bloquear un horario</a>
+
+</main>
+<aside class="proto" aria-label="Navegación del prototipo">
+  <div class="proto__inner">
+    <h2>Prototipo (no es parte del producto)</h2>
+    <ul><li><a href="p-agenda.html">Agenda de hoy</a></li><li><a href="p-agenda-vacia.html">Estado: día sin turnos</a></li><li><a href="p-agenda-semana.html">Semana</a></li><li><a href="p-bloquear.html">Bloquear horario</a></li><li><a href="p-bloquear-conflicto.html">Estado: bloqueo con turnos</a></li><li><a href="index.html">Índice del prototipo</a></li></ul>
+  </div>
+</aside>
+<script src="app.js"></script>
+</body>
+</html>
