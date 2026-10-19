@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Campaña programada — Spa Lúa · Prototipo spa-reservas-mvp</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="tenant-spa-lua.css">
+</head>
+<body class="wide">
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="app-header">
+  <div class="app-header__inner">
+    <a class="brand brand--chip" href="a-panel.html"><img class="brand__logo" src="assets/logo-spa-lua.svg" alt="" width="36" height="36"><span>Spa Lúa<span class="muted small"> · Administración</span></span></a>
+    <p class="small muted u-m-0">Valeria · administradora</p>
+  </div>
+</header>
+<div class="admin-layout"><nav class="side-nav" aria-label="Administración"><ul><li><a href="a-panel.html">Panel</a></li><li><a href="a-servicios.html">Servicios</a></li><li><a href="a-profesionales.html">Profesionales y horarios</a></li><li><a href="a-ajustes.html">Reservas y avisos</a></li><li><a href="a-pack.html">Pack</a></li><li><a href="a-marca.html">Marca</a></li><li><a href="a-campana.html" aria-current="page">Campaña de Navidad</a></li><li><a href="a-importar.html">Importar clientas</a></li></ul></nav>
+<main id="main" class="page">
+
+<div class="alert alert--success" role="status"><p class="alert__title"><span aria-hidden="true">✓ </span>Campaña programada para el 1/12 a las 10:00</p><p>La reciben 86 clientas con permiso. Podés cancelarla hasta esa hora.</p></div>
+<h1>Campaña de Navidad</h1>
+<dl class="dl card"><dt>Estado</dt><dd>Programada</dd><dt>Segmento</dt><dd>Vinieron en los últimos 90 días, con permiso (86)</dd><dt>Oferta</dt><dd>15 % off en esmaltado semipermanente · 1/12 al 24/12</dd></dl>
+<div class="actions actions--inline"><button type="button" class="btn btn--danger-outline" data-confirm-target="confirmar-cancelacion" aria-expanded="false" aria-controls="confirmar-cancelacion">Cancelar envío</button><a class="btn btn--secondary" href="a-panel.html">Ir al panel</a></div>
+<section class="card card--outlined u-mt-500" id="confirmar-cancelacion" aria-labelledby="cc-t" hidden>
+  <h2 id="cc-t" tabindex="-1">¿Cancelás el envío de la campaña?</h2>
+  <p>No se va a mandar el mensaje a las 86 clientas. La campaña queda como borrador y la podés volver a programar.</p>
+  <form action="a-campana-cancelada.html" class="actions actions--inline">
+    <button type="submit" class="btn btn--danger">Sí, cancelar envío</button>
+    <button type="button" class="btn btn--secondary" data-confirm-dismiss>No, mantener programada</button>
+  </form>
+</section>
+
+</main>
+</div>
+<aside class="proto" aria-label="Navegación del prototipo">
+  <div class="proto__inner">
+    <h2>Prototipo (no es parte del producto)</h2>
+    <ul><li><a href="a-panel.html">Panel</a></li><li><a href="a-panel-vacio.html">Estado: panel sin datos</a></li><li><a href="a-servicios.html">Servicios</a></li><li><a href="a-profesionales.html">Profesionales y horarios</a></li><li><a href="a-ajustes.html">Reservas y avisos</a></li><li><a href="a-pack.html">Pack</a></li><li><a href="a-marca.html">Marca</a></li><li><a href="a-campana.html">Campaña</a></li><li><a href="a-campana-cancelada.html">Estado: envío cancelado</a></li><li><a href="a-importar.html">Importar CSV</a></li><li><a href="index.html">Índice del prototipo</a></li></ul>
+  </div>
+</aside>
+<script src="app.js"></script>
+</body>
+</html>

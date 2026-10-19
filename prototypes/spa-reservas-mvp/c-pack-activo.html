@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mi pack — Spa Lúa · Prototipo spa-reservas-mvp</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="tenant-spa-lua.css">
+</head>
+<body class="tenant">
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="app-header">
+  <div class="app-header__inner">
+    <a class="brand" href="c-inicio-con-pack.html"><img class="brand__logo" src="assets/logo-spa-lua.svg" alt="" width="36" height="36"><span>Spa Lúa</span></a>
+    <nav class="app-nav" aria-label="Principal"><ul><li><a href="c-inicio-con-pack.html">Inicio</a></li><li><a href="c-reservar-servicios-pack.html">Reservar</a></li><li><a href="c-mis-turnos.html">Mis turnos</a></li><li><a href="c-pack-activo.html" aria-current="page">Mi pack</a></li></ul></nav>
+  </div>
+</header>
+<main id="main" class="page">
+
+<div class="alert alert--success" role="status">
+  <p class="alert__title"><span aria-hidden="true">✓ </span>Pago aprobado. Tu pack ya está activo</p>
+  <p>Te mandamos la confirmación por WhatsApp.</p>
+</div>
+<h1>Mi pack</h1>
+<section class="card card--outlined" aria-labelledby="pk">
+  <h2 id="pk">Pack 3 meses</h2>
+  <dl class="dl">
+    <dt>Vigencia</dt><dd>Diciembre 2026 a febrero 2027</dd>
+    <dt>Incluye</dt><dd>1 servicio por mes (manicura, esmaltado semipermanente o pedicura spa) y elegís profesional</dd>
+    <dt>Este mes</dt><dd>Te queda 1 servicio sin usar</dd>
+    <dt>Usados</dt><dd>0 de 3</dd>
+    <dt>Pagaste</dt><dd>$ 30.000 · 15/12/2026 · $ 10.000 por servicio</dd>
+  </dl>
+  <div class="actions"><a class="btn" href="c-reservar-servicios-pack.html">Reservar el turno de este mes</a></div>
+</section>
+<section class="card" aria-labelledby="baja">
+  <h2 id="baja">Baja del pack</h2>
+  <p>Podés darte de baja en cualquier momento. También tenés este botón desde «Mi pack» en el menú y desde el inicio.</p>
+  <ul>
+    <li>Hasta el 25/12/2026 inclusive (10 días desde la compra), si no usaste ningún servicio: te devolvemos todo ($ 30.000).</li>
+    <li>Después: te devolvemos $ 10.000 por cada servicio sin usar.</li>
+  </ul>
+  <a class="btn btn--danger-outline" href="c-pack-baja.html">Darme de baja</a>
+</section>
+<div class="alert alert--warning"><p class="alert__title"><span aria-hidden="true">⚠ </span>Propuesta provisoria</p><p>Condiciones del pack propuestas por el CPO. Las decide Fidel y <strong>no tienen revisión legal</strong>.</p></div>
+<p class="small muted">Nota de diseño: Mercado Pago vuelve a esta pantalla aunque la sesión se haya cerrado; se muestra el resultado del pago y, para reservar, se pide ingresar.</p>
+
+</main>
+<aside class="proto" aria-label="Navegación del prototipo">
+  <div class="proto__inner">
+    <h2>Prototipo (no es parte del producto)</h2>
+    <ul><li><a href="c-ingresar.html">Ingresar</a></li><li><a href="c-inicio.html">Inicio</a></li><li><a href="c-reservar-servicios.html">Reservar</a></li><li><a href="c-mis-turnos.html">Mis turnos</a></li><li><a href="c-whatsapp.html">Mensajes de WhatsApp (mock)</a></li><li><a href="c-pack.html">Pack prepago (Fase 2)</a></li><li><a href="c-pack-activo.html">Pack activo (con botón de baja)</a></li><li><a href="c-inicio-con-pack.html">Inicio con pack activo</a></li><li><a href="c-pack-pago-pendiente.html">Estado: pago pendiente</a></li><li><a href="c-pack-pago-error.html">Estado: pago rechazado</a></li><li><a href="c-pack-baja.html">Darse de baja</a></li><li><a href="index.html">Índice del prototipo</a></li></ul>
+  </div>
+</aside>
+<script src="app.js"></script>
+</body>
+</html>

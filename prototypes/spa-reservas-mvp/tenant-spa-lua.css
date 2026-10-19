@@ -1,0 +1,21 @@
+/* Capa tenant de Spa Lúa (dato del negocio, no token del design system).
+   El spa define SOLO brand.primary (+ logo y nombre en el HTML). El resto se DERIVA al guardar con las reglas de
+   design-system/README.md §Marca del tenant (PR #6; implementación de referencia: tools/tokens.py derive_brand,
+   replicada en app.js para la vista previa de «Marca»). Hay que escribir TODOS los --brand-* derivados: sobreescribir
+   solo --brand-primary no recalcula text/hover.
+   Superficies donde aparece la marca: surface.default #fffdf9, surface.canvas/subtle #f6f2eb y brand.subtle.
+   brand.text NO se usa sobre surface.sunken/disabled (#ebe4d8).
+   Spa Lúa (ficticio) · primary #8a2b6a · sin ajuste:
+     on-primary #ffffff sobre solid #8a2b6a 7.97:1 · sobre hover #75255a 9.68:1
+     brand.text #8a2b6a: 7.84:1 (default) · 7.14:1 (canvas) · 6.45:1 (brand.subtle #f1e4e8)
+     text-hover #75255a ≥ 8:1 en las mismas superficies (más oscuro que text). Ratios truncados. */
+:root {
+  --brand-primary: #8a2b6a;
+  --brand-solid: #8a2b6a;
+  --brand-on-primary: #ffffff;
+  --brand-primary-hover: #75255a;
+  --brand-text: #8a2b6a;
+  --brand-text-hover: #75255a;
+  --brand-subtle: #f1e4e8;
+  --brand-border: #8a2b6a;
+}

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inicio — Spa Lúa · Prototipo spa-reservas-mvp</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="tenant-spa-lua.css">
+</head>
+<body class="tenant">
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="app-header">
+  <div class="app-header__inner">
+    <a class="brand" href="c-inicio.html"><img class="brand__logo" src="assets/logo-spa-lua.svg" alt="" width="36" height="36"><span>Spa Lúa</span></a>
+    <nav class="app-nav" aria-label="Principal"><ul><li><a href="c-inicio.html" aria-current="page">Inicio</a></li><li><a href="c-reservar-servicios.html">Reservar</a></li><li><a href="c-mis-turnos.html">Mis turnos</a></li></ul></nav>
+  </div>
+</header>
+<main id="main" class="page">
+
+<h1>Hola, Sofía</h1>
+<div class="alert alert--info">
+  <p class="alert__title">Te toca volver</p>
+  <p>Hace 3 semanas te hiciste <strong>Esmaltado semipermanente</strong>. ¿Reservamos el próximo?</p>
+  <p><a href="c-te-toca-volver.html">Ver turnos para repetirlo</a></p>
+</div>
+<section class="card" aria-labelledby="prox">
+  <h2 id="prox">Tu próximo turno</h2>
+  <p class="muted">No tenés turnos reservados.</p>
+  <a class="btn btn--block" href="c-reservar-servicios.html">Reservar un turno</a>
+</section>
+<section class="card" aria-labelledby="spa">
+  <h2 id="spa">Spa Lúa</h2>
+  <dl class="dl">
+    <dt>Dirección</dt><dd>Av. Ficticia 1234, CABA</dd>
+    <dt>Horario</dt><dd>Mar a sáb · 10 a 20 h</dd>
+    <dt>Pago</dt><dd>En el local</dd>
+  </dl>
+</section>
+<section class="card" aria-labelledby="pack">
+  <h2 id="pack">Este año, venís todos los meses</h2>
+  <p>Pack prepago de 3 o 12 meses con ahorro. <span class="badge badge--neutral">Fase 2</span></p>
+  <a href="c-pack.html">Ver packs</a>
+</section>
+
+</main>
+<aside class="proto" aria-label="Navegación del prototipo">
+  <div class="proto__inner">
+    <h2>Prototipo (no es parte del producto)</h2>
+    <ul><li><a href="c-ingresar.html">Ingresar</a></li><li><a href="c-inicio.html">Inicio</a></li><li><a href="c-reservar-servicios.html">Reservar</a></li><li><a href="c-mis-turnos.html">Mis turnos</a></li><li><a href="c-whatsapp.html">Mensajes de WhatsApp (mock)</a></li><li><a href="c-pack.html">Pack prepago (Fase 2)</a></li><li><a href="c-inicio-con-turno.html">Inicio con turno reservado</a></li><li><a href="index.html">Índice del prototipo</a></li></ul>
+  </div>
+</aside>
+<script src="app.js"></script>
+</body>
+</html>

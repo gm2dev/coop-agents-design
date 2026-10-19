@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Elegí los servicios (con pack) — Spa Lúa · Prototipo spa-reservas-mvp</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="tenant-spa-lua.css">
+</head>
+<body class="tenant">
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="app-header">
+  <div class="app-header__inner">
+    <a class="brand" href="c-inicio-con-pack.html"><img class="brand__logo" src="assets/logo-spa-lua.svg" alt="" width="36" height="36"><span>Spa Lúa</span></a>
+    <nav class="app-nav" aria-label="Principal"><ul><li><a href="c-inicio-con-pack.html">Inicio</a></li><li><a href="c-reservar-servicios-pack.html" aria-current="page">Reservar</a></li><li><a href="c-mis-turnos.html">Mis turnos</a></li><li><a href="c-pack-activo.html">Mi pack</a></li></ul></nav>
+  </div>
+</header>
+<main id="main" class="page">
+
+<a class="back" href="c-inicio-con-pack.html">← Volver</a>
+<p class="steps">Paso 1 de 4</p>
+<p><span class="badge badge--success">Con tu pack</span></p>
+<h1>¿Qué te querés hacer?</h1>
+<p>Tu pack incluye <strong>1 servicio en diciembre</strong>. Si sumás otros servicios, van a precio de lista y los pagás en el local.</p>
+<div class="alert alert--danger error-summary" role="alert" tabindex="-1" hidden>
+  <p class="alert__title"><span aria-hidden="true">✕ </span>Revisá estos datos</p>
+  <ul></ul>
+</div>
+<form action="c-reservar-profesional.html" data-validate novalidate>
+  <fieldset id="fs-pack" data-required data-error-id="pack-error" data-msg="Elegí el servicio de este mes de tu pack.">
+    <legend>Servicio de diciembre (incluido en tu pack)</legend>
+    <p class="field-error" id="pack-error" hidden><span aria-hidden="true">✕</span> Elegí el servicio de este mes de tu pack.</p>
+    <ul class="choices"><li class="choice"><input type="radio" name="servicio-pack" id="sp1" value="sp1" data-min="45" data-price="0"><label for="sp1"><span class="choice__body"><span class="choice__title">Manicura tradicional</span><span class="choice__meta">45 min · $ 12.000 de lista</span></span><span class="choice__aside">Incluido en tu pack</span></label></li><li class="choice"><input type="radio" name="servicio-pack" id="sp3" checked value="sp3" data-min="60" data-price="0"><label for="sp3"><span class="choice__body"><span class="choice__title">Esmaltado semipermanente</span><span class="choice__meta">60 min · $ 18.000 de lista</span></span><span class="choice__aside">Incluido en tu pack</span></label></li><li class="choice"><input type="radio" name="servicio-pack" id="sp5" value="sp5" data-min="60" data-price="0"><label for="sp5"><span class="choice__body"><span class="choice__title">Pedicura spa</span><span class="choice__meta">60 min · $ 20.000 de lista</span></span><span class="choice__aside">Incluido en tu pack</span></label></li></ul>
+  </fieldset>
+  <fieldset>
+    <legend>Servicios extra (opcional)</legend>
+    <p class="hint">A precio de lista, se pagan en el local. Los hacemos seguidos, con la misma profesional. Manicura, esmaltado y pedicura extra se reservan en otro turno.</p>
+    <ul class="choices"><li class="choice"><input type="checkbox" name="servicio" id="x2" checked value="x2" data-min="30" data-price="6000"><label for="x2"><span class="choice__body"><span class="choice__title">Retiro de semipermanente</span><span class="choice__meta">30 min</span></span><span class="choice__aside">$ 6.000</span></label></li><li class="choice"><input type="checkbox" name="servicio" id="x4" value="x4" data-min="90" data-price="25000"><label for="x4"><span class="choice__body"><span class="choice__title">Kapping en gel</span><span class="choice__meta">90 min</span></span><span class="choice__aside">$ 25.000</span></label></li></ul>
+  </fieldset>
+  <div class="summary-bar">
+    <p aria-live="polite" data-total data-total-suffix=" a pagar en el local (el servicio del pack ya está pago)"></p>
+    <button type="submit" class="btn btn--block">Continuar</button>
+  </div>
+</form>
+<p class="small muted">Precios en pesos. ¿Este mes no querés usar el pack? <a href="c-reservar-servicios.html">Reservar sin usar el pack</a>.</p>
+
+</main>
+<aside class="proto" aria-label="Navegación del prototipo">
+  <div class="proto__inner">
+    <h2>Prototipo (no es parte del producto)</h2>
+    <ul><li><a href="c-inicio-con-pack.html">Inicio con pack activo</a></li><li><a href="c-reservar-servicios-pack.html">Reservar con pack (4 pasos)</a></li><li><a href="c-reservar-servicios.html">Reservar sin pack (3 pasos)</a></li><li><a href="c-pack-activo.html">Mi pack</a></li><li><a href="c-mis-turnos.html">Mis turnos</a></li><li><a href="c-whatsapp.html">Mensajes de WhatsApp (mock)</a></li><li><a href="index.html">Índice del prototipo</a></li></ul>
+  </div>
+</aside>
+<script src="app.js"></script>
+</body>
+</html>

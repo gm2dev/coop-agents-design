@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Marca — Spa Lúa · Prototipo spa-reservas-mvp</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="tenant-spa-lua.css">
+</head>
+<body class="wide">
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="app-header">
+  <div class="app-header__inner">
+    <a class="brand brand--chip" href="a-panel.html"><img class="brand__logo" src="assets/logo-spa-lua.svg" alt="" width="36" height="36"><span>Spa Lúa<span class="muted small"> · Administración</span></span></a>
+    <p class="small muted u-m-0">Valeria · administradora</p>
+  </div>
+</header>
+<div class="admin-layout"><nav class="side-nav" aria-label="Administración"><ul><li><a href="a-panel.html">Panel</a></li><li><a href="a-servicios.html">Servicios</a></li><li><a href="a-profesionales.html">Profesionales y horarios</a></li><li><a href="a-ajustes.html">Reservas y avisos</a></li><li><a href="a-pack.html">Pack</a></li><li><a href="a-marca.html" aria-current="page">Marca</a></li><li><a href="a-campana.html">Campaña de Navidad</a></li><li><a href="a-importar.html">Importar clientas</a></li></ul></nav>
+<main id="main" class="page">
+
+<h1>Marca de tu spa</h1>
+<p>Así ven tus clientas la app. En esta versión podés cambiar el nombre, el logo y un color principal.</p>
+<div class="grid-2">
+  <form class="card" action="a-marca.html" aria-labelledby="mf">
+    <h2 id="mf">Datos de la marca</h2>
+    <div class="field"><label for="m-nombre">Nombre del spa</label><input type="text" id="m-nombre" value="Spa Lúa"></div>
+    <div class="field"><label for="m-logo">Logo</label>
+      <span class="hint" id="m-logo-hint">PNG o SVG cuadrado, hasta 1 MB. Se ve a 36 px en el encabezado.</span>
+      <input type="file" id="m-logo" accept="image/png,image/svg+xml" aria-describedby="m-logo-hint"></div>
+    <div class="field"><label for="color-marca">Color principal</label>
+      <span class="hint" id="m-color-hint">Solo elegís un color: el resto (botones, links, fondos suaves) lo calculamos. Si tu color no se lee bien en botones o links (contraste menor a 4,5:1 sobre blanco, sobre el fondo de página o sobre el tinte de tu color), usamos un tono más oscuro del mismo color y te avisamos. Podés guardar igual. Los estados de error, aviso y éxito son siempre los de la plataforma.</span>
+      <div class="row"><input type="color" id="color-marca" value="#8a2b6a" aria-describedby="m-color-hint"></div></div>
+    <div id="contraste" class="alert alert--success" role="status" aria-live="polite"></div>
+    <p class="small muted u-m-0">Probar otros colores (ejemplos de la revisión de contraste):</p>
+    <ul class="row list-plain">
+      <li><button type="button" class="btn btn--link" data-try-color="#8a2b6a">Color actual (#8a2b6a)</button></li>
+      <li><button type="button" class="btn btn--link" data-try-color="#e88fb4">Rosa claro (#e88fb4)</button></li>
+      <li><button type="button" class="btn btn--link" data-try-color="#d81b60">Fucsia (#d81b60)</button></li>
+      <li><button type="button" class="btn btn--link" data-try-color="#767676">Gris medio (#767676)</button></li>
+    </ul>
+    <button class="btn" type="submit">Guardar marca</button>
+  </form>
+  <section class="card" aria-labelledby="pv">
+    <h2 id="pv">Vista previa</h2>
+    <div id="preview" class="preview tenant">
+      <div id="franja" class="preview__band">
+        <p class="row u-bold"><img class="preview__logo" src="assets/logo-spa-lua.svg" alt="" width="36" height="36"> Spa Lúa</p>
+        <p>Hola, Sofía. <a href="a-marca.html">Ver mis turnos</a> <span class="small muted">(link sobre el fondo de página)</span></p>
+        <div class="preview__surface">
+          <p class="u-m-0">Tu próximo turno: sábado 28/11 · 10:30. <a href="a-marca.html">Cambiar</a> <span class="small muted">(sobre blanco)</span></p>
+        </div>
+        <div class="choice" aria-hidden="true"><input type="radio" id="pv-sel" checked tabindex="-1"><label for="pv-sel"><span class="choice__body"><span class="choice__title">Horario elegido · 10:30</span><span class="choice__meta">Fondo suave de tu color</span></span></label></div>
+        <p><span class="btn" aria-hidden="true">Reservar un turno</span></p>
+      </div>
+    </div>
+    <p class="small muted">Tus colores se usan solo en la web de tus clientas. Las pantallas de tu equipo (agenda, recepción y este panel) usan los colores de la plataforma con tu logo y nombre.</p>
+  </section>
+</div>
+
+</main>
+</div>
+<aside class="proto" aria-label="Navegación del prototipo">
+  <div class="proto__inner">
+    <h2>Prototipo (no es parte del producto)</h2>
+    <ul><li><a href="a-panel.html">Panel</a></li><li><a href="a-panel-vacio.html">Estado: panel sin datos</a></li><li><a href="a-servicios.html">Servicios</a></li><li><a href="a-profesionales.html">Profesionales y horarios</a></li><li><a href="a-ajustes.html">Reservas y avisos</a></li><li><a href="a-pack.html">Pack</a></li><li><a href="a-marca.html">Marca</a></li><li><a href="a-campana.html">Campaña</a></li><li><a href="a-importar.html">Importar CSV</a></li><li><a href="index.html">Índice del prototipo</a></li></ul>
+  </div>
+</aside>
+<script src="app.js"></script>
+</body>
+</html>

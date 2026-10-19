@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pack prepago — Spa Lúa · Prototipo spa-reservas-mvp</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="tenant-spa-lua.css">
+</head>
+<body class="tenant">
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="app-header">
+  <div class="app-header__inner">
+    <a class="brand" href="c-inicio.html"><img class="brand__logo" src="assets/logo-spa-lua.svg" alt="" width="36" height="36"><span>Spa Lúa</span></a>
+    <nav class="app-nav" aria-label="Principal"><ul><li><a href="c-inicio.html">Inicio</a></li><li><a href="c-reservar-servicios.html">Reservar</a></li><li><a href="c-mis-turnos.html">Mis turnos</a></li></ul></nav>
+  </div>
+</header>
+<main id="main" class="page">
+
+<a class="back" href="c-inicio.html">← Volver</a>
+<p><span class="badge badge--neutral">Fase 2 · Año Nuevo</span></p>
+<h1>Este año venís todos los meses</h1>
+<p>Pagás una sola vez y tenés un servicio por mes, a precio de pack, con la profesional que elijas.</p>
+<form action="c-pack-activo.html">
+  <fieldset>
+    <legend>Elegí tu pack</legend>
+    <ul class="choices">
+      <li class="choice"><input type="radio" name="pack" id="pk3" checked ><label for="pk3"><span class="choice__body"><span class="choice__title">Pack 3 meses</span><span class="choice__meta">3 servicios (1 por mes) a $ 10.000 cada uno</span></span><span class="choice__aside">$ 30.000</span></label></li>
+      <li class="choice"><input type="radio" name="pack" id="pk12" ><label for="pk12"><span class="choice__body"><span class="choice__title">Pack 12 meses</span><span class="choice__meta">12 servicios (1 por mes) a $ 9.500 cada uno</span></span><span class="choice__aside">$ 114.000</span></label></li>
+    </ul>
+  </fieldset>
+  <section class="card" aria-labelledby="inc">
+    <h2 id="inc">Qué incluye</h2>
+    <ul>
+      <li>Cada mes, 1 servicio de esta lista: Manicura tradicional ($ 12.000), Esmaltado semipermanente ($ 18.000) o Pedicura spa ($ 20.000). Con el pack, cualquiera de los tres te sale $ 10.000 (o $ 9.500 en el de 12 meses): menos que el precio de lista de todos.</li>
+      <li>Elegís con qué profesional te atendés.</li>
+      <li>Si sumás otros servicios al turno, van a precio de lista y se pagan en el local.</li>
+    </ul>
+  </section>
+  <section class="card" aria-labelledby="cond">
+    <h2 id="cond">Antes de pagar</h2>
+    <ul>
+      <li>Es un único pago por Mercado Pago, directo a Spa Lúa. No se renueva solo.</li>
+      <li>Cada mes reservás tu turno como siempre; el servicio ya está pago.</li>
+      <li>Si te das de baja dentro de los 10 días de la compra y no usaste ningún servicio, te devolvemos todo.</li>
+      <li>Después, te devolvemos los servicios que no usaste, a precio de pack ($ 10.000 cada uno en el de 3 meses).</li>
+      <li>Te das de baja cuando quieras desde «Mi pack» (en el menú y en el inicio), con el botón «Darme de baja».</li>
+    </ul>
+  </section>
+  <div class="alert alert--warning"><p class="alert__title"><span aria-hidden="true">⚠ </span>Propuesta provisoria</p><p>Condiciones del pack propuestas por el CPO. Las decide Fidel y <strong>no tienen revisión legal</strong>.</p></div>
+  <button type="submit" class="btn btn--block">Pagar con Mercado Pago</button>
+  <p class="small muted">Te llevamos a Mercado Pago para pagar y volvés acá. La confirmación final te llega por WhatsApp.</p>
+</form>
+
+</main>
+<aside class="proto" aria-label="Navegación del prototipo">
+  <div class="proto__inner">
+    <h2>Prototipo (no es parte del producto)</h2>
+    <ul><li><a href="c-ingresar.html">Ingresar</a></li><li><a href="c-inicio.html">Inicio</a></li><li><a href="c-reservar-servicios.html">Reservar</a></li><li><a href="c-mis-turnos.html">Mis turnos</a></li><li><a href="c-whatsapp.html">Mensajes de WhatsApp (mock)</a></li><li><a href="c-pack.html">Pack prepago (Fase 2)</a></li><li><a href="c-pack-activo.html">Pack activo (con botón de baja)</a></li><li><a href="c-pack-pago-pendiente.html">Estado: pago pendiente</a></li><li><a href="c-pack-pago-error.html">Estado: pago rechazado</a></li><li><a href="c-pack-baja.html">Darse de baja</a></li><li><a href="index.html">Índice del prototipo</a></li></ul>
+  </div>
+</aside>
+<script src="app.js"></script>
+</body>
+</html>

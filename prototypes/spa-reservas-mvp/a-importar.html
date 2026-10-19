@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Importar clientas — Spa Lúa · Prototipo spa-reservas-mvp</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="tenant-spa-lua.css">
+</head>
+<body class="wide">
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="app-header">
+  <div class="app-header__inner">
+    <a class="brand brand--chip" href="a-panel.html"><img class="brand__logo" src="assets/logo-spa-lua.svg" alt="" width="36" height="36"><span>Spa Lúa<span class="muted small"> · Administración</span></span></a>
+    <p class="small muted u-m-0">Valeria · administradora</p>
+  </div>
+</header>
+<div class="admin-layout"><nav class="side-nav" aria-label="Administración"><ul><li><a href="a-panel.html">Panel</a></li><li><a href="a-servicios.html">Servicios</a></li><li><a href="a-profesionales.html">Profesionales y horarios</a></li><li><a href="a-ajustes.html">Reservas y avisos</a></li><li><a href="a-pack.html">Pack</a></li><li><a href="a-marca.html">Marca</a></li><li><a href="a-campana.html">Campaña de Navidad</a></li><li><a href="a-importar.html" aria-current="page">Importar clientas</a></li></ul></nav>
+<main id="main" class="page">
+
+<h1>Importar clientas desde una planilla</h1>
+<section class="card" aria-labelledby="i1">
+  <h2 id="i1">1. Prepará el archivo CSV</h2>
+  <p>Columnas: <code>nombre</code>, <code>whatsapp</code> (10 dígitos con código de área) y <code>dio_permiso</code> (<code>si</code> o <code>no</code>).</p>
+  <p>Marcá <code>si</code> solo si la clienta aceptó recibir ofertas por WhatsApp. Si dudás, poné <code>no</code>: igual le llegan los recordatorios de sus turnos.</p>
+  <p><a href="assets/plantilla-clientas.csv" download>Descargar planilla de ejemplo (CSV)</a></p>
+</section>
+<form class="card" action="a-importar-resultado.html" aria-labelledby="i2">
+  <h2 id="i2">2. Subí el archivo</h2>
+  <div class="field"><label for="csv">Archivo CSV</label><span class="hint" id="csv-hint">Hasta 5.000 filas.</span><input type="file" id="csv" accept=".csv,text/csv" aria-describedby="csv-hint"></div>
+  <button class="btn" type="submit">Revisar archivo</button>
+</form>
+
+</main>
+</div>
+<aside class="proto" aria-label="Navegación del prototipo">
+  <div class="proto__inner">
+    <h2>Prototipo (no es parte del producto)</h2>
+    <ul><li><a href="a-panel.html">Panel</a></li><li><a href="a-panel-vacio.html">Estado: panel sin datos</a></li><li><a href="a-servicios.html">Servicios</a></li><li><a href="a-profesionales.html">Profesionales y horarios</a></li><li><a href="a-ajustes.html">Reservas y avisos</a></li><li><a href="a-pack.html">Pack</a></li><li><a href="a-marca.html">Marca</a></li><li><a href="a-campana.html">Campaña</a></li><li><a href="a-importar.html">Importar CSV</a></li><li><a href="index.html">Índice del prototipo</a></li></ul>
+  </div>
+</aside>
+<script src="app.js"></script>
+</body>
+</html>

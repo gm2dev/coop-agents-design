@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Elegí día y horario (con pack) — Spa Lúa · Prototipo spa-reservas-mvp</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="tenant-spa-lua.css">
+</head>
+<body class="tenant">
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="app-header">
+  <div class="app-header__inner">
+    <a class="brand" href="c-inicio-con-pack.html"><img class="brand__logo" src="assets/logo-spa-lua.svg" alt="" width="36" height="36"><span>Spa Lúa</span></a>
+    <nav class="app-nav" aria-label="Principal"><ul><li><a href="c-inicio-con-pack.html">Inicio</a></li><li><a href="c-reservar-servicios-pack.html" aria-current="page">Reservar</a></li><li><a href="c-mis-turnos.html">Mis turnos</a></li><li><a href="c-pack-activo.html">Mi pack</a></li></ul></nav>
+  </div>
+</header>
+<main id="main" class="page">
+
+
+<a class="back" href="c-reservar-profesional.html">← Cambiar profesional</a>
+<p class="steps">Paso 3 de 4</p>
+<h1>¿Cuándo?</h1>
+<p class="muted">Retiro + Esmaltado semipermanente (incluido en tu pack) · 90 min · Con Carla</p>
+<p class="small muted">Te mostramos los horarios de Carla donde entran los 90 min seguidos.</p>
+<form action="c-reservar-confirmar-pack.html">
+  <fieldset>
+    <legend>Día</legend>
+    <ul class="days"><li class="choice"><input type="radio" name="dia" id="d1" ><label for="d1"><span class="choice__body"><span class="choice__title">Mié</span><span class="choice__meta">16/12</span></span></label></li><li class="choice"><input type="radio" name="dia" id="d2" ><label for="d2"><span class="choice__body"><span class="choice__title">Jue</span><span class="choice__meta">17/12</span></span></label></li><li class="choice"><input type="radio" name="dia" id="d3" disabled ><label for="d3"><span class="choice__body"><span class="choice__title">Vie</span><span class="choice__meta">18/12 · completo</span></span></label></li><li class="choice"><input type="radio" name="dia" id="d4" checked ><label for="d4"><span class="choice__body"><span class="choice__title">Sáb</span><span class="choice__meta">19/12</span></span></label></li><li class="choice"><input type="radio" name="dia" id="d5" ><label for="d5"><span class="choice__body"><span class="choice__title">Mar</span><span class="choice__meta">22/12</span></span></label></li></ul>
+  </fieldset>
+  <fieldset>
+    <legend>Horario del sábado 19/12 con Carla</legend>
+    <p class="hint" id="hora-hint">Es la hora de inicio. Terminás 90 min después.</p>
+    <ul class="slots"><li class="choice"><input type="radio" name="hora" id="h1030" checked aria-describedby="hora-hint"><label for="h1030"><span class="choice__body"><span class="choice__title">10:30</span></span></label></li><li class="choice"><input type="radio" name="hora" id="h1100" aria-describedby="hora-hint"><label for="h1100"><span class="choice__body"><span class="choice__title">11:00</span></span></label></li><li class="choice"><input type="radio" name="hora" id="h1230" aria-describedby="hora-hint"><label for="h1230"><span class="choice__body"><span class="choice__title">12:30</span></span></label></li><li class="choice"><input type="radio" name="hora" id="h1400" aria-describedby="hora-hint"><label for="h1400"><span class="choice__body"><span class="choice__title">14:00</span></span></label></li><li class="choice"><input type="radio" name="hora" id="h1530" aria-describedby="hora-hint"><label for="h1530"><span class="choice__body"><span class="choice__title">15:30</span></span></label></li><li class="choice"><input type="radio" name="hora" id="h1700" aria-describedby="hora-hint"><label for="h1700"><span class="choice__body"><span class="choice__title">17:00</span></span></label></li><li class="choice"><input type="radio" name="hora" id="h1830" aria-describedby="hora-hint"><label for="h1830"><span class="choice__body"><span class="choice__title">18:30</span></span></label></li></ul>
+  </fieldset>
+  <p><a href="c-reservar-horario-pack.html">Ver la semana siguiente →</a></p>
+  <button type="submit" class="btn btn--block">Continuar</button>
+</form>
+
+
+</main>
+<aside class="proto" aria-label="Navegación del prototipo">
+  <div class="proto__inner">
+    <h2>Prototipo (no es parte del producto)</h2>
+    <ul><li><a href="c-inicio-con-pack.html">Inicio con pack activo</a></li><li><a href="c-reservar-servicios-pack.html">Reservar con pack (4 pasos)</a></li><li><a href="c-reservar-servicios.html">Reservar sin pack (3 pasos)</a></li><li><a href="c-pack-activo.html">Mi pack</a></li><li><a href="c-mis-turnos.html">Mis turnos</a></li><li><a href="c-whatsapp.html">Mensajes de WhatsApp (mock)</a></li><li><a href="index.html">Índice del prototipo</a></li></ul>
+  </div>
+</aside>
+<script src="app.js"></script>
+</body>
+</html>

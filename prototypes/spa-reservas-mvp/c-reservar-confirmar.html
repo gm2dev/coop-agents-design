@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Confirmá tu turno — Spa Lúa · Prototipo spa-reservas-mvp</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="tenant-spa-lua.css">
+</head>
+<body class="tenant">
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="app-header">
+  <div class="app-header__inner">
+    <a class="brand" href="c-inicio.html"><img class="brand__logo" src="assets/logo-spa-lua.svg" alt="" width="36" height="36"><span>Spa Lúa</span></a>
+    <nav class="app-nav" aria-label="Principal"><ul><li><a href="c-inicio.html">Inicio</a></li><li><a href="c-reservar-servicios.html" aria-current="page">Reservar</a></li><li><a href="c-mis-turnos.html">Mis turnos</a></li></ul></nav>
+  </div>
+</header>
+<main id="main" class="page">
+
+<a class="back" href="c-reservar-horario.html">← Cambiar horario</a>
+<p class="steps">Paso 3 de 3</p>
+<h1>Revisá y confirmá</h1>
+
+<section class="card card--outlined" aria-labelledby="res">
+  <h2 id="res">Tu turno</h2>
+  <dl class="dl">
+    <dt>Día</dt><dd>Sábado 28/11</dd>
+    <dt>Horario</dt><dd>10:30 a 12:00</dd>
+    <dt>Servicios</dt><dd>Retiro de semipermanente + Esmaltado semipermanente</dd>
+    <dt>Con</dt><dd>Carla <span class="small muted">(la primera profesional disponible en ese horario)</span></dd>
+    <dt>Total</dt><dd>$ 24.000 · pagás en el local</dd>
+  </dl>
+  <p class="small"><a href="c-reservar-servicios.html">Cambiar algo</a></p>
+</section>
+<section class="card" aria-labelledby="pol">
+  <h2 id="pol">Política de cancelación del spa</h2>
+  <p>Podés cancelar desde la app hasta <strong>12 horas antes</strong> del turno. Si es más tarde, avisanos por WhatsApp para liberar el horario.</p>
+</section>
+<form action="c-reservado.html">
+  <div class="choices u-mb-500">
+    <div class="choice">
+      <input type="checkbox" id="optin" name="optin">
+      <label for="optin"><span class="choice__body"><span class="choice__title">Quiero recibir ofertas de Spa Lúa por WhatsApp</span><span class="choice__meta">Opcional. Por ejemplo, la promo de Navidad. Te podés dar de baja cuando quieras respondiendo BAJA.</span></span></label>
+    </div>
+  </div>
+  <p class="small muted">Los recordatorios del turno te llegan igual, aunque no aceptes ofertas.</p>
+  <button type="submit" class="btn btn--block">Confirmar turno</button>
+</form>
+
+</main>
+<aside class="proto" aria-label="Navegación del prototipo">
+  <div class="proto__inner">
+    <h2>Prototipo (no es parte del producto)</h2>
+    <ul><li><a href="c-ingresar.html">Ingresar</a></li><li><a href="c-inicio.html">Inicio</a></li><li><a href="c-reservar-servicios.html">Reservar</a></li><li><a href="c-mis-turnos.html">Mis turnos</a></li><li><a href="c-whatsapp.html">Mensajes de WhatsApp (mock)</a></li><li><a href="c-pack.html">Pack prepago (Fase 2)</a></li><li><a href="c-reservar-sin-horarios.html">Estado: sin horarios</a></li><li><a href="c-reservar-error.html">Estado: horario ocupado</a></li><li><a href="index.html">Índice del prototipo</a></li></ul>
+  </div>
+</aside>
+<script src="app.js"></script>
+</body>
+</html>

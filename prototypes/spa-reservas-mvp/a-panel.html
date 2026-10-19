@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel — Spa Lúa · Prototipo spa-reservas-mvp</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="tenant-spa-lua.css">
+</head>
+<body class="wide">
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="app-header">
+  <div class="app-header__inner">
+    <a class="brand brand--chip" href="a-panel.html"><img class="brand__logo" src="assets/logo-spa-lua.svg" alt="" width="36" height="36"><span>Spa Lúa<span class="muted small"> · Administración</span></span></a>
+    <p class="small muted u-m-0">Valeria · administradora</p>
+  </div>
+</header>
+<div class="admin-layout"><nav class="side-nav" aria-label="Administración"><ul><li><a href="a-panel.html" aria-current="page">Panel</a></li><li><a href="a-servicios.html">Servicios</a></li><li><a href="a-profesionales.html">Profesionales y horarios</a></li><li><a href="a-ajustes.html">Reservas y avisos</a></li><li><a href="a-pack.html">Pack</a></li><li><a href="a-marca.html">Marca</a></li><li><a href="a-campana.html">Campaña de Navidad</a></li><li><a href="a-importar.html">Importar clientas</a></li></ul></nav>
+<main id="main" class="page">
+
+<h1>Panel</h1>
+<form class="row u-mb-400" action="a-panel.html">
+  <label class="label u-m-0" for="periodo">Período</label>
+  <select id="periodo" name="periodo" class="u-w-auto"><option>Últimos 30 días</option><option>Este mes</option><option>Últimos 90 días</option></select>
+  <button class="btn btn--secondary" type="submit">Ver</button>
+</form>
+<div class="grid-3">
+  <section class="card"><h2 class="metric-label">Turnos</h2><p class="metric">142</p><p class="small muted">112 asistió · 9 no vino · 6 sin marcar · 15 cancelados</p></section>
+  <section class="card"><h2 class="metric-label">Asistencia</h2><p class="metric">92 %</p><p class="small muted">«Asistió» sobre turnos marcados (112 de 121). Los 6 sin marcar no cuentan.</p></section>
+  <section class="card"><h2 class="metric-label">Recompra a 60 días</h2><p class="metric">41 %</p><p class="small muted">De las clientas que vinieron hace 60 a 120 días, 41 % volvió a reservar</p></section>
+</div>
+<section class="card" aria-labelledby="sm">
+  <h2 id="sm">6 turnos sin marcar</h2>
+  <p class="small muted">Marcalos para que el % de asistencia sea más preciso. Lo puede hacer la profesional desde su agenda, recepción o vos.</p>
+  <ul class="list">
+    <li><strong>Vie 27/11 · 10:00</strong> · Nora C. · Pedicura spa · con Rocío<div class="attendance" role="group" aria-label="Asistencia de Nora C., viernes 27/11 10:00"><p class="attendance__status small" aria-live="polite">Asistencia: <span class="badge badge--neutral" data-att-badge>Sin marcar</span><span data-att-by></span></p><button type="button" class="btn btn--secondary btn--sm" aria-pressed="false" data-att="si">Asistió</button><button type="button" class="btn btn--secondary btn--sm" aria-pressed="false" data-att="no">No vino</button></div></li>
+    <li><strong>Jue 26/11 · 18:30</strong> · Vera S. · Esmaltado semipermanente · con Jimena<div class="attendance" role="group" aria-label="Asistencia de Vera S., jueves 26/11 18:30"><p class="attendance__status small" aria-live="polite">Asistencia: <span class="badge badge--neutral" data-att-badge>Sin marcar</span><span data-att-by></span></p><button type="button" class="btn btn--secondary btn--sm" aria-pressed="false" data-att="si">Asistió</button><button type="button" class="btn btn--secondary btn--sm" aria-pressed="false" data-att="no">No vino</button></div></li>
+    <li><strong>Jue 26/11 · 11:00</strong> · Ana P. · Manicura tradicional · con Carla<div class="attendance" role="group" aria-label="Asistencia de Ana P., jueves 26/11 11:00"><p class="attendance__status small" aria-live="polite">Asistencia: <span class="badge badge--neutral" data-att-badge>Sin marcar</span><span data-att-by></span></p><button type="button" class="btn btn--secondary btn--sm" aria-pressed="false" data-att="si">Asistió</button><button type="button" class="btn btn--secondary btn--sm" aria-pressed="false" data-att="no">No vino</button></div></li>
+  </ul>
+  <p class="small">Y 3 más de la semana pasada: <a href="r-agenda.html">ver en la agenda</a>.</p>
+</section>
+<section class="card" aria-labelledby="hoy">
+  <div class="row row--between"><h2 id="hoy" class="u-m-0">Próximos pasos</h2></div>
+  <ul class="list">
+    <li><a href="a-campana.html">Campaña de Navidad</a> · borrador, sin enviar <span class="badge badge--warning">Pendiente</span></li>
+    <li><a href="a-importar.html">Importar clientas</a> · 0 importadas</li>
+    <li><a href="a-marca.html">Marca</a> · logo y color cargados <span class="badge badge--success">Listo</span></li>
+  </ul>
+</section>
+<div class="table-wrap">
+<table class="table-stack">
+  <caption>Por profesional · últimos 30 días</caption>
+  <thead><tr><th scope="col">Profesional</th><th scope="col">Turnos</th><th scope="col">Asistencia</th><th scope="col">Sin marcar</th></tr></thead>
+  <tbody>
+    <tr><td data-label="Profesional">Carla</td><td data-label="Turnos">58</td><td data-label="Asistencia">95 %</td><td data-label="Sin marcar">1</td></tr>
+    <tr><td data-label="Profesional">Jimena</td><td data-label="Turnos">49</td><td data-label="Asistencia">91 %</td><td data-label="Sin marcar">2</td></tr>
+    <tr><td data-label="Profesional">Rocío</td><td data-label="Turnos">35</td><td data-label="Asistencia">89 %</td><td data-label="Sin marcar">3</td></tr>
+  </tbody>
+</table>
+</div>
+
+</main>
+</div>
+<aside class="proto" aria-label="Navegación del prototipo">
+  <div class="proto__inner">
+    <h2>Prototipo (no es parte del producto)</h2>
+    <ul><li><a href="a-panel.html">Panel</a></li><li><a href="a-panel-vacio.html">Estado: panel sin datos</a></li><li><a href="a-servicios.html">Servicios</a></li><li><a href="a-profesionales.html">Profesionales y horarios</a></li><li><a href="a-ajustes.html">Reservas y avisos</a></li><li><a href="a-pack.html">Pack</a></li><li><a href="a-marca.html">Marca</a></li><li><a href="a-campana.html">Campaña</a></li><li><a href="a-importar.html">Importar CSV</a></li><li><a href="index.html">Índice del prototipo</a></li></ul>
+  </div>
+</aside>
+<script src="app.js"></script>
+</body>
+</html>

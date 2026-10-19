@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Revisá la importación — Spa Lúa · Prototipo spa-reservas-mvp</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="tenant-spa-lua.css">
+</head>
+<body class="wide">
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="app-header">
+  <div class="app-header__inner">
+    <a class="brand brand--chip" href="a-panel.html"><img class="brand__logo" src="assets/logo-spa-lua.svg" alt="" width="36" height="36"><span>Spa Lúa<span class="muted small"> · Administración</span></span></a>
+    <p class="small muted u-m-0">Valeria · administradora</p>
+  </div>
+</header>
+<div class="admin-layout"><nav class="side-nav" aria-label="Administración"><ul><li><a href="a-panel.html">Panel</a></li><li><a href="a-servicios.html">Servicios</a></li><li><a href="a-profesionales.html">Profesionales y horarios</a></li><li><a href="a-ajustes.html">Reservas y avisos</a></li><li><a href="a-pack.html">Pack</a></li><li><a href="a-marca.html">Marca</a></li><li><a href="a-campana.html">Campaña de Navidad</a></li><li><a href="a-importar.html" aria-current="page">Importar clientas</a></li></ul></nav>
+<main id="main" class="page">
+
+<a class="back" href="a-importar.html">← Elegir otro archivo</a>
+<h1>Revisá antes de importar</h1>
+<p class="muted">clientas-spa-lua.csv · 212 filas</p>
+<div class="grid-3">
+  <section class="card"><h2 class="metric-label">Listas para importar</h2><p class="metric">205</p></section>
+  <section class="card"><h2 class="metric-label">Con permiso para ofertas</h2><p class="metric">74</p></section>
+  <section class="card"><h2 class="metric-label">Con errores</h2><p class="metric">7</p><p class="small muted">No se importan</p></section>
+</div>
+<div class="alert alert--warning">
+  <p class="alert__title"><span aria-hidden="true">⚠ </span>7 filas tienen errores y no se van a importar</p>
+  <p>Corregilas en la planilla y subila de nuevo, o importá las 205 válidas ahora.</p>
+</div>
+<div class="table-wrap">
+<table class="table-stack">
+  <caption>Filas con errores</caption>
+  <thead><tr><th scope="col">Fila</th><th scope="col">Nombre</th><th scope="col">Problema</th></tr></thead>
+  <tbody>
+    <tr><td data-label="Fila">14</td><td data-label="Nombre">Clienta Ejemplo 14</td><td data-label="Problema">WhatsApp con 8 dígitos</td></tr>
+    <tr><td data-label="Fila">57</td><td data-label="Nombre">Clienta Ejemplo 57</td><td data-label="Problema">«dio_permiso» vacío: poné si o no</td></tr>
+    <tr><td data-label="Fila">90</td><td data-label="Nombre">Clienta Ejemplo 90</td><td data-label="Problema">WhatsApp repetido (fila 12)</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="small muted">Se muestran 3 de 7. <a href="a-importar-resultado.html">Descargar las 7 filas con error</a></p>
+<form action="a-importar-ok.html"><div class="actions actions--inline"><button class="btn" type="submit">Importar 205 clientas</button><a class="btn btn--secondary" href="a-importar.html">Cancelar</a></div></form>
+
+</main>
+</div>
+<aside class="proto" aria-label="Navegación del prototipo">
+  <div class="proto__inner">
+    <h2>Prototipo (no es parte del producto)</h2>
+    <ul><li><a href="a-panel.html">Panel</a></li><li><a href="a-panel-vacio.html">Estado: panel sin datos</a></li><li><a href="a-servicios.html">Servicios</a></li><li><a href="a-profesionales.html">Profesionales y horarios</a></li><li><a href="a-ajustes.html">Reservas y avisos</a></li><li><a href="a-pack.html">Pack</a></li><li><a href="a-marca.html">Marca</a></li><li><a href="a-campana.html">Campaña</a></li><li><a href="a-importar.html">Importar CSV</a></li><li><a href="index.html">Índice del prototipo</a></li></ul>
+  </div>
+</aside>
+<script src="app.js"></script>
+</body>
+</html>

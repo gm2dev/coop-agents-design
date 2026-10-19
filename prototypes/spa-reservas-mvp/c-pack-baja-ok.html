@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Baja confirmada — Spa Lúa · Prototipo spa-reservas-mvp</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="tenant-spa-lua.css">
+</head>
+<body class="tenant">
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="app-header">
+  <div class="app-header__inner">
+    <a class="brand" href="c-inicio.html"><img class="brand__logo" src="assets/logo-spa-lua.svg" alt="" width="36" height="36"><span>Spa Lúa</span></a>
+    <nav class="app-nav" aria-label="Principal"><ul><li><a href="c-inicio.html">Inicio</a></li><li><a href="c-reservar-servicios.html">Reservar</a></li><li><a href="c-mis-turnos.html">Mis turnos</a></li></ul></nav>
+  </div>
+</header>
+<main id="main" class="page">
+
+<div class="alert alert--success" role="status">
+  <p class="alert__title"><span aria-hidden="true">✓ </span>Te diste de baja del pack</p>
+  <p>Número de trámite: BAJA-20270103-0042. Te lo mandamos también por WhatsApp.</p>
+</div>
+<h1>Listo, tu pack quedó dado de baja</h1>
+<section class="card card--outlined" aria-labelledby="comp">
+  <h2 id="comp">Comprobante de baja</h2>
+  <dl class="dl">
+    <dt>Trámite</dt><dd>BAJA-20270103-0042</dd>
+    <dt>Fecha</dt><dd>3/1/2027 · 11:20</dd>
+    <dt>Pack</dt><dd>3 meses · comprado el 15/12/2026 · $ 30.000</dd>
+    <dt>Usaste</dt><dd>1 de 3 servicios</dd>
+    <dt>Devolución</dt><dd>Te devolvemos $ 20.000 por 2 servicios sin usar</dd>
+    <dt>Cómo</dt><dd>Al medio de pago que usaste en Mercado Pago</dd>
+  </dl>
+</section>
+<p>Podés seguir reservando turnos como siempre.</p>
+<div class="actions"><a class="btn" href="c-inicio.html">Ir al inicio</a></div>
+<div class="alert alert--warning"><p class="alert__title"><span aria-hidden="true">⚠ </span>Propuesta provisoria</p><p>Condiciones del pack propuestas por el CPO. Las decide Fidel y <strong>no tienen revisión legal</strong>.</p></div>
+
+</main>
+<aside class="proto" aria-label="Navegación del prototipo">
+  <div class="proto__inner">
+    <h2>Prototipo (no es parte del producto)</h2>
+    <ul><li><a href="c-ingresar.html">Ingresar</a></li><li><a href="c-inicio.html">Inicio</a></li><li><a href="c-reservar-servicios.html">Reservar</a></li><li><a href="c-mis-turnos.html">Mis turnos</a></li><li><a href="c-whatsapp.html">Mensajes de WhatsApp (mock)</a></li><li><a href="c-pack.html">Pack prepago (Fase 2)</a></li><li><a href="c-pack-activo.html">Pack activo (con botón de baja)</a></li><li><a href="c-pack-pago-pendiente.html">Estado: pago pendiente</a></li><li><a href="c-pack-pago-error.html">Estado: pago rechazado</a></li><li><a href="c-pack-baja.html">Darse de baja</a></li><li><a href="index.html">Índice del prototipo</a></li></ul>
+  </div>
+</aside>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reservas y avisos — Spa Lúa · Prototipo spa-reservas-mvp</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="tenant-spa-lua.css">
+</head>
+<body class="wide">
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="app-header">
+  <div class="app-header__inner">
+    <a class="brand brand--chip" href="a-panel.html"><img class="brand__logo" src="assets/logo-spa-lua.svg" alt="" width="36" height="36"><span>Spa Lúa<span class="muted small"> · Administración</span></span></a>
+    <p class="small muted u-m-0">Valeria · administradora</p>
+  </div>
+</header>
+<div class="admin-layout"><nav class="side-nav" aria-label="Administración"><ul><li><a href="a-panel.html">Panel</a></li><li><a href="a-servicios.html">Servicios</a></li><li><a href="a-profesionales.html">Profesionales y horarios</a></li><li><a href="a-ajustes.html" aria-current="page">Reservas y avisos</a></li><li><a href="a-pack.html">Pack</a></li><li><a href="a-marca.html">Marca</a></li><li><a href="a-campana.html">Campaña de Navidad</a></li><li><a href="a-importar.html">Importar clientas</a></li></ul></nav>
+<main id="main" class="page">
+
+<h1>Reservas y avisos</h1>
+<form action="a-ajustes.html">
+  <section class="card" aria-labelledby="r1">
+    <h2 id="r1">Reservas</h2>
+    <p class="hint">Las clientas reservan con <strong>la primera profesional disponible</strong>. Elegir profesional es un beneficio del pack: lo activás en <a href="a-pack.html">Pack</a>.</p>
+    <div class="field"><label for="pol">Política de cancelación</label>
+      <span class="hint" id="pol-hint">Se muestra al reservar y al cancelar.</span>
+      <textarea id="pol" aria-describedby="pol-hint">Podés cancelar desde la app hasta 12 horas antes del turno. Si es más tarde, avisanos por WhatsApp para liberar el horario.</textarea></div>
+    <div class="field"><label for="plazo">Cancelación desde la app hasta (horas antes)</label><span class="hint" id="plazo-hint">Por defecto, 12 horas.</span><input type="number" id="plazo" value="12" min="0" class="input--narrow" aria-describedby="plazo-hint"></div>
+  </section>
+  <section class="card" aria-labelledby="r2">
+    <h2 id="r2">Recordatorios por WhatsApp</h2>
+    <div class="inline-fields">
+      <div class="field"><label for="rec1">Primer recordatorio</label><select id="rec1" aria-describedby="rec1-hint"><option selected>24 h antes</option><option>48 h antes</option><option>No enviar</option></select></div>
+      <div class="field"><label for="rec2">Segundo recordatorio</label><select id="rec2"><option selected>2 h antes</option><option>1 h antes</option><option>No enviar</option></select></div>
+    </div>
+    <p class="hint" id="rec1-hint">Por defecto, 24 h y 2 h antes. Conviene que el primer recordatorio salga antes del plazo para cancelar desde la app (hoy 12 h), así la clienta todavía puede cancelar si no puede venir.</p>
+  </section>
+  <button class="btn" type="submit">Guardar cambios</button>
+</form>
+
+</main>
+</div>
+<aside class="proto" aria-label="Navegación del prototipo">
+  <div class="proto__inner">
+    <h2>Prototipo (no es parte del producto)</h2>
+    <ul><li><a href="a-panel.html">Panel</a></li><li><a href="a-panel-vacio.html">Estado: panel sin datos</a></li><li><a href="a-servicios.html">Servicios</a></li><li><a href="a-profesionales.html">Profesionales y horarios</a></li><li><a href="a-ajustes.html">Reservas y avisos</a></li><li><a href="a-marca.html">Marca</a></li><li><a href="a-campana.html">Campaña</a></li><li><a href="a-importar.html">Importar CSV</a></li><li><a href="index.html">Índice del prototipo</a></li></ul>
+  </div>
+</aside>
+<script src="app.js"></script>
+</body>
+</html>
