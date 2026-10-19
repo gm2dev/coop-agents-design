@@ -63,7 +63,7 @@
       var min = 0, price = 0, n = 0;
       $$('input[data-min]:checked').forEach(function (i) { n++; min += Number(i.dataset.min); price += Number(i.dataset.price); });
       total.textContent = n === 0 ? 'Todavía no elegiste servicios.' :
-        n + (n === 1 ? ' servicio' : ' servicios seguidos') + ' · ' + min + ' min · $ ' + price.toLocaleString('es-AR');
+        n + (n === 1 ? ' servicio' : ' servicios seguidos') + ' · ' + min + ' min · $ ' + price.toLocaleString('es-AR') + (total.dataset.totalSuffix || '');
     };
     $$('input[data-min]').forEach(function (i) { i.addEventListener('change', update); });
     update();
@@ -90,6 +90,11 @@
       var existente = $('#datos-existente');
       if (nueva) nueva.hidden = !esNueva;
       if (existente) existente.hidden = esNueva;
+      // DP-03 en recepción: una clienta nueva no tiene pack, así que no elige profesional.
+      if ($('[data-no-pack]')) {
+        $$('[data-pack-only]').forEach(function (el) { el.hidden = esNueva; });
+        $$('[data-no-pack]').forEach(function (el) { el.hidden = !esNueva && $$('[data-pack-only]').length > 0; });
+      }
       // El resumen de errores lista solo campos visibles: al alternar, se rehace con los que siguen marcados.
       var summary = $('.error-summary');
       if (summary && !summary.hidden) {
@@ -104,6 +109,28 @@
       }
     });
   });
+
+  // a-pack: avisar si el precio por servicio del pack supera el precio de lista de algún servicio incluido.
+  var packPrices = $$('[data-pack-price]');
+  var packWarn = $('#pk-precio-aviso');
+  if (packPrices.length && packWarn) {
+    var checkPack = function () {
+      var incl = $$('input[data-list-price]:checked');
+      var problems = [];
+      packPrices.forEach(function (inp) {
+        var v = Number(inp.value);
+        var caros = incl.filter(function (c) { return v > Number(c.dataset.listPrice); });
+        if (caros.length) problems.push(inp.dataset.packPrice + ': $ ' + v.toLocaleString('es-AR') + ' es más que el precio de lista de ' +
+          caros.map(function (c) { return c.dataset.name + ' ($ ' + Number(c.dataset.listPrice).toLocaleString('es-AR') + ')'; }).join(', '));
+        inp.setAttribute('aria-invalid', caros.length ? 'true' : 'false');
+      });
+      $('ul', packWarn).innerHTML = '';
+      problems.forEach(function (p) { var li = document.createElement('li'); li.textContent = p; $('ul', packWarn).appendChild(li); });
+      packWarn.hidden = problems.length === 0;
+    };
+    packPrices.concat($$('input[data-list-price]')).forEach(function (i) { i.addEventListener('input', checkPack); i.addEventListener('change', checkPack); });
+    checkPack();
+  }
 
   // Asistencia: «Asistió» / «No vino» con aria-pressed; el estado se anuncia en texto (aria-live).
   $$('.attendance').forEach(function (g) {
@@ -135,13 +162,15 @@
     };
     var contrast = function (a, b) { var x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
     var trunc = function (r) { return Math.floor(r * 100) / 100; };          // nunca redondear hacia arriba
+    // round() de Python 3 (mitad al par): 76.5 → 76, como tools/tokens.py. Math.round daría 77.
+    var pyRound = function (x) { var r = Math.round(x); return Math.abs(x % 1) === 0.5 ? 2 * Math.round(x / 2) : r; };
     var mix = function (a, b, t) {                                           // interpolación lineal en sRGB
       var A = rgb(a), B = rgb(b);
-      return '#' + [0, 1, 2].map(function (i) { return ('0' + Math.round((A[i] * (1 - t) + B[i] * t) * 255).toString(16)).slice(-2); }).join('');
+      return '#' + [0, 1, 2].map(function (i) { return ('0' + pyRound((A[i] * (1 - t) + B[i] * t) * 255).toString(16)).slice(-2); }).join('');
     };
     var darkenUntil = function (c, ok) {                                     // pasos de 2 % hacia negro
       var k = 0, out = c;
-      while (!ok(out) && k < 1) { k = Math.round((k + 0.02) * 100) / 100; out = mix(c, BLACK, k); }
+      while (!ok(out) && k < 1) { k = pyRound((k + 0.02) * 100) / 100; out = mix(c, BLACK, k); }
       return out;
     };
     var derive = function (primary) {

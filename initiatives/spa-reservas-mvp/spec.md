@@ -53,10 +53,12 @@ El foco (`color.focus.ring` + offset) no cambia con la marca.
 | `c-ingresar` | Prefijo +54 9 fijo + número; «Enviarme el código» | Error de formato (10 dígitos) |
 | `c-codigo` | Código 6 dígitos (`autocomplete=one-time-code`); «Ingresar»; «Reenviar código» deshabilitado con cuenta regresiva de 45 s (texto asociado), se habilita al llegar a 0 | `c-codigo-error`: intentos restantes · `c-codigo-bloqueado`: sin intentos, espera 15 min, volver a ingresar el número |
 | `c-inicio` | Aviso «te toca volver» (info), próximo turno, datos del spa, pack (Fase 2) | Sin turno (CTA reservar) / `c-inicio-con-turno` / `c-inicio-con-pack`: «Mi pack» en la navegación + tarjeta «Mi pack» con «Ver mi pack» y «Darme de baja del pack» |
-| `c-reservar-servicios` | Paso 1/3 (1/4 con pack). Checkboxes con duración y precio; barra de resumen con total en vivo (`aria-live=polite`) y «Continuar», fija abajo solo con alto ≥ 30rem | Ninguno elegido → error |
-| `c-reservar-profesional` | Solo con pack y beneficio activo (DP-03): badge «Beneficio de tu pack»; «La primera profesional disponible» + quienes hacen todos los servicios | Sin pack: no aparece |
-| `c-reservar-horario` | Paso 2/3. «Con la primera profesional disponible»; días (con «completo» deshabilitado) y horarios donde entra el bloque entero | `c-reservar-sin-horarios`: próximo libre + servicios más cortos |
-| `c-reservar-confirmar` | Paso 3/3. Resumen (con quién quedó asignada), política (12 h), opt-in de ofertas (destildado); «Confirmar turno» | `c-reservar-error`: horario tomado mientras confirmaba (no se reserva antes) |
+| `c-reservar-servicios` | Paso 1/3 (sin pack). Checkboxes con duración y precio; barra de resumen con total en vivo (`aria-live=polite`) y «Continuar», fija abajo solo con alto ≥ 30rem | Ninguno elegido → error |
+| `c-reservar-servicios-pack` | Paso 1/4 (con pack, entrada desde `c-inicio-con-pack`, `c-pack-activo` y «Reservar» de la navegación con pack). Servicio del mes (radio, «Incluido en tu pack», con precio de lista como referencia) + servicios extra opcionales a precio de lista; barra de resumen «$ X a pagar en el local» | Falta el servicio del mes → error; link «Reservar sin usar el pack» |
+| `c-reservar-profesional` | Paso 2/4. Solo con pack y beneficio activo (DP-03): badge «Beneficio de tu pack»; «La primera profesional disponible» + quienes hacen todos los servicios | Sin pack: no aparece |
+| `c-reservar-horario-pack`, `c-reservar-confirmar-pack`, `c-reservado-pack` | Pasos 3/4 y 4/4 y éxito con la profesional elegida («Con Carla»); el servicio del mes con badge «Incluido en tu pack»; «A pagar: $ 6.000 en el local» solo por los extras; reservado muestra «Usaste el servicio de diciembre (1 de 3)» | Cancelar dentro del plazo devuelve el servicio al pack |
+| `c-reservar-horario` | Paso 2/3 (sin pack). «Con la primera profesional disponible»; días (con «completo» deshabilitado) y horarios donde entra el bloque entero | `c-reservar-sin-horarios`: próximo libre + servicios más cortos |
+| `c-reservar-confirmar` | Paso 3/3 (sin pack). Resumen (con quién quedó asignada), política (12 h), opt-in de ofertas (destildado); «Confirmar turno» | `c-reservar-error`: horario tomado mientras confirmaba (no se reserva antes) |
 | `c-reservado` | Éxito + resumen + qué avisos va a recibir + cómo cancelar | — |
 | `c-mis-turnos` | Próximos con plazo de cancelación y «Cancelar turno»; anteriores con estado (badge con texto) | `c-mis-turnos-vacio` |
 | `c-cancelar` | Turno + política + «Sí, cancelar» / «No, mantener» | `c-cancelar-fuera-plazo` |
@@ -64,7 +66,7 @@ El foco (`color.focus.ring` + offset) no cambia con la marca.
 | `c-te-toca-volver` | Repetir lo último (primera profesional disponible); 3 horarios; más días / otros servicios | — |
 | `c-whatsapp` | Mock: recordatorios 24 h (con plazo para cancelar) y 2 h, «te toca volver», primera oferta con baja en un toque, confirmación del pago del pack, comprobante de baja | — |
 | `c-whatsapp-baja-ofertas` | Resultado de la baja en un toque, sin sesión; los recordatorios siguen | — |
-| `c-pack` (Fase 2) | Pack 3 y 12 meses: 1 servicio por mes de la lista del spa a precio de pack + elegís profesional; condiciones (pago único, no se renueva, devolución); aviso «propuesta provisoria, sin revisión legal» | `c-pack-pago-pendiente`, `c-pack-pago-error` (ambos sin sesión) |
+| `c-pack` (Fase 2) | Pack 3 y 12 meses: 1 servicio por mes de la lista del spa a precio de pack (menor que el de lista de todos los servicios incluidos) + elegís profesional; condiciones (pago único, no se renueva, devolución); aviso «propuesta provisoria, sin revisión legal» | `c-pack-pago-pendiente`, `c-pack-pago-error` (ambos sin sesión) |
 | `c-pack-activo` | Vigencia, qué incluye, usados, pago y precio por servicio; «Baja del pack» con reglas de devolución | — |
 | `c-pack-baja`, `c-pack-baja-ok` | «Te devolvemos $X por N servicios sin usar»; comprobante con trámite, uso y devolución | Dentro de 10 días sin uso: devolución total |
 
@@ -81,8 +83,8 @@ El foco (`color.focus.ring` + offset) no cambia con la marca.
 
 | Pantalla | Contenido | Estados |
 |---|---|---|
-| `r-agenda` | Día por profesional en 3 columnas (1 en mobile); marcar o corregir asistencia de los turnos que ya empezaron; «Cargar turno» | — |
-| `r-cargar-turno` | Dos bloques: 1. Clienta (existente: WhatsApp → «Encontramos a…» con permiso; nueva: nombre + WhatsApp; en ambos, checkbox «Me dijo en persona que acepta recibir ofertas», destildado, DP-05) · 2. Turno (servicios, profesional, día, horario) | `r-cargar-error`: un único resumen de errores que se rehace al alternar «Ya es clienta» (no lista campos ocultos), sin horarios |
+| `r-agenda` | Día por profesional en 3 columnas (1 en mobile); el contador de turnos coincide con los listados (no cuenta bloqueos ni libres); marcar o corregir asistencia de **todos** los turnos que ya empezaron; «Cargar turno» | — |
+| `r-cargar-turno` | Dos bloques: 1. Clienta (existente: WhatsApp → «Encontramos a…» con permiso; nueva: nombre + WhatsApp; en ambos, checkbox «Me dijo en persona que acepta recibir ofertas», destildado, DP-05) · 2. Turno (servicios, profesional, día, horario). **Profesional (DP-03 en recepción, decisión provisoria del CDO):** si la clienta encontrada tiene pack activo, el resumen muestra «Tiene pack» y se puede elegir profesional (`r-cargar-turno`); si no tiene pack o es nueva, se muestra «La primera profesional disponible» sin selector (`r-cargar-turno-sin-pack`, y al alternar a «Clienta nueva») | `r-cargar-error`: un único resumen de errores que se rehace al alternar «Ya es clienta» (no lista campos ocultos), sin horarios |
 | `r-turno-cargado` | Éxito + permiso registrado (quién, cuándo, «en persona») + «Cargar otro turno» | — |
 
 ### Administradora (desktop, responsive)
@@ -93,7 +95,7 @@ El foco (`color.focus.ring` + offset) no cambia con la marca.
 | `a-servicios` | Tabla (apilada < 40rem) + alta: nombre, duración, precio, días para «te toca volver» | Errores por campo |
 | `a-profesionales` | Equipo + horario semanal editable por profesional | `a-profesionales-ok` |
 | `a-ajustes` | Política (texto + horas, 12 por defecto), recordatorios 1 (24 h) y 2 (2 h); remite a «Pack» para elegir profesional | — |
-| `a-pack` (Fase 2) | Servicios del pack, precio por servicio (3 y 12 meses), beneficio «Elegir profesional», cobro «Configurado» (credenciales cargadas a mano en el piloto); aviso de propuesta provisoria | — |
+| `a-pack` (Fase 2) | Servicios del pack, precio por servicio (3 y 12 meses), beneficio «Elegir profesional», cobro «Configurado» (credenciales cargadas a mano en el piloto); aviso de propuesta provisoria | Precio del pack mayor que el de lista de algún servicio incluido: aviso «El precio del pack tiene que ser menor que el de lista» (`role=status`) con el servicio y el monto; no bloquea el guardado |
 | `a-marca` | Nombre, logo, un color; derivación en vivo (PR #6) con contrastes contra `surface.default`, `canvas` y `brand.subtle`; vista previa con link sobre fondo de página y sobre blanco, seleccionado y botón | Color ajustado: aviso con el tono usado y su contraste (se puede guardar) |
 | `a-campana` | 1. Segmento (único) con conteo con/sin permiso · 2. Plantilla con campos y vista previa · 3. Fecha | Oferta vacía; `a-campana-enviada` → «Cancelar envío» con confirmación → `a-campana-cancelada` |
 | `a-importar` | Formato de columnas, planilla de ejemplo, subir archivo | — |

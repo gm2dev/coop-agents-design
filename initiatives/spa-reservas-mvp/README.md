@@ -1,6 +1,6 @@
 # Reservas con recompra para spas · MVP (Roadmap B)
 
-Estado: borrador v0.3 (look «Sereno», decisiones de producto y revisión ronda 2) · Pedido por: Ezequiel Avila · Diseño: Designer · Revisión: Designer Reviewer / CDO
+Estado: borrador v0.3.1 (look «Sereno», decisiones de producto y revisión ronda 3) · Pedido por: Ezequiel Avila · Diseño: Designer · Revisión: Designer Reviewer / CDO
 
 ## Objetivo
 
@@ -23,7 +23,7 @@ producto y tecnología antes del PRD; no son diseño final ni código de product
 | Flujos (Mermaid) | [flows.md](flows.md) |
 | Spec de UI | [spec.md](spec.md) |
 | Accesibilidad | [accessibility.md](accessibility.md) |
-| Prototipo (entrada, índice por perfil) | [`prototypes/spa-reservas-mvp/index.html`](../../prototypes/spa-reservas-mvp/index.html) |
+| Prototipo (59 páginas HTML; entrada, índice por perfil) | [`prototypes/spa-reservas-mvp/index.html`](../../prototypes/spa-reservas-mvp/index.html) |
 | Tokens del prototipo (generados) | [`prototypes/shared/tokens.css`](../../prototypes/shared/tokens.css) |
 
 ### Look y tokens: design system v1 «Sereno»
@@ -35,8 +35,8 @@ producto y tecnología antes del PRD; no son diseño final ni código de product
 - **`prototypes/shared/tokens.css` es un archivo generado, no se edita a mano.** Se generó con
   `python3 design-system/tools/tokens.py css` a partir de `design-system/tokens.json` de
   `origin/design/ds-sereno` (PR #6), copiado a un directorio temporal: esta rama **no toca
-  `design-system/`**. Conserva los nombres de variables anteriores (los 78 nombres se mantienen; los
-  alias `$deprecated` siguen saliendo como variables).
+  `design-system/`**. Tiene **182 variables** CSS (`--…`); conserva las 59 de v0.2 (los alias `$deprecated` siguen
+  saliendo como variables).
 - **Cuando PR #6 se mergee en `main`, hay que regenerar `prototypes/shared/tokens.css` desde `main`**
   (`python3 design-system/tools/tokens.py css` y copiar `design-system/tokens.css`), para que el
   prototipo no quede con una copia vieja.
@@ -58,14 +58,14 @@ producto y tecnología antes del PRD; no son diseño final ni código de product
 | CU | Perfil | Recorrido | Pantallas |
 |---|---|---|---|
 | CU-01 | Clienta | Ingresar con número de WhatsApp + código | `c-ingresar`, `c-codigo`, `c-codigo-error`, `c-codigo-bloqueado` |
-| CU-02 | Clienta | Reservar uno o varios servicios seguidos (primera profesional disponible; elegir profesional solo con pack; día/horario, opt-in, política) | `c-reservar-*`, `c-reservado` |
+| CU-02 | Clienta | Reservar uno o varios servicios seguidos. Sin pack: 3 pasos con la primera profesional disponible. Con pack: 4 pasos, elige profesional y el servicio del mes va «incluido en tu pack» (extras a precio de lista, pago en el local) | `c-reservar-*`, `c-reservado`, `c-reservar-*-pack`, `c-reservar-profesional`, `c-reservado-pack` |
 | CU-03 | Clienta | Ver y cancelar turnos (sin reprogramar) | `c-mis-turnos*`, `c-cancelar*`, `c-cancelado` |
 | CU-04 | Clienta | Volver a reservar desde «te toca volver» (app y WhatsApp) | `c-inicio`, `c-te-toca-volver`, `c-whatsapp` |
 | CU-05 | Clienta | Recordatorios por WhatsApp 24 h y 2 h, primera oferta con baja en un toque (mock de contenido) | `c-whatsapp`, `c-whatsapp-baja-ofertas` |
 | CU-06 | Clienta (Fase 2) | Comprar pack prepago 3/12 meses (pago aprobado, pendiente o rechazado, sin sesión) y darse de baja con devolución | `c-pack*`, `c-inicio-con-pack` |
 | CU-07 | Profesional | Ver agenda del día (anterior/siguiente) y de la semana; marcar «Asistió»/«No vino» | `p-agenda*` |
 | CU-08 | Profesional | Bloquear horario | `p-bloquear*`, `p-bloqueado` |
-| CU-09 | Recepción | Cargar turno en nombre de la clienta (registra permiso de ofertas dado en persona); marcar o corregir asistencia | `r-agenda`, `r-cargar-*`, `r-turno-cargado` |
+| CU-09 | Recepción | Cargar turno en nombre de la clienta (registra permiso de ofertas dado en persona); marcar o corregir asistencia | `r-agenda`, `r-cargar-*` (con y sin pack), `r-turno-cargado` |
 | CU-10 | Administradora | Ver métricas básicas (turnos, % asistencia sin contar «Sin marcar», recompra) y turnos sin marcar | `a-panel*` |
 | CU-11 | Administradora | Servicios, profesionales y horarios, ajustes de reserva; configuración del pack (Fase 2) | `a-servicios`, `a-profesionales*`, `a-ajustes`, `a-pack` |
 | CU-12 | Administradora | Marca básica (nombre, logo, color) | `a-marca` |
@@ -86,12 +86,13 @@ pendiente de Fidel** = se aplica en el prototipo pero Fidel puede cambiarlo.
 |---|---|---|---|---|
 | DP-01 | Recordatorios **24 h y 2 h** antes, configurables por spa. Se revierte el cambio a 48 h de v0.2. Cierra P-09. | Fidel Cossio | **Confirmado por Fidel** | `c-whatsapp`, `a-ajustes`, `c-reservado` |
 | DP-02 | Plazo para cancelar desde la app: por defecto **12 h antes** del turno, configurable por spa. Con el recordatorio de 24 h, la clienta todavía puede cancelar. | CPO | **Pendiente de Fidel** | `c-reservar-confirmar`, `c-reservar-error`, `c-reservado`, `c-mis-turnos`, `c-cancelar`, `c-cancelar-fuera-plazo`, `a-ajustes` |
-| DP-03 | **Elegir profesional es un beneficio del pack** que cada spa activa o no. Solo las clientas con pack ven ese paso; las demás reservan con «la primera profesional disponible». Sale de los ajustes generales y pasa a la configuración del pack. Vuelve «elegís profesional» como beneficio del pack. Cierra P-01. | Fidel Cossio | **Confirmado por Fidel** | `c-reservar-profesional` (con pack), `c-reservar-horario`, `c-te-toca-volver`, `c-pack`, `a-pack`, `a-ajustes` |
+| DP-03 | **Elegir profesional es un beneficio del pack** que cada spa activa o no. Solo las clientas con pack ven ese paso; las demás reservan con «la primera profesional disponible». Sale de los ajustes generales y pasa a la configuración del pack. Vuelve «elegís profesional» como beneficio del pack. Cierra P-01. | Fidel Cossio | **Confirmado por Fidel** | con pack: `c-reservar-servicios-pack` → `c-reservar-profesional` → `c-reservar-horario-pack` → `c-reservar-confirmar-pack` → `c-reservado-pack`; sin pack: `c-reservar-horario`, `c-te-toca-volver`, `c-pack`, `a-pack`, `a-ajustes` |
+| DP-03c | **Recepción aplica la misma regla:** elige profesional solo si la clienta tiene pack activo («Tiene pack» en el resumen de la clienta encontrada); sin pack o clienta nueva, «La primera profesional disponible». | CDO (provisoria) | **Pregunta al CPO** (P-15) | `r-cargar-turno` (con pack), `r-cargar-turno-sin-pack`, `r-cargar-error` |
 | DP-03b | Pregunta abierta: ¿en Fase 1 (sin packs) el spa puede abrir «elegir profesional» para todas? **Hasta que se decida, solo con pack.** | — | **Pendiente de Fidel** (P-13) | nota en `a-pack` |
 | DP-04 | **Asistencia:** la profesional marca «Asistió»/«No vino» desde su agenda; recepción y administración pueden marcarla o corregirla. Los turnos sin marcar quedan «Sin marcar», **no cuentan** en el % de asistencia y el panel muestra cuántos hay. Cierra P-06. | CPO | **Pendiente de Fidel** | `p-agenda`, `p-agenda-dia-anterior`, `r-agenda`, `a-panel` |
 | DP-05 | **Permiso de ofertas en persona:** recepción puede registrarlo al cargar un turno; queda guardado quién, cuándo y «en persona». La primera oferta (mock de WhatsApp) trae la baja en un toque. Reemplaza S-09 y cierra P-04. | CPO | **Pendiente de Fidel** | `r-cargar-turno`, `r-cargar-error`, `r-turno-cargado`, `c-whatsapp`, `c-whatsapp-baja-ofertas` |
 | DP-06 | **Marca:** logo + un color principal; el resto se deriva (regla de PR #6). Cierra DD-11 como **decidido-provisorio** y P-10. | CPO | **Pendiente de Fidel** | `a-marca`, `tenant-spa-lua.css` |
-| DP-07 | **Pack (propuesta provisoria):** 1 servicio por mes de una lista que arma el spa, a precio con descuento que fija el spa, más elegir profesional. Baja dentro de los 10 días de la compra sin uso: devolución total. Después: se devuelven los servicios no usados al precio del pack («Te devolvemos $X por N servicios sin usar»). Precios del ejemplo ficticios. | CPO (propone) · decide Fidel | **Pendiente de Fidel · ⚠ SIN REVISIÓN LEGAL** | `c-pack`, `c-pack-activo`, `c-pack-baja`, `c-pack-baja-ok`, `a-pack` |
+| DP-07 | **Pack (propuesta provisoria):** 1 servicio por mes de una lista que arma el spa, a precio con descuento que fija el spa (**menor que el precio de lista de todos los servicios incluidos**; `a-pack` avisa si no), más elegir profesional. Los servicios extra del mismo turno van a precio de lista y se pagan en el local. Baja dentro de los 10 días de la compra sin uso: devolución total. Después: se devuelven los servicios no usados al precio del pack («Te devolvemos $X por N servicios sin usar»). Precios del ejemplo ficticios. | CPO (propone) · decide Fidel | **Pendiente de Fidel · ⚠ SIN REVISIÓN LEGAL** | `c-pack`, `c-pack-activo`, `c-pack-baja`, `c-pack-baja-ok`, `a-pack` |
 | DP-08 | **Mercado Pago:** estado «pago pendiente» (`c-pack-pago-pendiente`); la pantalla de resultado funciona **sin sesión**; la confirmación final llega por WhatsApp (mock). No se prototipa la conexión del spa con MP. | CPO | **Pendiente de Fidel** | `c-pack-pago-pendiente`, `c-pack-pago-error`, `c-pack-activo`, `c-whatsapp` |
 
 > **⚠ Pack sin revisión legal.** Las condiciones de DP-07 (devolución, plazos, textos) son una propuesta
@@ -142,8 +143,10 @@ Propuesta del Architect, **pendiente de aprobación de Ezequiel Avila**. Respond
   permiso; una plantilla «oferta de temporada» con campos editables (oferta y vigencia).
 - **S-14** CSV con columnas `nombre`, `whatsapp`, `dio_permiso` (`si`/`no`); importar no envía mensajes.
 - **S-15** Pack prepago: ver DP-07 (propuesta provisoria, sin revisión legal). Pago único por Mercado
-  Pago del spa, no se renueva. Precios del prototipo ficticios ($ 15.000 por servicio en el de 3 meses,
-  $ 14.000 en el de 12).
+  Pago del spa, no se renueva. Precios del prototipo ficticios: $ 10.000 por servicio en el de 3 meses
+  ($ 30.000) y $ 9.500 en el de 12 ($ 114.000); el servicio incluido más barato cuesta $ 12.000 de lista.
+  Devolución después de 10 días: $ 10.000 por servicio sin usar (ej.: 2 sin usar → $ 20.000). Devolución
+  total hasta el 25/12/2026 inclusive para una compra del 15/12/2026.
 - **S-16** Marca del spa: nombre, logo y un color principal; el resto se deriva (DP-06, regla de PR #6).
 - **S-17** Clienta con pack activo: «Mi pack» aparece en la navegación principal y en el inicio, con
   «Darme de baja del pack» siempre a la vista (Res. 316/2018, botón de baja). Sin pack, la navegación no
@@ -216,6 +219,8 @@ Para **Fidel / CPO**:
 - **P-07** ¿La clienta puede reservar sin registrarse (solo nombre + WhatsApp en el último paso)?
 - **P-08** Textos legales y facturación ante ARCA del pack.
 - **P-13** ¿En Fase 1 (sin packs) el spa puede abrir «elegir profesional» para todas? (DP-03b)
+- **P-15** (CDO → CPO) ¿Recepción sigue la regla de DP-03 (elige profesional solo si la clienta tiene
+  pack)? Aplicado en forma provisoria como DP-03c.
 - **P-14** Confirmar las decisiones del CPO pendientes: DP-02, DP-04, DP-05, DP-06, DP-07 y DP-08.
 
 Para el **Architect** (además de las notas de factibilidad, pendientes de Ezequiel):
@@ -246,3 +251,24 @@ Para el **Architect** (además de las notas de factibilidad, pendientes de Ezequ
   pack con devolución (provisorio, sin revisión legal). Menores de la revisión ronda 2: servicio de
   Julia T. unificado (Esmaltado semipermanente) y resumen de errores de `r-cargar-error` que se
   actualiza al alternar «Ya es clienta».
+- v0.3.1 (19/10/2026): correcciones de la revisión ronda 3.
+  1. Recorrido **con pack** de 4 pasos (DP-03): `c-reservar-servicios-pack`, `c-reservar-profesional`,
+     `c-reservar-horario-pack`, `c-reservar-confirmar-pack`, `c-reservado-pack`, con la profesional
+     elegida y el servicio del mes «incluido en tu pack» (extras a precio de lista, pago en el local).
+     Se entra desde `c-inicio-con-pack`, `c-pack-activo` y «Reservar» de la navegación con pack. El
+     recorrido sin pack sigue de 3 pasos.
+  2. Precio del pack menor que el de lista: $ 10.000 (3 meses, $ 30.000) y $ 9.500 (12 meses,
+     $ 114.000); devolución recalculada ($ 20.000 por 2 servicios sin usar). `a-pack` avisa si el precio
+     del pack supera el de lista de algún servicio incluido.
+  3. «Pack» en la navegación lateral de `a-ajustes`.
+  4. `r-agenda`: «8 turnos» = los listados; Nora C. (12:00, ya empezó) con control de asistencia;
+     servicios con nombre completo y hora de fin; Marta R. 17:00 como en `p-agenda`.
+  5. Lucía G. unificada: sábado 28/11, 12:30–14:00, Kapping en gel, con Carla (`r-cargar-turno`,
+     `r-turno-cargado`, `r-agenda`, `p-agenda`). `r-cargar-error` ya no usa a Jimena: jueves 26/11
+     completo para todas, coherente con `p-agenda-semana`.
+  6. Devolución total hasta el 25/12/2026 inclusive en `c-whatsapp` y `c-pack-activo`.
+  7. DP-03c (provisoria del CDO, P-15): recepción elige profesional solo con pack («Tiene pack»);
+     nueva `r-cargar-turno-sin-pack`.
+  8. `app.js`: `mix` redondea como `round()` de Python (mitad al par): `#f5c400` → hover `#f8d64c`,
+     igual que `tools/tokens.py` de `origin/design/ds-sereno`.
+  9. Cifras del README: 182 variables en `tokens.css`; 59 páginas HTML en el prototipo (54 + 5 nuevas).

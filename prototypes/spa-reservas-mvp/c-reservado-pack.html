@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Turno reservado (con pack) — Spa Lúa · Prototipo spa-reservas-mvp</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="tenant-spa-lua.css">
+</head>
+<body class="tenant">
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="app-header">
+  <div class="app-header__inner">
+    <a class="brand" href="c-inicio-con-pack.html"><img class="brand__logo" src="assets/logo-spa-lua.svg" alt="" width="36" height="36"><span>Spa Lúa</span></a>
+    <nav class="app-nav" aria-label="Principal"><ul><li><a href="c-inicio-con-pack.html">Inicio</a></li><li><a href="c-reservar-servicios-pack.html">Reservar</a></li><li><a href="c-mis-turnos.html">Mis turnos</a></li><li><a href="c-pack-activo.html">Mi pack</a></li></ul></nav>
+  </div>
+</header>
+<main id="main" class="page">
+
+
+<div class="alert alert--success" role="status">
+  <p class="alert__title"><span aria-hidden="true">✓ </span>¡Listo! Tu turno quedó reservado</p>
+  <p>Te mandamos la confirmación por WhatsApp.</p>
+</div>
+<h1>Te esperamos el sábado 19/12 a las 10:30</h1>
+<section class="card card--outlined" aria-labelledby="res">
+  <h2 id="res">Resumen</h2>
+  <dl class="dl">
+    <dt>Día</dt><dd>Sábado 19/12</dd>
+    <dt>Horario</dt><dd>10:30 a 12:00</dd>
+    <dt>Servicios</dt><dd>Retiro de semipermanente · $ 6.000<br>Esmaltado semipermanente <span class="badge badge--success">Incluido en tu pack</span></dd>
+    <dt>Con</dt><dd>Carla</dd>
+    <dt>A pagar</dt><dd>$ 6.000 · en el local</dd>
+    <dt>Tu pack</dt><dd>Usaste el servicio de diciembre (1 de 3)</dd>
+  </dl>
+</section>
+<section class="card" aria-labelledby="av">
+  <h2 id="av">Te vamos a avisar</h2>
+  <ul>
+    <li>24 horas antes (todavía a tiempo de cancelar) y 2 horas antes, por WhatsApp.</li>
+    <li>Cuando te toque volver, para que no se te pase.</li>
+  </ul>
+</section>
+<p class="small muted">¿No podés venir? Cancelá desde Mis turnos hasta 12 h antes. Para cambiar el día, cancelá y reservá de nuevo.</p>
+<div class="actions">
+  <a class="btn" href="c-mis-turnos.html">Ver mis turnos</a>
+  <a class="btn btn--secondary" href="c-pack-activo.html">Ver mi pack</a>
+</div>
+
+
+</main>
+<aside class="proto" aria-label="Navegación del prototipo">
+  <div class="proto__inner">
+    <h2>Prototipo (no es parte del producto)</h2>
+    <ul><li><a href="c-inicio-con-pack.html">Inicio con pack activo</a></li><li><a href="c-reservar-servicios-pack.html">Reservar con pack (4 pasos)</a></li><li><a href="c-reservar-servicios.html">Reservar sin pack (3 pasos)</a></li><li><a href="c-pack-activo.html">Mi pack</a></li><li><a href="c-mis-turnos.html">Mis turnos</a></li><li><a href="c-whatsapp.html">Mensajes de WhatsApp (mock)</a></li><li><a href="index.html">Índice del prototipo</a></li></ul>
+  </div>
+</aside>
+<script src="app.js"></script>
+</body>
+</html>

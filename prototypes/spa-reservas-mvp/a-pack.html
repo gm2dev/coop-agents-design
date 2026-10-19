@@ -28,20 +28,21 @@
     <fieldset>
       <legend>Cada mes, la clienta elige 1 de estos servicios</legend>
       <ul class="choices">
-        <li class="choice"><input type="checkbox" id="pk-s1" checked><label for="pk-s1"><span class="choice__body"><span class="choice__title">Manicura tradicional</span><span class="choice__meta">Precio normal $ 12.000</span></span></label></li>
-        <li class="choice"><input type="checkbox" id="pk-s3" checked><label for="pk-s3"><span class="choice__body"><span class="choice__title">Esmaltado semipermanente</span><span class="choice__meta">Precio normal $ 18.000</span></span></label></li>
-        <li class="choice"><input type="checkbox" id="pk-s4"><label for="pk-s4"><span class="choice__body"><span class="choice__title">Kapping en gel</span><span class="choice__meta">Precio normal $ 25.000</span></span></label></li>
-        <li class="choice"><input type="checkbox" id="pk-s5" checked><label for="pk-s5"><span class="choice__body"><span class="choice__title">Pedicura spa</span><span class="choice__meta">Precio normal $ 20.000</span></span></label></li>
+        <li class="choice"><input type="checkbox" id="pk-s1" data-list-price="12000" data-name="Manicura tradicional" checked><label for="pk-s1"><span class="choice__body"><span class="choice__title">Manicura tradicional</span><span class="choice__meta">Precio normal $ 12.000</span></span></label></li>
+        <li class="choice"><input type="checkbox" id="pk-s3" data-list-price="18000" data-name="Esmaltado semipermanente" checked><label for="pk-s3"><span class="choice__body"><span class="choice__title">Esmaltado semipermanente</span><span class="choice__meta">Precio normal $ 18.000</span></span></label></li>
+        <li class="choice"><input type="checkbox" id="pk-s4" data-list-price="25000" data-name="Kapping en gel"><label for="pk-s4"><span class="choice__body"><span class="choice__title">Kapping en gel</span><span class="choice__meta">Precio normal $ 25.000</span></span></label></li>
+        <li class="choice"><input type="checkbox" id="pk-s5" data-list-price="20000" data-name="Pedicura spa" checked><label for="pk-s5"><span class="choice__body"><span class="choice__title">Pedicura spa</span><span class="choice__meta">Precio normal $ 20.000</span></span></label></li>
       </ul>
     </fieldset>
   </section>
   <section class="card" aria-labelledby="pk-precio">
     <h2 id="pk-precio">Precio por servicio con el pack</h2>
     <div class="inline-fields">
-      <div class="field"><label for="pk-p3">Pack 3 meses ($ por servicio)</label><input type="number" id="pk-p3" value="15000" min="0" step="500" class="input--narrow"></div>
-      <div class="field"><label for="pk-p12">Pack 12 meses ($ por servicio)</label><input type="number" id="pk-p12" value="14000" min="0" step="500" class="input--narrow"></div>
+      <div class="field"><label for="pk-p3">Pack 3 meses ($ por servicio)</label><input type="number" id="pk-p3" data-pack-price="Pack 3 meses" aria-describedby="pk-precio-hint" value="10000" min="0" step="500" class="input--narrow"></div>
+      <div class="field"><label for="pk-p12">Pack 12 meses ($ por servicio)</label><input type="number" id="pk-p12" data-pack-price="Pack 12 meses" aria-describedby="pk-precio-hint" value="9500" min="0" step="500" class="input--narrow"></div>
     </div>
-    <p class="hint">La clienta paga 3 o 12 servicios a este precio. Si se da de baja, se le devuelven los servicios sin usar a este mismo precio (o todo, si es dentro de los 10 días de la compra y no usó ninguno).</p>
+    <div class="alert alert--warning" id="pk-precio-aviso" role="status" hidden><p class="alert__title"><span aria-hidden="true">⚠ </span>El precio del pack tiene que ser menor que el de lista</p><ul></ul><p>Bajá el precio del pack o sacá ese servicio de la lista. Podés guardar igual, pero la clienta pagaría más que sin pack.</p></div>
+    <p class="hint" id="pk-precio-hint">Tiene que ser menor que el precio de lista de todos los servicios incluidos (hoy, el más barato es Manicura tradicional, $ 12.000). La clienta paga 3 o 12 servicios a este precio. Si se da de baja, se le devuelven los servicios sin usar a este mismo precio (o todo, si es dentro de los 10 días de la compra y no usó ninguno).</p>
   </section>
   <section class="card" aria-labelledby="pk-ben">
     <h2 id="pk-ben">Beneficios</h2>

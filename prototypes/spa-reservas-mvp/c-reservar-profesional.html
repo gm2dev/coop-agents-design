@@ -12,18 +12,18 @@
 <a class="skip-link" href="#main">Saltar al contenido</a>
 <header class="app-header">
   <div class="app-header__inner">
-    <a class="brand" href="c-inicio.html"><img class="brand__logo" src="assets/logo-spa-lua.svg" alt="" width="36" height="36"><span>Spa Lúa</span></a>
-    <nav class="app-nav" aria-label="Principal"><ul><li><a href="c-inicio.html">Inicio</a></li><li><a href="c-reservar-servicios.html" aria-current="page">Reservar</a></li><li><a href="c-mis-turnos.html">Mis turnos</a></li></ul></nav>
+    <a class="brand" href="c-inicio-con-pack.html"><img class="brand__logo" src="assets/logo-spa-lua.svg" alt="" width="36" height="36"><span>Spa Lúa</span></a>
+    <nav class="app-nav" aria-label="Principal"><ul><li><a href="c-inicio-con-pack.html">Inicio</a></li><li><a href="c-reservar-servicios-pack.html" aria-current="page">Reservar</a></li><li><a href="c-mis-turnos.html">Mis turnos</a></li><li><a href="c-pack-activo.html">Mi pack</a></li></ul></nav>
   </div>
 </header>
 <main id="main" class="page">
 
-<a class="back" href="c-reservar-servicios.html">← Cambiar servicios</a>
+<a class="back" href="c-reservar-servicios-pack.html">← Cambiar servicios</a>
 <p class="steps">Paso 2 de 4</p>
 <p><span class="badge badge--success">Beneficio de tu pack</span></p>
 <h1>¿Con quién?</h1>
-<p class="muted">Retiro de semipermanente + Esmaltado semipermanente · 90 min</p>
-<form action="c-reservar-horario.html">
+<p class="muted">Retiro de semipermanente + Esmaltado semipermanente (incluido en tu pack) · 90 min</p>
+<form action="c-reservar-horario-pack.html">
   <fieldset>
     <legend>Profesional</legend>
     <ul class="choices"><li class="choice"><input type="radio" name="profesional" id="p0" ><label for="p0"><span class="choice__body"><span class="choice__title">La primera profesional disponible</span><span class="choice__meta">Te mostramos todos los horarios libres</span></span></label></li><li class="choice"><input type="radio" name="profesional" id="p1" checked ><label for="p1"><span class="choice__body"><span class="choice__title">Carla</span><span class="choice__meta">Manos y kapping</span></span></label></li><li class="choice"><input type="radio" name="profesional" id="p2" ><label for="p2"><span class="choice__body"><span class="choice__title">Jimena</span><span class="choice__meta">Manos y pies</span></span></label></li></ul>
@@ -31,13 +31,13 @@
   <p class="small muted">Te mostramos solo a quienes hacen todos los servicios que elegiste.</p>
   <button type="submit" class="btn btn--block">Continuar</button>
 </form>
-<p class="small muted">Nota de diseño: este paso lo ven solo las clientas con pack, si el spa activó «Elegir profesional» como beneficio del pack (decisión confirmada por Fidel). Sin pack se reserva con la primera profesional disponible y se pasa directo al horario. En el prototipo, el paso siguiente muestra la variante sin pack.</p>
+<p class="small muted">Nota de diseño: este paso lo ven solo las clientas con pack, si el spa activó «Elegir profesional» como beneficio del pack (DP-03, confirmado por Fidel). Sin pack se reserva con la primera profesional disponible y se pasa directo al horario (<a href="c-reservar-servicios.html">recorrido sin pack, 3 pasos</a>).</p>
 
 </main>
 <aside class="proto" aria-label="Navegación del prototipo">
   <div class="proto__inner">
     <h2>Prototipo (no es parte del producto)</h2>
-    <ul><li><a href="c-ingresar.html">Ingresar</a></li><li><a href="c-inicio.html">Inicio</a></li><li><a href="c-reservar-servicios.html">Reservar</a></li><li><a href="c-mis-turnos.html">Mis turnos</a></li><li><a href="c-whatsapp.html">Mensajes de WhatsApp (mock)</a></li><li><a href="c-pack.html">Pack prepago (Fase 2)</a></li><li><a href="c-reservar-sin-horarios.html">Estado: sin horarios</a></li><li><a href="c-reservar-error.html">Estado: horario ocupado</a></li><li><a href="index.html">Índice del prototipo</a></li></ul>
+    <ul><li><a href="c-inicio-con-pack.html">Inicio con pack activo</a></li><li><a href="c-reservar-servicios-pack.html">Reservar con pack (4 pasos)</a></li><li><a href="c-reservar-servicios.html">Reservar sin pack (3 pasos)</a></li><li><a href="c-pack-activo.html">Mi pack</a></li><li><a href="c-mis-turnos.html">Mis turnos</a></li><li><a href="c-whatsapp.html">Mensajes de WhatsApp (mock)</a></li><li><a href="index.html">Índice del prototipo</a></li></ul>
   </div>
 </aside>
 <script src="app.js"></script>

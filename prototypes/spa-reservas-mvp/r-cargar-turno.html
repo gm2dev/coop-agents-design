@@ -46,6 +46,7 @@
     <div id="datos-existente">
       <div class="alert alert--success" role="status">
         <p class="alert__title"><span aria-hidden="true">✓ </span>Encontramos a Lucía Gómez</p>
+        <p><span class="badge badge--info">Tiene pack</span> Pack 3 meses · servicio de este mes ya usado · puede elegir profesional.</p>
         <p>Último turno 31/10 · <strong>no dio permiso</strong> para ofertas.</p>
       </div>
       <div class="choices u-mt-400">
@@ -81,13 +82,16 @@
       </ul>
     </fieldset>
     <div class="inline-fields">
-      <div class="field"><label for="r-pro">Profesional</label>
-        <select id="r-pro" name="pro"><option>Cualquiera</option><option>Carla</option><option selected>Jimena</option></select></div>
+      <div class="field" data-pack-only><label for="r-pro">Profesional</label>
+        <span class="hint" id="r-pro-hint">Puede elegir porque tiene pack. Solo quienes hacen todos los servicios elegidos.</span>
+        <select id="r-pro" name="pro" aria-describedby="r-pro-hint"><option>La primera profesional disponible</option><option selected>Carla</option></select></div>
+      <div class="field" data-no-pack hidden><p class="u-m-0"><strong>Profesional</strong></p><p class="hint u-m-0">La primera profesional disponible (sin pack no se elige). Al cargar te decimos con quién.</p></div>
       <div class="field"><label for="r-dia">Día</label><input type="date" id="r-dia" name="dia" value="2026-11-28"></div>
     </div>
     <fieldset>
       <legend>Horario</legend>
-      <ul class="slots"><li class="choice"><input type="radio" name="hora" id="rh1130" checked ><label for="rh1130"><span class="choice__body"><span class="choice__title">11:30</span></span></label></li><li class="choice"><input type="radio" name="hora" id="rh1600" ><label for="rh1600"><span class="choice__body"><span class="choice__title">16:00</span></span></label></li><li class="choice"><input type="radio" name="hora" id="rh1730" ><label for="rh1730"><span class="choice__body"><span class="choice__title">17:30</span></span></label></li><li class="choice"><input type="radio" name="hora" id="rh1830" ><label for="rh1830"><span class="choice__body"><span class="choice__title">18:30</span></span></label></li></ul>
+      <p class="hint" data-pack-only>Horarios de Carla donde entran los 90 min seguidos.</p>
+      <ul class="slots"><li class="choice"><input type="radio" name="hora" id="rh1200" ><label for="rh1200"><span class="choice__body"><span class="choice__title">12:00</span></span></label></li><li class="choice"><input type="radio" name="hora" id="rh1230" checked ><label for="rh1230"><span class="choice__body"><span class="choice__title">12:30</span></span></label></li><li class="choice"><input type="radio" name="hora" id="rh1800" ><label for="rh1800"><span class="choice__body"><span class="choice__title">18:00</span></span></label></li><li class="choice"><input type="radio" name="hora" id="rh1830" ><label for="rh1830"><span class="choice__body"><span class="choice__title">18:30</span></span></label></li></ul>
     </fieldset>
   </section>
 </div>
@@ -95,14 +99,14 @@
   <button type="submit" class="btn">Cargar turno</button>
   <a class="btn btn--secondary" href="r-agenda.html">Cancelar</a>
 </div>
-<p class="small muted">Al cargarlo, le llega a la clienta la confirmación y los recordatorios por WhatsApp.</p>
+<p class="small muted">Nota de diseño (decisión provisoria del CDO, pregunta al CPO): recepción aplica la regla de DP-03; elige profesional solo si la clienta tiene pack activo. Fechas del ejemplo ilustrativas (los packs son de la Fase 2). Al cargarlo, le llega a la clienta la confirmación y los recordatorios por WhatsApp.</p>
 </form>
 
 </main>
 <aside class="proto" aria-label="Navegación del prototipo">
   <div class="proto__inner">
     <h2>Prototipo (no es parte del producto)</h2>
-    <ul><li><a href="r-agenda.html">Agenda del día</a></li><li><a href="r-cargar-turno.html">Cargar turno</a></li><li><a href="r-cargar-error.html">Estado: errores y sin horarios</a></li><li><a href="r-turno-cargado.html">Turno cargado</a></li><li><a href="index.html">Índice del prototipo</a></li></ul>
+    <ul><li><a href="r-agenda.html">Agenda del día</a></li><li><a href="r-cargar-turno.html">Cargar turno (clienta con pack)</a></li><li><a href="r-cargar-turno-sin-pack.html">Cargar turno (clienta sin pack)</a></li><li><a href="r-cargar-error.html">Estado: errores y sin horarios</a></li><li><a href="r-turno-cargado.html">Turno cargado</a></li><li><a href="index.html">Índice del prototipo</a></li></ul>
   </div>
 </aside>
 <script src="app.js"></script>

@@ -21,12 +21,15 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[c-inicio] --> S[c-reservar-servicios: uno o varios, total en vivo]
+  A[c-inicio] --> Q{¿Tiene pack y el spa activó «elegir profesional»?}
+  Q -->|no: 3 pasos, primera profesional disponible| S[c-reservar-servicios: uno o varios, total en vivo]
   S -->|ninguno elegido| S1[Error: elegí al menos uno] --> S
-  S --> Q{¿Tiene pack y el spa activó «elegir profesional»?}
-  Q -->|sí| P[c-reservar-profesional: una o la primera disponible]
-  Q -->|no: primera profesional disponible| H
-  P --> H[c-reservar-horario: día + horarios donde entra el bloque entero]
+  S --> H[c-reservar-horario: día + horarios donde entra el bloque entero]
+  Q -->|sí: 4 pasos, desde c-inicio-con-pack / c-pack-activo| SP[c-reservar-servicios-pack: servicio del mes incluido + extras a precio de lista]
+  SP --> P[c-reservar-profesional: una o la primera disponible]
+  P --> HP[c-reservar-horario-pack: horarios de la profesional elegida]
+  HP --> CP[c-reservar-confirmar-pack: «incluido en tu pack», extras a pagar en el local]
+  CP --> OKP[c-reservado-pack: servicio del mes usado]
   H -->|sin horarios| H1[c-reservar-sin-horarios: próximo libre / servicios más cortos] --> H
   H --> C[c-reservar-confirmar: resumen + política + opt-in opcional]
   C -->|otra lo tomó mientras confirmaba: no se reserva antes| C1[c-reservar-error: elegir otro horario] --> H
@@ -116,8 +119,11 @@ flowchart TD
   Q -->|no| N[Nombre + WhatsApp]
   T --> OP[Opcional: «me dijo en persona que acepta ofertas» → queda quién, cuándo y en persona]
   N --> OP
-  T --> S[Servicios, profesional, día, horario]
+  T --> PK{¿Tiene pack activo? DP-03, decisión provisoria del CDO}
+  PK -->|sí: «Tiene pack»| SP[r-cargar-turno: servicios, elige profesional, día, horario]
+  PK -->|no| S[r-cargar-turno-sin-pack: servicios, la primera profesional disponible, día, horario]
   N --> S
+  SP --> S
   S -->|sin horarios| S1[Próximo libre / cualquier profesional] --> S
   A -->|marcar o corregir asistencia| AA[Asistió / No vino]
   S -->|faltan datos| E[r-cargar-error: resumen de errores] --> F

@@ -12,7 +12,7 @@
 <header class="app-header"><div class="app-header__inner"><a class="brand" href="../index.html">← Todos los prototipos</a></div></header>
 <main id="main" class="page">
   <h1>Reservas con recompra para spas · MVP</h1>
-  <p>Prototipos v0.3 (media fidelidad, look «Sereno» del design system v1) del <strong>Roadmap B</strong> (decidido el 19/10/2026). Datos ficticios. Spa de ejemplo: «Spa Lúa», con su color y logo aplicados por la capa de marca.</p>
+  <p>Prototipos v0.3.1 (media fidelidad, look «Sereno» del design system v1) del <strong>Roadmap B</strong> (decidido el 19/10/2026). Datos ficticios. Spa de ejemplo: «Spa Lúa», con su color y logo aplicados por la capa de marca.</p>
   <div class="alert alert--info">
     <p class="alert__title">Antes de mirar</p>
     <p>No hay PRD todavía: la fuente es la presentación ejecutiva. Supuestos, decisiones y preguntas abiertas en <code>initiatives/spa-reservas-mvp/README.md</code>.</p>
@@ -23,7 +23,8 @@
     <ol>
       <li><a href="c-ingresar.html">Ingresar con WhatsApp</a> → <a href="c-codigo.html">código</a> · estado: <a href="c-codigo-error.html">código incorrecto</a> · <a href="c-codigo-bloqueado.html">sin intentos</a></li>
       <li><a href="c-inicio.html">Inicio del spa</a> (con aviso «te toca volver») · <a href="c-inicio-con-turno.html">con turno reservado</a> · <a href="c-inicio-con-pack.html">con pack activo («Mi pack» y baja en el menú)</a></li>
-      <li>Reservar: <a href="c-reservar-servicios.html">servicios</a> → (<a href="c-reservar-profesional.html">profesional, solo con pack</a>) → <a href="c-reservar-horario.html">día y horario</a> → <a href="c-reservar-confirmar.html">confirmar (permiso de ofertas + política)</a> → <a href="c-reservado.html">reservado</a>
+      <li>Reservar sin pack (3 pasos, la primera profesional disponible): <a href="c-reservar-servicios.html">servicios</a> → <a href="c-reservar-horario.html">día y horario</a> → <a href="c-reservar-confirmar.html">confirmar (permiso de ofertas + política)</a> → <a href="c-reservado.html">reservado</a>
+        <br>Reservar con pack (4 pasos, DP-03): <a href="c-reservar-servicios-pack.html">servicios (el del mes incluido en el pack)</a> → <a href="c-reservar-profesional.html">profesional</a> → <a href="c-reservar-horario-pack.html">día y horario</a> → <a href="c-reservar-confirmar-pack.html">confirmar</a> → <a href="c-reservado-pack.html">reservado</a>
         <br><span class="small">Estados: <a href="c-reservar-sin-horarios.html">sin horarios</a> · <a href="c-reservar-error.html">horario recién ocupado</a></span></li>
       <li><a href="c-mis-turnos.html">Mis turnos</a> → <a href="c-cancelar.html">cancelar</a> → <a href="c-cancelado.html">cancelado</a>
         <br><span class="small">Estados: <a href="c-mis-turnos-vacio.html">sin turnos</a> · <a href="c-cancelar-fuera-plazo.html">fuera de plazo</a></span></li>
@@ -45,7 +46,7 @@
     <h2 id="h-r">Recepción <span class="small muted">(tablet/desktop)</span></h2>
     <ul>
       <li><a href="r-agenda.html">Agenda del día (marcar o corregir asistencia)</a></li>
-      <li><a href="r-cargar-turno.html">Cargar turno para una clienta (permiso de ofertas en persona)</a> → <a href="r-turno-cargado.html">turno cargado</a> · estado: <a href="r-cargar-error.html">clienta nueva, error y sin horarios</a></li>
+      <li>Cargar turno para una clienta (permiso de ofertas en persona): <a href="r-cargar-turno.html">clienta con pack (elige profesional)</a> · <a href="r-cargar-turno-sin-pack.html">clienta sin pack (la primera profesional disponible)</a> → <a href="r-turno-cargado.html">turno cargado</a> · estado: <a href="r-cargar-error.html">clienta nueva, error y sin horarios</a></li>
     </ul>
   </section>
 

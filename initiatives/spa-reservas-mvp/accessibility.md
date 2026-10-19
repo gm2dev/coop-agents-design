@@ -3,6 +3,23 @@
 Prototipo: `prototypes/spa-reservas-mvp/` (51 páginas HTML en v0.2). Verificación del 19/10/2026
 (v0.2) con Playwright (Chromium headless) + axe-core 4.x, fuera del repo.
 
+## Verificado (ejecutado, v0.3.1)
+
+Playwright (Chromium headless) + axe-core, fuera del repo, sobre las **59 páginas HTML** reales.
+
+| Chequeo | Resultado |
+|---|---|
+| axe (wcag2a/aa, wcag21a/aa, wcag22aa, best-practice), 59 páginas a 320 y 1280 px (118 corridas) | **0 violaciones** (también `a-pack` con el aviso de precio visible) |
+| Reflow 1.4.10, 59 páginas a 320, 360 y 1280 px (177 corridas) | **0 desbordes** |
+| Espaciado de texto 1.4.12 a 320 y 360 px | **0 desbordes** |
+| Links/`action`/`src` (parser) + carga (118 cargas) | 0 rotos, 0 remotos, 0 errores JS, 0 requests fallidos, 0 páginas sin estilos |
+| 2.4.11 barras fijas: `c-reservar-servicios` y `c-reservar-servicios-pack`, 22 paradas de Tab a 640×360, 320×256, 360×640, 320×568, 375×667, 1280×900 | **0 % tapado** en los 12 casos |
+| Recorrido con pack por links/forms desde `c-inicio-con-pack`, `c-pack-activo` y la navegación con pack | servicios-pack (1/4) → profesional (2/4) → horario-pack (3/4, «Con Carla») → confirmar-pack (4/4, «Incluido en tu pack», $ 6.000 en el local) → reservado-pack |
+| Recorrido sin pack desde `c-inicio` | servicios (1/3) → horario (2/3, primera disponible) → confirmar (3/3) → reservado |
+| `a-marca` con `#f5c400` | `primary-hover` = `#f8d64c`, igual que `tools/tokens.py` |
+| `a-pack`: precio 3 meses $ 15.000 | aviso «… es más que el precio de lista de Manicura tradicional ($ 12.000)»; se oculta al sacar ese servicio |
+| `r-cargar-turno`: alternar «Clienta nueva» | selector de profesional se oculta y aparece «La primera profesional disponible»; vuelve al alternar |
+
 ## Verificado (ejecutado, v0.2)
 
 | Chequeo | Cómo | Resultado |
